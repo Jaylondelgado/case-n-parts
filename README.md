@@ -7,6 +7,13 @@
 
 This allows you to experiement with different parts and computer cases to build your desired PC.
 
+## Design
+
+- [API design](docs/apis.md)
+- [Data model](docs/data-model.md)
+- [GHI](docs/ghi.md)
+- [Integrations](docs/integrations.md)
+
 ## Intended market
 
 The people we would expect to use this application, are hobbiests and enthusiests.
