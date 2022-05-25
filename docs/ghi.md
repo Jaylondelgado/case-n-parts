@@ -30,7 +30,7 @@ This page will be displayed when a user goes to view the builds that they have a
 This page will be displayed when a user goes to the View Builds page. It will display
 all of the builds that are public.
 
-## <img src="./wireframes/ListBuilds.png" style="height: 900px" />
+<img src="./wireframes/ListBuilds.png" style="height: 900px" />
 
 ---
 
