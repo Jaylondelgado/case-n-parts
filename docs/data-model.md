@@ -2,12 +2,11 @@
 
 ## User
 
-| name     | type                 | unique | optional |
-| -------- | -------------------- | ------ | -------- |
-| username | varchar(40)          | yes    | false    |
-| password | varchar(30)          | no     | false    |
-| email    | varchar(50)          | yes    | false    |
-| my_build | foreign key to build | yes    | true     |
+| name     | type        | unique | optional |
+| -------- | ----------- | ------ | -------- |
+| username | varchar(40) | yes    | false    |
+| password | varchar(30) | no     | false    |
+| email    | varchar(50) | yes    | false    |
 
 ## Build
 
@@ -20,6 +19,37 @@
 | ram          | foreign key to ram          | yes    | true     |
 | motherboard  | foreign key to motherboard  | yes    | true     |
 | power_supply | foreign key to power_supply | yes    | true     |
+| user_id      | foreign key to user         | yes    | false    |
+
+## Comments
+
+| name       | type                        | unique | optional |
+| ---------- | --------------------------- | ------ | -------- |
+| build_name | foreign key to build        | yes    | false    |
+| user       | foreign key to user         | yes    | false    |
+| comments   | varchar(3000)               | no     | false    |
+| rating     | foreign key to build rating | no     | false    |
+
+## Rating
+
+| name       | type                 | unique | optional |
+| ---------- | -------------------- | ------ | -------- |
+| build_name | foreign key to build | yes    | false    |
+| user       | foreign key to user  | yes    | false    |
+| rating     | int                  | no     | false    |
+
+## Case
+
+| name  | type                 | unique | optional |
+| ----- | -------------------- | ------ | -------- |
+| size  | varchar(30)          | no     | false    |
+| color | foreign key to color | no     | false    |
+
+## Color
+
+| name  | type        | unique | optional |
+| ----- | ----------- | ------ | -------- |
+| color | varchar(30) | no     | false    |
 
 ## Gpu
 
