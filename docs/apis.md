@@ -22,7 +22,6 @@ Output:
   "username": string,
   "password": string,
   "email": string,
-  "my_build": string  //is this necessary?
 }
 ```
 
@@ -97,6 +96,7 @@ Input:
     "ram": string,
     "motherboard": string,
     "power_supply": string,
+    "user_id": string
 }
 ```
 
@@ -111,15 +111,16 @@ Output:
     "ram": string,
     "motherboard": string,
     "power_supply": string,
+    "user_id": string
 }
 ```
 
-Create a new build from some or all of the computer components. It uses data compiled from all the single componenets lists allowing for the user to choose their desired parts.
+Create a new build from some or all of the computer components. It uses data compiled from all the single components lists allowing for the user to choose their desired parts.
 
 ## Update a build
 
 - **Method**: `PUT`
-- **Path**: /api/builds/update
+- **Path**: /api/builds/update/<int:pk>/
 
 Input:
 
@@ -132,6 +133,7 @@ Input:
     "ram": string,
     "motherboard": string,
     "power_supply": string,
+    "user_id": string
 }
 ```
 
@@ -146,6 +148,7 @@ Output:
     "ram": string,
     "motherboard": string,
     "power_supply": string,
+    "user_id": string
 }
 ```
 
@@ -167,6 +170,7 @@ Output:
     "ram": string,
     "motherboard": string,
     "power_supply": string,
+    "user_id": string
 }
 ```
 
@@ -179,10 +183,10 @@ Shows a more detailed description of the computer build and the comments from th
 
 Deletes the build.
 
-## List reviews
+## List comments
 
 - **Method**: `GET`
-- **Path**: /api/builds/<int:pk>/reviews/
+- **Path**: /api/builds/<int:pk>/comments/
 
 Output:
 
@@ -190,59 +194,93 @@ Output:
 {
     "user": string,
     "build_name": string,
+    "comments": string,
     "rating": int,
-    "author_comment": string,
 }
 ```
 
-Lists all reviews for a specific build.
+Lists all comments for a specific build.
 
-## Create reviews
+## Create comments
 
 - **Method**: `POST`
-- **Path**: /api/builds/<int:pk>/reviews/
+- **Path**: /api/builds/<int:pk>/comments/
+
+```json
+Input:
+{
+  "comments": string,
+  "rating": int,
+}
+```
+
+```json
+Output:
+{
+    "user": string,
+    "comments": string,
+    "rating": int,
+}
+
+```
 
 Post a review for a specific build.
 
-## Detail reviews
+## Detail comments
 
 - **Method**: `GET`
-- **Path**: /api/builds/<int:pk>/reviews/<int:pk>/
+- **Path**: /api/builds/<int:pk>/comments/<int:pk>/
 
 Detailed view of review.
 
-## Edit reviews
+Output:
+
+```json
+{
+    "user": string,
+    "comments": string,
+    "rating": int,
+}
+
+```
+
+## Edit comments
 
 - **Method**: `PUT`
-- **Path**: /api/builds/<int:pk>/reviews/<int:pk>/
+- **Path**: /api/builds/<int:pk>/comments/<int:pk>/
+
+```json
+Input:
+{
+  "comments": string,
+  "rating": int,
+}
+```
+
+```json
+Output:
+{
+    "user": string,
+    "comments": string,
+    "rating": int,
+}
+
+```
 
 Allow user to edit their review on specific build
 
-## Delete reviews
+## Delete comments
 
 - **Method**: `DELETE`
-- **Path**: /api/builds/<int:pk>/reviews/<int:pk>/
+- **Path**: /api/builds/<int:pk>/comments/<int:pk>/
 
 Delete review from specific build.
 
-## List gpu
+## List Gpu
 
 - **Method**: `GET`
 - **Path**: /api/gpus
 
-Input:
-
-```json
-{
-    "brand": string,
-    "max_resolution": string,
-    "memory_speed": int,
-    "coprocessor": string,
-    "ram_size": int,
-    "dimensions": string,
-}
-```
-
 Output:
 
 ```json
@@ -258,24 +296,11 @@ Output:
 
 Using the webscraper, the data gathered from the website will be sorted into their respective columns and provide a detailed description of the product.
 
-## List cpu
+## List Cpu
 
 - **Method**: `GET`
 - **Path**: /api/cpus
 
-Input:
-
-```json
-{
-    "manufacturer": string,
-    "processor_count": int,
-    "model": string,
-    "socket": string,
-    "speed": int,
-    "dimensionions": string
-}
-```
-
 Output:
 
 ```json
@@ -291,24 +316,11 @@ Output:
 
 Using the webscraper, the data gathered from the website will be sorted into their respective columns and provide a detailed description of the product.
 
-## List powersupply
+## List Powersupply
 
 - **Method**: `GET`
 - **Path**: /api/powersupplies
 
-Input:
-
-```json
-{
-    "manufacturer": string,
-    "processor_count": int,
-    "model": string,
-    "socket": string,
-    "speed": int,
-    "dimensionions": string
-}
-```
-
 Output:
 
 ```json
@@ -324,23 +336,11 @@ Output:
 
 Using the webscraper, the data gathered from the website will be sorted into their respective columns and provide a detailed description of the product.
 
-## List ram
+## List Ram
 
 - **Method**: `GET`
 - **Path**: /api/ram
 
-Input:
-
-```json
-{
-    "brand": string,
-    "capacity": int,
-    "clock_speed": int,
-    "speed": int,
-    "type": string
-}
-```
-
 Output:
 
 ```json
@@ -355,24 +355,11 @@ Output:
 
 Using the webscraper, the data gathered from the website will be sorted into their respective columns and provide a detailed description of the product.
 
-## List motherboard
+## List Motherboard
 
 - **Method**: `GET`
 - **Path**: /api/motherboards
 
-Input:
-
-```json
-{
-    "brand": string,
-    "ram": string,
-    "memory_speed": int,
-    "cpu_socket": string,
-    "chipset": string,
-    "dimensions": string,
-}
-```
-
 Output:
 
 ```json
@@ -388,7 +375,7 @@ Output:
 
 Using the webscraper, the data gathered from the website will be sorted into their respective columns and provide a detailed description of the product.
 
-## List hardrives
+## List Hardrives
 
 - **Method**: `GET`
 - **Path**: /api/harddrives
@@ -407,5 +394,3 @@ Output:
 ```
 
 Using the webscraper, the data gathered from the website will be sorted into their respective columns and provide a detailed description of the product.
-
---(add edit feature for lists?)
