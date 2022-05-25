@@ -20,6 +20,7 @@
 | motherboard  | foreign key to motherboard  | yes    | true     |
 | power_supply | foreign key to power_supply | yes    | true     |
 | user_id      | foreign key to user         | yes    | false    |
+| private      | boolean                     | no     | false    |
 
 ## Comments
 
