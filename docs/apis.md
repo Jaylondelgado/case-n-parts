@@ -30,7 +30,7 @@ Creates a new user that requires a username, password, and email.
 ## Update a user
 
 - **Method**: `PUT`
-- **Path**: /api/users/<int:pk>/
+- **Path**: /api/users/&lt;int:pk/
 
 Input:
 

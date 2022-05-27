@@ -19,6 +19,10 @@ This allows you to experiement with different parts and computer cases to build 
 The people we would expect to use this application, are hobbiests and enthusiests.
 People that care about how their PC looks, and not just that it works.
 
+## Backend needs
+
+- As we are unable to find an API to handle products, we create a web scraper to pull computer part details and price
+
 ### Functionality
 
 - Users should be able to sign up for an account so that they save their builds
