@@ -33,11 +33,10 @@
 
 ## Rating
 
-| name       | type                 | unique | optional |
-| ---------- | -------------------- | ------ | -------- |
-| build_name | foreign key to build | yes    | false    |
-| user       | foreign key to user  | yes    | false    |
-| rating     | int                  | no     | false    |
+| name   | type                | unique | optional |
+| ------ | ------------------- | ------ | -------- |
+| user   | foreign key to user | yes    | false    |
+| rating | int                 | no     | false    |
 
 ## Case
 
@@ -95,14 +94,15 @@
 
 ## Motherboard
 
-| name         | type        | unique | optional |
-| ------------ | ----------- | ------ | -------- |
-| brand        | varchar(60) | yes    | false    |
-| ram          | varchar(10) | no     | false    |
-| memory_speed | int         | no     | false    |
-| cpu_socket   | varchar(20) | no     | false    |
-| chipset      | varchar(20) | no     | false    |
-| dimensions   | varchar(30) | no     | false    |
+| name         | type               | unique | optional |
+| ------------ | ------------------ | ------ | -------- |
+| brand        | varchar(60)        | yes    | false    |
+| ram          | foreign-key to ram | no     | false    |
+| ram_slots    | int                | no     | false    |
+| memory_speed | int                | no     | false    |
+| cpu_socket   | varchar(20)        | no     | false    |
+| chipset      | varchar(20)        | no     | false    |
+| dimensions   | varchar(30)        | no     | false    |
 
 ## Harddrive
 
