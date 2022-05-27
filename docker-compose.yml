@@ -1,0 +1,48 @@
+volumes:
+  cnp-data:
+    external: true
+  pg-admin:
+    external: true
+services:
+  react:
+    image: node:lts-bullseye
+    command: /bin/bash run.sh
+    working_dir: /ghi
+    volumes:
+      - ./ghi/:/ghi
+    ports:
+      - "3000:3000"
+    environment:
+      HOST_OS: ${OS}
+      NODE_ENV: development
+      HOST: "0.0.0.0"
+  db:
+    build:
+      context: data
+      dockerfile: Dockerfile.dev
+    volumes:
+      - cnp-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: great-value
+      POSTGRES_USER: great-value
+      POSTGRES_DB: great-value
+    ports:
+      - 15432:5432
+  authentication-api:
+    build:
+      context: ./authentication
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8080:8000"
+  # parts-api:
+  #   build:
+  #     context: ./api/parts
+  #     dockerfile: Dockerfile.dev
+  #   ports:
+  #     - "8090:8000"
+  # builds-api:
+  #   build:
+  #     context: ./api/builds
+  #     dockerfile: Dockerfile.dev
+  #   ports:
+  #     - "8100:8000"
