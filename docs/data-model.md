@@ -54,14 +54,14 @@
 
 ## Gpu
 
-| name           | type         | unique | optional |
-| -------------- | ------------ | ------ | -------- |
-| brand          | varchar(60)  | yes    | false    |
-| max_resolution | varchar(15)  | no     | false    |
-| memory_speed   | int          | no     | false    |
-| coprocessor    | varchar(100) | no     | false    |
-| ram_size       | int          | no     | false    |
-| dimensions     | varchar(30)  | no     | false    |
+| name               | type        | unique | optional |
+| ------------------ | ----------- | ------ | -------- |
+| model              | varchar(60) | yes    | false    |
+| power_draw         | int         | no     | false    |
+| psu_recommendation | int         | no     | false    |
+| memory_size        | int         | no     | false    |
+| memory_type        | varchar(10) | no     | false    |
+| base_frequency     | int         | no     | false    |
 
 ## Cpu
 
