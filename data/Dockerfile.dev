@@ -1,0 +1,7 @@
+FROM postgres:14.2-bullseye
+# COPY jservice.sql /docker-entrypoint-initdb.d
+# RUN chmod a+r /docker-entrypoint-initdb.d/*FROM python:3.10-bullseye
+
+WORKDIR /app
+# COPY requirements.txt requirements.txt
+# RUN pip install -r requirements.txt
