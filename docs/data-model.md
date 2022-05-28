@@ -69,7 +69,6 @@
 | manufacturer    | varchar(60) | yes    | false    |
 | processor_count | int         | no     | false    |
 | model           | varchar(50) | no     | false    |
-| socket          | varchar(20) | no     | false    |
 | speed           | int         | no     | false    |
 | dimensionions   | varchar(30) | no     | false    |
 
@@ -100,7 +99,6 @@
 | ram          | foreign-key to ram | no     | false    |
 | ram_slots    | int                | no     | false    |
 | memory_speed | int                | no     | false    |
-| cpu_socket   | varchar(20)        | no     | false    |
 | chipset      | varchar(20)        | no     | false    |
 | dimensions   | varchar(30)        | no     | false    |
 
