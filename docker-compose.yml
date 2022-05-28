@@ -30,7 +30,7 @@ services:
       - 15432:5432
   authentication-api:
     build:
-      context: ./authentication
+      context: api/authentication
       dockerfile: Dockerfile.dev
     ports:
       - "8080:8000"
