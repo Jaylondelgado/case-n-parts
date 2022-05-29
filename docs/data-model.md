@@ -53,14 +53,17 @@
 
 ## Gpu
 
-| name           | type         | unique | optional |
-| -------------- | ------------ | ------ | -------- |
-| brand          | varchar(60)  | yes    | false    |
-| max_resolution | varchar(15)  | no     | false    |
-| memory_speed   | int          | no     | false    |
-| coprocessor    | varchar(100) | no     | false    |
-| ram_size       | int          | no     | false    |
-| dimensions     | varchar(30)  | no     | false    |
+| name             | type         | unique | optional |
+| ---------------- | ------------ | ------ | -------- |
+| manufacturer     | varchar(60)  | yes    | false    |
+| core_clock_speed | varchar(15)  | no     | false    |
+| video_memory     | int          | no     | false    |
+| memory_type      | varchar(100) | no     | false    |
+| height           | varchar(15)  | no     | false    |
+| length           | varchar(15)  | no     | false    |
+| width            | varchar(15)  | no     | false    |
+| hdmi             | varchar(30)  | no     | false    |
+| display_port     | varchar(40)  | no     | false    |
 
 ## Cpu
 
