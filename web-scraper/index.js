@@ -1,56 +1,40 @@
-const PORT = 8000;
-const axios = require("axios");
-const cheerio = require("cheerio");
-const express = require("express");
-const app = express();
-const cors = require("cors");
-app.use(cors());
+const { program } = require('commander');
 
-const url =
-  "https://www.microcenter.com/product/635279/msi-amd-radeon-rx-6700-xt-mech-2x-overclocked-dual-fan-12gb-gddr6-pcie-40-graphics-card";
+const { scrapeGpus } = require('./src/scrapers');
 
-app.get("/", function (req, res) {
-  res.json("This is my scraper boi");
-});
+const PartTypes = require('./src/PartTypes');
 
-app.get("/results", (req, res) => {
-  axios(url)
-    .then(response => {
-      const html = response.data;
-      const $ = cheerio.load(html);
-      const descriptions = [];
-      $(".spec-body", html)
-        .find("div")
-        .each(function (i, e) {
-          const head = $(this).text();
-          descriptions[i] = $(this).text();
-          // console.log("THIS!", this);
-          // const body = $(this).next().text(".spec-head");
-          // const url = $(this).find("a").attr("href");
-          // descriptions.push({
-          //   head,
-          // body,
-          // url,
-          // });
-        });
-      const obj = {};
-      for (let i = 0; i < descriptions.length; i += 2) {
-        obj[descriptions[i]] = descriptions[i + 1];
-      }
+// program.option('-p, --part <part>');
 
-      res.json(obj);
-    })
-    .catch(err => console.log(err));
-});
+// const options = program.opts();
 
-app.listen(PORT, () => console.log(`server running on PORT ${PORT}`));
+// console.log(program.args);
+// console.log(options);
 
-// async function getStuff() {
-//   try {
-//     const html = await axios.get(url);
-//     const $ = cheerio.load(html.data);
-//     const descriptions = [];
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
+const scrapers = {
+  [PartTypes.GPUs]: scrapeGpus,
+};
+
+program
+  .command('scrape')
+  .description(
+    `Scrapes the Microcenter website for various parts. Valid types are: ${Object.values(
+      PartTypes,
+    )}`,
+  )
+  .argument('<part>', 'The part type to scrape.')
+  .action(async part => {
+    const scraper = scrapers[part];
+
+    if (!scraper) {
+      console.log(`Unknown part: ${part}`);
+      console.log(
+        `Please send in a known type from among: ${Object.values(PartTypes)}`,
+      );
+      return;
+    }
+
+    await scraper();
+  });
+
+program.parse();
