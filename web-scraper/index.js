@@ -7,7 +7,7 @@ const cors = require("cors");
 app.use(cors());
 
 const url =
-  "https://www.microcenter.com/product/632086/samsung-870-evo-2tb-ssd-3-bit-mlc-v-nand-sata-iii-6gb-s-25-internal-solid-state-drive";
+  "https://www.microcenter.com/product/635279/msi-amd-radeon-rx-6700-xt-mech-2x-overclocked-dual-fan-12gb-gddr6-pcie-40-graphics-card";
 
 app.get("/", function (req, res) {
   res.json("This is my scraper boi");
@@ -15,7 +15,7 @@ app.get("/", function (req, res) {
 
 app.get("/results", (req, res) => {
   axios(url)
-    .then((response) => {
+    .then(response => {
       const html = response.data;
       const $ = cheerio.load(html);
       const descriptions = [];
@@ -40,7 +40,7 @@ app.get("/results", (req, res) => {
 
       res.json(obj);
     })
-    .catch((err) => console.log(err));
+    .catch(err => console.log(err));
 });
 
 app.listen(PORT, () => console.log(`server running on PORT ${PORT}`));
