@@ -2,8 +2,9 @@
   "dependencies": {
     "axios": "^0.27.2",
     "cheerio": "^1.0.0-rc.11",
+    "cli-progress": "^3.11.1",
+    "commander": "^9.3.0",
     "cors": "^2.8.5",
-    "express": "^4.18.1",
     "nodemon": "^2.0.16"
   },
   "name": "great-value",
@@ -25,5 +26,13 @@
   "bugs": {
     "url": "https://gitlab.com/jlee220/great-value/issues"
   },
-  "homepage": "https://gitlab.com/jlee220/great-value#readme"
+  "homepage": "https://gitlab.com/jlee220/great-value#readme",
+  "devDependencies": {
+    "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-jest": "^26.4.5",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.30.0",
+    "prettier": "^2.6.2"
+  }
 }

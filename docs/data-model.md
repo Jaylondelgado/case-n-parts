@@ -53,25 +53,27 @@
 
 ## Gpu
 
-| name           | type         | unique | optional |
-| -------------- | ------------ | ------ | -------- |
-| brand          | varchar(60)  | yes    | false    |
-| max_resolution | varchar(15)  | no     | false    |
-| memory_speed   | int          | no     | false    |
-| coprocessor    | varchar(100) | no     | false    |
-| ram_size       | int          | no     | false    |
-| dimensions     | varchar(30)  | no     | false    |
+| name             | type         | unique | optional |
+| ---------------- | ------------ | ------ | -------- |
+| manufacturer     | varchar(60)  | yes    | false    |
+| core_clock_speed | varchar(15)  | no     | false    |
+| video_memory     | int          | no     | false    |
+| memory_type      | varchar(100) | no     | false    |
+| height           | varchar(15)  | no     | false    |
+| length           | varchar(15)  | no     | false    |
+| width            | varchar(15)  | no     | false    |
+| hdmi             | varchar(30)  | no     | false    |
+| display_port     | varchar(40)  | no     | false    |
 
 ## Cpu
 
-| name            | type        | unique | optional |
-| --------------- | ----------- | ------ | -------- |
-| manufacturer    | varchar(60) | yes    | false    |
-| processor_count | int         | no     | false    |
-| model           | varchar(50) | no     | false    |
-| socket          | varchar(20) | no     | false    |
-| speed           | int         | no     | false    |
-| dimensionions   | varchar(30) | no     | false    |
+| name        | type        | unique | optional |
+| ----------- | ----------- | ------ | -------- |
+| processor   | varchar(60) | yes    | false    |
+| cores       | varchar(15) | no     | false    |
+| threads     | varchar(70) | no     | false    |
+| speed       | varchar(10) | no     | false    |
+| socket_type | varchar(30) | no     | false    |
 
 ## PowerSupply
 
@@ -100,7 +102,6 @@
 | ram          | foreign-key to ram | no     | false    |
 | ram_slots    | int                | no     | false    |
 | memory_speed | int                | no     | false    |
-| cpu_socket   | varchar(20)        | no     | false    |
 | chipset      | varchar(20)        | no     | false    |
 | dimensions   | varchar(30)        | no     | false    |
 
