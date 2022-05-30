@@ -1,5 +1,16 @@
 import styled from "styled-components";
 
+export const Navbar = styled.nav`
+  background: forestgreen;
+  display: flex;
+  align-items: center;
+  margin-right: -24px;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`;
+
 export const Button = styled.button`
   display: inline-block;
   color: green;
@@ -8,16 +19,18 @@ export const Button = styled.button`
   padding: 0.25em 1em;
   border: 2px solid green;
   border-radius: 3px;
-  display: block;
 
   .current {
-    li {
-      border-bottom: 2px solid black;
+    a {
+      border-bottom: 2px solid green;
     }
   }
 `;
 
-export default styled;
+//   display: flex;
+//   flex-flow: row nowrap;
+//   justify-content: space-evenly;
+// `;
 
 // const TomatoButton = styled(Button)`
 //   color: tomato;
