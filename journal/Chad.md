@@ -17,3 +17,9 @@ bringing the data into the back end.
 
 Today, through many errors, I solidified some of the knowledge that I have of a Dockerfile.
 Specifically, the context part of the file.
+
+## May 29th, 2022
+
+Refactored the web scraper to get rid of the use of Express, it wasn't necessary.
+
+Discovered the Commander package, which lets you make your own command line utilities and commands.

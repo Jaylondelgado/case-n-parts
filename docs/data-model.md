@@ -86,13 +86,12 @@
 
 ## Ram
 
-| name        | type        | unique | optional |
-| ----------- | ----------- | ------ | -------- |
-| brand       | varchar(60) | yes    | false    |
-| capacity    | int         | no     | false    |
-| clock_speed | int         | no     | false    |
-| speed       | int         | no     | false    |
-| type        | varchar(20) | no     | false    |
+| name              | type        | unique | optional |
+| ----------------- | ----------- | ------ | -------- |
+| memory_type       | varchar(8)  | no     | false    |
+| memory_speed      | varchar(20) | no     | false    |
+| memory_channels   | varchar(10) | no     | false    |
+| pin_configuration | varchar(20) | no     | false    |
 
 ## Motherboard
 
