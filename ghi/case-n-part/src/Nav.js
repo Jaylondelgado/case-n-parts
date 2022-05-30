@@ -6,7 +6,7 @@ const links = [
   { name: "My Builds", path: "/" },
   { name: "Create Builds", path: "/create" },
   { name: "View Builds", path: "/toprated" },
-  { name: "Login", path: "/contact" },
+  { name: "Login", path: "/login" },
 ];
 
 function Nav() {

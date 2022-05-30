@@ -5,10 +5,14 @@
     "cli-progress": "^3.11.1",
     "commander": "^9.3.0",
     "cors": "^2.8.5",
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.16",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-router-dom": "^6.3.0",
+    "styled-components": "^5.3.5"
   },
   "name": "great-value",
-  "description": "- Chad - Jason - Jarett - Jaylon",
+  "description": "Chad - Jason - Jarett - Jaylon",
   "version": "1.0.0",
   "main": "index.js",
   "directories": {
