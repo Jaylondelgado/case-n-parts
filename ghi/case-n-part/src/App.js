@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./Nav";
-import signIn from "./login/SignIn";
+import SignIn from "./login/SignIn";
 
 function App() {
   return (
@@ -8,8 +8,7 @@ function App() {
       <Nav />
       <div className="container">
         <Routes>
-          <Route path="login" />
-          <Route index element={<signIn />} />
+          <Route path="login" element={<SignIn />} />
         </Routes>
       </div>
     </BrowserRouter>

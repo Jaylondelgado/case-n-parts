@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import {
   CardWrapper,
   CardHeader,
@@ -15,7 +14,7 @@ import {
   CardLink,
 } from "./Card";
 
-function App() {
+function SignIn() {
   return (
     <div className="App">
       <CardWrapper>
@@ -68,5 +67,4 @@ function App() {
   );
 }
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+export default SignIn;
