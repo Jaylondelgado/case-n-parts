@@ -6,8 +6,9 @@ const createSqlInsert = require("../createSqlInsert");
 const { partDefaultUrls } = require("../urls");
 
 async function getDetailPages() {
-  const { data } = await axios(partDefaultUrls.gpus);
+  const { data } = await axios(partDefaultUrls.ram);
   const $ = cheerio.load(data);
+  console.log(data);
 
   const detailUrls = [];
   $(".detail_wrapper a").each((i, element) => {
@@ -26,21 +27,16 @@ function mapDetailPage($) {
   });
 
   const data = {
-    manufacturer: specs["GPU Manufacturer"],
-    core_clock_speed: specs["Boost Core Clock Speed"],
-    video_memory: parseInt(specs["Video Memory"], 10),
     memory_type: specs["Memory Type"],
-    height: specs["Height"],
-    length: specs["Video Card Length"],
-    width: specs["Width"],
-    hdmi: specs["HDMI"],
-    display_port: specs["DisplayPort"],
+    memory_speed: specs["Memory Speed"],
+    memory_channels: specs["Memory Channels"],
+    pin_configuration: specs["Pin Configuration"],
   };
 
   return data;
 }
 
-async function scrapeGpus() {
+async function scrapeRam() {
   const detailUrls = await getDetailPages();
 
   const scrapeProgress = new cliProgress.SingleBar(
@@ -74,9 +70,9 @@ async function scrapeGpus() {
   // stop the progress bar
   scrapeProgress.stop();
 
-  await createSqlInsert("./gpus.sql", "gpu", detailValues);
+  await createSqlInsert("./ram.sql", "ram", detailValues);
 
-  console.log("Done! Go look in gpus.sql for your insert statement!");
+  console.log("Done! Go look in cpus.sql for your insert statement!");
 }
 
-exports.scrapeGpus = scrapeGpus;
+exports.scrapeRam = scrapeRam;

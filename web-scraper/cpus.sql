@@ -1,5 +1,5 @@
 INSERT INTO Cpu
-(processor,cores,threads,speed,socker_type)
+(processor,cores,threads,speed,socket_type)
 VALUES
 ('Ryzen 5 5600X','Six-Core','12 Processing Threads','3.70GHz','AM4'),
     ('Ryzen 7 5800X','Eight-Core','16 Processing Threads','3.80GHz','AM4'),

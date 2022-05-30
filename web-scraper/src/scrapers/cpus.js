@@ -74,7 +74,7 @@ async function scrapeCpus() {
   // stop the progress bar
   scrapeProgress.stop();
 
-  await createSqlInsert("./cpus.sql", "Cpu", detailValues);
+  await createSqlInsert("./cpus.sql", "cpu", detailValues);
 
   console.log("Done! Go look in cpus.sql for your insert statement!");
 }
