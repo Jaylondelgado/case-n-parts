@@ -21,17 +21,8 @@ app.get("/results", (req, res) => {
       const descriptions = [];
       $(".spec-body", html)
         .find("div")
-        .each(function (i, e) {
-          const head = $(this).text();
+        .each(function (i) {
           descriptions[i] = $(this).text();
-          // console.log("THIS!", this);
-          // const body = $(this).next().text(".spec-head");
-          // const url = $(this).find("a").attr("href");
-          // descriptions.push({
-          //   head,
-          // body,
-          // url,
-          // });
         });
       const obj = {};
       for (let i = 0; i < descriptions.length; i += 2) {
@@ -44,13 +35,3 @@ app.get("/results", (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`server running on PORT ${PORT}`));
-
-// async function getStuff() {
-//   try {
-//     const html = await axios.get(url);
-//     const $ = cheerio.load(html.data);
-//     const descriptions = [];
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
