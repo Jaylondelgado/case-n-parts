@@ -67,13 +67,13 @@
 
 ## Cpu
 
-| name            | type        | unique | optional |
-| --------------- | ----------- | ------ | -------- |
-| manufacturer    | varchar(60) | yes    | false    |
-| processor_count | int         | no     | false    |
-| model           | varchar(50) | no     | false    |
-| speed           | int         | no     | false    |
-| dimensionions   | varchar(30) | no     | false    |
+| name        | type        | unique | optional |
+| ----------- | ----------- | ------ | -------- |
+| processor   | varchar(60) | yes    | false    |
+| cores       | varchar(15) | no     | false    |
+| threads     | varchar(70) | no     | false    |
+| speed       | varchar(10) | no     | false    |
+| socket_type | varchar(30) | no     | false    |
 
 ## PowerSupply
 

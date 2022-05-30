@@ -1,3 +1,4 @@
 module.exports = {
-  GPUs: 'gpus',
+  GPUs: "gpus",
+  CPUs: "cpus",
 };

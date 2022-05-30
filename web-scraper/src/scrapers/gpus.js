@@ -1,17 +1,17 @@
-const axios = require('axios');
-const cheerio = require('cheerio');
-const cliProgress = require('cli-progress');
+const axios = require("axios");
+const cheerio = require("cheerio");
+const cliProgress = require("cli-progress");
 
-const createSqlInsert = require('../createSqlInsert');
-const { partDefaultUrls } = require('../urls');
+const createSqlInsert = require("../createSqlInsert");
+const { partDefaultUrls } = require("../urls");
 
 async function getDetailPages() {
   const { data } = await axios(partDefaultUrls.gpus);
   const $ = cheerio.load(data);
 
   const detailUrls = [];
-  $('.detail_wrapper a').each((i, element) => {
-    detailUrls.push(partDefaultUrls.base + $(element).attr('href'));
+  $(".detail_wrapper a").each((i, element) => {
+    detailUrls.push(partDefaultUrls.base + $(element).attr("href"));
   });
 
   return detailUrls;
@@ -19,22 +19,22 @@ async function getDetailPages() {
 
 function mapDetailPage($) {
   const specs = {};
-  $('.spec-body').each((i, element) => {
-    const specName = $('div:first-child', element).text();
-    const specValue = $('div:last-child', element).text();
+  $(".spec-body").each((i, element) => {
+    const specName = $("div:first-child", element).text();
+    const specValue = $("div:last-child", element).text();
     specs[specName] = specValue;
   });
 
   const data = {
-    manufacturer: specs['GPU Manufacturer'],
-    core_clock_speed: specs['Boost Core Clock Speed'],
-    video_memory: parseInt(specs['Video Memory'], 10),
-    memory_type: specs['Memory Type'],
-    height: specs['Height'],
-    length: specs['Video Card Length'],
-    width: specs['Width'],
-    hdmi: specs['HDMI'],
-    display_port: specs['DisplayPort'],
+    manufacturer: specs["GPU Manufacturer"],
+    core_clock_speed: specs["Boost Core Clock Speed"],
+    video_memory: parseInt(specs["Video Memory"], 10),
+    memory_type: specs["Memory Type"],
+    height: specs["Height"],
+    length: specs["Video Card Length"],
+    width: specs["Width"],
+    hdmi: specs["HDMI"],
+    display_port: specs["DisplayPort"],
   };
 
   return data;
@@ -45,7 +45,7 @@ async function scrapeGpus() {
 
   const scrapeProgress = new cliProgress.SingleBar(
     {},
-    cliProgress.Presets.shades_classic,
+    cliProgress.Presets.shades_classic
   );
 
   // start the progress bar with a total value of 200 and start value of 0
@@ -68,15 +68,15 @@ async function scrapeGpus() {
           reject(error);
         }
       });
-    }),
+    })
   );
 
   // stop the progress bar
   scrapeProgress.stop();
 
-  await createSqlInsert('./gpus.sql', 'Gpu', detailValues);
+  await createSqlInsert("./gpus.sql", "Gpu", detailValues);
 
-  console.log('Done! Go look in gpus.sql for your insert statement!');
+  console.log("Done! Go look in gpus.sql for your insert statement!");
 }
 
 exports.scrapeGpus = scrapeGpus;
