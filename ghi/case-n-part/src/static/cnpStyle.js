@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Navbar = styled.nav`
-  background: forestgreen;
+  background: darkslategrey;
   display: flex;
   align-items: center;
   margin-right: -24px;
