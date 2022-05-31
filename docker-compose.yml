@@ -14,11 +14,10 @@ services:
       HOST_OS: ${OS}
       NODE_ENV: development
       HOST: "0.0.0.0"
-  db:
-    build:
-      context: data
-      dockerfile: Dockerfile.dev
+  postgres:
+    image: postgres:14-bullseye
     volumes:
+      - ./data/:/docker-entrypoint-initdb.d
       - cnp-data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: great-value
