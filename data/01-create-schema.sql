@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS public.gpu
 -- Name: gpu_id_seq; Type: SEQUENCE; Schema: public; Owner: jservice
 --
 
-ALTER TABLE IF EXISTS public.cpu
+ALTER TABLE IF EXISTS public.gpu
     OWNER to "great-value";
 
 --
