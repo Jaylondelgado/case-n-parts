@@ -1,3 +1,4 @@
+-- gpu_id INT NULL REFERENCES tabletnae (id)
 --
 -- PostgreSQL database dump
 --
@@ -27,6 +28,7 @@ SET default_table_access_method = heap;
 
 CREATE TABLE IF NOT EXISTS public.cpu
 (
+    id SERIAL NOT NULL PRIMARY KEY,
     processor character varying(60) COLLATE pg_catalog."default" NOT NULL,
     cores character varying(20) COLLATE pg_catalog."default" NOT NULL,
     threads character varying(70) COLLATE pg_catalog."default" NOT NULL,
@@ -37,20 +39,13 @@ CREATE TABLE IF NOT EXISTS public.cpu
 ALTER TABLE IF EXISTS public.cpu
     OWNER to "great-value";
 
-CREATE SEQUENCE IF NOT EXISTS public.cpu_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
 --
 -- Name: gpu; Type: TABLE; Schema: public; Owner: jservice
 --
 
 CREATE TABLE IF NOT EXISTS public.gpu
 (
+    id SERIAL NOT NULL PRIMARY KEY,
     manufacturer character varying(60) COLLATE pg_catalog."default" NOT NULL,
     core_clock_speed character varying(15) COLLATE pg_catalog."default" NOT NULL,
     video_memory int NOT NULL,
@@ -69,20 +64,13 @@ CREATE TABLE IF NOT EXISTS public.gpu
 ALTER TABLE IF EXISTS public.cpu
     OWNER to "great-value";
 
-CREATE SEQUENCE IF NOT EXISTS public.harddrive_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
 --
 -- Name: harddrive; Type: TABLE; Schema: public; Owner: jservice
 --
 
 CREATE TABLE IF NOT EXISTS public.hdd
 (
+    id SERIAL NOT NULL PRIMARY KEY,
     capacity character varying(5) COLLATE pg_catalog."default" NOT NULL,
     interface character varying(25) COLLATE pg_catalog."default" NOT NULL,
     cache character varying(30) COLLATE pg_catalog."default" NOT NULL,
@@ -93,13 +81,6 @@ CREATE TABLE IF NOT EXISTS public.hdd
 ALTER TABLE IF EXISTS public.hdd
     OWNER to "great-value";
 
-CREATE SEQUENCE IF NOT EXISTS public.harddrive_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
 
 --
 -- Name: harddrive; Type: TABLE; Schema: public; Owner: jservice
@@ -107,6 +88,7 @@ CREATE SEQUENCE IF NOT EXISTS public.harddrive_id_seq
 
 CREATE TABLE IF NOT EXISTS public.ram
 (
+    id SERIAL NOT NULL PRIMARY KEY,
     memory_type character varying(8) COLLATE pg_catalog."default" NOT NULL,
     memory_speed character varying(20) COLLATE pg_catalog."default" NOT NULL,
     memory_channels character varying(10) COLLATE pg_catalog."default" NOT NULL,
@@ -117,20 +99,13 @@ CREATE TABLE IF NOT EXISTS public.ram
 ALTER TABLE IF EXISTS public.ram
     OWNER to "great-value";
 
-CREATE SEQUENCE IF NOT EXISTS public.ram_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
 --
 -- Name: psu; Type: TABLE; Schema: public; Owner: jservice
 --
 
 CREATE TABLE IF NOT EXISTS public.psu
 (
+    id SERIAL NOT NULL PRIMARY KEY,
     wattage character varying(20) COLLATE pg_catalog."default" NOT NULL,
     atx_connector character varying(20) COLLATE pg_catalog."default" NOT NULL,
     atx_12v_connector character varying(20) COLLATE pg_catalog."default" NOT NULL,
@@ -143,13 +118,3 @@ CREATE TABLE IF NOT EXISTS public.psu
 
 ALTER TABLE IF EXISTS public.psu
     OWNER to "great-value";
-
-CREATE SEQUENCE IF NOT EXISTS public.psu_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
