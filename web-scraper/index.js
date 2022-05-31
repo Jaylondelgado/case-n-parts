@@ -3,6 +3,8 @@ const { program } = require("commander");
 const { scrapeGpus } = require("./src/scrapers");
 const { scrapeCpus } = require("./src/scrapers");
 const { scrapeRam } = require("./src/scrapers");
+const { scrapeHdd } = require("./src/scrapers");
+const { scrapePsu } = require("./src/scrapers");
 
 const PartTypes = require("./src/PartTypes");
 
@@ -10,6 +12,8 @@ const scrapers = {
   [PartTypes.GPUs]: scrapeGpus,
   [PartTypes.CPUs]: scrapeCpus,
   [PartTypes.RAM]: scrapeRam,
+  [PartTypes.HDD]: scrapeHdd,
+  [PartTypes.PSU]: scrapePsu,
 };
 
 program

@@ -83,4 +83,89 @@ VALUES
     ('NVIDIA','1830MHz',6,'GDDR6','5.00 in. (127.00 mm)','9.72 in. (247.00 mm)','Dual Slot','1 x HDMI 2.0b','3 x DisplayPort 1.4'),
     ('AMD','2340MHz',16,'GDDR6','5.55 in. (140.97 mm)','12.76 in. (324.00 mm)','Dual Slot','1 x HDMI 2.1','3 x DisplayPort 1.4a'),
     ('AMD','2321MHz',4,'GDDR6','4.92 in. (125.00 mm)','6.50 in. (165.00 mm)','Dual Slot','1 x HDMI 2.1','1 x DisplayPort 1.4a'),
-    ('NVIDIA','1845MHz',6,'GDDR6','4.90 in. (124.46 mm)','8.10 in. (205.74 mm)','Dual Slot','2 x HDMI 2.0b','1 x DisplayPort 1.4a')
+    ('NVIDIA','1845MHz',6,'GDDR6','4.90 in. (124.46 mm)','8.10 in. (205.74 mm)','Dual Slot','2 x HDMI 2.0b','1 x DisplayPort 1.4a');
+
+INSERT INTO cpu
+(processor,cores,threads,speed,socket_type)
+VALUES
+('Ryzen 5 5600X','Six-Core','12 Processing Threads','3.70GHz','AM4'),
+    ('Ryzen 7 5800X','Eight-Core','16 Processing Threads','3.80GHz','AM4'),
+    ('Ryzen 5 5600','Six-Core','12 Processing Threads','3.50GHz','AM4'),
+    ('Ryzen 9 5900X','Twelve-Core','24 Processing Threads','3.70GHz','AM4'),
+    ('Ryzen 7 5700X','Eight-Core','16 Processing Threads','3.40GHz','AM4'),
+    ('Ryzen 5 5600G','Six-Core','12 Processing Threads','3.90GHz','AM4'),
+    ('Ryzen 9 5950X','Sixteen-Core','32 Processing Threads','3.40GHz','AM4'),
+    ('Ryzen 7 5800X3D','Eight-Core','16 Processing Threads','3.40GHz','AM4'),
+    ('Ryzen 7 5700G','Eight-Core','16 Processing Threads','3.80GHz','AM4'),
+    ('Ryzen 5 5500','Six-Core','12 Processing Threads','3.60GHz','AM4'),
+    ('Ryzen 5 4500','Six-Core','12 Processing Threads','3.60GHz','AM4');
+
+INSERT INTO hdd
+(capacity,interface,cache,rpm)
+VALUES
+('1TB','SATA 3.0 6.0Gb/s','128MB','5,400 RPM'),
+    ('4TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
+    ('6TB','SATA 3.0 6.0Gb/s','256MB','5,400 RPM'),
+    ('4TB','SATA 3.0 6.0Gb/s','64MB','5,900 RPM'),
+    ('8TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
+    ('2TB','SATA 3.0 6.0Gb/s','128MB','5,400 RPM'),
+    ('2TB','SATA 3.0 6.0Gb/s','64MB','7,200 RPM'),
+    ('2TB','SATA 3.0 6.0Gb/s','64MB','5,900 RPM'),
+    ('6TB','SATA 3.0 6.0Gb/s','256MB','5,400 RPM'),
+    ('8TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
+    ('6TB','SATA 3.0 6.0Gb/s','128MB','5,400 RPM'),
+    ('8TB','SATA 3.0 6.0Gb/s','256MB','5,400 RPM'),
+    ('12TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
+    ('10TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
+    ('20TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
+    ('1TB','SATA 3.0 6.0Gb/s','64MB','7,200 RPM'),
+    ('10TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
+    ('1TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
+    ('2TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
+    ('14TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
+    ('2TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM');
+
+INSERT INTO psu
+(wattage,atx_connector,atx_12v_connector,graphics_connector,molex_connector,sata_connector,floppy_connector)
+VALUES
+('850 Watts','20+4-pin','2 x 4+4-pin','6 x 6+2-pin','3','9','1'),
+    ('850 Watts','24-pin','3 x 4+4-pin','4 x 6+2-pin','4','8','1'),
+    ('1000 Watts','20+4-pin','2 x 4+4-pin','8 x 6+2-pin','4','12','1'),
+    ('650 Watts','24-pin','1 x 4+4-pin','2 x 6+2-pin','3','7','1'),
+    ('850 Watts','24-pin','2 x 4+4-pin','6 x 6+2-pin','5','10','1'),
+    ('1000 Watts','24-pin','2 x 8-pin','10 x 6+2-pin','3','12','2'),
+    ('750 Watts','24-pin','2 x 4+4-pin','4 x 6+2-pin','4','9','1'),
+    ('850 Watts','20+4-pin','2 x 4+4-pin','6 x 6+2-pin','3','9','1'),
+    ('1000 Watts','20+4-pin','2 x 4+4-pin','7 x 6+2-pin','4','12','1'),
+    ('1200 Watts','20+4-pin','2 x 4+4-pin','8 x 6+2-pin','5','12','1'),
+    ('850 Watts','20+4-pin','2 x 4+4-pin','4 x 6+2-pin','4','6','1'),
+    ('1200 Watts','20+4-pin','2 x 4+4-pin','8 x 6+2-pin','14','14','6'),
+    ('600 Watts','20+4-pin','1 x 4+4-pin','2 x 6+2-pin','3','6','1');
+
+INSERT INTO ram
+(memory_type,memory_speed,memory_channels,pin_configuration)
+VALUES
+('DDR4','PC4-25600','Dual','288-pin'),
+    ('DDR4','PC4-28800','Dual','288-pin'),
+    ('DDR4','PC4-25600','Dual','288-pin'),
+    ('DDR4','PC4-25600','Dual','288-pin'),
+    ('DDR4','PC4-25600','Dual','288-pin'),
+    ('DDR4','PC4-25600','Dual','288-pin'),
+    ('DDR4','PC4-28800','Dual','288-pin'),
+    ('DDR4','PC4-25600','Dual','288-pin'),
+    ('DDR4','PC4-25600','Dual','288-pin'),
+    ('DDR4','PC4-28800','Dual','288-pin'),
+    ('DDR4','PC4-28800','Dual','288-pin'),
+    ('DDR4','PC4-25600','Dual','288-pin'),
+    ('DDR4','PC4-28800','Dual','288-pin'),
+    ('DDR4','PC4-25600','Dual','288-pin'),
+    ('DDR4','PC4-28800','Dual','288-pin'),
+    ('DDR4','PC4-28800','Dual','288-pin'),
+    ('DDR4','PC4-25600','Dual','288-pin'),
+    ('DDR4','PC4-25600','Dual','288-pin'),
+    ('DDR4','PC4-28800','Dual','288-pin'),
+    ('DDR4','PC4-25600','Dual','288-pin'),
+    ('DDR4','PC4-28800','Dual','288-pin'),
+    ('DDR4','PC4-28800','Dual','288-pin'),
+    ('DDR4','PC4-28800','Dual','288-pin'),
+    ('DDR4','PC4-25600','Dual','288-pin');

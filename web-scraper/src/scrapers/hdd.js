@@ -6,7 +6,7 @@ const createSqlInsert = require("../createSqlInsert");
 const { partDefaultUrls } = require("../urls");
 
 async function getDetailPages() {
-  const { data } = await axios(partDefaultUrls.cpus);
+  const { data } = await axios(partDefaultUrls.hdd);
   const $ = cheerio.load(data);
 
   const detailUrls = [];
@@ -26,17 +26,16 @@ function mapDetailPage($) {
   });
 
   const data = {
-    processor: specs["Processor"],
-    cores: specs["Cores"],
-    threads: specs["Number of Threads"],
-    speed: specs["Operating Frequency"],
-    socket_type: specs["Socket Type"],
+    capacity: specs["Capacity"],
+    interface: specs["Interface"],
+    cache: specs["Cache"],
+    rpm: specs["RPM"],
   };
 
   return data;
 }
 
-async function scrapeCpus() {
+async function scrapeHdd() {
   const detailUrls = await getDetailPages();
 
   const scrapeProgress = new cliProgress.SingleBar(
@@ -48,33 +47,31 @@ async function scrapeCpus() {
   scrapeProgress.start(detailUrls.length, 0);
 
   const detailValues = await Promise.all(
-    detailUrls
-      .filter(url => url.includes("amd"))
-      .map(async (url, i) => {
-        return new Promise((resolve, reject) => {
-          try {
-            setTimeout(async () => {
-              const { data } = await axios(url);
-              const $ = cheerio.load(data);
-              const rowData = mapDetailPage($);
-              resolve(rowData);
+    detailUrls.map(async (url, i) => {
+      return new Promise((resolve, reject) => {
+        try {
+          setTimeout(async () => {
+            const { data } = await axios(url);
+            const $ = cheerio.load(data);
+            const rowData = mapDetailPage($);
+            resolve(rowData);
 
-              // update the current value in your application..
-              scrapeProgress.update(i);
-            }, i * 300 + Math.floor(Math.random() * 300));
-          } catch (error) {
-            reject(error);
-          }
-        });
-      })
+            // update the current value in your application..
+            scrapeProgress.update(i);
+          }, i * 300 + Math.floor(Math.random() * 300));
+        } catch (error) {
+          reject(error);
+        }
+      });
+    })
   );
 
   // stop the progress bar
   scrapeProgress.stop();
 
-  await createSqlInsert("./cpus.sql", "cpu", detailValues);
+  await createSqlInsert("./hdd.sql", "hdd", detailValues);
 
-  console.log("Done! Go look in cpus.sql for your insert statement!");
+  console.log("Done! Go look in hdd.sql for your insert statement!");
 }
 
-exports.scrapeCpus = scrapeCpus;
+exports.scrapeHdd = scrapeHdd;
