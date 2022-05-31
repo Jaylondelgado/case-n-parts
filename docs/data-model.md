@@ -77,12 +77,15 @@
 
 ## PowerSupply
 
-| name       | type        | unique | optional |
-| ---------- | ----------- | ------ | -------- |
-| brand      | varchar(60) | yes    | false    |
-| voltage    | int         | no     | false    |
-| wattage    | int         | no     | false    |
-| dimensions | varchar(50) | no     | false    |
+| name               | type        | unique | optional |
+| ------------------ | ----------- | ------ | -------- |
+| wattage            | varchar(15) | no     | false    |
+| atx_connector      | varchar(20) | no     | false    |
+| atx_12v_connector  | varchar(20) | no     | false    |
+| graphics_connector | varchar(20) | no     | false    |
+| molex_connector    | int         | no     | false    |
+| sata_connector     | int         | no     | false    |
+| floppy_connector   | int         | no     | false    |
 
 ## Ram
 
@@ -106,10 +109,9 @@
 
 ## Harddrive
 
-| name             | type        | unique | optional |
-| ---------------- | ----------- | ------ | -------- |
-| brand            | varchar(60) | yes    | false    |
-| capacity         | int         | no     | false    |
-| rotational_speed | int         | no     | false    |
-| interface        | varchar(20) | no     | false    |
-| dimensions       | varchar(30) | no     | false    |
+| name      | type        | unique | optional |
+| --------- | ----------- | ------ | -------- |
+| capacity  | varchar(5)  | no     | false    |
+| interface | varchar(25) | no     | false    |
+| cache     | varchar(20) | no     | false    |
+| rpm       | varchar(30) | no     | false    |
