@@ -1,4 +1,7 @@
 import React from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function HomePage() {
   //   const [appointments, setAppointments] = useState([]);
@@ -25,32 +28,43 @@ function HomePage() {
   //     });
   //   };
 
-  //   const updateAppointment = async (id) => {
-  //     const appointmentUrl = `http://localhost:8080/api/appointments/${id}/`;
-  //     const fetchConfig = {
-  //       method: "PUT",
-  //       body: JSON.stringify({
-  //         finished: true,
-  //       }),
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     };
-  //     const response = await fetch(appointmentUrl, fetchConfig);
-
-  //     if (response.ok) {
-  //       await fetchAppointmentData();
-  //     }
-  //   };
-
-  //   const handleClick = (id) => {
-  //     updateAppointment(id);
-  //   };
+  function SimpleSlider() {
+    var settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+    };
+    return (
+      <Slider {...settings}>
+        <div>
+          <h3>1</h3>
+        </div>
+        <div>
+          <h3>2</h3>
+        </div>
+        <div>
+          <h3>3</h3>
+        </div>
+        <div>
+          <h3>4</h3>
+        </div>
+        <div>
+          <h3>5</h3>
+        </div>
+        <div>
+          <h3>6</h3>
+        </div>
+      </Slider>
+    );
+  }
 
   return (
     <>
-      <h1>Custom Builds</h1>
-      <h1>Featured Builds</h1>
+      <h1>Builds of the Month</h1>
+      <h1>Our Cases</h1>
+      <div>{SimpleSlider}</div>
     </>
   );
 }
