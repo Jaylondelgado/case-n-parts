@@ -169,3 +169,17 @@ VALUES
     ('DDR4','PC4-28800','Dual','288-pin'),
     ('DDR4','PC4-28800','Dual','288-pin'),
     ('DDR4','PC4-25600','Dual','288-pin');
+
+INSERT INTO color
+(color_name)
+VALUES 
+('black'),
+('red'),
+('green');
+
+INSERT INTO size
+(size_name)
+VALUES 
+('Mini Tower'),
+('Mid Tower'),
+('Full Tower');
