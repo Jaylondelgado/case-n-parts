@@ -11,10 +11,9 @@ import {
   CardOptions,
   CardOptionsNote,
   CardButton,
-  CardLink,
 } from "./Card";
 
-function SignIn() {
+function Login() {
   return (
     <div className="App">
       <CardWrapper>
@@ -28,16 +27,12 @@ function SignIn() {
           </CardFieldset>
 
           <CardFieldset>
-            <CardInput placeholder="E-mail" type="text" required />
-          </CardFieldset>
-
-          <CardFieldset>
             <CardInput placeholder="Password" type="password" required />
             <CardIcon className="fa fa-eye" eye small />
           </CardFieldset>
 
           <CardFieldset>
-            <CardOptionsNote>Or sign up with</CardOptionsNote>
+            <CardOptionsNote>Or login with</CardOptionsNote>
 
             <CardOptions>
               <CardOptionsItem>
@@ -55,11 +50,7 @@ function SignIn() {
           </CardFieldset>
 
           <CardFieldset>
-            <CardButton type="button">Sign Up</CardButton>
-          </CardFieldset>
-
-          <CardFieldset>
-            <CardLink>I already have an account</CardLink>
+            <CardButton type="button">Sign In</CardButton>
           </CardFieldset>
         </CardBody>
       </CardWrapper>
@@ -67,4 +58,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default Login;
