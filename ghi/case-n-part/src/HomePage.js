@@ -2,6 +2,7 @@ import React from "react";
 import Slider from "react-slick";
 import "./index.css";
 
+
 function HomePage() {
   //   const [appointments, setAppointments] = useState([]);
 

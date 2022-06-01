@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import { GpuImage } from "./static/cnpStyle";
 function BuildColumn(props) {
   return (
     <div className="col">
@@ -96,9 +96,8 @@ class MyBuilds extends React.Component {
           <img className="bg-white rounded shadow d-block mx-auto mb-4" src="/logo.svg" alt="" width="600" />
           <h1 className="display-5 fw-bold">My Builds</h1>
           <div className="row">
-            <div>
-                <img src="https://c1.neweggimages.com/ProductImage/11-129-268-36.jpg" />
-            </div>
+          <GpuImage />
+          <GpuImage />
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
               <Link to="/create" className="btn btn-primary btn-lg px-4 gap-3">Create a Build</Link>
             </div>
