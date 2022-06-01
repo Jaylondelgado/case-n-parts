@@ -29,10 +29,12 @@ services:
     build:
       context: api
       dockerfile: Dockerfile.dev
+    ports:
+      - "8000:8000"
     volumes:
       - ./api:/app
     environment:
-      PGHOST: db
+      PGHOST: postgres
       PGDATABASE: great-value
       PGUSER: great-value
-      PGPASSWORD: trivia-game
+      PGPASSWORD: great-value
