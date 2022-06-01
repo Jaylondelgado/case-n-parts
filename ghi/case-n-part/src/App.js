@@ -3,6 +3,8 @@ import Nav from "./Nav";
 import Login from "./login/Login";
 import SignUp from "./login/SignUp";
 import HomePage from "./HomePage";
+import MyBuilds from "./MyBuilds";
+
 function App() {
   return (
     <BrowserRouter>
@@ -10,6 +12,7 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="mybuilds" element={<MyBuilds />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
         </Routes>

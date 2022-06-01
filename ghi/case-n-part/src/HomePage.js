@@ -1,7 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import "./index.css";
 
 function HomePage() {
   //   const [appointments, setAppointments] = useState([]);
@@ -27,13 +26,15 @@ function HomePage() {
   //       headers: { "Content-Type": "application/json" },
   //     });
   //   };
+  
+  
+
   const settings = {
     dots: true,
     infinite: true,
-
+    speed: 500,
     slidesToShow: 3,
-    slidesToScroll: 3
-
+    slidesToScroll: 3,
   };
   
 
@@ -45,16 +46,16 @@ function HomePage() {
       <div className="container">
         <Slider {...settings}>
           <div>
-            <img src="http://placekitten.com/g/400/200" />
+            <img src="https://c1.neweggimages.com/ProductImage/11-129-268-36.jpg" />
           </div>
           <div>
-            <img src="http://placekitten.com/g/400/200" />
+            <img src="https://c1.neweggimages.com/ProductImage/AFSTS2112102mvyB.jpg" />
           </div>
           <div>
-            <img src="http://placekitten.com/g/400/200" />
+            <img src="https://c1.neweggimages.com/ProductImage/11-173-041-V01.jpg" />
           </div>
           <div>
-            <img src="http://placekitten.com/g/400/200" />
+            <img src="https://c1.neweggimages.com/ProductImage/11-129-268-36.jpg" />
           </div>
         </Slider>
       </div>
