@@ -118,3 +118,34 @@ CREATE TABLE IF NOT EXISTS public.psu
 
 ALTER TABLE IF EXISTS public.psu
     OWNER to "great-value";
+
+CREATE TABLE IF NOT EXISTS public.color
+(
+    id SERIAL NOT NULL PRIMARY KEY,
+    color_name character varying(30)
+);
+
+
+ALTER TABLE IF EXISTS public.color
+    OWNER to "great-value";
+
+CREATE TABLE IF NOT EXISTS public.user
+(
+    id SERIAL NOT NULL PRIMARY KEY,
+    user_name character varying(200),
+    password TEXT
+);
+
+
+ALTER TABLE IF EXISTS public.user
+    OWNER to "great-value";
+
+CREATE TABLE IF NOT EXISTS public.size
+(
+    id SERIAL NOT NULL PRIMARY KEY,
+    size_name character varying(10)
+);
+
+
+ALTER TABLE IF EXISTS public.size
+    OWNER to "great-value";
