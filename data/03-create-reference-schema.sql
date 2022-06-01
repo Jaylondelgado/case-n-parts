@@ -1,11 +1,11 @@
 CREATE TABLE IF NOT EXISTS public.motherboard
 (
-    id SERIAL NOT NULL PRIMARY KEY,
-    cpu INT NOT NULL REFERENCES cpu (id),
-    gpu INT NOT NULL REFERENCES gpu (id),
-    hdd INT NOT NULL REFERENCES hdd (id),
-    ram INT NOT NULL REFERENCES ram (id),
-    psu INT NOT NULL REFERENCES psu (id)
+    sku SERIAL NOT NULL PRIMARY KEY,
+    socket_type CHARACTER VARYING(5) NOT NULL,
+    max_memory CHARACTER VARYING(10) NOT NULL REFERENCES,
+    max_memory_per_slot CHARACTER VARYING(10) NOT NULL,
+    pci_slots INT NOT NULL REFERENCES,
+    memory_slots INT NOT NULL REFERENCES,
 );
 
 ALTER TABLE IF EXISTS public.motherboard
