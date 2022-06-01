@@ -10,26 +10,13 @@
 
 ## Build
 
-| name         | type                        | unique | optional |
-| ------------ | --------------------------- | ------ | -------- |
-| build_name   | varchar(60)                 | yes    | false    |
-| case         | foreign key to case         | no     | true     |
-| gpu          | foreign key to gpu          | yes    | true     |
-| cpu          | foreign key to cpu          | yes    | true     |
-| ram          | foreign key to ram          | yes    | true     |
-| motherboard  | foreign key to motherboard  | yes    | true     |
-| power_supply | foreign key to power_supply | yes    | true     |
-| user_id      | foreign key to user         | yes    | false    |
-| private      | boolean                     | no     | false    |
-
-## Comments
-
-| name       | type                        | unique | optional |
-| ---------- | --------------------------- | ------ | -------- |
-| build_name | foreign key to build        | yes    | false    |
-| user       | foreign key to user         | yes    | false    |
-| comments   | varchar(3000)               | no     | false    |
-| rating     | foreign key to build rating | no     | false    |
+| name        | type                | unique | optional |
+| ----------- | ------------------- | ------ | -------- |
+| name        | varchar(60)         | yes    | false    |
+| case        | f.k. to case        | no     | true     |
+| motherboard | f.k. to motherboard | yes    | true     |
+| user_id     | f.k. to user        | yes    | false    |
+| private     | boolean             | no     | false    |
 
 ## Rating
 
@@ -40,16 +27,22 @@
 
 ## Case
 
-| name  | type                 | unique | optional |
-| ----- | -------------------- | ------ | -------- |
-| size  | varchar(30)          | no     | false    |
-| color | foreign key to color | no     | false    |
+| name  | type          | unique | optional |
+| ----- | ------------- | ------ | -------- |
+| size  | f.k. to size  | no     | false    |
+| color | f.k. to color | no     | false    |
 
 ## Color
 
 | name  | type        | unique | optional |
 | ----- | ----------- | ------ | -------- |
 | color | varchar(30) | no     | false    |
+
+## Size
+
+| name      | type        | unique | optional |
+| --------- | ----------- | ------ | -------- |
+| size_name | varchar(10) | no     | false    |
 
 ## Gpu
 
@@ -98,16 +91,16 @@
 
 ## Motherboard
 
-| name         | type               | unique | optional |
-| ------------ | ------------------ | ------ | -------- |
-| brand        | varchar(60)        | yes    | false    |
-| ram          | foreign-key to ram | no     | false    |
-| ram_slots    | int                | no     | false    |
-| memory_speed | int                | no     | false    |
-| chipset      | varchar(20)        | no     | false    |
-| dimensions   | varchar(30)        | no     | false    |
+| name | type        | unique | optional |
+| ---- | ----------- | ------ | -------- |
+| id   | serial      | yes    | false    |
+| cpu  | f.k. to cpu | no     | false    |
+| gpu  | f.k. to gpu | no     | false    |
+| hdd  | f.k. to hdd | no     | false    |
+| ram  | f.k. to ram | no     | false    |
+| psu  | f.k. to psu | no     | false    |
 
-## Harddrive
+## Hdd
 
 | name      | type        | unique | optional |
 | --------- | ----------- | ------ | -------- |
