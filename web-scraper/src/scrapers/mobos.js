@@ -28,7 +28,6 @@ function mapDetailPage($) {
   // totalPciSlots = pciSlots[express4] + pciSlots[express3] + pciSlots[express1];
 
   const data = {
-    sku: specs["SKU"],
     socket_type: specs["Socket Type"],
     max_memory: specs["Max Memory Supported"],
     max_memory_per_slot: specs["Maximum Memory Supported Per Slot"],

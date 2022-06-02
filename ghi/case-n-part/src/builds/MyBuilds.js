@@ -1,10 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { GpuImage } from "./static/cnpStyle";
+import React from "react";
+import { Link } from "react-router-dom";
+import { GpuImage } from "../static/cnpStyle";
 function BuildColumn(props) {
   return (
     <div className="col">
-      {props.list.map(data => {
+      {props.list.map((data) => {
         const build = data.build;
         return (
           <div key={build.href} className="card mb-3 shadow">
@@ -14,13 +14,10 @@ function BuildColumn(props) {
               <h6 className="card-subtitle mb-2 text-muted">
                 {build.location.name}
               </h6>
-              <p className="card-text">
-                {build.description}
-              </p>
+              <p className="card-text">{build.description}</p>
             </div>
             <div className="card-footer">
-              {new Date(build.starts).toLocaleDateString()}
-              -
+              {new Date(build.starts).toLocaleDateString()}-
               {new Date(build.ends).toLocaleDateString()}
             </div>
           </div>
@@ -39,7 +36,7 @@ class MyBuilds extends React.Component {
   }
 
   async componentDidMount() {
-    const url = 'http://localhost:8000/api/builds/';
+    const url = "http://localhost:8000/api/builds/";
 
     try {
       const response = await fetch(url);
@@ -82,7 +79,7 @@ class MyBuilds extends React.Component {
 
         // Set the state to the new list of three lists of
         // builds
-        this.setState({BuildColumns: BuildColumns});
+        this.setState({ BuildColumns: BuildColumns });
       }
     } catch (e) {
       console.error(e);
@@ -93,13 +90,20 @@ class MyBuilds extends React.Component {
     return (
       <>
         <div className="px-4 py-5 my-5 mt-0 text-center bg-info">
-          <img className="bg-white rounded shadow d-block mx-auto mb-4" src="/logo.svg" alt="" width="600" />
+          <img
+            className="bg-white rounded shadow d-block mx-auto mb-4"
+            src="/logo.svg"
+            alt=""
+            width="600"
+          />
           <h1 className="display-5 fw-bold">My Builds</h1>
           <div className="row">
-          <GpuImage />
-          <GpuImage />
+            <GpuImage />
+            <GpuImage />
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-              <Link to="/create" className="btn btn-primary btn-lg px-4 gap-3">Create a Build</Link>
+              <Link to="/create" className="btn btn-primary btn-lg px-4 gap-3">
+                Create a Build
+              </Link>
             </div>
           </div>
         </div>
@@ -107,12 +111,15 @@ class MyBuilds extends React.Component {
           <h1>Favorite Builds</h1>
           <div className="row">
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-              <Link to="/toprated" className="btn btn-primary btn-lg px-4 gap-3">View Builds</Link>
+              <Link
+                to="/toprated"
+                className="btn btn-primary btn-lg px-4 gap-3"
+              >
+                View Builds
+              </Link>
             </div>
             {this.state.BuildColumns.map((buildList, index) => {
-              return (
-                <BuildColumn key={index} list={buildList} />
-              );
+              return <BuildColumn key={index} list={buildList} />;
             })}
           </div>
         </div>
