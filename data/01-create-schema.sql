@@ -115,6 +115,19 @@ CREATE TABLE IF NOT EXISTS public.psu
     Floppy_Connector int NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS public.mobos
+(
+    Id SERIAL NOT NULL PRIMARY KEY,
+    Socket_Type CHARACTER VARYING(5) NOT NULL,
+    Max_Memory CHARACTER VARYING(10) NOT NULL,
+    Max_Memory_Per_Slot CHARACTER VARYING(10) NOT NULL,
+    Pcie_Slots INT NOT NULL,
+    Memory_Slots INT NOT NULL
+);
+
+ALTER TABLE IF EXISTS public.mobos
+    OWNER to "great-value";
+
 
 ALTER TABLE IF EXISTS public.psu
     OWNER to "great-value";

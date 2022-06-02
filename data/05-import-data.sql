@@ -86,7 +86,7 @@ VALUES
     ('NVIDIA','1845MHz',6,'GDDR6','4.90 in. (124.46 mm)','8.10 in. (205.74 mm)','Dual Slot','2 x HDMI 2.0b','1 x DisplayPort 1.4a');
 
 INSERT INTO cpu
-(Processor,Tores,Threads,Speed,Socket_Type)
+(Processor,Cores,Threads,Speed,Socket_Type)
 VALUES
 ('Ryzen 5 5600X','Six-Core','12 Processing Threads','3.70GHz','AM4'),
     ('Ryzen 7 5800X','Eight-Core','16 Processing Threads','3.80GHz','AM4'),
