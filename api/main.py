@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from routers import parts
+from postgres.routers import parts
 
 app = FastAPI()
 
