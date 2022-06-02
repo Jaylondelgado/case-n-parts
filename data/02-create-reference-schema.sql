@@ -1,6 +1,6 @@
-CREATE TABLE IF NOT EXISTS public.motherboard
+CREATE TABLE IF NOT EXISTS public.mobos
 (
-    sku SERIAL NOT NULL PRIMARY KEY,
+    id SERIAL NOT NULL PRIMARY KEY,
     socket_type CHARACTER VARYING(5) NOT NULL,
     max_memory CHARACTER VARYING(10) NOT NULL,
     max_memory_per_slot CHARACTER VARYING(10) NOT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS public.motherboard
     memory_slots INT NOT NULL
 );
 
-ALTER TABLE IF EXISTS public.motherboard
+ALTER TABLE IF EXISTS public.mobos
     OWNER to "great-value";
 
 CREATE TABLE IF NOT EXISTS public.case
