@@ -27,3 +27,13 @@ class GpuOut(BaseModel):
 
 class Gpu(BaseModel):
     gpus: list[GpuOut]
+
+class RamOut(BaseModel):
+    id: int
+    memory_type: str
+    memory_speed: str
+    memory_channels: str
+    pin_configuration: str
+
+class Ram(BaseModel):
+    rams: list[RamOut]

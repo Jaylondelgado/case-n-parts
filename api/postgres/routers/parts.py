@@ -4,7 +4,9 @@ from ..models.parts import (
     Gpu,
     GpuOut,
     Cpu,
-    CpuOut
+    CpuOut,
+    Ram,
+    RamOut
 )
 from ..db import PartsQueries
 
@@ -36,6 +38,16 @@ def row_to_cpu(row):
     }
     return cpu
 
+def row_to_ram(row):
+    ram = {
+        "id": row[0],
+        "memory_type": row[1],
+        'memory_speed': row[2],
+        'memory_channel': row[3],
+        'pin_configuration': row[4],
+    }
+    return ram
+
 @router.get("/api/gpus", response_model=Gpu)
 def gpu_list(query=Depends(PartsQueries)):
     rows = query.get_all_gpus()
@@ -49,4 +61,10 @@ def cpu_list(query=Depends(PartsQueries)):
     return {
         "cpus": [row_to_cpu(row) for row in rows],
     }
-    
+
+@router.get("/api/rams", response_model=Ram)
+def ram_list(query=Depends(PartsQueries)):
+    rows = query.get_all_rams()
+    return {
+        "rams": [row_to_ram(row) for row in rows],
+    }

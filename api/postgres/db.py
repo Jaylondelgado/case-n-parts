@@ -30,3 +30,14 @@ class PartsQueries:
                 )
                 rows = cursor.fetchall()
                 return list(rows)
+    def get_all_rams(self):
+        with pool.connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    SELECT id, memory_type, memory_speed, memory_channel, pin_configuration
+                    FROM ram
+                    """
+                )
+                rows = cursor.fetchall()
+                return list(rows)

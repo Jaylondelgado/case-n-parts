@@ -4,7 +4,8 @@ import Footer from "./Footer";
 import Login from "./login/Login";
 import SignUp from "./login/SignUp";
 import HomePage from "./HomePage";
-import MyBuilds from "./MyBuilds";
+import MyBuilds from "./builds/MyBuilds";
+import ViewBuilds from "./builds/ViewBuilds";
 
 function App() {
   return (
