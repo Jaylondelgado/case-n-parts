@@ -65,7 +65,7 @@ ALTER TABLE IF EXISTS public.gpu
     OWNER to "great-value";
 
 --
--- Name: harddrive; Type: TABLE; Schema: public; Owner: jservice
+-- Name: hdd; Type: TABLE; Schema: public; Owner: jservice
 --
 
 CREATE TABLE IF NOT EXISTS public.hdd
@@ -83,7 +83,7 @@ ALTER TABLE IF EXISTS public.hdd
 
 
 --
--- Name: harddrive; Type: TABLE; Schema: public; Owner: jservice
+-- Name: ram; Type: TABLE; Schema: public; Owner: jservice
 --
 
 CREATE TABLE IF NOT EXISTS public.ram
