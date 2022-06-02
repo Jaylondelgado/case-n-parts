@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 ghi/node_modules
+__pycache__/
 
 # testing
 /coverage
