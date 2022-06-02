@@ -5,7 +5,10 @@ import Login from "./login/Login";
 import SignUp from "./login/SignUp";
 import HomePage from "./HomePage";
 import MyBuilds from "./builds/MyBuilds";
+<<<<<<< HEAD
 import ViewBuilds from "./builds/ViewBuilds";
+=======
+>>>>>>> dd61bd9c3b9b28aceb6e787a6f6a509f43f90313
 
 function App() {
   return (

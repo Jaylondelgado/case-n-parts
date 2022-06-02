@@ -37,3 +37,25 @@ class RamOut(BaseModel):
 
 class Ram(BaseModel):
     rams: list[RamOut]
+class HddOut(BaseModel):
+    id: int
+    capacity: str
+    interface: str
+    cache: str
+    rpm: str
+
+class Hdd(BaseModel):
+    hdds: list[HddOut]
+
+class PsuOut(BaseModel):
+    id: int
+    wattage: str
+    atx_connector: str 
+    atx_12v_connector: str
+    graphics_connector: str
+    molex_connector: str
+    sata_connector: str
+    floppy_connector: str
+
+class Psu(BaseModel):
+    psus: list[PsuOut]

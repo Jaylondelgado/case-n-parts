@@ -1,11 +1,11 @@
 CREATE TABLE IF NOT EXISTS public.mobos
 (
-    id SERIAL NOT NULL PRIMARY KEY,
-    socket_type CHARACTER VARYING(5) NOT NULL,
-    max_memory CHARACTER VARYING(10) NOT NULL,
-    max_memory_per_slot CHARACTER VARYING(10) NOT NULL,
-    pcie_slots INT NOT NULL,
-    memory_slots INT NOT NULL
+    Id SERIAL NOT NULL PRIMARY KEY,
+    Socket_type CHARACTER VARYING(5) NOT NULL,
+    Max_memory CHARACTER VARYING(10) NOT NULL,
+    Max_memory_per_slot CHARACTER VARYING(10) NOT NULL,
+    Mcie_slots INT NOT NULL,
+    Memory_slots INT NOT NULL
 );
 
 ALTER TABLE IF EXISTS public.mobos
@@ -13,9 +13,10 @@ ALTER TABLE IF EXISTS public.mobos
 
 CREATE TABLE IF NOT EXISTS public.case
 (
-    id SERIAL NOT NULL PRIMARY KEY,
-    color INT NOT NULL REFERENCES color (id),
-    size INT NOT NULL REFERENCES size (id)
+    Id SERIAL NOT NULL PRIMARY KEY,
+    BuildId INT NOT NULL REFERENCES build,
+    Color INT NOT NULL REFERENCES Color (id),
+    Size INT NOT NULL REFERENCES Size (id)
 );
 
 ALTER TABLE IF EXISTS public.case
