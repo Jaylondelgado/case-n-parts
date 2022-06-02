@@ -14,6 +14,7 @@ ALTER TABLE IF EXISTS public.mobos
 CREATE TABLE IF NOT EXISTS public.case
 (
     Id SERIAL NOT NULL PRIMARY KEY,
+    BuildId INT NOT NULL REFERENCES build,
     Color INT NOT NULL REFERENCES Color (id),
     Size INT NOT NULL REFERENCES Size (id)
 );
