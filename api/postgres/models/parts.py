@@ -37,6 +37,7 @@ class RamOut(BaseModel):
 
 class Ram(BaseModel):
     rams: list[RamOut]
+
 class HddOut(BaseModel):
     id: int
     capacity: str
@@ -64,7 +65,7 @@ class MoboOut(BaseModel):
     id: int
     socket_type: str
     max_memory: str
-    memory_per_slot: str
+    max_memory_per_slot: str
     pcie_slots: int
     memory_slots: int
 

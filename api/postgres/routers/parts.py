@@ -6,6 +6,7 @@ from ..models.parts import (
     Hdd,
     Psu,
     Mobo,
+    Ram,
 )
 from ..db import PartsQueries
 
@@ -43,7 +44,7 @@ def row_to_ram(row):
         "id": row[0],
         "memory_type": row[1],
         'memory_speed': row[2],
-        'memory_channel': row[3],
+        'memory_channels': row[3],
         'pin_configuration': row[4],
     }
     return ram
@@ -71,9 +72,9 @@ def row_to_psu(row):
 def row_to_mobo(row):
     mobo= {
         "id": row[0],
-        "scoket_type": row[1],
+        "socket_type": row[1],
         "max_memory": row[2],
-        "memory_per_slot": row[3],
+        "max_memory_per_slot": row[3],
         "pcie_slots": row[4],
         "memory_slots": row[5],
     }
@@ -110,6 +111,13 @@ def psu_list(query=Depends(PartsQueries)):
 @router.get("/api/mobos", response_model=Mobo)
 def mobo_list(query=Depends(PartsQueries)):
     rows = query.get_all_mobos()
-    retrun {
+    return {
         "mobos": [row_to_mobo(row) for row in rows],
+    }
+
+@router.get("/api/rams", response_model=Ram)
+def ram_list(query=Depends(PartsQueries)):
+    rows = query.get_all_rams()
+    return {
+        "rams": [row_to_ram(row) for row in rows],
     }
