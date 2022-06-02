@@ -3,14 +3,9 @@ from typing import Union
 from ..models.parts import (
     Gpu,
     Cpu,
-<<<<<<< HEAD
-    CpuOut,
-    Ram,
-    RamOut
-=======
     Hdd,
     Psu,
->>>>>>> dd61bd9c3b9b28aceb6e787a6f6a509f43f90313
+    Mobo,
 )
 from ..db import PartsQueries
 
@@ -61,7 +56,6 @@ def row_to_hdd(row):
         "rpm": row[4]
     }
     return hdd
-
 def row_to_psu(row):
     psu= {
         "id": row[0],
@@ -74,6 +68,16 @@ def row_to_psu(row):
         "floppy_connector": row[7]
     }
     return psu
+def row_to_mobo(row):
+    mobo= {
+        "id": row[0],
+        "scoket_type": row[1],
+        "max_memory": row[2],
+        "memory_per_slot": row[3],
+        "pcie_slots": row[4],
+        "memory_slots": row[5],
+    }
+    return mobo
 
 @router.get("/api/gpus", response_model=Gpu)
 def gpu_list(query=Depends(PartsQueries)):
@@ -88,14 +92,6 @@ def cpu_list(query=Depends(PartsQueries)):
     return {
         "cpus": [row_to_cpu(row) for row in rows],
     }
-<<<<<<< HEAD
-
-@router.get("/api/rams", response_model=Ram)
-def ram_list(query=Depends(PartsQueries)):
-    rows = query.get_all_rams()
-    return {
-        "rams": [row_to_ram(row) for row in rows],
-=======
     
 @router.get("/api/psus", response_model=Psu)
 def psu_list(query=Depends(PartsQueries)):
@@ -109,5 +105,11 @@ def psu_list(query=Depends(PartsQueries)):
     rows = query.get_all_psus()
     return {
         "hdds": [row_to_hdd(row) for row in rows],
->>>>>>> dd61bd9c3b9b28aceb6e787a6f6a509f43f90313
+    }
+
+@router.get("/api/mobos", response_model=Mobo)
+def mobo_list(query=Depends(PartsQueries)):
+    rows = query.get_all_mobos()
+    retrun {
+        "mobos": [row_to_mobo(row) for row in rows],
     }

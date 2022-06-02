@@ -59,3 +59,14 @@ class PsuOut(BaseModel):
 
 class Psu(BaseModel):
     psus: list[PsuOut]
+
+class MoboOut(BaseModel):
+    id: int
+    socket_type: str
+    max_memory: str
+    memory_per_slot: str
+    pcie_slots: int
+    memory_slots: int
+
+class Mobo(BaseModel):
+    mobos: list[MoboOut]
