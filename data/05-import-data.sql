@@ -1,5 +1,5 @@
 INSERT INTO gpu
-(manufacturer,core_clock_speed,video_memory,memory_type,height,length,width,hdmi,display_port)
+(Manufacturer,Core_Clock_Speed,Video_Memory,Memory_Type,Height,Length,Width,Hdmi,Display_Port)
 VALUES
 ('NVIDIA','1800MHz',12,'GDDR6X','5.38 in. (136.65 mm)','11.81 in. (300.00 mm)','Dual Slot','1 x HDMI 2.1','3 x DisplayPort 1.4a'),
     ('NVIDIA','1815MHz',8,'GDDR6X','5.00 in. (127.00 mm)','11.81 in. (300.00 mm)','Dual Slot','2 x HDMI 2.1','3 x DisplayPort 1.4a'),
@@ -86,7 +86,7 @@ VALUES
     ('NVIDIA','1845MHz',6,'GDDR6','4.90 in. (124.46 mm)','8.10 in. (205.74 mm)','Dual Slot','2 x HDMI 2.0b','1 x DisplayPort 1.4a');
 
 INSERT INTO cpu
-(processor,cores,threads,speed,socket_type)
+(Processor,Tores,Threads,Speed,Socket_Type)
 VALUES
 ('Ryzen 5 5600X','Six-Core','12 Processing Threads','3.70GHz','AM4'),
     ('Ryzen 7 5800X','Eight-Core','16 Processing Threads','3.80GHz','AM4'),
@@ -101,7 +101,7 @@ VALUES
     ('Ryzen 5 4500','Six-Core','12 Processing Threads','3.60GHz','AM4');
 
 INSERT INTO hdd
-(capacity,interface,cache,rpm)
+(Capacity,Interface,Cache,Rpm)
 VALUES
 ('1TB','SATA 3.0 6.0Gb/s','128MB','5,400 RPM'),
     ('4TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
@@ -126,7 +126,7 @@ VALUES
     ('2TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM');
 
 INSERT INTO psu
-(wattage,atx_connector,atx_12v_connector,graphics_connector,molex_connector,sata_connector,floppy_connector)
+(Wattage,Atx_Connector,Atx_12v_Connector,Graphics_Connector,Molex_Connector,Sata_Connector,Floppy_Connector)
 VALUES
 ('850 Watts','20+4-pin','2 x 4+4-pin','6 x 6+2-pin','3','9','1'),
     ('850 Watts','24-pin','3 x 4+4-pin','4 x 6+2-pin','4','8','1'),
@@ -143,7 +143,7 @@ VALUES
     ('600 Watts','20+4-pin','1 x 4+4-pin','2 x 6+2-pin','3','6','1');
 
 INSERT INTO ram
-(memory_type,memory_speed,memory_channels,pin_configuration)
+(Memory_Type,Memory_Speed,Memory_Channels,Pin_Configuration)
 VALUES
 ('DDR4','PC4-25600','Dual','288-pin'),
     ('DDR4','PC4-28800','Dual','288-pin'),
@@ -171,20 +171,20 @@ VALUES
     ('DDR4','PC4-25600','Dual','288-pin');
 
 INSERT INTO color
-(color_name)
+(Name)
 VALUES 
 ('black'),
 ('red'),
 ('green');
 
 INSERT INTO size
-(size_name)
+(Name)
 VALUES 
 ('Mini Tower'),
 ('Mid Tower'),
 ('Full Tower');
 
 INSERT INTO mobos
-(socket_type,max_memory,max_memory_per_slot,pcie_slots,memory_slots)
+(Socket_Type,Max_Memory,Max_Memory_Per_Slot,Pcie_Slots,Memory_Slots)
 VALUES
 ('AM4','128GB','32GB',4,4)

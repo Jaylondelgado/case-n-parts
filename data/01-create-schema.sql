@@ -28,12 +28,12 @@ SET default_table_access_method = heap;
 
 CREATE TABLE IF NOT EXISTS public.cpu
 (
-    id SERIAL NOT NULL PRIMARY KEY,
-    processor character varying(60) COLLATE pg_catalog."default" NOT NULL,
-    cores character varying(20) COLLATE pg_catalog."default" NOT NULL,
-    threads character varying(70) COLLATE pg_catalog."default" NOT NULL,
-    speed character varying(10) COLLATE pg_catalog."default" NOT NULL,
-    socket_type character varying(30) COLLATE pg_catalog."default" NOT NULL
+    Id SERIAL NOT NULL PRIMARY KEY,
+    Processor character varying(60) COLLATE pg_catalog."default" NOT NULL,
+    Cores character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    Threads character varying(70) COLLATE pg_catalog."default" NOT NULL,
+    Speed character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    Socket_type character varying(30) COLLATE pg_catalog."default" NOT NULL
 );
 
 ALTER TABLE IF EXISTS public.cpu
@@ -45,16 +45,16 @@ ALTER TABLE IF EXISTS public.cpu
 
 CREATE TABLE IF NOT EXISTS public.gpu
 (
-    id SERIAL NOT NULL PRIMARY KEY,
-    manufacturer character varying(60) COLLATE pg_catalog."default" NOT NULL,
-    core_clock_speed character varying(15) COLLATE pg_catalog."default" NOT NULL,
-    video_memory int NOT NULL,
-    memory_type character varying(100) COLLATE pg_catalog."default" NOT NULL,
-    height character varying(30) COLLATE pg_catalog."default" NOT NULL,
-    length character varying(30) COLLATE pg_catalog."default" NOT NULL,
-    width character varying(30) COLLATE pg_catalog."default" NOT NULL,
-    hdmi character varying(30) COLLATE pg_catalog."default" NOT NULL,
-    display_port character varying(40) COLLATE pg_catalog."default" NOT NULL
+    Id SERIAL NOT NULL PRIMARY KEY,
+    Manufacturer character varying(60) COLLATE pg_catalog."default" NOT NULL,
+    Core_Clock_Speed character varying(15) COLLATE pg_catalog."default" NOT NULL,
+    Video_Memory int NOT NULL,
+    Memory_Type character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    Height character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    Length character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    Width character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    Hdmi character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    Display_Port character varying(40) COLLATE pg_catalog."default" NOT NULL
 );
 
 --
@@ -70,11 +70,11 @@ ALTER TABLE IF EXISTS public.gpu
 
 CREATE TABLE IF NOT EXISTS public.hdd
 (
-    id SERIAL NOT NULL PRIMARY KEY,
-    capacity character varying(5) COLLATE pg_catalog."default" NOT NULL,
-    interface character varying(25) COLLATE pg_catalog."default" NOT NULL,
-    cache character varying(30) COLLATE pg_catalog."default" NOT NULL,
-    rpm character varying(30) COLLATE pg_catalog."default" NOT NULL
+    Id SERIAL NOT NULL PRIMARY KEY,
+    Capacity character varying(5) COLLATE pg_catalog."default" NOT NULL,
+    Interface character varying(25) COLLATE pg_catalog."default" NOT NULL,
+    Cache character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    Rpm character varying(30) COLLATE pg_catalog."default" NOT NULL
 );
 
 
@@ -88,11 +88,11 @@ ALTER TABLE IF EXISTS public.hdd
 
 CREATE TABLE IF NOT EXISTS public.ram
 (
-    id SERIAL NOT NULL PRIMARY KEY,
-    memory_type character varying(8) COLLATE pg_catalog."default" NOT NULL,
-    memory_speed character varying(20) COLLATE pg_catalog."default" NOT NULL,
-    memory_channels character varying(10) COLLATE pg_catalog."default" NOT NULL,
-    pin_configuration character varying(20) COLLATE pg_catalog."default" NOT NULL
+    Id SERIAL NOT NULL PRIMARY KEY,
+    Memory_Type character varying(8) COLLATE pg_catalog."default" NOT NULL,
+    Memory_Speed character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    Memory_Channels character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    Pin_Configuration character varying(20) COLLATE pg_catalog."default" NOT NULL
 );
 
 
@@ -105,14 +105,14 @@ ALTER TABLE IF EXISTS public.ram
 
 CREATE TABLE IF NOT EXISTS public.psu
 (
-    id SERIAL NOT NULL PRIMARY KEY,
-    wattage character varying(20) COLLATE pg_catalog."default" NOT NULL,
-    atx_connector character varying(20) COLLATE pg_catalog."default" NOT NULL,
-    atx_12v_connector character varying(20) COLLATE pg_catalog."default" NOT NULL,
-    graphics_connector character varying(20) COLLATE pg_catalog."default" NOT NULL,
-    molex_connector int NOT NULL,
-    sata_connector int NOT NULL,
-    floppy_connector int NOT NULL
+    Id SERIAL NOT NULL PRIMARY KEY,
+    Wattage character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    Atx_Connector character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    Atx_12v_Connector character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    Graphics_Connector character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    Molex_Connector int NOT NULL,
+    Sata_Connector int NOT NULL,
+    Floppy_Connector int NOT NULL
 );
 
 
@@ -121,8 +121,8 @@ ALTER TABLE IF EXISTS public.psu
 
 CREATE TABLE IF NOT EXISTS public.color
 (
-    id SERIAL NOT NULL PRIMARY KEY,
-    color_name character varying(30)
+    Id SERIAL NOT NULL PRIMARY KEY,
+    Name character varying(30)
 );
 
 
@@ -131,8 +131,8 @@ ALTER TABLE IF EXISTS public.color
 
 CREATE TABLE IF NOT EXISTS public.user
 (
-    id SERIAL NOT NULL PRIMARY KEY,
-    user_name character varying(200),
+    Id SERIAL NOT NULL PRIMARY KEY,
+    User_Name character varying(200),
     password TEXT
 );
 
@@ -142,8 +142,8 @@ ALTER TABLE IF EXISTS public.user
 
 CREATE TABLE IF NOT EXISTS public.size
 (
-    id SERIAL NOT NULL PRIMARY KEY,
-    size_name character varying(10)
+    Id SERIAL NOT NULL PRIMARY KEY,
+    Name character varying(10)
 );
 
 
