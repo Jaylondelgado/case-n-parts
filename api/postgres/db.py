@@ -32,6 +32,18 @@ class PartsQueries:
                 rows = cursor.fetchall()
                 return list(rows)
     
+    def get_all_rams(self):
+        with pool.connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    SELECT id, memory_type, memory_speed, memory_channels, pin_configuration
+                    FROM ram
+                    """
+                )
+                rows = cursor.fetchall()
+                return list(rows)
+
     def get_all_psus(self):
         with pool.connection() as connection:
             with connection.cursor() as cursor:
@@ -54,6 +66,19 @@ class PartsQueries:
                     SELECT id, capacity, interface, cache,
                     rpm
                     from hdd
+                    """
+                )
+                rows = cursor.fetchall()
+                return list(rows)
+
+    def get_all_mobos(self):
+        with pool.connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    SELECT id, socket_type, max_memory, max_memory_per_slot,
+                    pcie_slots, memory_slots
+                    FROM mobos
                     """
                 )
                 rows = cursor.fetchall()

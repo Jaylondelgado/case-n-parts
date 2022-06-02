@@ -5,6 +5,8 @@ from ..models.parts import (
     Cpu,
     Hdd,
     Psu,
+    Mobo,
+    Ram,
 )
 from ..db import PartsQueries
 
@@ -37,6 +39,15 @@ def row_to_cpu(row):
     }
     return cpu
 
+def row_to_ram(row):
+    ram = {
+        "id": row[0],
+        "memory_type": row[1],
+        'memory_speed': row[2],
+        'memory_channels': row[3],
+        'pin_configuration': row[4],
+    }
+    return ram
 def row_to_hdd(row):
     hdd = {
         "id": row[0],
@@ -46,7 +57,6 @@ def row_to_hdd(row):
         "rpm": row[4]
     }
     return hdd
-
 def row_to_psu(row):
     psu= {
         "id": row[0],
@@ -59,6 +69,16 @@ def row_to_psu(row):
         "floppy_connector": row[7]
     }
     return psu
+def row_to_mobo(row):
+    mobo= {
+        "id": row[0],
+        "socket_type": row[1],
+        "max_memory": row[2],
+        "max_memory_per_slot": row[3],
+        "pcie_slots": row[4],
+        "memory_slots": row[5],
+    }
+    return mobo
 
 @router.get("/api/gpus", response_model=Gpu)
 def gpu_list(query=Depends(PartsQueries)):
@@ -86,4 +106,18 @@ def psu_list(query=Depends(PartsQueries)):
     rows = query.get_all_psus()
     return {
         "hdds": [row_to_hdd(row) for row in rows],
+    }
+
+@router.get("/api/mobos", response_model=Mobo)
+def mobo_list(query=Depends(PartsQueries)):
+    rows = query.get_all_mobos()
+    return {
+        "mobos": [row_to_mobo(row) for row in rows],
+    }
+
+@router.get("/api/rams", response_model=Ram)
+def ram_list(query=Depends(PartsQueries)):
+    rows = query.get_all_rams()
+    return {
+        "rams": [row_to_ram(row) for row in rows],
     }

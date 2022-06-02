@@ -98,8 +98,12 @@ class MyBuilds extends React.Component {
           />
           <h1 className="display-5 fw-bold">My Builds</h1>
           <div className="row">
+          <div className="column">
             <GpuImage />
+          </div>
+          <div className="column">
             <GpuImage />
+          </div>
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
               <Link to="/create" className="btn btn-primary btn-lg px-4 gap-3">
                 Create a Build
@@ -111,6 +115,7 @@ class MyBuilds extends React.Component {
           <h1>Favorite Builds</h1>
           <div className="row">
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <GpuImage />
               <Link
                 to="/toprated"
                 className="btn btn-primary btn-lg px-4 gap-3"

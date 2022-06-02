@@ -28,6 +28,16 @@ class GpuOut(BaseModel):
 class Gpu(BaseModel):
     gpus: list[GpuOut]
 
+class RamOut(BaseModel):
+    id: int
+    memory_type: str
+    memory_speed: str
+    memory_channels: str
+    pin_configuration: str
+
+class Ram(BaseModel):
+    rams: list[RamOut]
+
 class HddOut(BaseModel):
     id: int
     capacity: str
@@ -50,3 +60,14 @@ class PsuOut(BaseModel):
 
 class Psu(BaseModel):
     psus: list[PsuOut]
+
+class MoboOut(BaseModel):
+    id: int
+    socket_type: str
+    max_memory: str
+    max_memory_per_slot: str
+    pcie_slots: int
+    memory_slots: int
+
+class Mobo(BaseModel):
+    mobos: list[MoboOut]
