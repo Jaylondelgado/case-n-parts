@@ -4,4 +4,5 @@ module.exports = {
   RAM: "ram",
   HDD: "hdd",
   PSU: "psu",
+  MOBOs: "mobos",
 };
