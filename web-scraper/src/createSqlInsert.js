@@ -1,4 +1,4 @@
-const { writeFile } = require('fs/promises');
+const { writeFile } = require("fs/promises");
 
 /*
  * For each column, go through the row in the order
@@ -8,26 +8,27 @@ const { writeFile } = require('fs/promises');
  */
 function generateValueLine(row, columns) {
   return (
-    '(' +
+    "(" +
     columns
       .map(column => {
         const value = row[column];
-        if (typeof value === 'string') {
+        if (typeof value === "string") {
           return `'${value}'`;
         }
 
         return value;
       })
-      .join(',') +
-    ')'
+      .join(",") +
+    ")"
   );
 }
 
 module.exports = async function createSqlInsert(path, table, rows) {
+  console.log(rows);
   const columns = Object.keys(rows[0]);
 
   let sql = `INSERT INTO ${table}
-(${columns.join(',')})
+(${columns.join(",")})
 VALUES
 `;
 

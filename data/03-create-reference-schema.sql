@@ -1,22 +1,12 @@
-CREATE TABLE IF NOT EXISTS public.motherboard
-(
-    sku SERIAL NOT NULL PRIMARY KEY,
-    socket_type CHARACTER VARYING(5) NOT NULL,
-    max_memory CHARACTER VARYING(10) NOT NULL REFERENCES,
-    max_memory_per_slot CHARACTER VARYING(10) NOT NULL,
-    pci_slots INT NOT NULL REFERENCES,
-    memory_slots INT NOT NULL REFERENCES,
-);
-
-ALTER TABLE IF EXISTS public.motherboard
-    OWNER to "great-value";
-
-CREATE TABLE IF NOT EXISTS public.case
+CREATE TABLE IF NOT EXISTS public.build
 (
     id SERIAL NOT NULL PRIMARY KEY,
-    color INT NOT NULL REFERENCES color (id),
-    size INT NOT NULL REFERENCES size (id)
+    "name" CHARACTER VARYING(200) NOT NULL,
+    "case" INT NOT NULL REFERENCES "case" (id),
+    motherboard INT NOT NULL REFERENCES motherboard (sku),
+    "user_id" INT NOT NULL REFERENCES "user" (id),
+    "private" BOOLEAN NOT NULL DEFAULT false
 );
 
-ALTER TABLE IF EXISTS public.case
+ALTER TABLE IF EXISTS public.build
     OWNER to "great-value";
