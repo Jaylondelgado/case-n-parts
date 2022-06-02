@@ -19,18 +19,13 @@ const Footer = () => {
       <Container>
         <Row>
           <Column>
-            <Heading>About Us</Heading>
-            <FooterLink href="#">Aim</FooterLink>
-            <FooterLink href="#">Vision</FooterLink>
-            <FooterLink href="#">Testimonials</FooterLink>
-          </Column>
-          <Column>
-            <Heading>Services</Heading>
-            <FooterLink href="#">Writing</FooterLink>
-            <FooterLink href="#">Internships</FooterLink>
-            <FooterLink href="#">Coding</FooterLink>
-            <FooterLink href="#">Teaching</FooterLink>
-          </Column>
+            <Heading>Case N' Parts</Heading>
+            <FooterLink href="/">home</FooterLink>
+            <FooterLink href="mybuilds">My Builds</FooterLink>
+            <FooterLink href="create">Create Builds</FooterLink>
+            <FooterLink href="view">View Builds</FooterLink>
+            <FooterLink href="#">About Us</FooterLink>
+          </Column>       
           <Column>
             <Heading>Social Media</Heading>
             <FooterLink href="#">
