@@ -72,6 +72,7 @@ ALTER TABLE IF EXISTS public.gpu
 CREATE TABLE IF NOT EXISTS public.hdd
 (
     Id SERIAL NOT NULL PRIMARY KEY,
+    Brand character varying(30) COLLATE pg_catalog."default" NOT NULL,
     Capacity character varying(5) COLLATE pg_catalog."default" NOT NULL,
     Interface character varying(25) COLLATE pg_catalog."default" NOT NULL,
     Cache character varying(30) COLLATE pg_catalog."default" NOT NULL,

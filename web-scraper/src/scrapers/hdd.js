@@ -25,7 +25,10 @@ function mapDetailPage($) {
     specs[specName] = specValue;
   });
 
+  specs["brand"] = $("#brandContainer a").text();
+
   const data = {
+    brand: specs["brand"],
     capacity: specs["Capacity"],
     interface: specs["Interface"],
     cache: specs["Cache"],
