@@ -27,6 +27,7 @@ function mapDetailPage($) {
 
   const data = {
     manufacturer: specs["GPU Manufacturer"],
+    chipset: specs["GPU Chipset"],
     core_clock_speed: specs["Boost Core Clock Speed"],
     video_memory: parseInt(specs["Video Memory"], 10),
     memory_type: specs["Memory Type"],
