@@ -89,13 +89,8 @@ class BuildsQueries:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """
-<<<<<<< HEAD
-                    SELECT build.id, build."name", color.name, "size".name, buildgpus.gpuid, buildgpus.cardcount,
-                    gpu.manufacturer, gpu.core_clock_speed, gpu.video_memory, gpu.memory_type,
-=======
                     SELECT build.id, build."Name", color.name, "size".name, buildgpus.gpuid, buildgpus.cardcount,
                     gpu.manufacturer, gpu.chipset, gpu.core_clock_speed, gpu.video_memory, gpu.memory_type,
->>>>>>> 3cddf16cd196f8301d366e016ce0f8b182f13563
                     gpu.height, gpu.length, gpu.width, gpu.hdmi, gpu.display_port, buildhdds.hddid,
                     buildhdds.hddcount, hdd.capacity, hdd.interface, hdd.cache, hdd.rpm, buildram.ramid,
                     buildram.ramcount, ram.brand, ram.memory_type, ram.memory_speed, ram.memory_channels, ram.pin_configuration,
