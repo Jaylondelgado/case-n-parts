@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./Nav";
 import Footer from "./Footer";
@@ -10,17 +11,16 @@ function App() {
   return (
     <BrowserRouter>
       <Nav />
-      <div className="container">
+      <div className='container'>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="mybuilds" element={<MyBuilds />} />
-          <Route path="login" element={<Login />} />
-          <Route path="signup" element={<SignUp />} />
+          <Route path='/' element={<HomePage />} />
+          <Route path='mybuilds' element={<MyBuilds />} />
+          <Route path='login' element={<Login />} />
+          <Route path='signup' element={<SignUp />} />
         </Routes>
       </div>
       <Footer />
     </BrowserRouter>
   );
 }
-
 export default App;
