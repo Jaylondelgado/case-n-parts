@@ -7,13 +7,11 @@ import {
   FooterLink,
   Heading,
 } from "./static/FooterStyles";
-  
+
 const Footer = () => {
   return (
     <Box>
-      <h1 style={{ color: "green", 
-                   textAlign: "center", 
-                   marginTop: "-50px" }}>
+      <h1 style={{ color: "green", textAlign: "center", marginTop: "-50px" }}>
         Case N' Parts: Get Your Case On
       </h1>
       <Container>
@@ -25,28 +23,22 @@ const Footer = () => {
             <FooterLink href="create">Create Builds</FooterLink>
             <FooterLink href="view">View Builds</FooterLink>
             <FooterLink href="#">About Us</FooterLink>
-          </Column>       
+          </Column>
           <Column>
             <Heading>Social Media</Heading>
             <FooterLink href="#">
               <i className="fab fa-facebook-f">
-                <span style={{ marginLeft: "10px" }}>
-                  Facebook
-                </span>
+                <span style={{ marginLeft: "10px" }}>Facebook</span>
               </i>
             </FooterLink>
             <FooterLink href="#">
               <i className="fab fa-instagram">
-                <span style={{ marginLeft: "10px" }}>
-                  Instagram
-                </span>
+                <span style={{ marginLeft: "10px" }}>Instagram</span>
               </i>
             </FooterLink>
             <FooterLink href="#">
               <i className="fab fa-twitter">
-                <span style={{ marginLeft: "10px" }}>
-                  Twitter
-                </span>
+                <span style={{ marginLeft: "10px" }}>Twitter</span>
               </i>
             </FooterLink>
           </Column>

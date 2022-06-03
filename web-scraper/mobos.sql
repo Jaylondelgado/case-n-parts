@@ -1,4 +1,4 @@
 INSERT INTO mobos
-(socket_type,max_memory,max_memory_per_slot,pcie_slots,memory_slots)
+(Brand,Socket_Type,Max_Memory,Max_Memory_Per_Slot,Pcie_Slots,Memory_Slots)
 VALUES
-('AM4','128GB','32GB',4,4)
+('ASUS','AM4','128GB','32GB',4,4)
