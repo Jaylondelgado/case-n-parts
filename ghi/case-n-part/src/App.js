@@ -8,6 +8,7 @@ import HomePage from "./HomePage";
 import MyBuilds from "./builds/MyBuilds";
 import MoboList from "./builds/MoboFetch";
 import RamList from "./builds/RamFetch";
+import PsuList from "./builds/PsuFetch";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='signup' element={<SignUp />} />
           <Route path='mobos' element={<MoboList />} />
           <Route path='rams' element={<RamList />} />
+          <Route path='psus' element={<PsuList />} />
         </Routes>
       </div>
       <Footer />
