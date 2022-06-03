@@ -12,7 +12,7 @@ class PartsQueries:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """
-                    SELECT id, manufacturer, core_clock_speed, video_memory,
+                    SELECT id, manufacturer, chipset, core_clock_speed, video_memory,
                     memory_type, height, length, width, hdmi, display_port
                     FROM gpu
                     """
@@ -37,7 +37,7 @@ class PartsQueries:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """
-                    SELECT id, memory_type, memory_speed, memory_channels, pin_configuration
+                    SELECT id, brand, memory_type, memory_speed, memory_channels, pin_configuration
                     FROM ram
                     """
                 )
@@ -49,9 +49,8 @@ class PartsQueries:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """
-                    SELECT id, wattage,atx_connector, atx_12v_connector,
-                    graphics_connector, molex_connector, sata_connector,
-                    floppy_connector
+                    SELECT id, brand, wattage,atx_connector, atx_12v_connector,
+                    graphics_connector, molex_connector, sata_connector
                     from psu
                     """
                 )
@@ -63,7 +62,7 @@ class PartsQueries:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """
-                    SELECT id, capacity, interface, cache,
+                    SELECT id, brand, capacity, interface, cache,
                     rpm
                     from hdd
                     """
@@ -90,14 +89,19 @@ class BuildsQueries:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """
-                    SELECT build.id, build."Name", color.name, "size".name, buildgpus.gpuid, buildgpus.cardcount,
+<<<<<<< HEAD
+                    SELECT build.id, build."name", color.name, "size".name, buildgpus.gpuid, buildgpus.cardcount,
                     gpu.manufacturer, gpu.core_clock_speed, gpu.video_memory, gpu.memory_type,
+=======
+                    SELECT build.id, build."Name", color.name, "size".name, buildgpus.gpuid, buildgpus.cardcount,
+                    gpu.manufacturer, gpu.chipset, gpu.core_clock_speed, gpu.video_memory, gpu.memory_type,
+>>>>>>> 3cddf16cd196f8301d366e016ce0f8b182f13563
                     gpu.height, gpu.length, gpu.width, gpu.hdmi, gpu.display_port, buildhdds.hddid,
                     buildhdds.hddcount, hdd.capacity, hdd.interface, hdd.cache, hdd.rpm, buildram.ramid,
-                    buildram.ramcount, ram.memory_type, ram.memory_speed, ram.memory_channels, ram.pin_configuration,
+                    buildram.ramcount, ram.brand, ram.memory_type, ram.memory_speed, ram.memory_channels, ram.pin_configuration,
                     mobos.id, mobos.socket_type, mobos.max_memory, mobos.max_memory_per_slot, mobos.pcie_slots,
                     mobos.memory_slots, cpu.id, cpu.processor, cpu.cores, cpu.threads, cpu.speed, cpu.socket_type,
-                    psu.id, psu.wattage, psu.atx_connector, psu.atx_12v_connector, psu.graphics_connector,
+                    psu.id, psu.brand, psu.wattage, psu.atx_connector, psu.atx_12v_connector, psu.graphics_connector,
                     psu.molex_connector, psu.sata_connector, psu.floppy_connector
                     FROM public.build
                     INNER JOIN public.case ON(build.id="case".buildid)
@@ -112,6 +116,35 @@ class BuildsQueries:
                     INNER JOIN public.mobos ON(build.moboid=mobos.id)
                     INNER JOIN public.cpu ON(build.cpuid=cpu.id)
                     INNER JOIN public.psu ON(build.psuid=psu.id);
+                    """
+                )
+                rows = cursor.fetchall()
+                print("rows:", rows)
+                return list(rows)
+
+    def create_build(self, Name, moboid, cpuid, psuid):
+        with pool.connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    INSERT INTO build("Name", moboid, cpuid, psuid)
+                    VALUES (%s, %s, %s, %s)
+                    RETURNING id, "Name", moboid, cpuid, psuid, "Private"
+                """,
+                    [Name, moboid, cpuid, psuid]
+                )
+                rows = cursor.fetchone()
+                print("rows:", rows)
+                return list(rows)
+
+
+class BuildPartsQueries:
+    def create_build_(self):
+        with pool.connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    
                     """
                 )
                 rows = cursor.fetchall()

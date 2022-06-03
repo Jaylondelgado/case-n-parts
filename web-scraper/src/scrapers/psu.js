@@ -8,7 +8,6 @@ const { partDefaultUrls } = require("../urls");
 async function getDetailPages() {
   const { data } = await axios(partDefaultUrls.psu);
   const $ = cheerio.load(data);
-  console.log(data);
 
   const detailUrls = [];
   $(".detail_wrapper a").each((i, element) => {
@@ -26,14 +25,16 @@ function mapDetailPage($) {
     specs[specName] = specValue;
   });
 
+  specs["brand"] = $("#brandContainer a").text();
+
   const data = {
-    wattage: specs["Wattage"],
-    atx_connector: specs["ATX Connector"],
-    atx_12v_connector: specs["ATX 12V Connector"],
-    graphics_connector: specs["Graphics Connector"],
-    molex_connector: specs["Molex Connector"],
-    sata_connector: specs["SATA Connector"],
-    floppy_connector: specs["Floppy Connector"],
+    Brand: specs["brand"],
+    Wattage: specs["Wattage"],
+    Atx_Connector: specs["ATX Connector"],
+    Atx_12v_Connector: specs["ATX 12V Connector"],
+    Graphics_Connector: specs["Graphics Connector"],
+    Molex_Connector: specs["Molex Connector"],
+    Sata_Connector: specs["SATA Connector"],
   };
 
   return data;

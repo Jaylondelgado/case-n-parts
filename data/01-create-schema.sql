@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS public.gpu
 (
     Id SERIAL NOT NULL PRIMARY KEY,
     Manufacturer character varying(60) COLLATE pg_catalog."default" NOT NULL,
+    Chipset character varying(100) COLLATE pg_catalog."default" NOT NULL,
     Core_Clock_Speed character varying(15) COLLATE pg_catalog."default" NOT NULL,
     Video_Memory int NOT NULL,
     Memory_Type character varying(100) COLLATE pg_catalog."default" NOT NULL,
@@ -71,6 +72,7 @@ ALTER TABLE IF EXISTS public.gpu
 CREATE TABLE IF NOT EXISTS public.hdd
 (
     Id SERIAL NOT NULL PRIMARY KEY,
+    Brand character varying(30) COLLATE pg_catalog."default" NOT NULL,
     Capacity character varying(5) COLLATE pg_catalog."default" NOT NULL,
     Interface character varying(25) COLLATE pg_catalog."default" NOT NULL,
     Cache character varying(30) COLLATE pg_catalog."default" NOT NULL,
@@ -89,6 +91,7 @@ ALTER TABLE IF EXISTS public.hdd
 CREATE TABLE IF NOT EXISTS public.ram
 (
     Id SERIAL NOT NULL PRIMARY KEY,
+    Brand character varying(30) COLLATE pg_catalog."default" NOT NULL,
     Memory_Type character varying(8) COLLATE pg_catalog."default" NOT NULL,
     Memory_Speed character varying(20) COLLATE pg_catalog."default" NOT NULL,
     Memory_Channels character varying(10) COLLATE pg_catalog."default" NOT NULL,
@@ -106,13 +109,13 @@ ALTER TABLE IF EXISTS public.ram
 CREATE TABLE IF NOT EXISTS public.psu
 (
     Id SERIAL NOT NULL PRIMARY KEY,
-    Wattage character varying(20) COLLATE pg_catalog."default" NOT NULL,
-    Atx_Connector character varying(20) COLLATE pg_catalog."default" NOT NULL,
-    Atx_12v_Connector character varying(20) COLLATE pg_catalog."default" NOT NULL,
-    Graphics_Connector character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    Brand character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    Wattage character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    Atx_Connector character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    Atx_12v_Connector character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    Graphics_Connector character varying(30) COLLATE pg_catalog."default" NOT NULL,
     Molex_Connector int NOT NULL,
-    Sata_Connector int NOT NULL,
-    Floppy_Connector int NOT NULL
+    Sata_Connector int NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS public.mobos
