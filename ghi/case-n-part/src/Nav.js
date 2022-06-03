@@ -13,8 +13,8 @@ const links = [
 function Nav() {
   return (
     <Navbar>
-      {links.map((link) => (
-        <NavLink to={link.path} exact activeClassName="current">
+      {links.map((link, index) => (
+        <NavLink key={index} to={link.path}>
           <Button>{link.name}</Button>
         </NavLink>
       ))}

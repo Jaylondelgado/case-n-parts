@@ -2,7 +2,6 @@ import React from "react";
 import Slider from "react-slick";
 import "./index.css";
 
-
 function HomePage() {
   //   const [appointments, setAppointments] = useState([]);
 
@@ -27,8 +26,6 @@ function HomePage() {
   //       headers: { "Content-Type": "application/json" },
   //     });
   //   };
-  
-  
 
   const settings = {
     dots: true,
@@ -37,26 +34,37 @@ function HomePage() {
     slidesToShow: 3,
     slidesToScroll: 3,
   };
-  
 
   return (
     <>
       <h1>Builds of the Month</h1>
       <h1>Our Cases</h1>
-      
+
       <div className="container">
         <Slider {...settings}>
           <div>
-            <img src="https://c1.neweggimages.com/ProductImage/11-129-268-36.jpg" />
+            <img
+              src="https://c1.neweggimages.com/ProductImage/11-129-268-36.jpg"
+              alt="an case"
+            />
           </div>
           <div>
-            <img src="https://c1.neweggimages.com/ProductImage/AFSTS2112102mvyB.jpg" />
+            <img
+              src="https://c1.neweggimages.com/ProductImage/AFSTS2112102mvyB.jpg"
+              alt="an case2"
+            />
           </div>
           <div>
-            <img src="https://c1.neweggimages.com/ProductImage/11-173-041-V01.jpg" />
+            <img
+              src="https://c1.neweggimages.com/ProductImage/11-173-041-V01.jpg"
+              alt="an case3"
+            />
           </div>
           <div>
-            <img src="https://c1.neweggimages.com/ProductImage/11-129-268-36.jpg" />
+            <img
+              src="https://c1.neweggimages.com/ProductImage/11-129-268-36.jpg"
+              alt="an case4"
+            />
           </div>
         </Slider>
       </div>
