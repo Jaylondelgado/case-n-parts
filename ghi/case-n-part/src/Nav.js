@@ -1,3 +1,4 @@
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { Button, Navbar } from "./static/cnpStyle";
 import logo from "./static/logo.png";
