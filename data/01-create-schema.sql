@@ -127,8 +127,8 @@ CREATE TABLE IF NOT EXISTS public.mobos
     Brand CHARACTER VARYING(20),
     Socket_Type CHARACTER VARYING(5),
     Max_Memory CHARACTER VARYING(10),
-    Max_Memory_Per_Slot CHARACTER VARYING(10,
-    Pcie_Slots IN,
+    Max_Memory_Per_Slot CHARACTER VARYING(10),
+    Pcie_Slots INT,
     Memory_Slots INT
 );
 
