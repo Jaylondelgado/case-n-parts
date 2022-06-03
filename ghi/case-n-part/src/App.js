@@ -6,7 +6,6 @@ import Login from "./login/Login";
 import SignUp from "./login/SignUp";
 import HomePage from "./HomePage";
 import MyBuilds from "./builds/MyBuilds";
-import ButtonExampleEmphasis from "./tester";
 
 function App() {
   return (
@@ -14,13 +13,14 @@ function App() {
       <Nav />
       <div className='container'>
         <Routes>
-          <Route path="mybuilds" element={<MyBuilds />} />
-          <Route path="login" element={<Login />} />
-          <Route path="signup" element={<SignUp />} />
-          <Route path="tester" element={<ButtonExampleEmphasis />} />
+          <Route path='/' element={<HomePage />} />
+          <Route path='mybuilds' element={<MyBuilds />} />
+          <Route path='login' element={<Login />} />
+          <Route path='signup' element={<SignUp />} />
         </Routes>
       </div>
-      </BrowserRouter>
-  )
+      <Footer />
+    </BrowserRouter>
+  );
 }
 export default App;
