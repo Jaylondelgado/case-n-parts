@@ -91,7 +91,7 @@ class BuildsQueries:
                 cursor.execute(
                     """
                     SELECT build.id, build."Name", color.name, "size".name, buildgpus.gpuid, buildgpus.cardcount,
-                    gpu.manufacturer, gpu.core_clock_speed, gpu.video_memory, gpu.memory_type,
+                    gpu.manufacturer, gpu.chipset, gpu.core_clock_speed, gpu.video_memory, gpu.memory_type,
                     gpu.height, gpu.length, gpu.width, gpu.hdmi, gpu.display_port, buildhdds.hddid,
                     buildhdds.hddcount, hdd.capacity, hdd.interface, hdd.cache, hdd.rpm, buildram.ramid,
                     buildram.ramcount, ram.brand, ram.memory_type, ram.memory_speed, ram.memory_channels, ram.pin_configuration,
