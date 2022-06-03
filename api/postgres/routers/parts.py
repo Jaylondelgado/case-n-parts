@@ -17,14 +17,15 @@ def row_to_gpu(row):
     gpu = {
         "id": row[0],
         "manufacturer": row[1],
-        "core_clock_speed": row[2],
-        "video_memory": row[3],
-        "memory_type": row[4],
-        "height": row[5],
-        "length": row[6],
-        "width": row[7],
-        "hdmi": row[8],
-        "display_port": row[9]
+        "chipset": row[2],
+        "core_clock_speed": row[3],
+        "video_memory": row[4],
+        "memory_type": row[5],
+        "height": row[6],
+        "length": row[7],
+        "width": row[8],
+        "hdmi": row[9],
+        "display_port": row[10]
     }
     return gpu
 
@@ -42,10 +43,11 @@ def row_to_cpu(row):
 def row_to_ram(row):
     ram = {
         "id": row[0],
-        "memory_type": row[1],
-        'memory_speed': row[2],
-        'memory_channels': row[3],
-        'pin_configuration': row[4],
+        "brand": row[1],
+        "memory_type": row[2],
+        'memory_speed': row[3],
+        'memory_channels': row[4],
+        'pin_configuration': row[5],
     }
     return ram
 def row_to_hdd(row):

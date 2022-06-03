@@ -8,7 +8,6 @@ const { partDefaultUrls } = require("../urls");
 async function getDetailPages() {
   const { data } = await axios(partDefaultUrls.ram);
   const $ = cheerio.load(data);
-  console.log(data);
 
   const detailUrls = [];
   $(".detail_wrapper a").each((i, element) => {
@@ -26,7 +25,10 @@ function mapDetailPage($) {
     specs[specName] = specValue;
   });
 
+  specs["brand"] = $("#brandContainer a").text();
+
   const data = {
+    brand: specs["brand"],
     memory_type: specs["Memory Type"],
     memory_speed: specs["Memory Speed"],
     memory_channels: specs["Memory Channels"],
