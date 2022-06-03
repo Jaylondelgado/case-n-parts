@@ -13,14 +13,6 @@ function HddList() {
     getHddData();
   }, []);
 
-  // const hd = hdds.map((hdd) => {
-  //   return (
-  //     <option key={hdd.id} value={hdd.id}>
-  //       {hdd.capacity} {hdd.interface} {hdd.cache} {hdd.rpm}
-  //     </option>
-  //   );
-  // });
-
   return (
     <select>
       <option value="">Select a HardDrive</option>

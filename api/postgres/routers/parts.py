@@ -48,6 +48,7 @@ def row_to_ram(row):
         'pin_configuration': row[4],
     }
     return ram
+
 def row_to_hdd(row):
     hdd = {
         "id": row[0],
@@ -57,6 +58,7 @@ def row_to_hdd(row):
         "rpm": row[4]
     }
     return hdd
+
 def row_to_psu(row):
     psu= {
         "id": row[0],
@@ -103,7 +105,7 @@ def psu_list(query=Depends(PartsQueries)):
 
 @router.get("/api/hdds", response_model=Hdd)
 def psu_list(query=Depends(PartsQueries)):
-    rows = query.get_all_psus()
+    rows = query.get_all_hdds()
     return {
         "hdds": [row_to_hdd(row) for row in rows],
     }
