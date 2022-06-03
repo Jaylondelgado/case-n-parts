@@ -6,7 +6,7 @@ import Login from "./login/Login";
 import SignUp from "./login/SignUp";
 import HomePage from "./HomePage";
 import MyBuilds from "./builds/MyBuilds";
-import HddList from "./builds/PcPartsFetch";
+import HddList from "./builds/HddsFetch";
 import MoboList from "./builds/MoboFetch";
 import RamList from "./builds/RamFetch";
 import PsuList from "./builds/PsuFetch";
