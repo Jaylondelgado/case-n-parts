@@ -8,7 +8,11 @@ function BuildColumn(props) {
         const build = data.build;
         return (
           <div key={build.href} className="card mb-3 shadow">
-            <img src={build.location.picture_url} className="card-img-top" />
+            <img
+              src={build.location.picture_url}
+              className="card-img-top"
+              alt="my build"
+            />
             <div className="card-body">
               <h5 className="card-title">{build.name}</h5>
               <h6 className="card-subtitle mb-2 text-muted">
@@ -93,17 +97,17 @@ class MyBuilds extends React.Component {
           <img
             className="bg-white rounded shadow d-block mx-auto mb-4"
             src="/logo.svg"
-            alt=""
+            alt="my builds2"
             width="600"
           />
           <h1 className="display-5 fw-bold">My Builds</h1>
           <div className="row">
-          <div className="column">
-            <GpuImage />
-          </div>
-          <div className="column">
-            <GpuImage />
-          </div>
+            <div className="column">
+              <GpuImage />
+            </div>
+            <div className="column">
+              <GpuImage />
+            </div>
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
               <Link to="/create" className="btn btn-primary btn-lg px-4 gap-3">
                 Create a Build
@@ -115,7 +119,7 @@ class MyBuilds extends React.Component {
           <h1>Favorite Builds</h1>
           <div className="row">
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <GpuImage />
+              <GpuImage />
               <Link
                 to="/toprated"
                 className="btn btn-primary btn-lg px-4 gap-3"
