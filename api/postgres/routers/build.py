@@ -1,8 +1,23 @@
-from ..models.build import Build
+from ctypes import Union
+from turtle import title
+from ..models.build import Build, InsertBuild, OutBuild
 from fastapi import APIRouter, Response, status, Depends
-from ..db import PartsQueries, BuildsQueries
+from ..db import BuildsQueries
+from ..models.common import ErrorMessage
 
 router = APIRouter()
+def row_to_create_build(row):
+    build ={
+        "id": row[0],
+        "Name": row[1],
+        "moboid": row[2],
+        "cpuid": row[3],
+        "psuid": row[4],
+        "Private": row[5],
+    }
+    return build
+
+
 def row_to_build(row):
     build = {
         "id": row[0],
@@ -73,3 +88,19 @@ def gpu_list(query=Depends(BuildsQueries)):
     return {
         "gpus": [row_to_build(row) for row in rows],
     }
+
+@router.post(
+    "/api/build/create",
+    response_model = OutBuild,
+    responses = {
+        200: {"model": OutBuild},
+    },
+)
+def create_build(
+    build: InsertBuild,
+    query = Depends(BuildsQueries),
+):
+
+    row = query.create_build(build.Name, build.moboid, build.cpuid, build.psuid)
+    print("row:", row)
+    return row_to_create_build(row)
