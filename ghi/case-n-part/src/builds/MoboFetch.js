@@ -19,7 +19,7 @@ function MoboList() {
       {mobos.map((mobo) => {
         return (
           <option key={mobo.id} value={mobo.id}>
-            {mobo.socket_type} {mobo.max_memory} {mobo.max_memory_per_slot} {ram.pcie_slots} {ram.memory_slots}
+            {mobo.socket_type} {mobo.max_memory} {mobo.max_memory_per_slot} {mobo.pcie_slots} {mobo.memory_slots}
           </option>
         );
       })}
