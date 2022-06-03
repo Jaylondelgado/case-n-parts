@@ -9,6 +9,7 @@ import MyBuilds from "./builds/MyBuilds";
 import HddList from "./builds/PcPartsFetch";
 import MoboList from "./builds/MoboFetch";
 import RamList from "./builds/RamFetch";
+import PsuList from "./builds/PsuFetch";
 
 function App() {
   return (
@@ -20,9 +21,10 @@ function App() {
           <Route path="mybuilds" element={<MyBuilds />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
-          <Route path="mobos" element={<MoboList />} />
           <Route path="hdds" element={<HddList />} />
+          <Route path="mobos" element={<MoboList />} />
           <Route path="rams" element={<RamList />} />
+          <Route path="psus" element={<PsuList />} />
         </Routes>
       </div>
       <Footer />
