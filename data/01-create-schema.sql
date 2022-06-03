@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS public.gpu
 (
     Id SERIAL NOT NULL PRIMARY KEY,
     Manufacturer character varying(60) COLLATE pg_catalog."default" NOT NULL,
+    Chipset character varying(100) COLLATE pg_catalog."default" NOT NULL,
     Core_Clock_Speed character varying(15) COLLATE pg_catalog."default" NOT NULL,
     Video_Memory int NOT NULL,
     Memory_Type character varying(100) COLLATE pg_catalog."default" NOT NULL,
