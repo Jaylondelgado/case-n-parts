@@ -42,10 +42,11 @@ def row_to_cpu(row):
 def row_to_ram(row):
     ram = {
         "id": row[0],
-        "memory_type": row[1],
-        'memory_speed': row[2],
-        'memory_channels': row[3],
-        'pin_configuration': row[4],
+        "brand": row[1],
+        "memory_type": row[2],
+        'memory_speed': row[3],
+        'memory_channels': row[4],
+        'pin_configuration': row[5],
     }
     return ram
 def row_to_hdd(row):

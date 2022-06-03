@@ -30,6 +30,7 @@ class Gpu(BaseModel):
 
 class RamOut(BaseModel):
     id: int
+    brand: str
     memory_type: str
     memory_speed: str
     memory_channels: str

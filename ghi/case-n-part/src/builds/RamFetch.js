@@ -19,7 +19,7 @@ function RamList() {
       {rams.map((ram) => {
         return (
           <option key={ram.id} value={ram.id}>
-            {ram.memory_type} {ram.memory_speed} {ram.memory_channels} {ram.pin_configuration}
+            {ram.brand} {ram.memory_type} {ram.memory_speed} {ram.memory_channels} {ram.pin_configuration}
           </option>
         );
       })}
