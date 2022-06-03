@@ -109,13 +109,13 @@ ALTER TABLE IF EXISTS public.ram
 CREATE TABLE IF NOT EXISTS public.psu
 (
     Id SERIAL NOT NULL PRIMARY KEY,
-    Wattage character varying(20) COLLATE pg_catalog."default" NOT NULL,
-    Atx_Connector character varying(20) COLLATE pg_catalog."default" NOT NULL,
-    Atx_12v_Connector character varying(20) COLLATE pg_catalog."default" NOT NULL,
-    Graphics_Connector character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    Brand character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    Wattage character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    Atx_Connector character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    Atx_12v_Connector character varying(30) COLLATE pg_catalog."default" NOT NULL,
+    Graphics_Connector character varying(30) COLLATE pg_catalog."default" NOT NULL,
     Molex_Connector int NOT NULL,
-    Sata_Connector int NOT NULL,
-    Floppy_Connector int NOT NULL
+    Sata_Connector int NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS public.mobos
