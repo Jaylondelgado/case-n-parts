@@ -10,7 +10,6 @@ Took some time learning a few packages (Axios, Cheerio, Express) as we were unab
 
 I installed react-browser-dom to route links for the navigation bar. The skeleton for the navigation was set up in the Nav.js and App.js. For the nav list, we wanted to try implementing style-components onto the bar as opposed to using bootstrap so I spent some time looking up the methods. It is very functional and could be argued that it is easier to manipulate by simply nesting what you want styled between html tags of variable name your style is exporting from the js file.
 
-
 ## 5/31/2022
 
 \* Carousel on the main page
@@ -24,3 +23,9 @@ worked on the front page with Jaylon, finding a style-component carousel to show
 After meeting with the team, it became apparent that the difficulty and scope of our project was greater than we anticipated. Going over our models, the motherboard slots proved to be a bit of a conundrum where that table would need to be connected to a specific pc part that had its own table, creating a tangled web of foreign keys. We've simplified this idea and created a new model, where everything connects to the case.
 
 On the front end, a footer was added with all the nav links as well as social media links.
+
+## 6/2/2022
+
+\* Working on getting data to the front end
+
+Switched from front end to working on some backend portions of the project to get more comfortable using FastAPIs. Thanks to my teammates I was able to reference their initial work to get some pages down (PSU and HDD). After that we made a breakthrough in pulling our first bits of data, fetching a table of hard drive descriptions to the front end.
