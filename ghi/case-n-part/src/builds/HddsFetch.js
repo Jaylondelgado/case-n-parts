@@ -27,7 +27,7 @@ function HddList() {
       {hdds.map((hdd) => {
         return (
           <option key={hdd.id} value={hdd.id}>
-            {hdd.capacity} {hdd.interface} {hdd.cache} {hdd.rpm}
+            {hdd.brand} {hdd.capacity} {hdd.interface} {hdd.cache} {hdd.rpm}
           </option>
         );
       })}

@@ -19,7 +19,7 @@ function PsuList() {
       {psus.map((psu) => {
         return (
           <option key={psu.id} value={psu.id}>
-            {psu.wattage} {psu.atx_connector} {psu.atx_12v_connector} {psu.graphics_connector} {psu.molex_connector} {psu.sata_connector} {psu.floppy_connector}
+            {psu.brand} {psu.wattage} {psu.atx_connector} {psu.atx_12v_connector} {psu.graphics_connector} {psu.molex_connector} {psu.sata_connector} {psu.floppy_connector}
           </option>
         );
       })}

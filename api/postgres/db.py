@@ -49,9 +49,8 @@ class PartsQueries:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """
-                    SELECT id, wattage,atx_connector, atx_12v_connector,
-                    graphics_connector, molex_connector, sata_connector,
-                    floppy_connector
+                    SELECT id, brand, wattage,atx_connector, atx_12v_connector,
+                    graphics_connector, molex_connector, sata_connector
                     from psu
                     """
                 )
@@ -63,7 +62,7 @@ class PartsQueries:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """
-                    SELECT id, capacity, interface, cache,
+                    SELECT id, brand, capacity, interface, cache,
                     rpm
                     from hdd
                     """
@@ -102,7 +101,7 @@ class BuildsQueries:
                     buildram.ramcount, ram.brand, ram.memory_type, ram.memory_speed, ram.memory_channels, ram.pin_configuration,
                     mobos.id, mobos.socket_type, mobos.max_memory, mobos.max_memory_per_slot, mobos.pcie_slots,
                     mobos.memory_slots, cpu.id, cpu.processor, cpu.cores, cpu.threads, cpu.speed, cpu.socket_type,
-                    psu.id, psu.wattage, psu.atx_connector, psu.atx_12v_connector, psu.graphics_connector,
+                    psu.id, psu.brand, psu.wattage, psu.atx_connector, psu.atx_12v_connector, psu.graphics_connector,
                     psu.molex_connector, psu.sata_connector, psu.floppy_connector
                     FROM public.build
                     INNER JOIN public.case ON(build.id="case".buildid)
