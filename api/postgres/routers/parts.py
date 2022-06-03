@@ -17,14 +17,15 @@ def row_to_gpu(row):
     gpu = {
         "id": row[0],
         "manufacturer": row[1],
-        "core_clock_speed": row[2],
-        "video_memory": row[3],
-        "memory_type": row[4],
-        "height": row[5],
-        "length": row[6],
-        "width": row[7],
-        "hdmi": row[8],
-        "display_port": row[9]
+        "chipset": row[2],
+        "core_clock_speed": row[3],
+        "video_memory": row[4],
+        "memory_type": row[5],
+        "height": row[6],
+        "length": row[7],
+        "width": row[8],
+        "hdmi": row[9],
+        "display_port": row[10]
     }
     return gpu
 

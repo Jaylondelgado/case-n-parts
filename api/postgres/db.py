@@ -12,7 +12,7 @@ class PartsQueries:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """
-                    SELECT id, manufacturer, core_clock_speed, video_memory,
+                    SELECT id, manufacturer, chipset, core_clock_speed, video_memory,
                     memory_type, height, length, width, hdmi, display_port
                     FROM gpu
                     """

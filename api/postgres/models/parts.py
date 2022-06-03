@@ -16,6 +16,7 @@ class Cpu(BaseModel):
 class GpuOut(BaseModel):
     id: int
     manufacturer: str
+    chipset: str
     core_clock_speed: str
     video_memory: str
     memory_type: str

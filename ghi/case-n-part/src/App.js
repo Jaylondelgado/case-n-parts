@@ -10,6 +10,7 @@ import HddList from "./builds/PcPartsFetch";
 import MoboList from "./builds/MoboFetch";
 import RamList from "./builds/RamFetch";
 import PsuList from "./builds/PsuFetch";
+import GpuList from "./builds/GpuFetch";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="mobos" element={<MoboList />} />
           <Route path="rams" element={<RamList />} />
           <Route path="psus" element={<PsuList />} />
+          <Route path="gpus" element={<GpuList />} />
         </Routes>
       </div>
       <Footer />
