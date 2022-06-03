@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Dropdown } from "semantic-ui-react";
 
 function HddList() {
   const [hdds, setHdd] = useState([]);
@@ -14,27 +13,25 @@ function HddList() {
     getHddData();
   }, []);
 
-  const hd = hdds.map((hdd) => {
-    return (
-      <option key={hdd.id} value={hdd.id}>
-        {hdd.capacity} {hdd.interface} {hdd.cache} {hdd.rpm}
-      </option>
-    );
-  });
+  // const hd = hdds.map((hdd) => {
+  //   return (
+  //     <option key={hdd.id} value={hdd.id}>
+  //       {hdd.capacity} {hdd.interface} {hdd.cache} {hdd.rpm}
+  //     </option>
+  //   );
+  // });
 
   return (
-    // <select>
-    //   <option value="">Select a HardDrive</option>
-    //   {hdds.map((hdd) => {
-    //     return (
-    //       <option key={hdd.id} value={hdd.id}>
-    //         {hdd.capacity} {hdd.interface} {hdd.cache} {hdd.rpm}
-    //       </option>
-    //     );
-    //   })}
-    // </select>
-
-    <Dropdown placeholder="Select Friend" fluid selection options={hd} />
+    <select>
+      <option value="">Select a HardDrive</option>
+      {hdds.map((hdd) => {
+        return (
+          <option key={hdd.id} value={hdd.id}>
+            {hdd.capacity} {hdd.interface} {hdd.cache} {hdd.rpm}
+          </option>
+        );
+      })}
+    </select>
   );
 }
 

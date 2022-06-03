@@ -6,7 +6,6 @@ import Login from "./login/Login";
 import SignUp from "./login/SignUp";
 import HomePage from "./HomePage";
 import MyBuilds from "./builds/MyBuilds";
-import ButtonExampleEmphasis from "./tester";
 import HddList from "./builds/PcPartsFetch";
 
 function App() {
@@ -19,7 +18,6 @@ function App() {
           <Route path="mybuilds" element={<MyBuilds />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
-          <Route path="tester" element={<ButtonExampleEmphasis />} />
           <Route path="parts" element={<HddList />} />
         </Routes>
       </div>
