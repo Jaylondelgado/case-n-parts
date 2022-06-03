@@ -5,9 +5,9 @@ services:
   react:
     image: node:lts-bullseye
     command: /bin/bash run.sh
-    working_dir: /great-value
+    working_dir: /case-n-part
     volumes:
-      - ./:/great-value
+      - ./ghi/case-n-part:/case-n-part
     ports:
       - "3000:3000"
     environment:
