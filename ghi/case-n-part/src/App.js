@@ -6,10 +6,11 @@ import Login from "./login/Login";
 import SignUp from "./login/SignUp";
 import HomePage from "./HomePage";
 import MyBuilds from "./builds/MyBuilds";
-import HddList from "./builds/PcPartsFetch";
+import HddList from "./builds/HddsFetch";
 import MoboList from "./builds/MoboFetch";
 import RamList from "./builds/RamFetch";
 import PsuList from "./builds/PsuFetch";
+import GpuList from "./builds/GpuFetch";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="mobos" element={<MoboList />} />
           <Route path="rams" element={<RamList />} />
           <Route path="psus" element={<PsuList />} />
+          <Route path="gpus" element={<GpuList />} />
         </Routes>
       </div>
       <Footer />

@@ -16,6 +16,7 @@ class Cpu(BaseModel):
 class GpuOut(BaseModel):
     id: int
     manufacturer: str
+    chipset: str
     core_clock_speed: str
     video_memory: str
     memory_type: str
@@ -30,6 +31,7 @@ class Gpu(BaseModel):
 
 class RamOut(BaseModel):
     id: int
+    brand: str
     memory_type: str
     memory_speed: str
     memory_channels: str
