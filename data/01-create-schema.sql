@@ -109,32 +109,33 @@ ALTER TABLE IF EXISTS public.ram
 CREATE TABLE IF NOT EXISTS public.psu
 (
     Id SERIAL NOT NULL PRIMARY KEY,
-    Brand character varying(50) COLLATE pg_catalog."default" NOT NULL,
-    Wattage character varying(30) COLLATE pg_catalog."default" NOT NULL,
-    Atx_Connector character varying(30) COLLATE pg_catalog."default" NOT NULL,
-    Atx_12v_Connector character varying(30) COLLATE pg_catalog."default" NOT NULL,
-    Graphics_Connector character varying(30) COLLATE pg_catalog."default" NOT NULL,
-    Molex_Connector int NOT NULL,
-    Sata_Connector int NOT NULL
+    Brand character varying(50) COLLATE pg_catalog."default",
+    Wattage character varying(30) COLLATE pg_catalog."default",
+    Atx_Connector character varying(30) COLLATE pg_catalog."default",
+    Atx_12v_Connector character varying(30) COLLATE pg_catalog."default",
+    Graphics_Connector character varying(30) COLLATE pg_catalog."default",
+    Molex_Connector int,
+    Sata_Connector int
 );
+
+ALTER TABLE IF EXISTS public.psu
+    OWNER to "great-value";
 
 CREATE TABLE IF NOT EXISTS public.mobos
 (
     Id SERIAL NOT NULL PRIMARY KEY,
-    Brand CHARACTER VARYING(20) NOT NULL,
-    Socket_Type CHARACTER VARYING(5) NOT NULL,
-    Max_Memory CHARACTER VARYING(10) NOT NULL,
-    Max_Memory_Per_Slot CHARACTER VARYING(10) NOT NULL,
-    Pcie_Slots INT NOT NULL,
-    Memory_Slots INT NOT NULL
+    Brand CHARACTER VARYING(20),
+    Socket_Type CHARACTER VARYING(5),
+    Max_Memory CHARACTER VARYING(10),
+    Max_Memory_Per_Slot CHARACTER VARYING(10,
+    Pcie_Slots IN,
+    Memory_Slots INT
 );
 
 ALTER TABLE IF EXISTS public.mobos
     OWNER to "great-value";
 
 
-ALTER TABLE IF EXISTS public.psu
-    OWNER to "great-value";
 
 CREATE TABLE IF NOT EXISTS public.color
 (
