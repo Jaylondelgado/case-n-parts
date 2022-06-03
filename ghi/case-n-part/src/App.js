@@ -12,18 +12,15 @@ function App() {
   return (
     <BrowserRouter>
       <Nav />
-      <div className="container">
+      <div className='container'>
         <Routes>
-          <Route path="/" element={<HomePage />} />
           <Route path="mybuilds" element={<MyBuilds />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="tester" element={<ButtonExampleEmphasis />} />
         </Routes>
       </div>
-      <Footer />
-    </BrowserRouter>
-  );
+      </BrowserRouter>
+  )
 }
-
 export default App;

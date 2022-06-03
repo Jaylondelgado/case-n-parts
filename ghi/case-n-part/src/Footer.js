@@ -14,13 +14,13 @@ const Footer = () => {
       <h1 style={{ color: "green", 
                    textAlign: "center", 
                    marginTop: "-50px" }}>
-        Case N' Parts: Get Your Case on
+        Case N' Parts: Get Your Case On
       </h1>
       <Container>
         <Row>
           <Column>
             <Heading>Case N' Parts</Heading>
-            <FooterLink href="/">home</FooterLink>
+            <FooterLink href="/">Home</FooterLink>
             <FooterLink href="mybuilds">My Builds</FooterLink>
             <FooterLink href="create">Create Builds</FooterLink>
             <FooterLink href="view">View Builds</FooterLink>
