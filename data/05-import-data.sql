@@ -102,29 +102,29 @@ VALUES
     ('Ryzen 5 4500','Six-Core','12 Processing Threads','3.60GHz','AM4');
 
 INSERT INTO hdd
-(Capacity,Interface,Cache,Rpm)
+(Brand,Capacity,Interface,Cache,Rpm)
 VALUES
-('1TB','SATA 3.0 6.0Gb/s','128MB','5,400 RPM'),
-    ('4TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
-    ('6TB','SATA 3.0 6.0Gb/s','256MB','5,400 RPM'),
-    ('4TB','SATA 3.0 6.0Gb/s','64MB','5,900 RPM'),
-    ('8TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
-    ('2TB','SATA 3.0 6.0Gb/s','128MB','5,400 RPM'),
-    ('2TB','SATA 3.0 6.0Gb/s','64MB','7,200 RPM'),
-    ('2TB','SATA 3.0 6.0Gb/s','64MB','5,900 RPM'),
-    ('6TB','SATA 3.0 6.0Gb/s','256MB','5,400 RPM'),
-    ('8TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
-    ('6TB','SATA 3.0 6.0Gb/s','128MB','5,400 RPM'),
-    ('8TB','SATA 3.0 6.0Gb/s','256MB','5,400 RPM'),
-    ('12TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
-    ('10TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
-    ('20TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
-    ('1TB','SATA 3.0 6.0Gb/s','64MB','7,200 RPM'),
-    ('10TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
-    ('1TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
-    ('2TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
-    ('14TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
-    ('2TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM');
+('Seagate','8TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
+    ('Seagate','2TB','SATA 3.0 6.0Gb/s','128MB','5,400 RPM'),
+    ('Seagate','1TB','SATA 3.0 6.0Gb/s','128MB','5,400 RPM'),
+    ('Seagate','4TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
+    ('Seagate','6TB','SATA 3.0 6.0Gb/s','256MB','5,400 RPM'),
+    ('Seagate','2TB','SATA 3.0 6.0Gb/s','64MB','7,200 RPM'),
+    ('Seagate','6TB','SATA 3.0 6.0Gb/s','128MB','5,400 RPM'),
+    ('Seagate','4TB','SATA 3.0 6.0Gb/s','64MB','5,900 RPM'),
+    ('Seagate','8TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
+    ('Seagate','1TB','SATA 3.0 6.0Gb/s','64MB','7,200 RPM'),
+    ('Seagate','6TB','SATA 3.0 6.0Gb/s','256MB','5,400 RPM'),
+    ('Seagate','2TB','SATA 3.0 6.0Gb/s','64MB','5,900 RPM'),
+    ('Seagate','8TB','SATA 3.0 6.0Gb/s','256MB','5,400 RPM'),
+    ('Seagate','10TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
+    ('Seagate','12TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
+    ('Seagate','2TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
+    ('Seagate','20TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
+    ('Seagate','10TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
+    ('Seagate','2TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
+    ('Seagate','14TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM'),
+    ('Seagate','1TB','SATA 3.0 6.0Gb/s','256MB','7,200 RPM');
 
 INSERT INTO psu
 (Wattage,Atx_Connector,Atx_12v_Connector,Graphics_Connector,Molex_Connector,Sata_Connector,Floppy_Connector)
