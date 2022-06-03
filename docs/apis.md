@@ -183,7 +183,7 @@ Shows a more detailed description of the computer build and the comments from th
 
 Deletes the build.
 
-## List comments
+<!-- ## List comments
 
 - **Method**: `GET`
 - **Path**: /api/builds/<int:pk>/comments/
@@ -274,7 +274,7 @@ Allow user to edit their review on specific build
 - **Method**: `DELETE`
 - **Path**: /api/builds/<int:pk>/comments/<int:pk>/
 
-Delete review from specific build.
+Delete review from specific build. -->
 
 ## List Gpu
 

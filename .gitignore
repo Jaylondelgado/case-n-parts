@@ -6,6 +6,7 @@
 .pnp.js
 ghi/node_modules
 __pycache__/
+web-scraper/node_modules
 
 # testing
 /coverage
