@@ -11,6 +11,7 @@ import MoboList from "./builds/MoboFetch";
 import RamList from "./builds/RamFetch";
 import PsuList from "./builds/PsuFetch";
 import GpuList from "./builds/GpuFetch";
+import CpuList from "./builds/CpuFetch";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="rams" element={<RamList />} />
           <Route path="psus" element={<PsuList />} />
           <Route path="gpus" element={<GpuList />} />
+          <Route path="cpus" element={<CpuList />} />
         </Routes>
       </div>
       <Footer />
