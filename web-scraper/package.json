@@ -1,24 +1,4 @@
 {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-  "dependencies": {
-    "axios": "^0.27.2",
-    "cheerio": "^1.0.0-rc.11",
-    "cli-progress": "^3.11.1",
-    "commander": "^9.3.0",
-    "cors": "^2.8.5",
-    "font-awesome": "^4.7.0",
-    "nodemon": "^2.0.16",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "react-router-dom": "^6.3.0",
-    "react-scripts": "^5.0.1",
-    "styled-components": "^5.3.5"
-  },
->>>>>>> 7e1ef708bce9a54c05ffa908e222ede94a37e806
->>>>>>> 1f446e811d1bc828ad8dcead0e0b5ffb0d870bf5
   "name": "great-value",
   "description": "Chad - Jason - Jarett - Jaylon",
   "version": "1.0.0",
@@ -58,7 +38,6 @@
     "font-awesome": "^4.7.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "react-google-login": "^5.2.2",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
     "styled-components": "^5.3.5",
