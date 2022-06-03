@@ -25,14 +25,15 @@ function mapDetailPage($) {
     specs[specName] = specValue;
   });
 
-  // totalPciSlots = pciSlots[express4] + pciSlots[express3] + pciSlots[express1];
+  specs["brand"] = $("#brandContainer a").text();
 
   const data = {
-    socket_type: specs["Socket Type"],
-    max_memory: specs["Max Memory Supported"],
-    max_memory_per_slot: specs["Maximum Memory Supported Per Slot"],
-    pcie_slots: 4,
-    memory_slots: Number(specs["Memory Slots"].charAt(0)),
+    Brand: specs["brand"],
+    Socket_Type: specs["Socket Type"],
+    Max_Memory: specs["Max Memory Supported"],
+    Max_Memory_Per_Slot: specs["Maximum Memory Supported Per Slot"],
+    Pcie_Slots: 4,
+    Memory_Slots: Number(specs["Memory Slots"].charAt(0)),
   };
 
   return data;
