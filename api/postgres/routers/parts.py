@@ -53,22 +53,23 @@ def row_to_ram(row):
 def row_to_hdd(row):
     hdd = {
         "id": row[0],
-        "capacity": row[1],
-        "interface": row[2],
-        "cache": row[3],
-        "rpm": row[4]
+        "brand": row[1],
+        "capacity": row[2],
+        "interface": row[3],
+        "cache": row[4],
+        "rpm": row[5]
     }
     return hdd
 def row_to_psu(row):
     psu= {
         "id": row[0],
-        "wattage": row[1],
-        "atx_connector": row[2],
-        "atx_12v_connector": row[3],
-        "graphics_connector": row[4],
-        "molex_connector": row[5],
-        "sata_connector": row[6],
-        "floppy_connector": row[7]
+        "brand": row[1],
+        "wattage": row[2],
+        "atx_connector": row[3],
+        "atx_12v_connector": row[4],
+        "graphics_connector": row[5],
+        "molex_connector": row[6],
+        "sata_connector": row[7],
     }
     return psu
 def row_to_mobo(row):
@@ -105,7 +106,7 @@ def psu_list(query=Depends(PartsQueries)):
 
 @router.get("/api/hdds", response_model=Hdd)
 def psu_list(query=Depends(PartsQueries)):
-    rows = query.get_all_psus()
+    rows = query.get_all_hdds()
     return {
         "hdds": [row_to_hdd(row) for row in rows],
     }

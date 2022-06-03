@@ -49,9 +49,8 @@ class PartsQueries:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """
-                    SELECT id, wattage,atx_connector, atx_12v_connector,
-                    graphics_connector, molex_connector, sata_connector,
-                    floppy_connector
+                    SELECT id, brand, wattage,atx_connector, atx_12v_connector,
+                    graphics_connector, molex_connector, sata_connector
                     from psu
                     """
                 )
@@ -63,7 +62,7 @@ class PartsQueries:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """
-                    SELECT id, capacity, interface, cache,
+                    SELECT id, brand, capacity, interface, cache,
                     rpm
                     from hdd
                     """
