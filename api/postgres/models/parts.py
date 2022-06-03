@@ -66,6 +66,7 @@ class Psu(BaseModel):
 
 class MoboOut(BaseModel):
     id: int
+    brand: str
     socket_type: str
     max_memory: str
     max_memory_per_slot: str

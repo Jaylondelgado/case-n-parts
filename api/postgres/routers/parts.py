@@ -75,11 +75,12 @@ def row_to_psu(row):
 def row_to_mobo(row):
     mobo= {
         "id": row[0],
-        "socket_type": row[1],
-        "max_memory": row[2],
-        "max_memory_per_slot": row[3],
-        "pcie_slots": row[4],
-        "memory_slots": row[5],
+        "brand": row[1],
+        "socket_type": row[2],
+        "max_memory": row[3],
+        "max_memory_per_slot": row[4],
+        "pcie_slots": row[5],
+        "memory_slots": row[6],
     }
     return mobo
 

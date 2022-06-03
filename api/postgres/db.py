@@ -75,7 +75,7 @@ class PartsQueries:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """
-                    SELECT id, socket_type, max_memory, max_memory_per_slot,
+                    SELECT id, brand, socket_type, max_memory, max_memory_per_slot,
                     pcie_slots, memory_slots
                     FROM mobos
                     """
