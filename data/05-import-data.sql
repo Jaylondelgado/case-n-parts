@@ -144,32 +144,32 @@ VALUES
     ('600 Watts','20+4-pin','1 x 4+4-pin','2 x 6+2-pin','3','6','1');
 
 INSERT INTO ram
-(Memory_Type,Memory_Speed,Memory_Channels,Pin_Configuration)
+(Brand,Memory_Type,Memory_Speed,Memory_Channels,Pin_Configuration)
 VALUES
-('DDR4','PC4-25600','Dual','288-pin'),
-    ('DDR4','PC4-28800','Dual','288-pin'),
-    ('DDR4','PC4-25600','Dual','288-pin'),
-    ('DDR4','PC4-25600','Dual','288-pin'),
-    ('DDR4','PC4-25600','Dual','288-pin'),
-    ('DDR4','PC4-25600','Dual','288-pin'),
-    ('DDR4','PC4-28800','Dual','288-pin'),
-    ('DDR4','PC4-25600','Dual','288-pin'),
-    ('DDR4','PC4-25600','Dual','288-pin'),
-    ('DDR4','PC4-28800','Dual','288-pin'),
-    ('DDR4','PC4-28800','Dual','288-pin'),
-    ('DDR4','PC4-25600','Dual','288-pin'),
-    ('DDR4','PC4-28800','Dual','288-pin'),
-    ('DDR4','PC4-25600','Dual','288-pin'),
-    ('DDR4','PC4-28800','Dual','288-pin'),
-    ('DDR4','PC4-28800','Dual','288-pin'),
-    ('DDR4','PC4-25600','Dual','288-pin'),
-    ('DDR4','PC4-25600','Dual','288-pin'),
-    ('DDR4','PC4-28800','Dual','288-pin'),
-    ('DDR4','PC4-25600','Dual','288-pin'),
-    ('DDR4','PC4-28800','Dual','288-pin'),
-    ('DDR4','PC4-28800','Dual','288-pin'),
-    ('DDR4','PC4-28800','Dual','288-pin'),
-    ('DDR4','PC4-25600','Dual','288-pin');
+('G.Skill','DDR4','PC4-25600','Dual','288-pin'),
+    ('G.Skill','DDR4','PC4-25600','Dual','288-pin'),
+    ('Corsair','DDR4','PC4-25600','Dual','288-pin'),
+    ('Corsair','DDR4','PC4-28800','Dual','288-pin'),
+    ('TeamGroup','DDR4','PC4-25600','Dual','288-pin'),
+    ('TeamGroup','DDR4','PC4-25600','Dual','288-pin'),
+    ('Corsair','DDR4','PC4-28800','Dual','288-pin'),
+    ('Corsair','DDR4','PC4-25600','Dual','288-pin'),
+    ('Corsair','DDR4','PC4-25600','Dual','288-pin'),
+    ('Corsair','DDR4','PC4-28800','Dual','288-pin'),
+    ('G.Skill','DDR4','PC4-28800','Dual','288-pin'),
+    ('Corsair','DDR4','PC4-25600','Dual','288-pin'),
+    ('G.Skill','DDR4','PC4-28800','Dual','288-pin'),
+    ('Corsair','DDR4','PC4-28800','Dual','288-pin'),
+    ('G.Skill','DDR4','PC4-25600','Dual','288-pin'),
+    ('TeamGroup','DDR4','PC4-25600','Dual','288-pin'),
+    ('G.Skill','DDR4','PC4-28800','Dual','288-pin'),
+    ('Corsair','DDR4','PC4-28800','Dual','288-pin'),
+    ('Corsair','DDR4','PC4-28800','Dual','288-pin'),
+    ('Corsair','DDR4','PC4-25600','Dual','288-pin'),
+    ('Corsair','DDR4','PC4-25600','Dual','288-pin'),
+    ('TeamGroup','DDR4','PC4-28800','Dual','288-pin'),
+    ('TeamGroup','DDR4','PC4-25600','Dual','288-pin'),
+    ('TeamGroup','DDR4','PC4-28800','Dual','288-pin');
 
 INSERT INTO color
 (Name)

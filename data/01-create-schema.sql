@@ -90,6 +90,7 @@ ALTER TABLE IF EXISTS public.hdd
 CREATE TABLE IF NOT EXISTS public.ram
 (
     Id SERIAL NOT NULL PRIMARY KEY,
+    Brand character varying(30) COLLATE pg_catalog."default" NOT NULL,
     Memory_Type character varying(8) COLLATE pg_catalog."default" NOT NULL,
     Memory_Speed character varying(20) COLLATE pg_catalog."default" NOT NULL,
     Memory_Channels character varying(10) COLLATE pg_catalog."default" NOT NULL,
