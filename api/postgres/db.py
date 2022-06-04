@@ -92,12 +92,12 @@ class BuildsQueries:
                     SELECT build.id, build."Name", color.name, "size".name, buildgpus.gpuid, buildgpus.cardcount,
                     gpu.manufacturer, gpu.chipset, gpu.core_clock_speed, gpu.video_memory, gpu.memory_type,
                     gpu.height, gpu.length, gpu.width, gpu.hdmi, gpu.display_port, buildhdds.hddid,
-                    buildhdds.hddcount, hdd.capacity, hdd.interface, hdd.cache, hdd.rpm, buildram.ramid,
+                    buildhdds.hddcount, hdd.brand, hdd.capacity, hdd.interface, hdd.cache, hdd.rpm, buildram.ramid,
                     buildram.ramcount, ram.brand, ram.memory_type, ram.memory_speed, ram.memory_channels, ram.pin_configuration,
                     mobos.id, mobos.brand, mobos.socket_type, mobos.max_memory, mobos.max_memory_per_slot, mobos.pcie_slots,
                     mobos.memory_slots, cpu.id, cpu.processor, cpu.cores, cpu.threads, cpu.speed, cpu.socket_type,
                     psu.id, psu.brand, psu.wattage, psu.atx_connector, psu.atx_12v_connector, psu.graphics_connector,
-                    psu.molex_connector, psu.sata_connector, psu.floppy_connector
+                    psu.molex_connector, psu.sata_connector
                     FROM public.build
                     INNER JOIN public.case ON(build.id="case".buildid)
                     INNER JOIN public.size ON("size".id="case".size)
@@ -117,7 +117,9 @@ class BuildsQueries:
                 print("rows:", rows)
                 return list(rows)
 
-    def create_build(self, Name, moboid, cpuid, psuid):
+    def create_build(self, Name, moboid, cpuid, psuid, gpuid):
+        gpu_queries = PartsQueries()
+        gpus = gpu_queries.get_all_gpus()
         with pool.connection() as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
