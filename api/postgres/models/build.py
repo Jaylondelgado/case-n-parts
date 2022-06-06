@@ -23,6 +23,13 @@ class InsertBuild(BaseModel):
     cpuid: int
     psuid: int
     gpuid: int
+    cardcount: int
+    hddid: int
+    hddcount: int
+    ramid: int
+    ramcount: int
+    color: int
+    size: int
 
 class OutBuild(BaseModel):
     id: int
@@ -31,5 +38,4 @@ class OutBuild(BaseModel):
     cpuid: int
     psuid: int
     Private: bool
-    gpuid: int
 
