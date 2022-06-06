@@ -259,7 +259,7 @@ class BuildsQueries:
                     SELECT build.id, build."Name", build.moboid, build.cpuid, build.psuid, build."Private"
                     FROM build
                     WHERE build.id = %s
-
+                    
                 """,
                     [new_build_id]
                     
@@ -267,51 +267,6 @@ class BuildsQueries:
                 rows = cursor.fetchone()
                 return list(rows)
 
-    
-    # def create_build(self, Name, moboid, cpuid, psuid, gpuid, cardcount):
-    #     with pool.connection() as connection:
-    #         with connection.cursor() as cursor
-    #             cursor.execute(
-    #                 """
-    #                 WITH ins1 AS(
-    #                 INSERT INTO build("Name", moboid, cpuid, psuid)
-    #                 VALUES(%s, %s, %s, %s)
-    #                 RETURNING id AS build_id
-    #                     )
-    #                 INSERT INTO buildgpus(buildid, gpuid, cardcount)
-    #                 SELECT build_id, %s , %s FROM ins1
-                    
-    #                 """,
-    #                     [Name, moboid, cpuid, psuid, gpuid, cardcount]
-    #                 )
-    #             cursor.execute(
-    #                 """
-    #                 SELECT build.id, build."Name", build.moboid, build.cpuid, build.psuid, build."Private"
-    #                 FROM build
-                    
-    #             """,
-                    
-    #             )
-
-    #             rows = cursor.fetchone()
-    #             print("rows:", rows)
-    #             return list(rows)
-        
-
-    # def create_build(self, Name, moboid, cpuid, psuid):
-    #     with pool.connection() as connection:
-    #         with connection.cursor() as cursor:
-    #             cursor.execute(
-    #                 """
-    #                 INSERT INTO build("Name", moboid, cpuid, psuid)
-    #                 VALUES (%s, %s, %s, %s)
-    #                 RETURNING id, "Name", moboid, cpuid, psuid, "Private"
-    #             """,
-    #                 [Name, moboid, cpuid, psuid]
-    #             )
-    #             rows = cursor.fetchone()
-    #             print("rows:", rows)
-    #             return list(rows)
 
 
 class BuildPartsQueries:
