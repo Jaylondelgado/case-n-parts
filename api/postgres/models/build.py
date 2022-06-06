@@ -7,12 +7,12 @@ class BuildOut(BaseModel):
     name: str
     color: str
     size: str
-    gpu: list[Gpu]
-    hdd: list[Hdd]
-    ram: list[Ram]
-    mobo: list[Mobo]
-    cpu: list[Cpu]
-    psu: list[Psu]
+    gpu: GpuOut
+    hdd: HddOut
+    ram: RamOut
+    mobo: MoboOut
+    cpu: CpuOut
+    psu: PsuOut
 
 class Build(BaseModel):
     builds: list[BuildOut]
