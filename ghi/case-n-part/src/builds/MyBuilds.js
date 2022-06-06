@@ -94,12 +94,12 @@ class MyBuilds extends React.Component {
     return (
       <>
         <div className="px-4 py-5 my-5 mt-0 text-center bg-info">
-          <img
+          {/* <img
             className="bg-white rounded shadow d-block mx-auto mb-4"
             src="/logo.svg"
             alt="my builds2"
             width="600"
-          />
+          /> */}
           <h1 className="display-5 fw-bold">My Builds</h1>
           <div className="row">
             <div className="column">

@@ -87,7 +87,7 @@ def row_to_build(row):
 def gpu_list(query=Depends(BuildsQueries)):
     rows = query.get_all_builds()
     return {
-        "gpus": [row_to_build(row) for row in rows],
+        "builds": [row_to_build(row) for row in rows],
     }
 
 # Example of how to get the current user for an endpoint
