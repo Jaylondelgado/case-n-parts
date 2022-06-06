@@ -93,7 +93,7 @@ class MyBuilds extends React.Component {
   render() {
     return (
       <>
-        <div className="px-4 py-5 my-5 mt-0 text-center bg-info">
+        <div className="px-4 py-5 my-5 mt-0 text-center">
           <img
             className="bg-white rounded shadow d-block mx-auto mb-4"
             src="/logo.svg"
