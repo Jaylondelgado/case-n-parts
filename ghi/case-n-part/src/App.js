@@ -7,6 +7,7 @@ import Logout from "./login/Logout";
 import SignUp from "./login/SignUp";
 import HomePage from "./HomePage";
 import MyBuilds from "./builds/MyBuilds";
+import CreateBuild from "./builds/CreateBuild";
 import HddList from "./builds/HddsFetch";
 import MoboList from "./builds/MoboFetch";
 import RamList from "./builds/RamFetch";
@@ -24,6 +25,7 @@ function App() {
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='mybuilds' element={<MyBuilds />} />
+          <Route path='create' element={<CreateBuild />} />
           <Route path='login' element={<Login token={token} login={login} />} />
           <Route path='logout' element={<Logout logout={logout} />} />
           <Route
