@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import CpuList from "./CpuFetch";
+import GpuList from "./GpuFetch";
+import HddList from "./HddsFetch";
+import MoboList from "./MoboFetch";
+import PsuList from "./PsuFetch";
+import RamList from "./RamFetch";
 function CreateBuild() {
-  const [cpus, setCpus] = useState([]);
-  const [state, setState] = useState({});
-
-  useEffect(() => {
-    const getCpuData = async () => {
-      const cpuResponse = await fetch("http://localhost:8000/api/cpus/");
-      const cpuData = await cpuResponse.json();
-      setCpus(cpuData.cpus);
-    };
-
-    getCpuData();
-  }, []);
+  const cpus = CpuList();
+  const gpus = GpuList();
+  const hdds = HddList();
+  const psus = PsuList();
+  const ram = RamList();
+  const mobos = MoboList();
 
   return (
     <table className='table'>

@@ -13,18 +13,7 @@ function MoboList() {
     getMoboData();
   }, []);
 
-  return (
-    <select>
-      <option value="">Select your Motherboard</option>
-      {mobos.map((mobo) => {
-        return (
-          <option key={mobo.id} value={mobo.id}>
-            {mobo.brand} {mobo.socket_type} {mobo.max_memory} {mobo.max_memory_per_slot} {mobo.pcie_slots} {mobo.memory_slots}
-          </option>
-        );
-      })}
-    </select>
-  );
+  return mobos;
 }
 
 export default MoboList;
