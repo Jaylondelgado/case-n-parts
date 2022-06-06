@@ -45,3 +45,7 @@ We decided for each part, we needed a bit more data, so added a brand name for m
 We were able to start making api requests to the back-end and get drop-downs of the data showing on the front-end.
 
 I'm starting to get a little bit more familiar with FastAPI. Still feels pretty foreign, but I'm getting a lot of practice writing out SQL statements, which I'm getting a much better understanding of.
+
+## June 6th, 2022
+
+Integrated authentication with the application. It was a major learning opportunity. With an instructor's help, we were able to get it working.

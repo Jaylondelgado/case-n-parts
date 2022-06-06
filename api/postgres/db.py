@@ -107,11 +107,12 @@ class BuildsQueries:
                         gpu.hdmi, 
                         gpu.display_port, 
                         buildhdds.hddid,
-                        buildhdds.hddcount, 
-                        hdd.capacity, 
-                        hdd.interface, 
-                        hdd.cache, 
-                        hdd.rpm, 
+                        buildhdds.hddcount,
+                        hdd.brand,
+                        hdd.capacity,
+                        hdd.interface,
+                        hdd.cache,
+                        hdd.rpm,
                         buildram.ramid,
                         buildram.ramcount, 
                         ram.brand, 
@@ -180,21 +181,106 @@ class BuildsQueries:
                 rows = cursor.fetchall()
                 print("rows:", rows)
                 return list(rows)
-
-    def create_build(self, Name, moboid, cpuid, psuid):
+    
+    def create_build(self, Name, moboid, cpuid, psuid, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size):
         with pool.connection() as connection:
             with connection.cursor() as cursor:
+                with connection.transaction():
+                    cursor.execute(
+                        """
+                        INSERT INTO build("Name", moboid, cpuid, psuid)
+                        VALUES(%s, %s, %s, %s)
+                        RETURNING id 
+                    """,
+                        [Name, moboid, cpuid, psuid]
+                    )
+                    new_build_id = cursor.fetchone()[0]
+                    cursor.execute(
+                        """
+                        INSERT INTO buildgpus(buildid, gpuid, cardcount)
+                        VALUES(%s, %s, %s)
+                    """,
+                        [new_build_id, gpuid, cardcount]
+                    
+                    )
+                    cursor.execute(
+                        """
+                        INSERT INTO buildhdds(buildid, hddid, hddcount)
+                        VALUES(%s, %s, %s)
+                    """,
+                        [new_build_id, hddid, hddcount]
+                    )
+                    cursor.execute(
+                        """
+                        INSERT INTO buildram(buildid, ramid, ramcount)
+                        VALUES(%s, %s, %s)
+                    """,
+                        [new_build_id, ramid, ramcount]
+                    )
+                    cursor.execute(
+                        """
+                        INSERT INTO "case"(buildid, color, size)
+                        VALUES(%s, %s, %s)
+                    """,
+                        [new_build_id, color, size]
+                    )
                 cursor.execute(
                     """
-                    INSERT INTO build("Name", moboid, cpuid, psuid)
-                    VALUES (%s, %s, %s, %s)
-                    RETURNING id, "Name", moboid, cpuid, psuid, "Private"
+                    SELECT build.id, build."Name", build.moboid, build.cpuid, build.psuid, build."Private"
+                    FROM build
+                    
                 """,
-                    [Name, moboid, cpuid, psuid]
+                    
                 )
                 rows = cursor.fetchone()
                 print("rows:", rows)
                 return list(rows)
+
+    
+    # def create_build(self, Name, moboid, cpuid, psuid, gpuid, cardcount):
+    #     with pool.connection() as connection:
+    #         with connection.cursor() as cursor
+    #             cursor.execute(
+    #                 """
+    #                 WITH ins1 AS(
+    #                 INSERT INTO build("Name", moboid, cpuid, psuid)
+    #                 VALUES(%s, %s, %s, %s)
+    #                 RETURNING id AS build_id
+    #                     )
+    #                 INSERT INTO buildgpus(buildid, gpuid, cardcount)
+    #                 SELECT build_id, %s , %s FROM ins1
+                    
+    #                 """,
+    #                     [Name, moboid, cpuid, psuid, gpuid, cardcount]
+    #                 )
+    #             cursor.execute(
+    #                 """
+    #                 SELECT build.id, build."Name", build.moboid, build.cpuid, build.psuid, build."Private"
+    #                 FROM build
+                    
+    #             """,
+                    
+    #             )
+
+    #             rows = cursor.fetchone()
+    #             print("rows:", rows)
+    #             return list(rows)
+        
+
+    # def create_build(self, Name, moboid, cpuid, psuid):
+    #     with pool.connection() as connection:
+    #         with connection.cursor() as cursor:
+    #             cursor.execute(
+    #                 """
+    #                 INSERT INTO build("Name", moboid, cpuid, psuid)
+    #                 VALUES (%s, %s, %s, %s)
+    #                 RETURNING id, "Name", moboid, cpuid, psuid, "Private"
+    #             """,
+    #                 [Name, moboid, cpuid, psuid]
+    #             )
+    #             rows = cursor.fetchone()
+    #             print("rows:", rows)
+    #             return list(rows)
 
 
 class BuildPartsQueries:

@@ -20,22 +20,30 @@ function App() {
   return (
     <BrowserRouter>
       <Nav token={token} />
-      <div className="container">
+      <div className='content-container'>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="mybuilds" element={<MyBuilds />} />
-          <Route path="login" element={<Login token={token} login={login} />} />
-          <Route path="logout" element={<Logout logout={logout} />} />
-          <Route path="signup" element={<SignUp token={token} signup={signup} />} />
-          <Route path="hdds" element={<HddList />} />
-          <Route path="mobos" element={<MoboList />} />
-          <Route path="rams" element={<RamList />} />
-          <Route path="psus" element={<PsuList />} />
-          <Route path="gpus" element={<GpuList />} />
-          <Route path="cpus" element={<CpuList />} />
+          <Route path='/' element={<HomePage />} />
+          <Route path='mybuilds' element={<MyBuilds />} />
+          <Route path='login' element={<Login token={token} login={login} />} />
+          <Route path='logout' element={<Logout logout={logout} />} />
+          <Route
+            path='signup'
+            element={<SignUp token={token} signup={signup} />}
+          />
+          <Route path='hdds' element={<HddList />} />
+          <Route path='mobos' element={<MoboList />} />
+          <Route path='rams' element={<RamList />} />
+          <Route path='psus' element={<PsuList />} />
+          <Route path='gpus' element={<GpuList />} />
+          <Route path='cpus' element={<CpuList />} />
         </Routes>
       </div>
-      <Footer />
+      <div
+        className='
+      footer-container'
+      >
+        <Footer />
+      </div>
     </BrowserRouter>
   );
 }
