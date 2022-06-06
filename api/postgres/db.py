@@ -139,6 +139,7 @@ class BuildsQueries:
                         gpu.display_port,
                         buildhdds.hddid,
                         buildhdds.hddcount,
+                        hdd.brand,
                         hdd.capacity,
                         hdd.interface,
                         hdd.cache,
