@@ -150,8 +150,9 @@ ALTER TABLE IF EXISTS public.color
 CREATE TABLE IF NOT EXISTS public.user
 (
     Id SERIAL  PRIMARY KEY,
-    User_Name character varying(200),
-    password TEXT
+    Username character varying(200) NOT NULL UNIQUE,
+    Password TEXT NOT NULL,
+    Email character varying(255) NOT NULL UNIQUE
 );
 
 

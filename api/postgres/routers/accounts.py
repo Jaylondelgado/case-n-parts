@@ -59,7 +59,7 @@ def authenticate_user(repo: UsersQueries, username: str, password: str):
     user = repo.get_user(username)
     if not user:
         return False
-    if not verify_password(password, user["hashed_password"]):
+    if not verify_password(password, user[1]):
         return False
     return user
 
@@ -118,7 +118,7 @@ async def login_for_access_token(response: Response, request: Request, form_data
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
-        data={"sub": user["username"]},
+        data={"sub": user[0]},
         expires_delta=access_token_expires,
     )
     token = {"access_token": access_token, "token_type": "bearer"}
