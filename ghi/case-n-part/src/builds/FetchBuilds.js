@@ -20,7 +20,8 @@ function BuildList() {
       {builds.map((build) => {
         return (
           <option key={build.id} value={build.id}>
-            {build.Name} {build.moboid} {build.cpuid} {build.psuid} {build.Private}
+            {build.name} {build.gpu.chipset} {build.hdd.brand} {build.hdd.capacity} {build.psuid} {build.ram.brand} {build.mobo.brand}
+            {build.cpu.processor} {build.psu.brand} {build.psu.wattage}
           </option>
         );
       })}
