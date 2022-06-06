@@ -1,5 +1,5 @@
-import { NavLink } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
+import { Navigate, NavLink } from "react-router-dom";
 import {
   CardWrapper,
   CardHeader,
@@ -8,14 +8,22 @@ import {
   CardIcon,
   CardFieldset,
   CardInput,
-  CardOptionsItem,
-  CardOptions,
-  CardOptionsNote,
+  // CardOptionsItem,
+  // CardOptions,
+  // CardOptionsNote,
   CardButton,
   CardLink,
 } from "./Card";
 
-function SignUp() {
+function SignUp(props) {
+  const {token, signup} = props;
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+
+  if (token) {
+    return <Navigate to="/mybuilds" />;
+  }
   return (
     <CardWrapper>
       <CardHeader>
@@ -23,31 +31,31 @@ function SignUp() {
       </CardHeader>
       <CardBody>
         <CardFieldset>
-          <CardInput placeholder="Username" type="text" required />
+          <CardInput onChange={e => setUsername(e.target.value)} value={username} placeholder="Username" type="text" required />
         </CardFieldset>
 
         <CardFieldset>
-          <CardInput placeholder="E-mail" type="text" required />
+          <CardInput onChange={e => setEmail(e.target.value)} value={email} placeholder="Email" type="email" required />
         </CardFieldset>
 
         <CardFieldset>
-          <CardInput placeholder="Password" type="password" required />
+          <CardInput onChange={e => setPassword(e.target.value)} value={password} placeholder="Password" type="password" required />
           <CardIcon className="fa fa-eye" eye small />
         </CardFieldset>
 
-        <CardFieldset>
+        {/* <CardFieldset>
           <CardOptionsNote>Or sign up with</CardOptionsNote>
           <CardOptions>
             <CardOptionsItem>
               <CardIcon className="fab fa-google" big />
             </CardOptionsItem>
           </CardOptions>
+        </CardFieldset> */}
+        <CardFieldset>
+          <CardButton onClick={() => signup(username, email, password)} type="button">Create account</CardButton>
         </CardFieldset>
         <CardFieldset>
-          <CardButton type="button">Create account</CardButton>
-        </CardFieldset>
-        <CardFieldset>
-          <NavLink to="login">
+          <NavLink to="/login">
             <CardLink>I already have an account</CardLink>
           </NavLink>
         </CardFieldset>

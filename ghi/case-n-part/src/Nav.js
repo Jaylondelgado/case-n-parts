@@ -3,14 +3,20 @@ import { NavLink } from "react-router-dom";
 import { Button, Navbar } from "./static/cnpStyle";
 import logo from "./static/logo.png";
 
-const links = [
+const myLinks = [
   { name: "My Builds", path: "/mybuilds" },
   { name: "Create Builds", path: "/create" },
   { name: "View Builds", path: "/toprated" },
-  { name: "Login", path: "/login" },
+  { name: "Logout", path: "/logout" },
 ];
 
-function Nav() {
+const loginLinks = [
+  { name: "Login", path: "/login" },
+  { name: "Sign up", path: '/signup' },
+];
+
+function Nav(props) {
+  const links = props.token ? myLinks : loginLinks;
   return (
     <Navbar>
       {links.map((link, index) => (

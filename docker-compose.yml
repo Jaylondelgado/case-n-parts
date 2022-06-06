@@ -14,6 +14,7 @@ services:
       HOST_OS: ${OS}
       NODE_ENV: development
       HOST: "0.0.0.0"
+      REACT_APP_ACCOUNTS_HOST: http://localhost:8000
   postgres:
     image: postgres:14-bullseye
     volumes:
@@ -38,3 +39,4 @@ services:
       PGDATABASE: great-value
       PGUSER: great-value
       PGPASSWORD: great-value
+      SECRET_KEY: fe9f6e232112f6a1075578cdd151b3a7ff3aa32c25d1dab913dfa16a989358c3
