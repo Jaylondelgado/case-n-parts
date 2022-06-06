@@ -110,6 +110,6 @@ def create_build(
     query = Depends(BuildsQueries),
 ):
 
-    row = query.create_build(build.Name, build.moboid, build.cpuid, build.psuid)
+    row = query.create_build(build.Name, build.moboid, build.cpuid, build.psuid, build.gpuid, build.cardcount, build.hddid, build.hddcount, build.ramid, build.ramcount, build.color, build.size) 
     print("row:", row)
     return row_to_create_build(row)
