@@ -6,6 +6,37 @@ pool = ConnectionPool()
 class DuplicateTitle(RuntimeError):
     pass
 
+class UsersQueries:
+    def get_user(self, username: str):
+        # TODO: Replace this with real SQL
+        with pool.connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                        SELECT username, password, email
+                        FROM "user"
+                        WHERE "user".username = %s
+                    """,
+                        [username]
+                )
+                rows = cursor.fetchone()
+                return rows
+
+    def create_user(self, username: str, hashed_password: str, email: str = None):
+        # TODO: Replace this with real SQL
+        with pool.connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                        INSERT INTO "user"(Username, Password, Email)
+                        VALUES (%s, %s, %s)
+                        RETURNING id, Username, Password, Email
+                    """,
+                    [username, hashed_password, email]
+                )
+                rows = cursor.fetchone()
+                return list(rows)
+
 class PartsQueries:
     def get_all_gpus(self):
         with pool.connection() as connection:
@@ -31,7 +62,7 @@ class PartsQueries:
                 )
                 rows = cursor.fetchall()
                 return list(rows)
-    
+
     def get_all_rams(self):
         with pool.connection() as connection:
             with connection.cursor() as cursor:
@@ -89,23 +120,23 @@ class BuildsQueries:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """
-                    SELECT 
-                        build.id, 
-                        build."Name", 
-                        color.name, 
-                        "size".name, 
-                        buildgpus.gpuid, 
+                    SELECT
+                        build.id,
+                        build."Name",
+                        color.name,
+                        "size".name,
+                        buildgpus.gpuid,
                         buildgpus.cardcount,
-                        gpu.manufacturer, 
-                        gpu.chipset, 
-                        gpu.core_clock_speed, 
-                        gpu.video_memory, 
+                        gpu.manufacturer,
+                        gpu.chipset,
+                        gpu.core_clock_speed,
+                        gpu.video_memory,
                         gpu.memory_type,
-                        gpu.height, 
-                        gpu.length, 
-                        gpu.width, 
-                        gpu.hdmi, 
-                        gpu.display_port, 
+                        gpu.height,
+                        gpu.length,
+                        gpu.width,
+                        gpu.hdmi,
+                        gpu.display_port,
                         buildhdds.hddid,
                         buildhdds.hddcount,
                         hdd.brand,
@@ -114,35 +145,35 @@ class BuildsQueries:
                         hdd.cache,
                         hdd.rpm,
                         buildram.ramid,
-                        buildram.ramcount, 
-                        ram.brand, 
-                        ram.memory_type, 
-                        ram.memory_speed, 
-                        ram.memory_channels, 
+                        buildram.ramcount,
+                        ram.brand,
+                        ram.memory_type,
+                        ram.memory_speed,
+                        ram.memory_channels,
                         ram.pin_configuration,
-                        mobos.id, 
-                        mobos.brand, 
-                        mobos.socket_type, 
-                        mobos.max_memory, 
-                        mobos.max_memory_per_slot, 
+                        mobos.id,
+                        mobos.brand,
+                        mobos.socket_type,
+                        mobos.max_memory,
+                        mobos.max_memory_per_slot,
                         mobos.pcie_slots,
-                        mobos.memory_slots, 
-                        cpu.id, 
-                        cpu.processor, 
-                        cpu.cores, 
-                        cpu.threads, 
-                        cpu.speed, 
+                        mobos.memory_slots,
+                        cpu.id,
+                        cpu.processor,
+                        cpu.cores,
+                        cpu.threads,
+                        cpu.speed,
                         cpu.socket_type,
-                        psu.id, 
-                        psu.brand, 
-                        psu.wattage, 
-                        psu.atx_connector, 
-                        psu.atx_12v_connector, 
+                        psu.id,
+                        psu.brand,
+                        psu.wattage,
+                        psu.atx_connector,
+                        psu.atx_12v_connector,
                         psu.graphics_connector,
-                        psu.molex_connector, 
+                        psu.molex_connector,
                         psu.sata_connector
                     FROM public.build
-                    
+
                     -- Join case information
                     INNER JOIN public.case
                     INNER JOIN public.size
@@ -289,7 +320,7 @@ class BuildPartsQueries:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """
-                    
+
                     """
                 )
                 rows = cursor.fetchall()
