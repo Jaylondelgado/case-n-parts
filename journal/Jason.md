@@ -29,3 +29,11 @@ On the front end, a footer was added with all the nav links as well as social me
 \* Working on getting data to the front end
 
 Switched from front end to working on some backend portions of the project to get more comfortable using FastAPIs. Thanks to my teammates I was able to reference their initial work to get some pages down (PSU and HDD). After that we made a breakthrough in pulling our first bits of data, fetching a table of hard drive descriptions to the front end.
+
+## 6/3/2022
+
+\* Troubleshooting the backend
+
+Tidied up the front end to have drop down forms for all the pc parts. Spent time trying to figure out how to implement the data onto the front end with images and how they will be respond to portions of the page when clicked on. Likely lots of if statements.
+
+The backend for sql was a challenge but we've managed to finally post a build which is huge.
