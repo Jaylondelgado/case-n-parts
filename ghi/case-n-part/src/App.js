@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./Nav";
 import Footer from "./Footer";
 import Login from "./login/Login";
+import Logout from "./login/Logout";
 import SignUp from "./login/SignUp";
 import HomePage from "./HomePage";
 import MyBuilds from "./builds/MyBuilds";
@@ -12,17 +13,20 @@ import RamList from "./builds/RamFetch";
 import PsuList from "./builds/PsuFetch";
 import GpuList from "./builds/GpuFetch";
 import CpuList from "./builds/CpuFetch";
+import { useToken } from "./authApi";
 
 function App() {
+  const [token, login, logout, signup] = useToken();
   return (
     <BrowserRouter>
-      <Nav />
+      <Nav token={token} />
       <div className="container">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="mybuilds" element={<MyBuilds />} />
-          <Route path="login" element={<Login />} />
-          <Route path="signup" element={<SignUp />} />
+          <Route path="login" element={<Login token={token} login={login} />} />
+          <Route path="logout" element={<Logout logout={logout} />} />
+          <Route path="signup" element={<SignUp token={token} signup={signup} />} />
           <Route path="hdds" element={<HddList />} />
           <Route path="mobos" element={<MoboList />} />
           <Route path="rams" element={<RamList />} />

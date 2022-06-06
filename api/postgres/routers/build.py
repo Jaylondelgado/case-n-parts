@@ -4,6 +4,7 @@ from ..models.build import Build, InsertBuild, OutBuild
 from fastapi import APIRouter, Response, status, Depends
 from ..db import BuildsQueries
 from ..models.common import ErrorMessage
+from .accounts import User, get_current_active_user
 
 router = APIRouter()
 def row_to_create_build(row):
@@ -85,6 +86,14 @@ def row_to_build(row):
 @router.get("/api/builds", response_model=Build)
 def gpu_list(query=Depends(BuildsQueries)):
     rows = query.get_all_builds()
+    return {
+        "gpus": [row_to_build(row) for row in rows],
+    }
+
+# Example of how to get the current user for an endpoint
+@router.get("/api/builds/mine", response_model=Build)
+def gpu_list(query=Depends(BuildsQueries), current_user: User = Depends(get_current_active_user)):
+    rows = query.get_user_builds(current_user)
     return {
         "gpus": [row_to_build(row) for row in rows],
     }

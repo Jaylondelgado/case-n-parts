@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
 import {
   CardWrapper,
   CardHeader,
@@ -7,13 +8,21 @@ import {
   CardIcon,
   CardFieldset,
   CardInput,
-  CardOptionsItem,
-  CardOptions,
-  CardOptionsNote,
+  // CardOptionsItem,
+  // CardOptions,
+  // CardOptionsNote,
   CardButton,
 } from "./Card";
 
-function Login() {
+function Login(props) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const { login, token } = props;
+
+  if (token) {
+    return <Navigate to="/mybuilds" />;
+  }
+
   return (
     <div className="App">
       <CardWrapper>
@@ -23,34 +32,34 @@ function Login() {
 
         <CardBody>
           <CardFieldset>
-            <CardInput placeholder="Username" type="text" required />
+            <CardInput onChange={e => setUsername(e.target.value)} value={username} placeholder="Username" type="text" required />
           </CardFieldset>
 
           <CardFieldset>
-            <CardInput placeholder="Password" type="password" required />
+            <CardInput onChange={e => setPassword(e.target.value)} value={password} placeholder="Password" type="password" required />
             <CardIcon className="fa fa-eye" eye small />
           </CardFieldset>
+          {/*
+        <CardFieldset>
+          <CardOptionsNote>Or login with</CardOptionsNote>
+
+          <CardOptions>
+            <CardOptionsItem>
+              <CardIcon className="fab fa-google" big />
+            </CardOptionsItem>
+
+            <CardOptionsItem>
+              <CardIcon className="fab fa-twitter" big />
+            </CardOptionsItem>
+
+            <CardOptionsItem>
+              <CardIcon className="fab fa-facebook" big />
+            </CardOptionsItem>
+          </CardOptions>
+        </CardFieldset> */}
 
           <CardFieldset>
-            <CardOptionsNote>Or login with</CardOptionsNote>
-
-            <CardOptions>
-              <CardOptionsItem>
-                <CardIcon className="fab fa-google" big />
-              </CardOptionsItem>
-
-              <CardOptionsItem>
-                <CardIcon className="fab fa-twitter" big />
-              </CardOptionsItem>
-
-              <CardOptionsItem>
-                <CardIcon className="fab fa-facebook" big />
-              </CardOptionsItem>
-            </CardOptions>
-          </CardFieldset>
-
-          <CardFieldset>
-            <CardButton type="button">Sign In</CardButton>
+            <CardButton onClick={() => login(username, password)} type="button">Sign In</CardButton>
           </CardFieldset>
         </CardBody>
       </CardWrapper>
