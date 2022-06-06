@@ -7,25 +7,35 @@ class DuplicateTitle(RuntimeError):
     pass
 
 class UsersQueries:
-    FAKE_USERS = []  # DELETE THIS AFTER REPLACING WITH SQL
-
     def get_user(self, username: str):
         # TODO: Replace this with real SQL
-        for user in self.FAKE_USERS:
-            if user["username"] == username:
-                return user
+        with pool.connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                        SELECT username, password, email
+                        FROM "user"
+                        WHERE "user".username = %s
+                    """,
+                        [username]
+                )
+                rows = cursor.fetchone()
+                return rows
 
     def create_user(self, username: str, hashed_password: str, email: str = None):
         # TODO: Replace this with real SQL
-        user = {
-            "id": len(self.FAKE_USERS),
-            "username": username,
-            "email": email,
-            "hashed_password": hashed_password,
-        }
-        self.FAKE_USERS.append(user)
-        return user
-
+        with pool.connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                        INSERT INTO "user"(Username, Password, Email)
+                        VALUES (%s, %s, %s)
+                        RETURNING id, Username, Password, Email
+                    """,
+                    [username, hashed_password, email]
+                )
+                rows = cursor.fetchone()
+                return list(rows)
 
 class PartsQueries:
     def get_all_gpus(self):
