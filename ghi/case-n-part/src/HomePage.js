@@ -1,6 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
 import "./index.css";
+import "slick-carousel/slick/slick.css";
 
 function HomePage() {
   //   const [appointments, setAppointments] = useState([]);
