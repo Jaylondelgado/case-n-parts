@@ -13,6 +13,7 @@ import RamList from "./builds/RamFetch";
 import PsuList from "./builds/PsuFetch";
 import GpuList from "./builds/GpuFetch";
 import CpuList from "./builds/CpuFetch";
+import BuildList from "./builds/FetchBuilds";
 import { useToken } from "./authApi";
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           <Route path='psus' element={<PsuList />} />
           <Route path='gpus' element={<GpuList />} />
           <Route path='cpus' element={<CpuList />} />
+          <Route path='builds' element={<BuildList />} />
         </Routes>
       </div>
       <div
