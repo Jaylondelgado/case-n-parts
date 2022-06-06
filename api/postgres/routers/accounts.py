@@ -57,7 +57,6 @@ def verify_password(plain_password, hashed_password):
 
 def authenticate_user(repo: UsersQueries, username: str, password: str):
     user = repo.get_user(username)
-    print("user type", user[1])
     if not user:
         return False
     if not verify_password(password, user[1]):
