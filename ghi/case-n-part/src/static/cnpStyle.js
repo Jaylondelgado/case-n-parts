@@ -4,7 +4,6 @@ export const Navbar = styled.nav`
   background: darkslategrey;
   display: flex;
   align-items: center;
-  margin-right: -24px;
 
   @media screen and (max-width: 768px) {
     display: none;
@@ -28,14 +27,13 @@ export const Button = styled.button`
 `;
 
 export const GpuImage = styled.img.attrs({
-  src: "https://c1.neweggimages.com/ProductImage/11-129-268-36.jpg"
+  src: "https://c1.neweggimages.com/ProductImage/11-129-268-36.jpg",
 })`
-
-
-//   display: flex;
-//   flex-flow: row nowrap;
-//   justify-content: space-evenly;
-// `;
+  //   display: flex;
+  //   flex-flow: row nowrap;
+  //   justify-content: space-evenly;
+  //
+`;
 
 // const TomatoButton = styled(Button)`
 //   color: tomato;
