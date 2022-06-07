@@ -18,11 +18,12 @@ def row_to_size(row):
     return size
 
 def row_to_caseimage(row):
-    size = {
+    caseimage = {
         "id": row[0],
         "picture": row[1]
     }
-    return size
+    return caseimage
+
 @router.get("/api/size", response_model=SizeOut)
 def size_list(query=Depends(CaseQueries)):
     rows = query.list_size()
@@ -41,5 +42,5 @@ def size_list(query=Depends(CaseQueries)):
 def size_list(query=Depends(CaseQueries)):
     rows = query.list_caseimage()
     return {
-        "colors": [row_to_caseimage(row) for row in rows],
+        "caseimages": [row_to_caseimage(row) for row in rows],
     }

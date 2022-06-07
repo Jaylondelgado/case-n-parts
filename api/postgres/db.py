@@ -301,7 +301,7 @@ class CaseQueries:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """
-                    SELECT id, caseimage
+                    SELECT id, picture
                     FROM caseimage
                     """
                 )

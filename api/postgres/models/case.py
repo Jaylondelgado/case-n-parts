@@ -17,7 +17,7 @@ class SizeOut(BaseModel):
 
 class CaseImageIn(BaseModel):
     id: int
-    caseimage: str
+    picture: str
 
 class CaseImageOut(BaseModel):
-    sizes: list[CaseImageIn]
+    caseimages: list[CaseImageIn]
