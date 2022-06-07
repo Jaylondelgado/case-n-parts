@@ -15,14 +15,7 @@ import PsuTable from "./PsuTable";
 import RamTable from "./RamTable";
 
 function CreateBuild() {
-  const cpus = CpuList();
-  const gpus = GpuList();
-  const hdds = HddList();
-  const psus = PsuList();
-  const ram = RamList();
-  const mobos = MoboList();
-
-  return <RamTable />;
+  return <CpuTable />;
 }
 
 export default CreateBuild;
