@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import CpuList from "./CpuFetch";
-import GpuList from "./GpuFetch";
-import HddList from "./HddsFetch";
-import MoboList from "./MoboFetch";
-import PsuList from "./PsuFetch";
-import RamList from "./RamFetch";
+import CpuList from "../parts/CpuFetch";
+import GpuList from "../parts/GpuFetch";
+import HddList from "../parts/HddsFetch";
+import MoboList from "../parts/MoboFetch";
+import PsuList from "../parts/PsuFetch";
+import RamList from "../parts/RamFetch";
 
-import CpuTable from "./CpuTable";
-import GpuTable from "./GpuTable";
-import HddTable from "./HddTable";
-import PsuTable from "./PsuTable";
-import RamTable from "./RamTable";
+import CpuTable from "../parts/CpuTable";
+import HddTable from "../parts/HddTable";
+import PsuTable from "../parts/PsuTable";
+import RamTable from "../parts/RamTable";
 
 function CreateBuild() {
   return <CpuTable />;
