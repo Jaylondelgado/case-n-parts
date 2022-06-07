@@ -295,3 +295,16 @@ class CaseQueries:
                 rows = cursor.fetchall()
                 print(rows)
                 return list(rows)
+
+    def list_caseimage(self):
+        with pool.connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    SELECT id, caseimage
+                    FROM caseimage
+                    """
+                )
+                rows = cursor.fetchall()
+                print(rows)
+                return list(rows)
