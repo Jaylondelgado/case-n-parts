@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Response, status, Depends
-from ..models.case import SizeOut, ColorOut
+from ..models.case import SizeOut, ColorOut, CaseImageOut
 from ..db import CaseQueries
 router = APIRouter()
 
@@ -16,6 +16,14 @@ def row_to_size(row):
         "name": row[1]
     }
     return size
+
+def row_to_caseimage(row):
+    caseimage = {
+        "id": row[0],
+        "picture": row[1]
+    }
+    return caseimage
+
 @router.get("/api/size", response_model=SizeOut)
 def size_list(query=Depends(CaseQueries)):
     rows = query.list_size()
@@ -28,4 +36,11 @@ def size_list(query=Depends(CaseQueries)):
     rows = query.list_color()
     return {
         "colors": [row_to_size(row) for row in rows],
+    }
+
+@router.get("/api/caseimage", response_model=CaseImageOut)
+def size_list(query=Depends(CaseQueries)):
+    rows = query.list_caseimage()
+    return {
+        "caseimages": [row_to_caseimage(row) for row in rows],
     }

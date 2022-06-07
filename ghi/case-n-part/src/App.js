@@ -10,6 +10,7 @@ import MyBuilds from "./builds/MyBuilds";
 import CreateBuild from "./builds/CreateBuild";
 import BuildList from "./builds/FetchBuilds";
 import { useToken } from "./authApi";
+import ViewBuilds from "./builds/ViewBuilds";
 
 import "./App.css";
 
@@ -29,7 +30,14 @@ function App() {
             path='signup'
             element={<SignUp token={token} signup={signup} />}
           />
+          <Route path='hdds' element={<HddList />} />
+          <Route path='mobos' element={<MoboList />} />
+          <Route path='rams' element={<RamList />} />
+          <Route path='psus' element={<PsuList />} />
+          <Route path='gpus' element={<GpuList />} />
+          <Route path='cpus' element={<CpuList />} />
           <Route path='builds' element={<BuildList />} />
+          <Route path='viewbuilds' element={<ViewBuilds />} />
         </Routes>
       </div>
       <div
