@@ -3,24 +3,24 @@ import { Link } from "react-router-dom";
 import { GpuImage } from "../static/cnpStyle";
 function BuildColumn(props) {
   return (
-    <div className='col'>
-      {props.list.map(data => {
+    <div className="col">
+      {props.list.map((data) => {
         const build = data.build;
         return (
-          <div key={build.href} className='card mb-3 shadow'>
+          <div key={build.href} className="card mb-3 shadow">
             <img
               src={build.location.picture_url}
-              className='card-img-top'
-              alt='my build'
+              className="card-img-top"
+              alt="my build"
             />
-            <div className='card-body'>
-              <h5 className='card-title'>{build.name}</h5>
-              <h6 className='card-subtitle mb-2 text-muted'>
+            <div className="card-body">
+              <h5 className="card-title">{build.name}</h5>
+              <h6 className="card-subtitle mb-2 text-muted">
                 {build.location.name}
               </h6>
-              <p className='card-text'>{build.description}</p>
+              <p className="card-text">{build.description}</p>
             </div>
-            <div className='card-footer'>
+            <div className="card-footer">
               {new Date(build.starts).toLocaleDateString()}-
               {new Date(build.ends).toLocaleDateString()}
             </div>
@@ -93,37 +93,34 @@ class MyBuilds extends React.Component {
   render() {
     return (
       <>
-        <div className='px-4 py-5 my-5 mt-0 text-center'>
+        <div className="px-4 py-5 my-5 mt-0 text-center">
           <img
-            className='bg-white rounded shadow d-block mx-auto mb-4'
-            src='/logo.svg'
-            alt='my builds2'
-            width='600'
+            className="bg-white rounded shadow d-block mx-auto mb-4"
+            src="/logo.svg"
+            alt="my builds2"
+            width="600"
           />
-          <h1 className='display-5 fw-bold'>My Builds</h1>
-          <div className='row'>
-            <div className='column'>
+          <h1 className="display-5 fw-bold">My Builds</h1>
+          <div className="row">
+            <div className="column">
               <GpuImage />
             </div>
-            <div className='column'>
+            <div className="column">
               <GpuImage />
             </div>
-            <div className='d-grid gap-2 d-sm-flex justify-content-sm-center'>
-              <Link to='/create' className='btn btn-primary btn-lg px-4 gap-3'>
+            <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+              <Link to="/create" className="btn btn-outline-secondary m-2">
                 Create a Build
               </Link>
             </div>
           </div>
         </div>
-        <div className='container'>
+        <div className="container">
           <h1>Favorite Builds</h1>
-          <div className='row'>
-            <div className='d-grid gap-2 d-sm-flex justify-content-sm-center'>
-              <GpuImage />
-              <Link
-                to='/toprated'
-                className='btn btn-primary btn-lg px-4 gap-3'
-              >
+          <div className="row">
+            <GpuImage />
+            <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+              <Link to="/toprated" className="btn btn-outline-secondary m-2">
                 View Builds
               </Link>
             </div>
