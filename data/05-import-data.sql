@@ -196,7 +196,7 @@ VALUES
 ('Full Tower');
 
 INSERT INTO caseimage
-(Name)
+(Picture)
 VALUES 
 ('https://live.staticflickr.com/65535/52130228011_42181ea446.jpg'),
 ('https://live.staticflickr.com/65535/52130723110_f296283e4c.jpg'),
