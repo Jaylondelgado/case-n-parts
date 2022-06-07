@@ -2,7 +2,7 @@ from ctypes import Union
 from turtle import title
 from ..models.build import Build, InsertBuild, OutBuild
 from fastapi import APIRouter, Response, status, Depends
-from ..db import BuildsQueries
+from ..db import BuildsQueries, DuplicateTitle
 from ..models.common import ErrorMessage
 from .accounts import User, get_current_active_user
 
@@ -117,3 +117,27 @@ def create_build(
     row = query.create_build(build.Name, build.moboid, build.cpuid, build.psuid, build.gpuid, build.cardcount, build.hddid, build.hddcount, build.ramid, build.ramcount, build.color, build.size)
     return row_to_create_build(row)
 
+# @router.put(
+#     "/api/build/create/{build_id}",
+#     response_model=OutBuild,
+#     responses={
+#         200: {"model": OutBuild},
+#         404: {"model": ErrorMessage},
+#         409: {"model": ErrorMessage},
+#     },
+# )
+# def update_build(
+#     build_id: int,
+#     build: InsertBuild,
+#     response: Response,
+#     query=Depends(BuildsQueries),
+# ):
+#     try:
+#         row = query.update_build(build_id, build.Name)
+#         if row is None:
+#             response.status_code = status.HTTP_404_NOT_FOUND
+#             return {"message": "Build not found"}
+#         return row_to_build(row)
+#     except DuplicateTitle:
+#         response.status_code = status.HTTP_409_CONFLICT
+#         return {"message": f"Duplicate build name: {build.Name}"}
