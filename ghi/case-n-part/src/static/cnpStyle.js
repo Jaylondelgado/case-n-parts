@@ -29,10 +29,7 @@ export const Button = styled.button`
 export const GpuImage = styled.img.attrs({
   src: "https://c1.neweggimages.com/ProductImage/11-129-268-36.jpg",
 })`
-  //   display: flex;
-  //   flex-flow: row nowrap;
-  //   justify-content: space-evenly;
-  //
+  width: 50%;
 `;
 
 // const TomatoButton = styled(Button)`
