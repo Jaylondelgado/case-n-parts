@@ -139,7 +139,6 @@ class BuildsQueries:
                         gpu.display_port,
                         buildhdds.hddid,
                         buildhdds.hddcount,
-                        hdd.brand,
                         hdd.capacity,
                         hdd.interface,
                         hdd.cache,
@@ -420,6 +419,19 @@ class CaseQueries:
                     """
                     SELECT id, name
                     FROM size
+                    """
+                )
+                rows = cursor.fetchall()
+                print(rows)
+                return list(rows)
+
+    def list_caseimage(self):
+        with pool.connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    SELECT id, caseimage
+                    FROM caseimage
                     """
                 )
                 rows = cursor.fetchall()

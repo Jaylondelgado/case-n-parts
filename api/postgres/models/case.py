@@ -13,3 +13,11 @@ class SizeIn(BaseModel):
 
 class SizeOut(BaseModel):
     sizes: list[SizeIn]
+
+
+class CaseImageIn(BaseModel):
+    id: int
+    caseimage: str
+
+class CaseImageOut(BaseModel):
+    sizes: list[CaseImageIn]
