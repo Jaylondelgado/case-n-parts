@@ -11,6 +11,12 @@ import CreateBuild from "./builds/CreateBuild";
 import BuildList from "./builds/FetchBuilds";
 import { useToken } from "./authApi";
 import ViewBuilds from "./builds/ViewBuilds";
+import HddList from "./builds/HddsFetch";
+import MoboList from "./builds/MoboFetch";
+import RamList from "./builds/RamFetch";
+import PsuList from "./builds/PsuFetch";
+import GpuList from "./builds/GpuFetch";
+import CpuList from "./builds/CpuFetch";
 
 import "./App.css";
 
