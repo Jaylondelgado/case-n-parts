@@ -266,8 +266,137 @@ class BuildsQueries:
                 )
                 rows = cursor.fetchone()
                 return list(rows)
+    def get_build(self, id:int):
+        with pool.connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    SELECT
+                        build.id,
+                        build."Name",
+                        color.name,
+                        "size".name,
+                        buildgpus.gpuid,
+                        buildgpus.cardcount,
+                        gpu.manufacturer,
+                        gpu.chipset,
+                        gpu.core_clock_speed,
+                        gpu.video_memory,
+                        gpu.memory_type,
+                        gpu.height,
+                        gpu.length,
+                        gpu.width,
+                        gpu.hdmi,
+                        gpu.display_port,
+                        buildhdds.hddid,
+                        buildhdds.hddcount,
+                        hdd.brand,
+                        hdd.capacity,
+                        hdd.interface,
+                        hdd.cache,
+                        hdd.rpm,
+                        buildram.ramid,
+                        buildram.ramcount,
+                        ram.brand,
+                        ram.memory_type,
+                        ram.memory_speed,
+                        ram.memory_channels,
+                        ram.pin_configuration,
+                        mobos.id,
+                        mobos.brand,
+                        mobos.socket_type,
+                        mobos.max_memory,
+                        mobos.max_memory_per_slot,
+                        mobos.pcie_slots,
+                        mobos.memory_slots,
+                        cpu.id,
+                        cpu.processor,
+                        cpu.cores,
+                        cpu.threads,
+                        cpu.speed,
+                        cpu.socket_type,
+                        psu.id,
+                        psu.brand,
+                        psu.wattage,
+                        psu.atx_connector,
+                        psu.atx_12v_connector,
+                        psu.graphics_connector,
+                        psu.molex_connector,
+                        psu.sata_connector
+                    FROM public.build
+                    
 
+                    -- Join case information
+                    INNER JOIN public.case
+                    INNER JOIN public.size
+                        ON "size".id = "case".size
+                    INNER JOIN public.color
+                        ON color.id = "case".color
+                    ON "case".buildid = build.id
 
+                    -- Join GPU info
+                    INNER JOIN public.BuildGpus
+                    INNER JOIN public.gpu
+                        ON gpu.id = BuildGpus.gpuid
+                    ON BuildGpus.BuildId = build.id
+
+                    -- Join HDD information.
+                    INNER JOIN public.buildhdds
+                    INNER JOIN public.hdd
+                        ON hdd.id = buildhdds.hddid
+                    ON buildhdds.id = build.id
+
+                    -- Join RAM information
+                    INNER JOIN public.buildram
+                    INNER JOIN public.ram
+                        ON ram.id = buildram.ramid
+                    ON build.id = buildram.id
+
+                    -- Join simple information.
+                    INNER JOIN public.mobos
+                    ON mobos.id = build.moboid
+                    INNER JOIN public.cpu
+                    ON cpu.id = build.cpuid
+                    INNER JOIN public.psu
+                    ON psu.id = build.psuid
+                    WHERE build.id = %s
+                """,
+                    [id],
+                )
+                return cursor.fetchone()
+#     def update_build(self,id, Name, moboid, cpuid, psuid, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size):
+#         with pool.connection() as connection:
+#             with connection.cursor() as cursor:
+#                 with connection.transaction():
+#                     cursor.execute(
+#                         """
+#                         UPDATE build
+#                         SET ("Name"=%s, moboid=%s,cpuid=%s,psuid=%s)
+#                         WHERE id=%s
+#                         RETURNING id
+#                     """,
+#                         [id,Name, moboid, cpuid, psuid]
+#                     )
+#                     build_id = cursor.fetchone()[0]
+#                     cursor.execute(
+#                         """
+#                         UPDATE buildgpus
+#                         SET (gpuid=%s, cardcount=%s)
+#                         WHERE buildid=%s
+#                     """,
+#                         [gpuid,psuid,build_id]
+#                     )
+#                 cursor.execute(
+#                     """
+#                     SELECT build.id, build."Name", build.moboid, build.cpuid, build.psuid, build."Private"
+#                     FROM build
+#                     WHERE build.id = %s
+                    
+#                 """,
+#                     [build_id]
+#                 )
+#                 rows = cursor.fetchone()
+#                 return list(rows)
 
 
 class CaseQueries:
