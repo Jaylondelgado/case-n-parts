@@ -39,32 +39,32 @@ function HomePage() {
   return (
     <>
       <h1>Builds of the Month</h1>
-      <h1>Our Cases</h1>
 
-      <div className="container">
+      <div className='slider-container'>
+        <h1>Our Cases</h1>
         <Slider {...settings}>
           <div>
             <img
-              src="https://c1.neweggimages.com/ProductImage/11-129-268-36.jpg"
-              alt="an case"
+              src='https://c1.neweggimages.com/ProductImage/11-129-268-36.jpg'
+              alt='an case'
             />
           </div>
           <div>
             <img
-              src="https://c1.neweggimages.com/ProductImage/AFSTS2112102mvyB.jpg"
-              alt="an case2"
+              src='https://c1.neweggimages.com/ProductImage/AFSTS2112102mvyB.jpg'
+              alt='an case2'
             />
           </div>
           <div>
             <img
-              src="https://c1.neweggimages.com/ProductImage/11-173-041-V01.jpg"
-              alt="an case3"
+              src='https://c1.neweggimages.com/ProductImage/11-173-041-V01.jpg'
+              alt='an case3'
             />
           </div>
           <div>
             <img
-              src="https://c1.neweggimages.com/ProductImage/11-129-268-36.jpg"
-              alt="an case4"
+              src='https://c1.neweggimages.com/ProductImage/11-129-268-36.jpg'
+              alt='an case4'
             />
           </div>
         </Slider>
