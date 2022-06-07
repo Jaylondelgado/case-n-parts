@@ -13,18 +13,7 @@ function RamList() {
     getRamData();
   }, []);
 
-  return (
-    <select>
-      <option value="">Select your RAM</option>
-      {rams.map((ram) => {
-        return (
-          <option key={ram.id} value={ram.id}>
-            {ram.brand} {ram.memory_type} {ram.memory_speed} {ram.memory_channels} {ram.pin_configuration}
-          </option>
-        );
-      })}
-    </select>
-  );
+  return rams;
 }
 
 export default RamList;
