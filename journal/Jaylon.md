@@ -36,5 +36,5 @@ After team troubleshooting/debugging I continued my work from yesterday, making 
 
 * Authentication and More fullstack coding
 
-Today started off with a meeting with Curtis and he quicly filled us in on how the authentication works. After replacing his code with code that works with our models and queries, we got it fully working and you can now create multiple users, login, signout, and the password is hashed out. After doing that, with the help of the team we were able to create and list builds in Insomnia. I then created a file to fetch the builds in our data to the front end, which is currently fully functioning.
+Today started off with a meeting with Curtis and he quickly filled us in on how the authentication works. After replacing his code with code that works with our models and queries, we got it fully working and you can now create multiple users, login, signout, and the password is hashed out. After doing that, with the help of the team we were able to create and list builds in Insomnia. I then created a file to fetch the builds in our data to the front end, which is currently fully functioning.
 
