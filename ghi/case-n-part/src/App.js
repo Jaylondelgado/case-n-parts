@@ -8,14 +8,10 @@ import SignUp from "./login/SignUp";
 import HomePage from "./HomePage";
 import MyBuilds from "./builds/MyBuilds";
 import CreateBuild from "./builds/CreateBuild";
-import HddList from "./builds/HddsFetch";
-import MoboList from "./builds/MoboFetch";
-import RamList from "./builds/RamFetch";
-import PsuList from "./builds/PsuFetch";
-import GpuList from "./builds/GpuFetch";
-import CpuList from "./builds/CpuFetch";
 import BuildList from "./builds/FetchBuilds";
 import { useToken } from "./authApi";
+
+import "./App.css";
 
 function App() {
   const [token, login, logout, signup] = useToken();
@@ -33,12 +29,6 @@ function App() {
             path='signup'
             element={<SignUp token={token} signup={signup} />}
           />
-          <Route path='hdds' element={<HddList />} />
-          <Route path='mobos' element={<MoboList />} />
-          <Route path='rams' element={<RamList />} />
-          <Route path='psus' element={<PsuList />} />
-          <Route path='gpus' element={<GpuList />} />
-          <Route path='cpus' element={<CpuList />} />
           <Route path='builds' element={<BuildList />} />
         </Routes>
       </div>
