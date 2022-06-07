@@ -6,7 +6,7 @@ function RamTable() {
   const rams = RamList();
 
   return (
-    <table className='table'>
+    <table className="table">
       <thead>
         <tr>
           <th>Brand</th>
@@ -14,7 +14,7 @@ function RamTable() {
         </tr>
       </thead>
       <tbody>
-        {rams.map(ram => {
+        {rams.map((ram) => {
           return (
             <>
               <tr key={ram["id"]}>

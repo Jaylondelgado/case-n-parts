@@ -6,7 +6,7 @@ function GpuTable() {
   const gpus = GpuList();
 
   return (
-    <table className='table'>
+    <table className="table">
       <thead>
         <tr>
           <th>Manufacturer</th>
@@ -14,7 +14,7 @@ function GpuTable() {
         </tr>
       </thead>
       <tbody>
-        {gpus.map(gpu => {
+        {gpus.map((gpu) => {
           return (
             <>
               <tr key={gpu["id"]}>
