@@ -271,15 +271,30 @@ class BuildsQueries:
 
 
 
-class BuildPartsQueries:
-    def create_build_(self):
+
+class CaseQueries:
+    def list_color(self):
         with pool.connection() as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """
-
+                    SELECT id, name
+                    FROM color
                     """
                 )
                 rows = cursor.fetchall()
-                print("rows:", rows)
+                print(rows)
+                return list(rows)
+
+    def list_size(self):
+        with pool.connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    SELECT id, name
+                    FROM size
+                    """
+                )
+                rows = cursor.fetchall()
+                print(rows)
                 return list(rows)
