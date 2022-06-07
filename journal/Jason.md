@@ -37,3 +37,9 @@ Switched from front end to working on some backend portions of the project to ge
 Tidied up the front end to have drop down forms for all the pc parts. Spent time trying to figure out how to implement the data onto the front end with images and how they will be respond to portions of the page when clicked on. Likely lots of if statements.
 
 The backend for sql was a challenge but we've managed to finally post a build which is huge.
+
+## 6/6/2022
+
+\* User authentication and more backend implementation
+
+Had a meeting with Curtis going over the authentication portion of our user login and understanding it's functionality. We worked as a team to get that into our SQL database to actually house that data so the user will be in the system. After some trial and error the problem was sorted and we began shifting out focus to the front end, gathering all of our data into a single page for the create build page which is the most important portion of this application.
