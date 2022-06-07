@@ -1,6 +1,7 @@
 from ctypes import Union
 from turtle import title
-from ..models.build import Build, InsertBuild, OutBuild
+from urllib import response
+from ..models.build import Build, BuildOut, InsertBuild, OutBuild
 from fastapi import APIRouter, Response, status, Depends
 from ..db import BuildsQueries
 from ..models.common import ErrorMessage
@@ -117,3 +118,26 @@ def create_build(
     row = query.create_build(build.Name, build.moboid, build.cpuid, build.psuid, build.gpuid, build.cardcount, build.hddid, build.hddcount, build.ramid, build.ramcount, build.color, build.size)
     return row_to_create_build(row)
 
+@router.get(
+    "/api/build/{build_id}",
+    response_model=BuildOut,
+)
+def get_build(build_id: int, query=Depends(BuildsQueries)):
+    row = query.get_build(build_id)
+    return row_to_build(row)
+
+
+# @router.put(
+#     "/api/builds{build_id}",
+#     response_model = OutBuild,
+#     responses = {
+#         200: {"model": OutBuild}
+#     },
+# )
+# def update_build(
+#     build_id: int,
+#     build: InsertBuild,
+#     query=Depends(BuildsQueries),
+# ):
+#     row = query.update_build(build_id,build.Name, build.moboid, build.cpuid, build.psuid, build.gpuid, build.cardcount, build.hddid, build.hddcount, build.ramid, build.ramcount, build.color, build.size)
+#     return row_to_create_build(row)
