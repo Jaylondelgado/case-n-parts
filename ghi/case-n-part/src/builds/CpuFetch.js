@@ -13,18 +13,7 @@ function CpuList() {
     getCpuData();
   }, []);
 
-  return (
-    <select>
-      <option value="">Select a CPU</option>
-      {cpus.map((cpu) => {
-        return (
-          <option key={cpu.id} value={cpu.id}>
-            {cpu.processor} {cpu.cores} {cpu.threads} {cpu.speed} {cpu.socket_type}
-          </option>
-        );
-      })}
-    </select>
-  );
+  return cpus;
 }
 
 export default CpuList;

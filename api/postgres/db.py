@@ -210,7 +210,6 @@ class BuildsQueries:
                     """
                 )
                 rows = cursor.fetchall()
-                print("rows:", rows)
                 return list(rows)
     
     def create_build(self, Name, moboid, cpuid, psuid, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size):
@@ -266,7 +265,6 @@ class BuildsQueries:
                     
                 )
                 rows = cursor.fetchone()
-                print("rows:", rows)
                 return list(rows)
 
 
