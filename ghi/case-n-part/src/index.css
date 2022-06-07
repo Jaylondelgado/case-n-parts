@@ -1,13 +1,10 @@
 html,
-<<<<<<< HEAD
-=======
 body,
 #root {
   min-height: 100vh;
   min-width: 100vw;
 }
 
->>>>>>> 0167d7d67c32daae0c405183c8bf91aa4b5a81b9
 body {
   position: relative;
   text-align: center;
