@@ -168,3 +168,12 @@ CREATE TABLE IF NOT EXISTS public.size
 
 ALTER TABLE IF EXISTS public.size
     OWNER to "great-value";
+
+CREATE TABLE IF NOT EXISTS public.caseimage
+(
+    Id SERIAL NOT NULL PRIMARY KEY,
+    Picture character varying(2000) NOT NULL
+);
+
+ALTER TABLE IF EXISTS public.caseimage
+    OWNER to "great-value";
