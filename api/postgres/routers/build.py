@@ -1,6 +1,7 @@
 from ctypes import Union
 from turtle import title
-from ..models.build import Build, InsertBuild, OutBuild
+from urllib import response
+from ..models.build import Build, BuildOut, InsertBuild, OutBuild
 from fastapi import APIRouter, Response, status, Depends
 from ..db import BuildsQueries, DuplicateTitle
 from ..models.common import ErrorMessage
@@ -27,62 +28,59 @@ def row_to_build(row):
         "size": row[3],
         "gpu": {
             "id": row[4],
-            "card_count": row[5],
-            "manufacturer": row[6],
-            "chipset": row[7],
-            "core_clock_speed": row[8],
-            "video_memory": row[9],
-            "memory_type": row[10],
-            "height": row[11],
-            "length": row[12],
-            "width": row[13],
-            "hdmi": row[14],
-            "display_port": row[15],
+            "manufacturer": row[5],
+            "chipset": row[6],
+            "core_clock_speed": row[7],
+            "video_memory": row[8],
+            "memory_type": row[9],
+            "height": row[10],
+            "length": row[11],
+            "width": row[12],
+            "hdmi": row[13],
+            "display_port": row[14],
         },
         "hdd": {
-            "id": row[16],
-            "hddcount": row[17],
-            "brand": row[18],
-            "capacity": row[19],
-            "interface": row[20],
-            "cache": row[21],
-            "rpm": row[22],
+            "id": row[15],
+            "brand": row[16],
+            "capacity": row[17],
+            "interface": row[18],
+            "cache": row[19],
+            "rpm": row[20],
         },
         "ram": {
-            "id": row[23],
-            "ramcount": row[24],
-            "brand": row[25],
-            "memory_type": row[26],
-            "memory_speed": row[27],
-            "memory_channels": row[28],
-            "pin_configuration": row[29],
+            "id": row[21],
+            "brand": row[22],
+            "memory_type": row[23],
+            "memory_speed": row[24],
+            "memory_channels": row[25],
+            "pin_configuration": row[26],
         },
         "mobo": {
-            "id": row[30],
-            "brand": row[31],
-            "socket_type": row[32],
-            "max_memory": row[33],
-            "max_memory_per_slot": row[34],
-            "pcie_slots": row[35],
-            "memory_slots": row[36],
+            "id": row[27],
+            "brand": row[28],
+            "socket_type": row[29],
+            "max_memory": row[30],
+            "max_memory_per_slot": row[31],
+            "pcie_slots": row[32],
+            "memory_slots": row[33],
         },
         "cpu": {
-            "id": row[37],
-            "processor": row[38],
-            "cores": row[39],
-            "threads": row[40],
-            "speed": row[41],
-            "socket_type": row[42],
+            "id": row[34],
+            "processor": row[35],
+            "cores": row[36],
+            "threads": row[37],
+            "speed": row[38],
+            "socket_type": row[39],
         },
         "psu": {
-            "id": row[43],
-            "brand": row[44],
-            "wattage": row[45],
-            "atx_connector": row[46],
-            "atx_12v_connector": row[47],
-            "graphics_connector": row[48],
-            "molex_connector": row[49],
-            "sata_connector": row[50],
+            "id": row[40],
+            "brand": row[41],
+            "wattage": row[42],
+            "atx_connector": row[43],
+            "atx_12v_connector": row[44],
+            "graphics_connector": row[45],
+            "molex_connector": row[46],
+            "sata_connector": row[47],
         }
     }
     return build
@@ -117,6 +115,15 @@ def create_build(
     row = query.create_build(build.Name, build.moboid, build.cpuid, build.psuid, build.gpuid, build.cardcount, build.hddid, build.hddcount, build.ramid, build.ramcount, build.color, build.size)
     return row_to_create_build(row)
 
+@router.get(
+    "/api/build/{build_id}",
+    response_model=BuildOut,
+)
+def get_build(build_id: int, query=Depends(BuildsQueries)):
+    row = query.get_build(build_id)
+    return row_to_build(row)
+
+    
 # @router.put(
 #     "/api/build/create/{build_id}",
 #     response_model=OutBuild,
@@ -124,20 +131,33 @@ def create_build(
 #         200: {"model": OutBuild},
 #         404: {"model": ErrorMessage},
 #         409: {"model": ErrorMessage},
-#     },
-# )
-# def update_build(
-#     build_id: int,
-#     build: InsertBuild,
-#     response: Response,
-#     query=Depends(BuildsQueries),
-# ):
-#     try:
-#         row = query.update_build(build_id, build.Name)
-#         if row is None:
-#             response.status_code = status.HTTP_404_NOT_FOUND
-#             return {"message": "Build not found"}
-#         return row_to_build(row)
-#     except DuplicateTitle:
-#         response.status_code = status.HTTP_409_CONFLICT
-#         return {"message": f"Duplicate build name: {build.Name}"}
+
+
+@router.put(
+    "/api/builds{build_id}",
+    response_model = OutBuild,
+    responses = {
+        200: {"model": OutBuild},
+        404: {"model": ErrorMessage},
+        409: {"model": ErrorMessage},
+    },
+)
+def update_build(
+    build_id: int,
+    build: InsertBuild,
+    response: Response,
+    query=Depends(BuildsQueries),
+):
+    try:
+        row = query.update_build(build_id,build.Name, build.moboid, build.cpuid, build.psuid, build.gpuid, build.hddid, build.ramid, build.color, build.size)
+        if row is None:
+            response.status_code = status.HTTP_404_NOT_FOUND
+            return {"message": "Build not found"}
+        return row_to_build(row)
+    except DuplicateTitle:
+        response.status_code = status.HTTP_409_CONFLICT
+        return {"message": f"Duplicate build name: {build.Name}"}
+
+    # query=Depends(BuildsQueries),
+    # row = query.update_build(build_id,build.Name, build.moboid, build.cpuid, build.psuid, build.gpuid, build.hddid, build.ramid, build.color, build.size)
+    # return row_to_create_build(row)
