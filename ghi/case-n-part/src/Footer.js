@@ -18,26 +18,26 @@ const Footer = () => {
         <Row>
           <Column>
             <Heading>Case N' Parts</Heading>
-            <FooterLink href="/">Home</FooterLink>
-            <FooterLink href="mybuilds">My Builds</FooterLink>
-            <FooterLink href="create">Create Builds</FooterLink>
-            <FooterLink href="view">View Builds</FooterLink>
-            <FooterLink href="#">About Us</FooterLink>
+            <FooterLink href='/'>Home</FooterLink>
+            <FooterLink href='mybuilds'>My Builds</FooterLink>
+            <FooterLink href='create'>Create Builds</FooterLink>
+            <FooterLink href='view'>View Builds</FooterLink>
+            <FooterLink href='#'>About Us</FooterLink>
           </Column>
           <Column>
             <Heading>Social Media</Heading>
-            <FooterLink href="#">
-              <i className="fab fa-facebook-f">
+            <FooterLink href='#'>
+              <i className='fab fa-facebook-f'>
                 <span style={{ marginLeft: "10px" }}>Facebook</span>
               </i>
             </FooterLink>
-            <FooterLink href="#">
-              <i className="fab fa-instagram">
+            <FooterLink href='#'>
+              <i className='fab fa-instagram'>
                 <span style={{ marginLeft: "10px" }}>Instagram</span>
               </i>
             </FooterLink>
-            <FooterLink href="#">
-              <i className="fab fa-twitter">
+            <FooterLink href='#'>
+              <i className='fab fa-twitter'>
                 <span style={{ marginLeft: "10px" }}>Twitter</span>
               </i>
             </FooterLink>

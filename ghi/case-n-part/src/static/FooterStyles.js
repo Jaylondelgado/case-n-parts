@@ -1,17 +1,17 @@
 import styled from "styled-components";
 
 export const Box = styled.div`
-  background: black;
-  width: 100%;
-  position: absolute;
-  left:0
-  right:0
-  bottom: 0;
+   background: black;
+   width: 100%;
+   position: absolute;
+   left:0
+   right:0
+   bottom: 0;
 
-  @media (max-width: 1000px) {
-    padding: 70px 30px;
-  }
-`;
+   @media (max-width: 1000px) {
+     padding: 70px 30px;
+   }
+ `;
 
 export const Container = styled.div`
   display: flex;
