@@ -371,39 +371,50 @@ class BuildsQueries:
                     [id],
                 )
                 return cursor.fetchone()
-#     def update_build(self,id, Name, moboid, cpuid, psuid, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size):
-#         with pool.connection() as connection:
-#             with connection.cursor() as cursor:
-#                 with connection.transaction():
-#                     cursor.execute(
-#                         """
-#                         UPDATE build
-#                         SET ("Name"=%s, moboid=%s,cpuid=%s,psuid=%s)
-#                         WHERE id=%s
-#                         RETURNING id
-#                     """,
-#                         [id,Name, moboid, cpuid, psuid]
-#                     )
-#                     build_id = cursor.fetchone()[0]
-#                     cursor.execute(
-#                         """
-#                         UPDATE buildgpus
-#                         SET (gpuid=%s, cardcount=%s)
-#                         WHERE buildid=%s
-#                     """,
-#                         [gpuid,psuid,build_id]
-#                     )
-#                 cursor.execute(
-#                     """
-#                     SELECT build.id, build."Name", build.moboid, build.cpuid, build.psuid, build."Private"
-#                     FROM build
-#                     WHERE build.id = %s
+    def update_build(self,id, Name, moboid, cpuid, psuid, Private, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size):
+        with pool.connection() as connection:
+            with connection.cursor() as cursor:
+                with connection.transaction():
+                    cursor.execute(
+                        """
+                        UPDATE build
+                        SET "Name" = %s, moboid = %s,cpuid = %s,psuid = %s,"Private" = %s
+                        WHERE id = %s
+                        RETURNING id
+                    """,
+                        [Name, moboid, cpuid, psuid, Private, id]
+                    )
+                    build_id = cursor.fetchone()[0]
                     
-#                 """,
-#                     [build_id]
-#                 )
-#                 rows = cursor.fetchone()
-#                 return list(rows)
+                    cursor.execute(
+                        """
+                        UPDATE buildgpus
+                        SET gpuid=%s, cardcount=%s
+                        WHERE buildid=%s
+                    """,
+                        [gpuid,psuid,build_id]
+                    )
+                    cursor.execute(
+                        """
+                        UPDATE buildhdds
+                        SET hddid=%s, hddcount=%s
+                        WHERE buildid=%s
+                    """,
+                        [hddid, hddcount, build_id]
+                    )
+
+                cursor.execute(
+                    """
+                    SELECT build.id, build."Name", build.moboid, build.cpuid, build.psuid, build."Private"
+                    FROM build
+                    WHERE build.id = %s
+                    
+                """,
+                    [build_id]
+                )
+                rows = cursor.fetchone()
+                print("build id:", build_id)
+                return list(rows)
 
 
 class CaseQueries:
