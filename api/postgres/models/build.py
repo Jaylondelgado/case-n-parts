@@ -33,6 +33,22 @@ class InsertBuild(BaseModel):
     size: int
     picture: int
 
+class InBuild(BaseModel):
+    Name: str
+    moboid: int
+    cpuid: int
+    psuid: int
+    gpuid: int
+    Private: bool
+    cardcount: int
+    hddid: int
+    hddcount: int
+    ramid: int
+    ramcount: int
+    color: int
+    size: int
+    picture: int
+
 class OutBuild(BaseModel):
     id: int
     Name: str

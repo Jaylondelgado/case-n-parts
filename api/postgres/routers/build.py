@@ -1,9 +1,9 @@
 from ctypes import Union
 from turtle import title
 from urllib import response
-from ..models.build import Build, BuildOut, InsertBuild, OutBuild
+from ..models.build import Build, BuildOut, InsertBuild, OutBuild, InBuild
 from fastapi import APIRouter, Response, status, Depends
-from ..db import BuildsQueries, DuplicateTitle
+from ..db import BuildsQueries
 from ..models.common import ErrorMessage
 from .accounts import User, get_current_active_user
 
@@ -131,7 +131,7 @@ def get_build(build_id: int, query=Depends(BuildsQueries)):
 
 
 @router.put(
-    "/api/builds{build_id}",
+    "/api/build/{build_id}",
     response_model = OutBuild,
     responses = {
         200: {"model": OutBuild}
@@ -139,7 +139,7 @@ def get_build(build_id: int, query=Depends(BuildsQueries)):
 )
 def update_build(
     build_id: int,
-    build: InsertBuild,
+    build: InBuild,
     query=Depends(BuildsQueries),
 ):
     row = query.update_build(build_id,build.Name, build.moboid, build.cpuid, build.psuid, build.gpuid, build.cardcount, build.hddid, build.hddcount, build.ramid, build.ramcount, build.color, build.size)
