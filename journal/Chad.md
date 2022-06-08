@@ -49,3 +49,12 @@ I'm starting to get a little bit more familiar with FastAPI. Still feels pretty 
 ## June 6th, 2022
 
 Integrated authentication with the application. It was a major learning opportunity. With an instructor's help, we were able to get it working.
+I was able to learn about how authentication works with FastAPI
+
+## June 7th, 2022
+
+Me and Jaylon have switched roles a little bit now. He wanted to work a bit on the backend and I wanted to work on the frontend a bit. So today I decided I was going to get all the pieces for the homepage in place. Decided that due to time constraints and not knowing CSS as well as we would need to, to do everything from scratch, we're going to use more Bootstrap components so that we can more easily make a site design that is mobile friend and scales well.
+
+I laid out the homepage to display a top 3 builds and a carousel of our cases. Still haven't added the data to the page yet, but the layout is there.
+
+Learned a bit more about bootstrap today. Implementing their carousel took a bit more time than I thought it would. Though looking at old documentation didn't help. Once I changed to the right version, I was able to implement it easly.
