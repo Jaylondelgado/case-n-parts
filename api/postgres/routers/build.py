@@ -1,7 +1,7 @@
 from ctypes import Union
 from turtle import title
 from urllib import response
-from ..models.build import Build, BuildOut, InBuild, InsertBuild, OutBuild
+from ..models.build import Build, BuildA, BuildOut, InBuild, InsertBuild, OutBuild
 from fastapi import APIRouter, Response, status, Depends
 from ..db import BuildsQueries
 from ..models.common import ErrorMessage
@@ -19,6 +19,45 @@ def row_to_create_build(row):
     }
     return build
 
+def row_to_list_build(row):
+    build ={
+        "id": row[0],
+        "Name": row[1],
+        "color": row[2],
+        "size": row[3],
+        "picture": row[4],
+        "gpu": {
+            "id": row[5],
+            "manufacturer": row[6],
+            "chipset": row[7],
+        },
+        "hdd": {
+            "id": row[8],
+            "brand": row[9],
+            "capacity": row[10],
+        },
+        "ram": {
+            "id": row[11],
+            "brand": row[12],
+        },
+        "mobo": {
+            "id": row[13],
+            "brand": row[14],
+            "socket_type": row[15],
+            "max_memory": row[16],
+        },
+        "cpu": {
+            "id": row[17],
+            "processor": row[18],
+            "cores": row[19],
+            "socket_type": row[20],
+        },
+        "psu": {
+            "id": row[21],
+            "brand": row[22],
+        },
+    }
+    return build
 
 def row_to_build(row):
     build = {
@@ -89,11 +128,11 @@ def row_to_build(row):
     }
     return build
 
-@router.get("/api/builds", response_model=Build)
-def gpu_list(query=Depends(BuildsQueries)):
+@router.get("/api/builds", response_model=BuildA)
+def build_list(query=Depends(BuildsQueries)):
     rows = query.get_all_builds()
     return {
-        "builds": [row_to_build(row) for row in rows],
+        "builds": [row_to_list_build(row) for row in rows],
     }
 
 # Example of how to get the current user for an endpoint
@@ -126,9 +165,6 @@ def create_build(
 def get_build(build_id: int, query=Depends(BuildsQueries)):
     row = query.get_build(build_id)
     return row_to_build(row)
-
-    
-
 
 @router.put(
     "/api/build/{build_id}",
