@@ -3,7 +3,7 @@ from turtle import title
 from urllib import response
 from ..models.build import Build, BuildOut, InBuild, InsertBuild, OutBuild
 from fastapi import APIRouter, Response, status, Depends
-from ..db import BuildsQueries, DuplicateTitle
+from ..db import BuildsQueries
 from ..models.common import ErrorMessage
 from .accounts import User, get_current_active_user
 

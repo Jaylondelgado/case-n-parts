@@ -371,15 +371,16 @@ class BuildsQueries:
                     [id],
                 )
                 return cursor.fetchone()
-    def update_build(self,id, Name, moboid, cpuid, psuid, Private, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size):
+
+    def update_build(self,id, Name, moboid, cpuid, psuid,Private, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size):
         with pool.connection() as connection:
             with connection.cursor() as cursor:
                 with connection.transaction():
                     cursor.execute(
                         """
                         UPDATE build
-                        SET "Name" = %s, moboid = %s,cpuid = %s,psuid = %s,"Private" = %s
-                        WHERE id = %s
+                        SET "Name"=%s, moboid=%s,cpuid=%s,psuid=%s, "Private"=%s
+                        WHERE id=%s
                         RETURNING id
                     """,
                         [Name, moboid, cpuid, psuid, Private, id]
@@ -402,7 +403,14 @@ class BuildsQueries:
                     """,
                         [hddid, hddcount, build_id]
                     )
-
+                    cursor.execute(
+                        """
+                        UPDATE buildram
+                        SET ramid=%s, ramcount=%s
+                        WHERE buildid=%s
+                        """,
+                        [ramid, ramcount, build_id]
+                    )
                 cursor.execute(
                     """
                     SELECT build.id, build."Name", build.moboid, build.cpuid, build.psuid, build."Private"
