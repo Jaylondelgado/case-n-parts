@@ -16,4 +16,8 @@ Started working on creating a build.
 ## June 6th, 2022
 
 Worked on more CRUD operations with the team. We were able to INSERT a build using a transaction.
-My teammates and I were also able to get an api for an entire builds list.
+My teammates and I were also able to get an api for an entire builds list. We were able to incorporate authentication on a build api
+
+## June 7th, 2022
+Added a pictureURL linked to build. Refactored INSERT, GET requests for build to have a image linked to a build.
+Working on updating a build for incomplete builds. Private field for published builds.
