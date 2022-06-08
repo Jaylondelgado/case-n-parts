@@ -7,6 +7,7 @@ class BuildOut(BaseModel):
     name: str
     color: str
     size: str
+    picture: str
     gpu: GpuOut
     hdd: HddOut
     ram: RamOut
@@ -30,6 +31,7 @@ class InsertBuild(BaseModel):
     ramcount: int
     color: int
     size: int
+    picture: int
 
 class OutBuild(BaseModel):
     id: int
