@@ -3,16 +3,16 @@ import { NavLink } from "react-router-dom";
 import { Button, Navbar } from "./static/cnpStyle";
 import logo from "./static/logo.png";
 
-const myLinks = [
+export const myLinks = [
   { name: "My Builds", path: "/mybuilds" },
   { name: "Create Builds", path: "/create" },
   { name: "View Builds", path: "/toprated" },
   { name: "Logout", path: "/logout" },
 ];
 
-const loginLinks = [
+export const loginLinks = [
   { name: "Login", path: "/login" },
-  { name: "Sign up", path: '/signup' },
+  { name: "Sign up", path: "/signup" },
 ];
 
 function Nav(props) {
@@ -25,8 +25,8 @@ function Nav(props) {
         </NavLink>
       ))}
       <div>
-        <NavLink to="/">
-          <img src={logo} alt="Case N Parts" width="350" />
+        <NavLink to='/'>
+          <img src={logo} alt='Case N Parts' width='350' />
         </NavLink>
       </div>
     </Navbar>
