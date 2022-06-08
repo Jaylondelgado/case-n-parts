@@ -40,7 +40,7 @@ function HomePage() {
   return (
     <>
       <h1>Top 3 Builds of the Month</h1>
-      <div className='container'>
+      <div className='container d-flex justify-content-center'>
         <div className='row'>
           <div className='col-sm'>
             <div className='card'>
@@ -67,6 +67,28 @@ function HomePage() {
         data-bs-ride='carousel'
         data-bs-interval='false'
       >
+        <div className='carousel-indicators'>
+          <button
+            type='button'
+            data-bs-target='#case-carousel'
+            data-bs-slide-to='0'
+            class='active'
+            aria-current='true'
+            aria-label='Slide 1'
+          ></button>
+          <button
+            type='button'
+            data-bs-target='#case-carousel'
+            data-bs-slide-to='1'
+            aria-label='Slide 2'
+          ></button>
+          <button
+            type='button'
+            data-bs-target='#case-carousel'
+            data-bs-slide-to='2'
+            aria-label='Slide 3'
+          ></button>
+        </div>
         <div className='carousel-inner'>
           <div className='carousel-item active'>
             <img
@@ -91,7 +113,7 @@ function HomePage() {
           </div>
         </div>
         <button
-          className='carousel-control-prev'
+          className='carousel-control-prev w-50'
           type='button'
           data-bs-target='#case-carousel'
           data-bs-slide='prev'
@@ -100,7 +122,7 @@ function HomePage() {
           <span class='visually-hidden'>Previous</span>
         </button>
         <button
-          class='carousel-control-next'
+          class='carousel-control-next w-50'
           type='button'
           data-bs-target='#case-carousel'
           data-bs-slide='next'

@@ -1,12 +1,5 @@
-.build-month {
-  padding: 11rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 20.2rem;
-  float: left;
-
-  @media screen and (max-width: 768px) {
-  }
+.carousel-item img {
+  width: 18rem;
 }
 
 .container .card {
