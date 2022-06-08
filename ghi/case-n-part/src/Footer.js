@@ -32,7 +32,7 @@ const Footer = () => {
           </div>
           <div className='col-sm text-start'>
             <div className='text-muted'>
-              <h4>Login</h4>
+              <h4>Account</h4>
               {loginLinks.map((link, index) => {
                 return (
                   <Link key={index} to={link.path}>
