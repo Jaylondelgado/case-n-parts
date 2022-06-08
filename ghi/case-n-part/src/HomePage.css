@@ -1,0 +1,15 @@
+.build-month {
+  padding: 11rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20.2rem;
+  float: left;
+
+  @media screen and (max-width: 768px) {
+  }
+}
+
+.container .card {
+  width: 16rem;
+  height: 16rem;
+}

@@ -1,6 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
 import "./index.css";
+import "./HomePage.css";
 import "slick-carousel/slick/slick.css";
 
 function HomePage() {
@@ -38,11 +39,77 @@ function HomePage() {
 
   return (
     <>
-      <h1>Builds of the Month</h1>
+      <h1>Top 3 Builds of the Month</h1>
+      <div className='container'>
+        <div className='row'>
+          <div className='col-sm'>
+            <div className='card'>
+              <h5 className='card-title'>Chad's Build</h5>
+            </div>
+          </div>
+          <div className='col-sm'>
+            <div className='card'>
+              <h5 className='card-title'>Chad's Build</h5>
+            </div>
+          </div>
+          <div className='col-sm'>
+            <div className='card'>
+              <h5 className='card-title'>Chad's Build</h5>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <div className='slider-container'>
-        <h1>Our Cases</h1>
-        <Slider {...settings}>
+      <h1>Our Cases</h1>
+      <div
+        id='case-carousel'
+        className='carousel slide'
+        data-bs-ride='carousel'
+        data-bs-interval='false'
+      >
+        <div className='carousel-inner'>
+          <div className='carousel-item active'>
+            <img
+              src='https://c1.neweggimages.com/ProductImage/11-129-268-36.jpg'
+              alt='an case'
+              className='img-fluid'
+            />
+          </div>
+          <div className='carousel-item'>
+            <img
+              src='https://c1.neweggimages.com/ProductImage/AFSTS2112102mvyB.jpg'
+              alt='an case2'
+              className='img-fluid'
+            />
+          </div>
+          <div className='carousel-item'>
+            <img
+              src='https://c1.neweggimages.com/ProductImage/11-173-041-V01.jpg'
+              alt='an case3'
+              className='img-fluid'
+            />
+          </div>
+        </div>
+        <button
+          className='carousel-control-prev'
+          type='button'
+          data-bs-target='#case-carousel'
+          data-bs-slide='prev'
+        >
+          <span class='carousel-control-prev-icon' aria-hidden='true'></span>
+          <span class='visually-hidden'>Previous</span>
+        </button>
+        <button
+          class='carousel-control-next'
+          type='button'
+          data-bs-target='#case-carousel'
+          data-bs-slide='next'
+        >
+          <span class='carousel-control-next-icon' aria-hidden='true'></span>
+          <span class='visually-hidden'>Next</span>
+        </button>
+      </div>
+      {/* <Slider {...settings}>
           <div>
             <img
               src='https://c1.neweggimages.com/ProductImage/11-129-268-36.jpg'
@@ -67,8 +134,7 @@ function HomePage() {
               alt='an case4'
             />
           </div>
-        </Slider>
-      </div>
+        </Slider> */}
     </>
   );
 }
