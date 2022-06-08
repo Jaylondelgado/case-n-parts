@@ -45,11 +45,6 @@ function App() {
           <Route path='builds' element={<BuildList />} />
           {/* <Route path='viewbuilds' element={<ViewBuilds />} /> */}
         </Routes>
-      </div>
-      <div
-        className='
-      footer-container'
-      >
         <Footer />
       </div>
     </BrowserRouter>

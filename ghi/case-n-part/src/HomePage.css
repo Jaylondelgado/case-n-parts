@@ -1,8 +1,15 @@
+.our-cases {
+  padding-top: 2rem;
+}
 .carousel-item img {
   width: 18rem;
 }
 
+.carousel-inner {
+  background-color: #070707;
+}
+
 .container .card {
-  width: 16rem;
-  height: 16rem;
+  width: 14rem;
+  height: 14rem;
 }

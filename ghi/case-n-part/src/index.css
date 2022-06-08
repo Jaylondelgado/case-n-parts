@@ -20,14 +20,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-/* slider */
-.content-container {
-  min-height: calc(100vh - 280px);
-}
-
-.footer-container {
-  position: relative;
-  left: 0;
-  bottom: 0;
-}

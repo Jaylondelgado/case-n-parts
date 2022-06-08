@@ -10,8 +10,9 @@ html {
   padding-bottom: 3rem;
 }
 .content-container {
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   background-color: #070707;
 }
