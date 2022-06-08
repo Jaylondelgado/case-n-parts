@@ -120,7 +120,7 @@ class MyBuilds extends React.Component {
           <div className="row">
             <GpuImage />
             <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-              <Link to="/toprated" className="btn btn-outline-secondary m-2">
+              <Link to="/viewbuilds" className="btn btn-outline-secondary m-2">
                 View Builds
               </Link>
             </div>
