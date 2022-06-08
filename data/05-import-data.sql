@@ -198,9 +198,9 @@ VALUES
 INSERT INTO caseimage
 (Picture)
 VALUES 
-('https://live.staticflickr.com/65535/52130228011_42181ea446.jpg'),
-('https://live.staticflickr.com/65535/52130723110_f296283e4c.jpg'),
-('https://live.staticflickr.com/65535/52130229211_ff64ea0d17.jpg');
+('https://i.ibb.co/pKn8MJ7/black.png'),
+('https://i.ibb.co/sRzRGTd/green.png'),
+('https://i.ibb.co/kcqXNf8/pink.png');
 
 INSERT INTO mobos
 (Brand,Socket_Type,Max_Memory,Max_Memory_Per_Slot,Pcie_Slots,Memory_Slots)
