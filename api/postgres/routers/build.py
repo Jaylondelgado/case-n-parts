@@ -3,7 +3,7 @@ from turtle import title
 from urllib import response
 from ..models.build import Build, BuildOut, InsertBuild, OutBuild
 from fastapi import APIRouter, Response, status, Depends
-from ..db import BuildsQueries
+from ..db import BuildsQueries, DuplicateTitle
 from ..models.common import ErrorMessage
 from .accounts import User, get_current_active_user
 
@@ -84,7 +84,7 @@ def row_to_build(row):
             "atx_12v_connector": row[48],
             "graphics_connector": row[49],
             "molex_connector": row[50],
-            "sata_connector": row[51],
+            "sata_connector": row[51]
         }
     }
     return build
@@ -126,6 +126,8 @@ def create_build(
 def get_build(build_id: int, query=Depends(BuildsQueries)):
     row = query.get_build(build_id)
     return row_to_build(row)
+
+    
 
 
 @router.put(

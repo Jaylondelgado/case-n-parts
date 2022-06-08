@@ -174,6 +174,7 @@ class BuildsQueries:
                         psu.molex_connector,
                         psu.sata_connector
                     FROM public.build
+                    
 
                     -- Join case information
                     INNER JOIN public.case
@@ -184,8 +185,6 @@ class BuildsQueries:
                         ON color.id = "case".color
                     INNER JOIN public.caseimage
                         ON caseimage.id = "case".picture
-                    
-                
 
                     -- Join GPU info
                     INNER JOIN public.BuildGpus
@@ -211,7 +210,7 @@ class BuildsQueries:
                     INNER JOIN public.cpu
                     ON cpu.id = build.cpuid
                     INNER JOIN public.psu
-                    ON psu.id = build.psuid;
+                    ON psu.id = build.psuid
                     """
                 )
                 rows = cursor.fetchall()

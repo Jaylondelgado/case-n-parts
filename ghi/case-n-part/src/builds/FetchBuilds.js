@@ -12,7 +12,7 @@ function BuildList() {
 
     getBuildData();
   }, []);
-  console.log(builds)
+  console.log(builds);
 
   return (
     <select>
@@ -20,7 +20,9 @@ function BuildList() {
       {builds.map((build) => {
         return (
           <option key={build.id} value={build.id}>
-            {build.name} {build.gpu.chipset} {build.hdd.brand} {build.hdd.capacity} {build.psuid} {build.ram.brand} {build.mobo.brand}
+            {build.name} {build.gpu.chipset} {build.hdd.brand}{" "}
+            {build.hdd.capacity} {build.psuid} {build.ram.brand}{" "}
+            {build.mobo.brand}
             {build.cpu.processor} {build.psu.brand} {build.psu.wattage}
           </option>
         );

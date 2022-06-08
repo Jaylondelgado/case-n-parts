@@ -6,7 +6,7 @@ function CpuTable() {
   const cpus = CpuList();
 
   return (
-    <table className='table'>
+    <table className="table">
       <thead>
         <tr>
           <th>Processor</th>
@@ -16,7 +16,7 @@ function CpuTable() {
         </tr>
       </thead>
       <tbody>
-        {cpus.map(cpu => {
+        {cpus.map((cpu) => {
           return (
             <>
               <tr key={cpu["id"]}>

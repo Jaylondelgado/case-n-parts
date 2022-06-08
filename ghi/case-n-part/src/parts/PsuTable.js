@@ -6,7 +6,7 @@ function PsuTable() {
   const psus = PsuList();
 
   return (
-    <table className='table'>
+    <table className="table">
       <thead>
         <tr>
           <th>Brand</th>
@@ -14,7 +14,7 @@ function PsuTable() {
         </tr>
       </thead>
       <tbody>
-        {psus.map(psu => {
+        {psus.map((psu) => {
           return (
             <>
               <tr key={psu["id"]}>

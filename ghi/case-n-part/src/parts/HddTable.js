@@ -6,7 +6,7 @@ function HddTable() {
   const hdds = HddList();
 
   return (
-    <table className='table'>
+    <table className="table">
       <thead>
         <tr>
           <th>Brand</th>
@@ -14,7 +14,7 @@ function HddTable() {
         </tr>
       </thead>
       <tbody>
-        {hdds.map(hdd => {
+        {hdds.map((hdd) => {
           return (
             <>
               <tr key={hdd["id"]}>
