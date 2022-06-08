@@ -43,3 +43,9 @@ The backend for sql was a challenge but we've managed to finally post a build wh
 \* User authentication and more backend implementation
 
 Had a meeting with Curtis going over the authentication portion of our user login and understanding it's functionality. We worked as a team to get that into our SQL database to actually house that data so the user will be in the system. After some trial and error the problem was sorted and we began shifting out focus to the front end, gathering all of our data into a single page for the create build page which is the most important portion of this application.
+
+## 6/7/2022
+
+\* Add case image table
+
+After some discussion with the team, we decided we needed another table for solely for the computer case images that will be referenced to the builds when a user creates one. This way, we can map and populate their build onto their "View Builds" page. Once that was added, we found some bugs trying to post as we did some other additions where we included brand name column to identify parts.

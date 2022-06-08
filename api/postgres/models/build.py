@@ -38,8 +38,8 @@ class InBuild(BaseModel):
     moboid: int
     cpuid: int
     psuid: int
-    gpuid: int
     Private: bool
+    gpuid: int
     cardcount: int
     hddid: int
     hddcount: int
