@@ -124,40 +124,29 @@ def get_build(build_id: int, query=Depends(BuildsQueries)):
     return row_to_build(row)
 
     
+
+
 # @router.put(
-#     "/api/build/create/{build_id}",
-#     response_model=OutBuild,
-#     responses={
+#     "/api/builds{build_id}",
+#     response_model = OutBuild,
+#     responses = {
 #         200: {"model": OutBuild},
 #         404: {"model": ErrorMessage},
 #         409: {"model": ErrorMessage},
-
-
-@router.put(
-    "/api/builds{build_id}",
-    response_model = OutBuild,
-    responses = {
-        200: {"model": OutBuild},
-        404: {"model": ErrorMessage},
-        409: {"model": ErrorMessage},
-    },
-)
-def update_build(
-    build_id: int,
-    build: InsertBuild,
-    response: Response,
-    query=Depends(BuildsQueries),
-):
-    try:
-        row = query.update_build(build_id,build.Name, build.moboid, build.cpuid, build.psuid, build.gpuid, build.hddid, build.ramid, build.color, build.size)
-        if row is None:
-            response.status_code = status.HTTP_404_NOT_FOUND
-            return {"message": "Build not found"}
-        return row_to_build(row)
-    except DuplicateTitle:
-        response.status_code = status.HTTP_409_CONFLICT
-        return {"message": f"Duplicate build name: {build.Name}"}
-
-    # query=Depends(BuildsQueries),
-    # row = query.update_build(build_id,build.Name, build.moboid, build.cpuid, build.psuid, build.gpuid, build.hddid, build.ramid, build.color, build.size)
-    # return row_to_create_build(row)
+#     },
+# )
+# def update_build(
+#     build_id: int,
+#     build: InsertBuild,
+#     response: Response,
+#     query=Depends(BuildsQueries),
+# ):
+#     try:
+#         row = query.update_build(build_id,build.Name, build.moboid, build.cpuid, build.psuid, build.gpuid, build.hddid, build.ramid, build.color, build.size)
+#         if row is None:
+#             response.status_code = status.HTTP_404_NOT_FOUND
+#             return {"message": "Build not found"}
+#         return row_to_build(row)
+#     except DuplicateTitle:
+#         response.status_code = status.HTTP_409_CONFLICT
+#         return {"message": f"Duplicate build name: {build.Name}"}
