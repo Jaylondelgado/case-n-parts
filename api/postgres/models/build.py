@@ -1,6 +1,6 @@
 from re import S
 from pydantic import BaseModel
-from .parts import Cpu, CpuOut, Gpu, GpuOut, Hdd, HddOut, Mobo, MoboOut, Psu, PsuOut, Ram, RamOut
+from .parts import BuildCpu, BuildHdd, BuildMobo, BuildPsu, BuildRam, Cpu, CpuOut, Gpu, GpuOut, Hdd, HddOut, Mobo, MoboOut, Psu, PsuOut, Ram, RamOut, BuildGpu
 
 class BuildOut(BaseModel):
     id: int
@@ -17,6 +17,9 @@ class BuildOut(BaseModel):
 
 class Build(BaseModel):
     builds: list[BuildOut]
+
+
+
 
 class InsertBuild(BaseModel):
     Name: str
@@ -57,3 +60,20 @@ class OutBuild(BaseModel):
     psuid: int
     Private: bool
 
+
+
+class BuildOutList(BaseModel):
+    id: int
+    Name: str
+    color: str
+    size: str
+    picture: str
+    gpu: BuildGpu
+    hdd: BuildHdd
+    ram: BuildRam
+    mobo: BuildMobo
+    cpu: BuildCpu
+    psu: BuildPsu
+
+class BuildA(BaseModel):
+    builds: list[BuildOutList]

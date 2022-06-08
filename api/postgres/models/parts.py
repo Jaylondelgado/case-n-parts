@@ -2,16 +2,6 @@ from pydantic import BaseModel
 
 
 
-class CpuOut(BaseModel):
-    id: int
-    processor: str
-    cores: str
-    threads: str
-    speed: str
-    socket_type: str
-
-class Cpu(BaseModel):
-    cpus: list[CpuOut]
 
 class GpuOut(BaseModel):
     id: int
@@ -29,6 +19,42 @@ class GpuOut(BaseModel):
 class Gpu(BaseModel):
     gpus: list[GpuOut]
 
+
+class BuildGpu(BaseModel):
+    id: int
+    manufacturer: str
+    chipset: str
+
+class GpuA(BaseModel):
+    gpus: list[BuildGpu]
+
+
+
+
+
+class CpuOut(BaseModel):
+    id: int
+    processor: str
+    cores: str
+    threads: str
+    speed: str
+    socket_type: str
+
+class Cpu(BaseModel):
+    cpus: list[CpuOut]
+
+class BuildCpu(BaseModel):
+    id: int
+    processor: str
+    cores: str
+    socket_type: str
+
+class CpuA(BaseModel):
+    cpus: list[BuildCpu]
+
+
+
+
 class RamOut(BaseModel):
     id: int
     brand: str
@@ -40,6 +66,16 @@ class RamOut(BaseModel):
 class Ram(BaseModel):
     rams: list[RamOut]
 
+class BuildRam(BaseModel):
+    id: int
+    brand: str
+
+
+class RamA(BaseModel):
+    rams: list[BuildRam]
+
+
+
 class HddOut(BaseModel):
     id: int
     brand: str
@@ -50,6 +86,16 @@ class HddOut(BaseModel):
 
 class Hdd(BaseModel):
     hdds: list[HddOut]
+
+class BuildHdd(BaseModel):
+    id: int
+    brand: str
+    capacity: str
+
+class HddA(BaseModel):
+    hdds: list[BuildHdd]
+
+
 
 class PsuOut(BaseModel):
     id: int
@@ -64,6 +110,15 @@ class PsuOut(BaseModel):
 class Psu(BaseModel):
     psus: list[PsuOut]
 
+class BuildPsu(BaseModel):
+    id: int
+    brand: str
+
+class PsuA(BaseModel):
+    psus: list[BuildPsu]
+
+
+
 class MoboOut(BaseModel):
     id: int
     brand: str
@@ -75,3 +130,12 @@ class MoboOut(BaseModel):
 
 class Mobo(BaseModel):
     mobos: list[MoboOut]
+
+class BuildMobo(BaseModel):
+    id: int
+    brand: str
+    socket_type: str
+    max_memory: str
+
+class MoboA(BaseModel):
+    mobos: list[BuildMobo]
