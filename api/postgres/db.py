@@ -125,6 +125,7 @@ class BuildsQueries:
                         build."Name",
                         color.name,
                         "size".name,
+                        caseimage.picture,
                         buildgpus.gpuid,
                         buildgpus.cardcount,
                         gpu.manufacturer,
@@ -139,6 +140,7 @@ class BuildsQueries:
                         gpu.display_port,
                         buildhdds.hddid,
                         buildhdds.hddcount,
+                        hdd.brand,
                         hdd.capacity,
                         hdd.interface,
                         hdd.cache,
@@ -175,11 +177,15 @@ class BuildsQueries:
 
                     -- Join case information
                     INNER JOIN public.case
+                    ON "case".buildid = build.id
                     INNER JOIN public.size
                         ON "size".id = "case".size
                     INNER JOIN public.color
                         ON color.id = "case".color
-                    ON "case".buildid = build.id
+                    INNER JOIN public.caseimage
+                        ON caseimage.id = "case".picture
+                    
+                
 
                     -- Join GPU info
                     INNER JOIN public.BuildGpus
@@ -211,7 +217,7 @@ class BuildsQueries:
                 rows = cursor.fetchall()
                 return list(rows)
     
-    def create_build(self, Name, moboid, cpuid, psuid, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size):
+    def create_build(self, Name, moboid, cpuid, psuid, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size, picture):
         with pool.connection() as connection:
             with connection.cursor() as cursor:
                 with connection.transaction():
@@ -248,10 +254,10 @@ class BuildsQueries:
                     )
                     cursor.execute(
                         """
-                        INSERT INTO "case"(buildid, color, size)
-                        VALUES(%s, %s, %s)
+                        INSERT INTO "case"(buildid, color, size, picture)
+                        VALUES(%s, %s, %s, %s)
                     """,
-                        [new_build_id, color, size]
+                        [new_build_id, color, size, picture]
                     )
                 cursor.execute(
                     """
@@ -275,6 +281,7 @@ class BuildsQueries:
                         build."Name",
                         color.name,
                         "size".name,
+                        caseimage.picture,
                         buildgpus.gpuid,
                         buildgpus.cardcount,
                         gpu.manufacturer,
@@ -327,11 +334,13 @@ class BuildsQueries:
 
                     -- Join case information
                     INNER JOIN public.case
+                    ON "case".buildid = build.id
                     INNER JOIN public.size
                         ON "size".id = "case".size
                     INNER JOIN public.color
                         ON color.id = "case".color
-                    ON "case".buildid = build.id
+                    INNER JOIN public.caseimage
+                        ON caseimage.id = "case".picture
 
                     -- Join GPU info
                     INNER JOIN public.BuildGpus
