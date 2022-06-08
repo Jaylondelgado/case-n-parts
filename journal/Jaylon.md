@@ -38,3 +38,19 @@ After team troubleshooting/debugging I continued my work from yesterday, making 
 
 Today started off with a meeting with Curtis and he quickly filled us in on how the authentication works. After replacing his code with code that works with our models and queries, we got it fully working and you can now create multiple users, login, signout, and the password is hashed out. After doing that, with the help of the team we were able to create and list builds in Insomnia. I then created a file to fetch the builds in our data to the front end, which is currently fully functioning.
 
+## June 7, 2022
+
+* Working on FastAPI
+
+Today started off with Jarett catching me up with his code on the back end. I then worked on implementing the PUT request for the builds which was not an easy thing to implement but i got some of it done. There was a lot of debugging and trial and error. I ended the day being able to update everything except the case parts of the build. I kept getting an error saying syntax error near case.
+
+
+## June 8, 2022 
+
+* Working on FastAPI
+
+I just started off and was able to finish the PUT request. The error I was gettign was becaue case needed qotes around it, once i implemented that it went smoothly. The team then took some time to brainstorm what we should put in the footer of our website. After lunch i decided to work on our request to List all of the builds. Before fixing it, it was showing all details of the build and each part, the team and I decided it would be best to only show necessary information. Doing so, casued me to have to create a new model in parts.py for each part in order to reference to that model and show only important information. Now, its the end of the day and I am realizing I am going to have to update my buildfetch on the front end since we are now presenting different data.
+
+## June 9, 2022 
+
+*
