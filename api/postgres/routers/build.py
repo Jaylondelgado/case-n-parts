@@ -16,6 +16,7 @@ def row_to_create_build(row):
         "cpuid": row[3],
         "psuid": row[4],
         "Private": row[5],
+        "userid": row[6],
     }
     return build
 
@@ -154,9 +155,10 @@ def gpu_list(query=Depends(BuildsQueries), current_user: User = Depends(get_curr
 def create_build(
     build: InsertBuild,
     query = Depends(BuildsQueries),
+    current_user: User = Depends(get_current_active_user)
 ):
 
-    row = query.create_build(build.Name, build.moboid, build.cpuid, build.psuid, build.gpuid, build.cardcount, build.hddid, build.hddcount, build.ramid, build.ramcount, build.color, build.size, build.picture)
+    row = query.create_build(build.Name, build.moboid, build.cpuid, build.psuid, current_user["id"], build.gpuid, build.cardcount, build.hddid, build.hddcount, build.ramid, build.ramcount, build.color, build.size, build.picture)
     return row_to_create_build(row)
 
 @router.get(

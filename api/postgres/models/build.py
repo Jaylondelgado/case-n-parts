@@ -60,6 +60,7 @@ class OutBuild(BaseModel):
     cpuid: int
     psuid: int
     Private: bool
+    userid: int
 
 
 

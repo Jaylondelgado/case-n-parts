@@ -50,6 +50,16 @@ class UserSignUp(BaseModel):
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
+def row_to_user(row):
+    user = {
+        "id": row[0],
+        "user": row[1],
+        "email": row[2],
+
+    }
+    return user
+
+
 
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
@@ -59,7 +69,7 @@ def authenticate_user(repo: UsersQueries, username: str, password: str):
     user = repo.get_user(username)
     if not user:
         return False
-    if not verify_password(password, user[1]):
+    if not verify_password(password, user[2]):
         return False
     return user
 
@@ -98,12 +108,12 @@ async def get_current_user(
     user = repo.get_user(username)
     if user is None:
         raise credentials_exception
-    return user
+    return row_to_user(user)
 
 
 async def get_current_active_user(current_user: User = Depends(get_current_user)):
-    if current_user.disabled:
-        raise HTTPException(status_code=400, detail="Inactive user")
+    # if current_user.disabled:
+    #     raise HTTPException(status_code=400, detail="Inactive user")
     return current_user
 
 
@@ -118,7 +128,7 @@ async def login_for_access_token(response: Response, request: Request, form_data
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
-        data={"sub": user[0]},
+        data={"sub": user[1]},
         expires_delta=access_token_expires,
     )
     token = {"access_token": access_token, "token_type": "bearer"}
