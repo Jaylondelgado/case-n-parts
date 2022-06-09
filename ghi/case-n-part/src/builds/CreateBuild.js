@@ -4,9 +4,10 @@ import GpuList from "../parts/GpuFetch";
 import CpuList from "../parts/CpuFetch";
 import PsuList from "../parts/PsuFetch";
 import RamList from "../parts/RamFetch";
-import HddTable from "../parts/HddTable";
 
 import pcCaseBlack from "../images/inner-case/pc-case-with-mobo-black.png";
+import pcCasePink from "../images/inner-case/pc-case-with-mobo-pink.png";
+import pcCaseGreen from "../images/inner-case/pc-case-with-mobo-green.png";
 import HddList from "../parts/HddsFetch";
 
 function CreateBuild() {
@@ -16,6 +17,13 @@ function CreateBuild() {
   const rams = RamList();
   const hdds = HddList();
 
+  const caseColors = {
+    empty: "",
+    black: pcCaseBlack,
+    red: pcCasePink,
+    green: pcCaseGreen,
+  };
+
   const [gpuChoice, setGpuChoice] = useState([]);
   const [cpuChoice, setCpuChoice] = useState([]);
   const [psuChoice, setPsuChoice] = useState([]);
@@ -23,6 +31,7 @@ function CreateBuild() {
   const [hddChoice, setHddChoice] = useState([]);
   const [colors, setColors] = useState([]);
   const [sizes, setSizes] = useState([]);
+  const [caseColor, setCaseColor] = useState(pcCaseBlack);
 
   const [gpuState, setGpuState] = useState({
     manufacturer: "",
@@ -83,6 +92,11 @@ function CreateBuild() {
       ...state,
       [event.target.name]: value,
     });
+    if (value === "") {
+      setCaseColor(caseColors["black"]);
+    } else {
+      setCaseColor(caseColors[colors[value - 1].name]);
+    }
   };
 
   return (
@@ -430,7 +444,7 @@ function CreateBuild() {
       </div>
       <div className='row justify-content-md-center'>
         <div className='col-md-2 offset-md-3'>
-          <img src={pcCaseBlack} alt='empty case' width='500' />
+          <img src={caseColor} alt='empty case' width='500' />
         </div>
 
         <div className='col-md-3 offset-md-3 '>
