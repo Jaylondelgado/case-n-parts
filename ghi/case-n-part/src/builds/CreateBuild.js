@@ -133,7 +133,6 @@ function CreateBuild() {
                       })}
                     </tbody>
                   </table>
-                  <PsuTable />
                 </div>
                 <div className='modal-footer'>
                   <button
