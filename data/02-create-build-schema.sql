@@ -10,3 +10,4 @@ CREATE TABLE IF NOT EXISTS public.build
 
     UNIQUE(CpuId, PsuId, MoboId)
 );
+

@@ -336,7 +336,7 @@ function CreateBuild() {
           </select>
           <select
             onChange={handleChange}
-            value={state.sizes}
+            value={state.size}
             name='color'
             id='color'
             className='form-select w-75'
