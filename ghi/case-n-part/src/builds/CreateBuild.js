@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import CpuTable from "../parts/CpuTable";
-import GpuTable from "../parts/GpuTable";
+import GpuList from "../parts/GpuFetch";
+import CpuList from "../parts/CpuFetch";
+import PsuList from "../parts/PsuFetch";
 import HddTable from "../parts/HddTable";
 import PsuTable from "../parts/PsuTable";
 import RamTable from "../parts/RamTable";
@@ -9,37 +10,39 @@ import RamTable from "../parts/RamTable";
 import pcCaseBlack from "../images/inner-case/pc-case-with-mobo-black.png";
 
 function CreateBuild() {
+  const gpus = GpuList();
+  const cpus = CpuList();
+  const psus = PsuList();
+
+  const [gpuChoice, setGpuChoice] = useState([]);
+  const [cpuChoice, setCpuChoice] = useState([]);
+  const [psuChoice, setPsuChoice] = useState([]);
+  const [colors, setColors] = useState([]);
+  const [sizes, setSizes] = useState([]);
+
+  const [gpuState, setGpuState] = useState({
+    manufacturer: "",
+    chipset: "",
+  });
   const [state, setState] = useState({
     color: "",
     size: "",
   });
-  const [colors, setColors] = useState([]);
-  const [sizes, setSizes] = useState([]);
 
-  // const [state, setState] = useState({
-  //   name: "",
-  // });
-  // const [successfulSubmit, setSuccessfulSubmit] = useState(false);
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
+  const handleGpuClick = e => {
+    const selected = e;
+    setGpuChoice(selected);
+  };
 
-  //   const manufacturerUrl = "http://localhost:8100/api/build/create/";
-  //   const fetchConfig = {
-  //     method: "POST",
-  //     body: JSON.stringify(state),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   };
-  //   const resposne = await fetch(manufacturerUrl, fetchConfig);
+  const handleCpuClick = e => {
+    const selected = e;
+    setCpuChoice(selected);
+  };
 
-  //   if (resposne.ok) {
-  //     setState({
-  //       name: "",
-  //     });
-  //     setSuccessfulSubmit(true);
-  //   }
-  // };
+  const handlePsuClick = e => {
+    const selected = e;
+    setPsuChoice(selected);
+  };
 
   useEffect(() => {
     const getColorData = async () => {
@@ -88,7 +91,7 @@ function CreateBuild() {
           >
             <div className='modal-dialog'>
               <div className='modal-content'>
-                <div className='modal-header'>
+                <div className='modal-header bg-secondary'>
                   <h5 className='modal-title' id='exampleModalLabel'>
                     PSU
                   </h5>
@@ -99,7 +102,30 @@ function CreateBuild() {
                     aria-label='Close'
                   ></button>
                 </div>
-                <div className='modal-body'>
+                <div className='modal-body bg-secondary'>
+                  <table className='table table-hover table-dark'>
+                    <thead>
+                      <tr>
+                        <th>Brand</th>
+                        <th>Wattage</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {psus.map(psu => {
+                        return (
+                          <>
+                            <tr
+                              key={psu["id"]}
+                              onClick={() => handlePsuClick(psu)}
+                            >
+                              <td>{psu["brand"]}</td>
+                              <td>{psu["wattage"]}</td>
+                            </tr>
+                          </>
+                        );
+                      })}
+                    </tbody>
+                  </table>
                   <PsuTable />
                 </div>
                 <div className='modal-footer'>
@@ -109,9 +135,6 @@ function CreateBuild() {
                     data-bs-dismiss='modal'
                   >
                     Close
-                  </button>
-                  <button type='button' className='btn btn-primary'>
-                    Save changes
                   </button>
                 </div>
               </div>
@@ -136,7 +159,7 @@ function CreateBuild() {
           >
             <div className='modal-dialog'>
               <div className='modal-content'>
-                <div className='modal-header'>
+                <div className='modal-header bg-secondary'>
                   <h5 className='modal-title' id='exampleModalLabel'>
                     GPU
                   </h5>
@@ -147,8 +170,38 @@ function CreateBuild() {
                     aria-label='Close'
                   ></button>
                 </div>
-                <div className='modal-body'>
-                  <GpuTable />
+                <div className='modal-body bg-secondary'>
+                  <table className='table table-hover table-dark'>
+                    <thead>
+                      <tr>
+                        <th>Manufacturer</th>
+                        <th>Chipset</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {gpus.map(gpu => {
+                        return (
+                          <>
+                            {/* <select
+                onChange={handleChange}
+                value={choice}
+                required
+                name="choice"
+                id="choice"
+              ></select> */}
+
+                            <tr
+                              key={gpu["id"]}
+                              onClick={() => handleGpuClick(gpu)}
+                            >
+                              <td>{gpu["manufacturer"]}</td>
+                              <td>{gpu["chipset"]}</td>
+                            </tr>
+                          </>
+                        );
+                      })}
+                    </tbody>
+                  </table>
                 </div>
                 <div className='modal-footer'>
                   <button
@@ -157,9 +210,6 @@ function CreateBuild() {
                     data-bs-dismiss='modal'
                   >
                     Close
-                  </button>
-                  <button type='button' className='btn btn-primary'>
-                    Save changes
                   </button>
                 </div>
               </div>
@@ -184,7 +234,7 @@ function CreateBuild() {
           >
             <div className='modal-dialog'>
               <div className='modal-content'>
-                <div className='modal-header'>
+                <div className='modal-header bg-secondary'>
                   <h5 className='modal-title' id='exampleModalLabel'>
                     CPU
                   </h5>
@@ -195,8 +245,34 @@ function CreateBuild() {
                     aria-label='Close'
                   ></button>
                 </div>
-                <div className='modal-body'>
-                  <CpuTable />
+                <div className='modal-body bg-secondary'>
+                  <table className='table table-hover table-dark'>
+                    <thead>
+                      <tr>
+                        <th>Processor</th>
+                        <th>Cores</th>
+                        <th>Threads</th>
+                        <th>Speed</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {cpus.map(cpu => {
+                        return (
+                          <>
+                            <tr
+                              key={cpu["id"]}
+                              onClick={() => handleCpuClick(cpu)}
+                            >
+                              <td>{cpu["processor"]}</td>
+                              <td>{cpu["cores"]}</td>
+                              <td>{cpu["threads"]}</td>
+                              <td>{cpu["speed"]}</td>
+                            </tr>
+                          </>
+                        );
+                      })}
+                    </tbody>
+                  </table>
                 </div>
                 <div className='modal-footer'>
                   <button
@@ -205,9 +281,6 @@ function CreateBuild() {
                     data-bs-dismiss='modal'
                   >
                     Close
-                  </button>
-                  <button type='button' className='btn btn-primary'>
-                    Save changes
                   </button>
                 </div>
               </div>
@@ -232,7 +305,7 @@ function CreateBuild() {
           >
             <div className='modal-dialog'>
               <div className='modal-content'>
-                <div className='modal-header'>
+                <div className='modal-header bg-secondary'>
                   <h5 className='modal-title' id='exampleModalLabel'>
                     HDD
                   </h5>
@@ -243,7 +316,7 @@ function CreateBuild() {
                     aria-label='Close'
                   ></button>
                 </div>
-                <div className='modal-body'>
+                <div className='modal-body bg-secondary'>
                   <HddTable />
                 </div>
                 <div className='modal-footer'>
@@ -253,9 +326,6 @@ function CreateBuild() {
                     data-bs-dismiss='modal'
                   >
                     Close
-                  </button>
-                  <button type='button' className='btn btn-primary'>
-                    Save changes
                   </button>
                 </div>
               </div>
@@ -280,7 +350,7 @@ function CreateBuild() {
           >
             <div className='modal-dialog'>
               <div className='modal-content'>
-                <div className='modal-header'>
+                <div className='modal-header bg-secondary'>
                   <h5 className='modal-title' id='exampleModalLabel'>
                     RAM
                   </h5>
@@ -291,7 +361,7 @@ function CreateBuild() {
                     aria-label='Close'
                   ></button>
                 </div>
-                <div className='modal-body'>
+                <div className='modal-body bg-secondary'>
                   <RamTable />
                 </div>
                 <div className='modal-footer'>
@@ -301,9 +371,6 @@ function CreateBuild() {
                     data-bs-dismiss='modal'
                   >
                     Close
-                  </button>
-                  <button type='button' className='btn btn-primary'>
-                    Save changes
                   </button>
                 </div>
               </div>
@@ -336,9 +403,9 @@ function CreateBuild() {
           </select>
           <select
             onChange={handleChange}
-            value={state.size}
-            name='color'
-            id='color'
+            value={state.sizes}
+            name='size'
+            id='size'
             className='form-select w-75'
             required
           >
