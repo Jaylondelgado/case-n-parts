@@ -337,7 +337,8 @@ class BuildsQueries:
                     INNER JOIN public.psu
                     ON psu.id = build.psuid
                     WHERE userid = %s
-                    """
+                """,
+                    [userid]
                 )
                 rows = cursor.fetchall()
                 return list(rows)
