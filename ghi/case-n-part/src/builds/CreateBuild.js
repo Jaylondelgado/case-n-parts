@@ -297,8 +297,8 @@ function CreateBuild() {
         </div>
       </div>
       <div className="row justify-content-md-center">
-        <div className="col-md-3 offset-md-3">
-          <img className="img-fluid" src={pcCaseBlack} alt="empty case" />
+        <div className="col-md-2 offset-md-3">
+          <img src={pcCaseBlack} alt="empty case" width="500" />
         </div>
 
         <div className="col-md-3 offset-md-3 ">

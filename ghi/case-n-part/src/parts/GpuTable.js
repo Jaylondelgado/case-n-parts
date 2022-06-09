@@ -5,14 +5,13 @@ import GpuList from "./GpuFetch";
 function GpuTable() {
   const gpus = GpuList();
   const [choice, setChoice] = useState();
-  const [state, setState] = useState({
-    manufacturer: "",
-    chipset: "",
-  });
+  // const [state, setState] = useState({
+  //   manufacturer: "",
+  //   chipset: "",
+  // });
 
   const handleClick = (e) => {
     const selected = e;
-    console.log("poop", selected);
     setChoice(selected);
   };
   console.log("choice: ", choice);
