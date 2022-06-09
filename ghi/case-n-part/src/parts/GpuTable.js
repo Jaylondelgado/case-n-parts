@@ -10,7 +10,7 @@ function GpuTable() {
     chipset: "",
   });
 
-  const handleClick = (e) => {
+  const handleClick = e => {
     const selected = e;
     console.log("poop", selected);
     setChoice(selected);
@@ -26,7 +26,7 @@ function GpuTable() {
   // };
 
   return (
-    <table className="table table-hover table-dark">
+    <table className='table table-hover table-dark'>
       <thead>
         <tr>
           <th>Manufacturer</th>
@@ -34,7 +34,7 @@ function GpuTable() {
         </tr>
       </thead>
       <tbody>
-        {gpus.map((gpu) => {
+        {gpus.map(gpu => {
           return (
             <>
               {/* <select
