@@ -177,3 +177,4 @@ CREATE TABLE IF NOT EXISTS public.caseimage
 
 ALTER TABLE IF EXISTS public.caseimage
     OWNER to "great-value";
+
