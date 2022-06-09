@@ -123,13 +123,13 @@ function CreateBuild() {
             type='button'
             className='btn btn-primary'
             data-bs-toggle='modal'
-            data-bs-target='#exampleModal'
+            data-bs-target='#exampleModals'
           >
             GPU
           </button>
           <div
             className='modal fade'
-            id='exampleModal'
+            id='exampleModals'
             tabIndex='-1'
             aria-labelledby='exampleModalLabel'
             aria-hidden='true'
@@ -171,13 +171,13 @@ function CreateBuild() {
             type='button'
             className='btn btn-primary'
             data-bs-toggle='modal'
-            data-bs-target='#exampleModal'
+            data-bs-target='#exampleModaler'
           >
             CPU
           </button>
           <div
             className='modal fade'
-            id='exampleModal'
+            id='exampleModaler'
             tabIndex='-1'
             aria-labelledby='exampleModalLabel'
             aria-hidden='true'
@@ -219,13 +219,13 @@ function CreateBuild() {
             type='button'
             className='btn btn-primary'
             data-bs-toggle='modal'
-            data-bs-target='#exampleModal'
+            data-bs-target='#exampleModale'
           >
             HDD
           </button>
           <div
             className='modal fade'
-            id='exampleModal'
+            id='exampleModale'
             tabIndex='-1'
             aria-labelledby='exampleModalLabel'
             aria-hidden='true'
@@ -267,13 +267,13 @@ function CreateBuild() {
             type='button'
             className='btn btn-primary'
             data-bs-toggle='modal'
-            data-bs-target='#exampleModal'
+            data-bs-target='#exampleModalj'
           >
             RAM
           </button>
           <div
             className='modal fade'
-            id='exampleModal'
+            id='exampleModalj'
             tabIndex='-1'
             aria-labelledby='exampleModalLabel'
             aria-hidden='true'
