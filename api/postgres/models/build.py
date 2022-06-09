@@ -1,4 +1,5 @@
 from re import S
+from .review import RatingOut
 from pydantic import BaseModel
 from .parts import BuildCpu, BuildHdd, BuildMobo, BuildPsu, BuildRam, Cpu, CpuOut, Gpu, GpuOut, Hdd, HddOut, Mobo, MoboOut, Psu, PsuOut, Ram, RamOut, BuildGpu
 
