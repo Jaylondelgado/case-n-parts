@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import CpuTable from "../parts/CpuTable";
 import GpuList from "../parts/GpuFetch";
 import CpuList from "../parts/CpuFetch";
+import PsuList from "../parts/PsuFetch";
 import HddTable from "../parts/HddTable";
 import PsuTable from "../parts/PsuTable";
 import RamTable from "../parts/RamTable";
@@ -12,8 +12,11 @@ import pcCaseBlack from "../images/inner-case/pc-case-with-mobo-black.png";
 function CreateBuild() {
   const gpus = GpuList();
   const cpus = CpuList();
+  const psus = PsuList();
 
   const [gpuChoice, setGpuChoice] = useState([]);
+  const [cpuChoice, setCpuChoice] = useState([]);
+  const [psuChoice, setPsuChoice] = useState([]);
   const [colors, setColors] = useState([]);
   const [sizes, setSizes] = useState([]);
 
@@ -33,34 +36,13 @@ function CreateBuild() {
 
   const handleCpuClick = e => {
     const selected = e;
-    console.log("poop", selected);
-    setGpuChoice(selected);
+    setCpuChoice(selected);
   };
 
-  // const [state, setState] = useState({
-  //   name: "",
-  // });
-  // const [successfulSubmit, setSuccessfulSubmit] = useState(false);
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-
-  //   const manufacturerUrl = "http://localhost:8100/api/build/create/";
-  //   const fetchConfig = {
-  //     method: "POST",
-  //     body: JSON.stringify(state),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   };
-  //   const resposne = await fetch(manufacturerUrl, fetchConfig);
-
-  //   if (resposne.ok) {
-  //     setState({
-  //       name: "",
-  //     });
-  //     setSuccessfulSubmit(true);
-  //   }
-  // };
+  const handlePsuClick = e => {
+    const selected = e;
+    setPsuChoice(selected);
+  };
 
   useEffect(() => {
     const getColorData = async () => {
@@ -90,10 +72,6 @@ function CreateBuild() {
 
   return (
     <div className='container-fluid my-5'>
-      <div className='test'>
-        {gpuChoice.manufacturer}
-        {/* {console.log("Picked gpu", "Also jaylon is a bitch", gpuChoice)} */}
-      </div>
       <div className='row justify-content-md-center py-4 g-4 mt-4'>
         <div className='col-sm-1'>
           <button
@@ -125,6 +103,29 @@ function CreateBuild() {
                   ></button>
                 </div>
                 <div className='modal-body bg-secondary'>
+                  <table className='table table-hover table-dark'>
+                    <thead>
+                      <tr>
+                        <th>Brand</th>
+                        <th>Wattage</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {psus.map(psu => {
+                        return (
+                          <>
+                            <tr
+                              key={psu["id"]}
+                              onClick={() => handlePsuClick(psu)}
+                            >
+                              <td>{psu["brand"]}</td>
+                              <td>{psu["wattage"]}</td>
+                            </tr>
+                          </>
+                        );
+                      })}
+                    </tbody>
+                  </table>
                   <PsuTable />
                 </div>
                 <div className='modal-footer'>
