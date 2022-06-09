@@ -7,5 +7,9 @@ CREATE TABLE IF NOT EXISTS public.build
     PsuId INTEGER REFERENCES psu ,
     "Private" BOOLEAN DEFAULT false,
     UserId INTEGER REFERENCES "user"
+<<<<<<< HEAD
+
+=======
+>>>>>>> 6b68959e60422ac1ab40376974d1b6efbd6ddf89
 );
 
