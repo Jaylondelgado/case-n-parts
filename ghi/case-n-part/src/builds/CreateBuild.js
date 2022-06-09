@@ -126,7 +126,6 @@ function CreateBuild() {
                       })}
                     </tbody>
                   </table>
-                  <PsuTable />
                 </div>
                 <div className="modal-footer">
                   <button
@@ -418,6 +417,9 @@ function CreateBuild() {
               );
             })}
           </select>
+          <div className="col-md-3 offset-md-3">
+            <button className="btn btn-outline-primary mt-4">Create</button>
+          </div>
         </div>
       </div>
     </div>
