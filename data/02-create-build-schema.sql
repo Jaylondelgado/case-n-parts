@@ -8,3 +8,4 @@ CREATE TABLE IF NOT EXISTS public.build
     "Private" BOOLEAN DEFAULT false,
     UserId INTEGER REFERENCES "user"
 );
+

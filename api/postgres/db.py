@@ -178,6 +178,7 @@ class BuildsQueries:
                     
                     INNER JOIN public.psu
                         ON psu.id = build.psuid
+                    
                     """
                 )
                 rows = cursor.fetchall()
