@@ -15,7 +15,7 @@ import GpuTable from "./parts/GpuTable";
 import CpuList from "./parts/CpuFetch";
 import BuildList from "./builds/FetchBuilds";
 import { useToken } from "./authApi";
-// import ViewBuilds from "./builds/ViewBuilds";
+import ViewBuilds from "./builds/ViewBuilds";
 
 import "./App.css";
 import HddTable from "./parts/HddTable";
@@ -25,7 +25,7 @@ function App() {
   return (
     <BrowserRouter>
       <Nav token={token} />
-      <div className="content-container">
+      <div className="container-fluid p-0">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="mybuilds" element={<MyBuilds />} />
@@ -43,8 +43,10 @@ function App() {
           <Route path="gpus" element={<GpuTable />} />
           <Route path="cpus" element={<CpuList />} />
           <Route path="builds" element={<BuildList />} />
-          {/* <Route path='viewbuilds' element={<ViewBuilds />} /> */}
+          <Route path="viewbuilds" element={<ViewBuilds />} />
         </Routes>
+      </div>
+      <div className="footer-container">
         <Footer />
       </div>
     </BrowserRouter>
