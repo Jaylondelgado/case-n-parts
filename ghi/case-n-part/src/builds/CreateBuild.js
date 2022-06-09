@@ -319,7 +319,7 @@ function CreateBuild() {
         <div className='col-md-3 offset-md-3 '>
           <select
             onChange={handleChange}
-            value={state.colors}
+            value={state.color}
             name='color'
             id='color'
             className='form-select w-75'

@@ -53,4 +53,6 @@ I just started off and was able to finish the PUT request. The error I was getti
 
 ## June 9, 2022 
 
-*
+*Create a build
+
+The day started off early with the team and I trying to troubleshoot why the modals weren't displaying hte correct data. after about 2 hours of documentation, changing names, and more documentation, we were able to fix the id for each modal in order to display to correct data.
