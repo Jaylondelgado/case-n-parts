@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-import CpuList from "../parts/CpuFetch";
-import GpuList from "../parts/GpuFetch";
-import HddList from "../parts/HddsFetch";
-import MoboList from "../parts/MoboFetch";
-import PsuList from "../parts/PsuFetch";
-import RamList from "../parts/RamFetch";
-
 import CpuTable from "../parts/CpuTable";
 import GpuTable from "../parts/GpuTable";
 import HddTable from "../parts/HddTable";
 import PsuTable from "../parts/PsuTable";
 import RamTable from "../parts/RamTable";
+
+import pcCaseBlack from "../images/inner-case/pc-case-with-mobo-black.png";
 
 function CreateBuild() {
   const [state, setState] = useState({
@@ -64,7 +59,7 @@ function CreateBuild() {
     getSizeData();
   }, []);
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     const value = event.target.value;
     setState({
       ...state,
@@ -73,33 +68,265 @@ function CreateBuild() {
   };
 
   return (
-    <div className="container">
-      <div className="row justify-content-md-center">
-        <div className="col-sm-1">PSU</div>
-        <div className="col-sm-1">GPU</div>
-        <div className="col-sm-1">CPU</div>
-        <div className="col-sm-1">HDD</div>
-        <div className="col-sm-1">RAM</div>
+    <div className='container-fluid my-5'>
+      <div className='row justify-content-md-center py-4 g-4 mt-4'>
+        <div className='col-sm-1'>
+          <button
+            type='button'
+            className='btn btn-primary'
+            data-bs-toggle='modal'
+            data-bs-target='#exampleModal'
+          >
+            PSU
+          </button>
+          <div
+            className='modal fade'
+            id='exampleModal'
+            tabIndex='-1'
+            aria-labelledby='exampleModalLabel'
+            aria-hidden='true'
+          >
+            <div className='modal-dialog'>
+              <div className='modal-content'>
+                <div className='modal-header'>
+                  <h5 className='modal-title' id='exampleModalLabel'>
+                    PSU
+                  </h5>
+                  <button
+                    type='button'
+                    className='btn-close'
+                    data-bs-dismiss='modal'
+                    aria-label='Close'
+                  ></button>
+                </div>
+                <div className='modal-body'>
+                  <PsuTable />
+                </div>
+                <div className='modal-footer'>
+                  <button
+                    type='button'
+                    className='btn btn-secondary'
+                    data-bs-dismiss='modal'
+                  >
+                    Close
+                  </button>
+                  <button type='button' className='btn btn-primary'>
+                    Save changes
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className='col-sm-1'>
+          <button
+            type='button'
+            className='btn btn-primary'
+            data-bs-toggle='modal'
+            data-bs-target='#exampleModal'
+          >
+            GPU
+          </button>
+          <div
+            className='modal fade'
+            id='exampleModal'
+            tabIndex='-1'
+            aria-labelledby='exampleModalLabel'
+            aria-hidden='true'
+          >
+            <div className='modal-dialog'>
+              <div className='modal-content'>
+                <div className='modal-header'>
+                  <h5 className='modal-title' id='exampleModalLabel'>
+                    GPU
+                  </h5>
+                  <button
+                    type='button'
+                    className='btn-close'
+                    data-bs-dismiss='modal'
+                    aria-label='Close'
+                  ></button>
+                </div>
+                <div className='modal-body'>
+                  <GpuTable />
+                </div>
+                <div className='modal-footer'>
+                  <button
+                    type='button'
+                    className='btn btn-secondary'
+                    data-bs-dismiss='modal'
+                  >
+                    Close
+                  </button>
+                  <button type='button' className='btn btn-primary'>
+                    Save changes
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className='col-sm-1'>
+          <button
+            type='button'
+            className='btn btn-primary'
+            data-bs-toggle='modal'
+            data-bs-target='#exampleModal'
+          >
+            CPU
+          </button>
+          <div
+            className='modal fade'
+            id='exampleModal'
+            tabIndex='-1'
+            aria-labelledby='exampleModalLabel'
+            aria-hidden='true'
+          >
+            <div className='modal-dialog'>
+              <div className='modal-content'>
+                <div className='modal-header'>
+                  <h5 className='modal-title' id='exampleModalLabel'>
+                    CPU
+                  </h5>
+                  <button
+                    type='button'
+                    className='btn-close'
+                    data-bs-dismiss='modal'
+                    aria-label='Close'
+                  ></button>
+                </div>
+                <div className='modal-body'>
+                  <CpuTable />
+                </div>
+                <div className='modal-footer'>
+                  <button
+                    type='button'
+                    className='btn btn-secondary'
+                    data-bs-dismiss='modal'
+                  >
+                    Close
+                  </button>
+                  <button type='button' className='btn btn-primary'>
+                    Save changes
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className='col-sm-1'>
+          <button
+            type='button'
+            className='btn btn-primary'
+            data-bs-toggle='modal'
+            data-bs-target='#exampleModal'
+          >
+            HDD
+          </button>
+          <div
+            className='modal fade'
+            id='exampleModal'
+            tabIndex='-1'
+            aria-labelledby='exampleModalLabel'
+            aria-hidden='true'
+          >
+            <div className='modal-dialog'>
+              <div className='modal-content'>
+                <div className='modal-header'>
+                  <h5 className='modal-title' id='exampleModalLabel'>
+                    HDD
+                  </h5>
+                  <button
+                    type='button'
+                    className='btn-close'
+                    data-bs-dismiss='modal'
+                    aria-label='Close'
+                  ></button>
+                </div>
+                <div className='modal-body'>
+                  <HddTable />
+                </div>
+                <div className='modal-footer'>
+                  <button
+                    type='button'
+                    className='btn btn-secondary'
+                    data-bs-dismiss='modal'
+                  >
+                    Close
+                  </button>
+                  <button type='button' className='btn btn-primary'>
+                    Save changes
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className='col-sm-1'>
+          <button
+            type='button'
+            className='btn btn-primary'
+            data-bs-toggle='modal'
+            data-bs-target='#exampleModal'
+          >
+            RAM
+          </button>
+          <div
+            className='modal fade'
+            id='exampleModal'
+            tabIndex='-1'
+            aria-labelledby='exampleModalLabel'
+            aria-hidden='true'
+          >
+            <div className='modal-dialog'>
+              <div className='modal-content'>
+                <div className='modal-header'>
+                  <h5 className='modal-title' id='exampleModalLabel'>
+                    RAM
+                  </h5>
+                  <button
+                    type='button'
+                    className='btn-close'
+                    data-bs-dismiss='modal'
+                    aria-label='Close'
+                  ></button>
+                </div>
+                <div className='modal-body'>
+                  <RamTable />
+                </div>
+                <div className='modal-footer'>
+                  <button
+                    type='button'
+                    className='btn btn-secondary'
+                    data-bs-dismiss='modal'
+                  >
+                    Close
+                  </button>
+                  <button type='button' className='btn btn-primary'>
+                    Save changes
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="row justify-content-md-center">
-        <div className="col-md-3 offset-md-3">
-          <img
-            src="https://live.staticflickr.com/65535/52130464139_8c2cbf315a_z.jpg"
-            alt="empty case"
-          />
+      <div className='row justify-content-md-center'>
+        <div className='col-md-3 offset-md-3'>
+          <img className='img-fluid' src={pcCaseBlack} alt='empty case' />
         </div>
 
-        <div className="col-md-3 offset-md-3 ">
+        <div className='col-md-3 offset-md-3 '>
           <select
             onChange={handleChange}
             value={state.colors}
-            name="color"
-            id="color"
-            className="form-select w-75"
+            name='color'
+            id='color'
+            className='form-select w-75'
             required
           >
-            <option value="">Choose a color</option>
-            {colors.map((color) => {
+            <option value=''>Choose a color</option>
+            {colors.map(color => {
               return (
                 <option key={color.id} value={color.id}>
                   {color.name}
@@ -110,13 +337,13 @@ function CreateBuild() {
           <select
             onChange={handleChange}
             value={state.sizes}
-            name="color"
-            id="color"
-            className="form-select w-75"
+            name='color'
+            id='color'
+            className='form-select w-75'
             required
           >
-            <option value="">Choose a size</option>
-            {sizes.map((size) => {
+            <option value=''>Choose a size</option>
+            {sizes.map(size => {
               return (
                 <option key={size.id} value={size.id}>
                   {size.name}

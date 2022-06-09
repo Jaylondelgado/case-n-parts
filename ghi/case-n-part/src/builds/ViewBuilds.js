@@ -16,15 +16,15 @@ function ViewBuildsList() {
 
   return (
     <>
-      <div class="row">
-        <div class="col">col</div>
-        <div class="col">col</div>
-        <div class="col">col</div>
-        <div class="col">col</div>
+      <div className="row">
+        <div className="col">col</div>
+        <div className="col">col</div>
+        <div className="col">col</div>
+        <div className="col">col</div>
       </div>
-      <div class="row">
-        <div class="col-8">col-8</div>
-        <div class="col-4">col-4</div>
+      <div className="row">
+        <div className="col-8">col-8</div>
+        <div className="col-4">col-4</div>
       </div>
     </>
   );

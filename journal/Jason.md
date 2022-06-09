@@ -49,3 +49,9 @@ Had a meeting with Curtis going over the authentication portion of our user logi
 \* Add case image table
 
 After some discussion with the team, we decided we needed another table for solely for the computer case images that will be referenced to the builds when a user creates one. This way, we can map and populate their build onto their "View Builds" page. Once that was added, we found some bugs trying to post as we did some other additions where we included brand name column to identify parts.
+
+## 6/8/2022
+
+\* Working on create builds page
+
+Got the grid more or less in the position we want the parts to be displayed and the central image. Tinkering with bootstrap was tricky but so far the layout is close to what I've envisioned. The drop downs for the color and size of the case have some alignment issues but are populating the data so thats a plus. I hit a wall this week working on the project, but my team picked me up and we were able to get some things moving today.
