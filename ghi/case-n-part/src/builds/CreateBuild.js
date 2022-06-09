@@ -444,7 +444,7 @@ function CreateBuild() {
       </div>
       <div className='row justify-content-md-center'>
         <div className='col-md-2 offset-md-3'>
-          <img src={caseColor} alt='empty case' width='500' />
+          <img src={caseColor} alt='pc case image' width='500' />
         </div>
 
         <div className='col-md-3 offset-md-3 '>
