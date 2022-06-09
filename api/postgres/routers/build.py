@@ -141,10 +141,10 @@ def build_list(query=Depends(BuildsQueries)):
 
 # Example of how to get the current user for an endpoint
 @router.get("/api/builds/mine", response_model=Build)
-def gpu_list(query=Depends(BuildsQueries), current_user: User = Depends(get_current_active_user)):
-    rows = query.get_user_builds(current_user)
+def my_build_list(query=Depends(BuildsQueries), current_user: User = Depends(get_current_active_user)):
+    rows = query.get_build_by_user(current_user["id"])
     return {
-        "gpus": [row_to_build(row) for row in rows],
+        "builds": [row_to_build(row) for row in rows],
     }
 
 @router.post(
