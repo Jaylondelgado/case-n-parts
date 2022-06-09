@@ -11,19 +11,6 @@ import pcCaseGreen from "../images/inner-case/pc-case-with-mobo-green.png";
 import HddList from "../parts/HddsFetch";
 
 function CreateBuild() {
-  const gpus = GpuList();
-  const cpus = CpuList();
-  const psus = PsuList();
-  const rams = RamList();
-  const hdds = HddList();
-
-  const caseColors = {
-    empty: "",
-    black: pcCaseBlack,
-    red: pcCasePink,
-    green: pcCaseGreen,
-  };
-
   const [gpuChoice, setGpuChoice] = useState([]);
   const [cpuChoice, setCpuChoice] = useState([]);
   const [psuChoice, setPsuChoice] = useState([]);
@@ -37,8 +24,39 @@ function CreateBuild() {
     manufacturer: "",
     chipset: "",
   });
-  const [colorState, setColorState] = useState("");
-  const [sizeState, setSizeState] = useState("");
+
+  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
+
+  const gpus = GpuList();
+  const cpus = CpuList();
+  const psus = PsuList();
+  const rams = RamList();
+  const hdds = HddList();
+
+  useEffect(() => {
+    const getColorData = async () => {
+      const colorRes = await fetch("http://localhost:8000/api/color/");
+      const colorData = await colorRes.json();
+      setColors(colorData.colors);
+    };
+    getColorData();
+  }, []);
+  useEffect(() => {
+    const getSizeData = async () => {
+      const sizeRes = await fetch("http://localhost:8000/api/size/");
+      const sizeData = await sizeRes.json();
+      setSizes(sizeData.sizes);
+    };
+
+    getSizeData();
+  }, []);
+  const caseColors = {
+    empty: "",
+    black: pcCaseBlack,
+    red: pcCasePink,
+    green: pcCaseGreen,
+  };
 
   const handleGpuClick = e => {
     const selected = e;
@@ -66,27 +84,9 @@ function CreateBuild() {
     setHddChoice(selected);
   };
 
-  useEffect(() => {
-    const getColorData = async () => {
-      const colorRes = await fetch("http://localhost:8000/api/color/");
-      const colorData = await colorRes.json();
-      setColors(colorData.colors);
-    };
-    getColorData();
-  }, []);
-  useEffect(() => {
-    const getSizeData = async () => {
-      const sizeRes = await fetch("http://localhost:8000/api/size/");
-      const sizeData = await sizeRes.json();
-      setSizes(sizeData.sizes);
-    };
-
-    getSizeData();
-  }, []);
-
   const handleColorChange = event => {
     const value = event.target.value;
-    setColorState(value);
+    setSelectedColor(value);
     if (value === "") {
       setCaseColor(caseColors["black"]);
     } else {
@@ -96,7 +96,7 @@ function CreateBuild() {
 
   const handleSizeChange = event => {
     const value = event.target.value;
-    setSizeState(value);
+    setSelectedSize(value);
   };
 
   return (
@@ -450,7 +450,7 @@ function CreateBuild() {
         <div className='col-md-3 offset-md-3 '>
           <select
             onChange={handleColorChange}
-            value={colorState}
+            value={selectedColor}
             name='color'
             id='color'
             className='form-select w-75'
@@ -467,7 +467,7 @@ function CreateBuild() {
           </select>
           <select
             onChange={handleSizeChange}
-            value={sizeState}
+            value={selectedSize}
             name='size'
             id='size'
             className='form-select w-75'
