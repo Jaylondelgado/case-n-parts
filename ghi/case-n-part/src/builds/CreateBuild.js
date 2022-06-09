@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import GpuList from "../parts/GpuFetch";
 import CpuList from "../parts/CpuFetch";
 import PsuList from "../parts/PsuFetch";
+import RamList from "../parts/RamFetch";
 import HddTable from "../parts/HddTable";
 import PsuTable from "../parts/PsuTable";
-import RamTable from "../parts/RamTable";
 
 import pcCaseBlack from "../images/inner-case/pc-case-with-mobo-black.png";
 
@@ -13,10 +13,12 @@ function CreateBuild() {
   const gpus = GpuList();
   const cpus = CpuList();
   const psus = PsuList();
+  const rams = RamList();
 
   const [gpuChoice, setGpuChoice] = useState([]);
   const [cpuChoice, setCpuChoice] = useState([]);
   const [psuChoice, setPsuChoice] = useState([]);
+  const [ramChoice, setRamChoice] = useState([]);
   const [colors, setColors] = useState([]);
   const [sizes, setSizes] = useState([]);
 
@@ -42,6 +44,11 @@ function CreateBuild() {
   const handlePsuClick = e => {
     const selected = e;
     setPsuChoice(selected);
+  };
+
+  const handleRamClick = e => {
+    const selected = e;
+    setRamChoice(selected);
   };
 
   useEffect(() => {
@@ -362,7 +369,29 @@ function CreateBuild() {
                   ></button>
                 </div>
                 <div className='modal-body bg-secondary'>
-                  <RamTable />
+                  <table className='table table-hover table-dark'>
+                    <thead>
+                      <tr>
+                        <th>Brand</th>
+                        <th>Memory Speed</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {rams.map(ram => {
+                        return (
+                          <>
+                            <tr
+                              key={ram["id"]}
+                              onClick={() => handleRamClick(ram)}
+                            >
+                              <td>{ram["brand"]}</td>
+                              <td>{ram["memory_speed"]}</td>
+                            </tr>
+                          </>
+                        );
+                      })}
+                    </tbody>
+                  </table>
                 </div>
                 <div className='modal-footer'>
                   <button
