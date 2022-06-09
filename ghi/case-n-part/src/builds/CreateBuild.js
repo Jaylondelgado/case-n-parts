@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import CpuTable from "../parts/CpuTable";
-// import GpuTable from "../parts/GpuTable";
 import GpuList from "../parts/GpuFetch";
+import CpuList from "../parts/CpuFetch";
 import HddTable from "../parts/HddTable";
 import PsuTable from "../parts/PsuTable";
 import RamTable from "../parts/RamTable";
@@ -11,6 +11,7 @@ import pcCaseBlack from "../images/inner-case/pc-case-with-mobo-black.png";
 
 function CreateBuild() {
   const gpus = GpuList();
+  const cpus = CpuList();
 
   const [gpuChoice, setGpuChoice] = useState([]);
   const [colors, setColors] = useState([]);
@@ -25,7 +26,12 @@ function CreateBuild() {
     size: "",
   });
 
-  const handleClick = e => {
+  const handleGpuClick = e => {
+    const selected = e;
+    setGpuChoice(selected);
+  };
+
+  const handleCpuClick = e => {
     const selected = e;
     console.log("poop", selected);
     setGpuChoice(selected);
@@ -185,7 +191,7 @@ function CreateBuild() {
 
                             <tr
                               key={gpu["id"]}
-                              onClick={() => handleClick(gpu)}
+                              onClick={() => handleGpuClick(gpu)}
                             >
                               <td>{gpu["manufacturer"]}</td>
                               <td>{gpu["chipset"]}</td>
@@ -239,7 +245,33 @@ function CreateBuild() {
                   ></button>
                 </div>
                 <div className='modal-body bg-secondary'>
-                  <CpuTable />
+                  <table className='table table-hover table-dark'>
+                    <thead>
+                      <tr>
+                        <th>Processor</th>
+                        <th>Cores</th>
+                        <th>Threads</th>
+                        <th>Speed</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {cpus.map(cpu => {
+                        return (
+                          <>
+                            <tr
+                              key={cpu["id"]}
+                              onClick={() => handleCpuClick(cpu)}
+                            >
+                              <td>{cpu["processor"]}</td>
+                              <td>{cpu["cores"]}</td>
+                              <td>{cpu["threads"]}</td>
+                              <td>{cpu["speed"]}</td>
+                            </tr>
+                          </>
+                        );
+                      })}
+                    </tbody>
+                  </table>
                 </div>
                 <div className='modal-footer'>
                   <button
