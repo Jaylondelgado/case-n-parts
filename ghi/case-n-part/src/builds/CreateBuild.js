@@ -367,7 +367,6 @@ function CreateBuild() {
                     aria-label="Close"
                   ></button>
                 </div>
-<<<<<<< HEAD
                 <div className='modal-body bg-secondary'>
                   <table className='table table-hover table-dark'>
                     <thead>
@@ -392,10 +391,6 @@ function CreateBuild() {
                       })}
                     </tbody>
                   </table>
-=======
-                <div className="modal-body bg-secondary">
-                  <RamTable />
->>>>>>> 6b68959e60422ac1ab40376974d1b6efbd6ddf89
                 </div>
                 <div className="modal-footer">
                   <button

@@ -122,6 +122,7 @@ class BuildsQueries:
                     """
                     SELECT
                         build.id,
+                        build.userid,
                         build."Name",
                         color.name,
                         "size".name,
@@ -349,6 +350,7 @@ class BuildsQueries:
                     """
                     SELECT
                         build.id,
+                        build.userid,
                         build."Name",
                         build."Private",
                         color.name,
@@ -494,7 +496,7 @@ class BuildsQueries:
                     )
                 cursor.execute(
                     """
-                    SELECT build.id, build."Name", build.moboid, build.cpuid, build.psuid, build."Private"
+                    SELECT build.id, build."Name", build.moboid, build.cpuid, build.psuid, build."Private", build.userid
                     FROM build
                     WHERE build.id = %s
                     
