@@ -13,7 +13,7 @@ class UsersQueries:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """
-                        SELECT username, password, email
+                        SELECT id, username, password, email
                         FROM "user"
                         WHERE "user".username = %s
                     """,
@@ -122,6 +122,7 @@ class BuildsQueries:
                     """
                     SELECT
                         build.id,
+                        build.userid,
                         build."Name",
                         color.name,
                         "size".name,
@@ -184,17 +185,17 @@ class BuildsQueries:
                 rows = cursor.fetchall()
                 return list(rows)
     
-    def create_build(self, Name, moboid, cpuid, psuid, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size, picture):
+    def create_build(self, Name, moboid, cpuid, psuid,userid:int, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size, picture):
         with pool.connection() as connection:
             with connection.cursor() as cursor:
                 with connection.transaction():
                     cursor.execute(
                         """
-                        INSERT INTO build("Name", moboid, cpuid, psuid)
-                        VALUES(%s, %s, %s, %s)
+                        INSERT INTO build("Name", moboid, cpuid, psuid, userid)
+                        VALUES(%s, %s, %s, %s, %s)
                         RETURNING id 
                     """,
-                        [Name, moboid, cpuid, psuid]
+                        [Name, moboid, cpuid, psuid, userid]
                     )
                     new_build_id = cursor.fetchone()[0]
                     cursor.execute(
@@ -228,7 +229,7 @@ class BuildsQueries:
                     )
                 cursor.execute(
                     """
-                    SELECT build.id, build."Name", build.moboid, build.cpuid, build.psuid, build."Private"
+                    SELECT build.id, build."Name", build.moboid, build.cpuid, build.psuid, build."Private", build.userid
                     FROM build
                     WHERE build.id = %s
                     
@@ -238,6 +239,111 @@ class BuildsQueries:
                 )
                 rows = cursor.fetchone()
                 return list(rows)
+    
+    def get_build_by_user(self, userid:int):
+        with pool.connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    SELECT
+                        build.id,
+                        build."Name",
+                        build."Private",
+                        color.name,
+                        "size".name,
+                        caseimage.picture,
+                        buildgpus.gpuid,
+                        buildgpus.cardcount,
+                        gpu.manufacturer,
+                        gpu.chipset,
+                        gpu.core_clock_speed,
+                        gpu.video_memory,
+                        gpu.memory_type,
+                        gpu.height,
+                        gpu.length,
+                        gpu.width,
+                        gpu.hdmi,
+                        gpu.display_port,
+                        buildhdds.hddid,
+                        buildhdds.hddcount,
+                        hdd.brand,
+                        hdd.capacity,
+                        hdd.interface,
+                        hdd.cache,
+                        hdd.rpm,
+                        buildram.ramid,
+                        buildram.ramcount,
+                        ram.brand,
+                        ram.memory_type,
+                        ram.memory_speed,
+                        ram.memory_channels,
+                        ram.pin_configuration,
+                        mobos.id,
+                        mobos.brand,
+                        mobos.socket_type,
+                        mobos.max_memory,
+                        mobos.max_memory_per_slot,
+                        mobos.pcie_slots,
+                        mobos.memory_slots,
+                        cpu.id,
+                        cpu.processor,
+                        cpu.cores,
+                        cpu.threads,
+                        cpu.speed,
+                        cpu.socket_type,
+                        psu.id,
+                        psu.brand,
+                        psu.wattage,
+                        psu.atx_connector,
+                        psu.atx_12v_connector,
+                        psu.graphics_connector,
+                        psu.molex_connector,
+                        psu.sata_connector
+                    FROM public.build
+                    
+
+                    -- Join case information
+                    INNER JOIN public.case
+                    ON "case".buildid = build.id
+                    INNER JOIN public.size
+                        ON "size".id = "case".size
+                    INNER JOIN public.color
+                        ON color.id = "case".color
+                    INNER JOIN public.caseimage
+                        ON caseimage.id = "case".picture
+
+                    -- Join GPU info
+                    INNER JOIN public.BuildGpus
+                    INNER JOIN public.gpu
+                        ON gpu.id = BuildGpus.gpuid
+                    ON BuildGpus.BuildId = build.id
+
+                    -- Join HDD information.
+                    INNER JOIN public.buildhdds
+                    INNER JOIN public.hdd
+                        ON hdd.id = buildhdds.hddid
+                    ON buildhdds.id = build.id
+
+                    -- Join RAM information
+                    INNER JOIN public.buildram
+                    INNER JOIN public.ram
+                        ON ram.id = buildram.ramid
+                    ON build.id = buildram.id
+
+                    -- Join simple information.
+                    INNER JOIN public.mobos
+                    ON mobos.id = build.moboid
+                    INNER JOIN public.cpu
+                    ON cpu.id = build.cpuid
+                    INNER JOIN public.psu
+                    ON psu.id = build.psuid
+                    WHERE userid = %s
+                """,
+                    [userid]
+                )
+                rows = cursor.fetchall()
+                return list(rows)
+
     def get_build(self, id:int):
         with pool.connection() as connection:
             with connection.cursor() as cursor:
@@ -245,6 +351,7 @@ class BuildsQueries:
                     """
                     SELECT
                         build.id,
+                        build.userid,
                         build."Name",
                         build."Private",
                         color.name,
@@ -390,7 +497,7 @@ class BuildsQueries:
                     )
                 cursor.execute(
                     """
-                    SELECT build.id, build."Name", build.moboid, build.cpuid, build.psuid, build."Private"
+                    SELECT build.id, build."Name", build.moboid, build.cpuid, build.psuid, build."Private", build.userid
                     FROM build
                     WHERE build.id = %s
                     

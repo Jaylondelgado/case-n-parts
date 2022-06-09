@@ -16,45 +16,47 @@ def row_to_create_build(row):
         "cpuid": row[3],
         "psuid": row[4],
         "Private": row[5],
+        "userid": row[6],
     }
     return build
 
 def row_to_list_build(row):
     build ={
         "id": row[0],
-        "Name": row[1],
-        "color": row[2],
-        "size": row[3],
-        "picture": row[4],
+        "userid": row[1],
+        "Name": row[2],
+        "color": row[3],
+        "size": row[4],
+        "picture": row[5],
         "gpu": {
-            "id": row[5],
-            "manufacturer": row[6],
-            "chipset": row[7],
+            "id": row[6],
+            "manufacturer": row[7],
+            "chipset": row[8],
         },
         "hdd": {
-            "id": row[8],
-            "brand": row[9],
-            "capacity": row[10],
+            "id": row[9],
+            "brand": row[10],
+            "capacity": row[11],
         },
         "ram": {
-            "id": row[11],
-            "brand": row[12],
+            "id": row[12],
+            "brand": row[13],
         },
         "mobo": {
-            "id": row[13],
-            "brand": row[14],
-            "socket_type": row[15],
-            "max_memory": row[16],
+            "id": row[14],
+            "brand": row[15],
+            "socket_type": row[16],
+            "max_memory": row[17],
         },
         "cpu": {
-            "id": row[17],
-            "processor": row[18],
-            "cores": row[19],
-            "socket_type": row[20],
+            "id": row[18],
+            "processor": row[19],
+            "cores": row[20],
+            "socket_type": row[21],
         },
         "psu": {
-            "id": row[21],
-            "brand": row[22],
+            "id": row[22],
+            "brand": row[23],
         },
     }
     return build
@@ -62,69 +64,70 @@ def row_to_list_build(row):
 def row_to_build(row):
     build = {
         "id": row[0],
-        "name": row[1],
-        "Private": row[2],
-        "color": row[3],
-        "size": row[4],
-        "picture": row[5],
+        "userid": row[1],
+        "name": row[2],
+        "Private": row[3],
+        "color": row[4],
+        "size": row[5],
+        "picture": row[6],
         "gpu": {
-            "id": row[6],
-            "card_count": row[7],
-            "manufacturer": row[8],
-            "chipset": row[9],
-            "core_clock_speed": row[10],
-            "video_memory": row[11],
-            "memory_type": row[12],
-            "height": row[13],
-            "length": row[14],
-            "width": row[15],
-            "hdmi": row[16],
-            "display_port": row[17],
+            "id": row[7],
+            "card_count": row[8],
+            "manufacturer": row[9],
+            "chipset": row[10],
+            "core_clock_speed": row[11],
+            "video_memory": row[12],
+            "memory_type": row[13],
+            "height": row[14],
+            "length": row[15],
+            "width": row[16],
+            "hdmi": row[17],
+            "display_port": row[18],
         },
         "hdd": {
-            "id": row[18],
-            "hddcount": row[19],
-            "brand": row[20],
-            "capacity": row[21],
-            "interface": row[22],
-            "cache": row[23],
-            "rpm": row[24],
+            "id": row[19],
+            "hddcount": row[20],
+            "brand": row[21],
+            "capacity": row[22],
+            "interface": row[23],
+            "cache": row[24],
+            "rpm": row[25],
         },
         "ram": {
-            "id": row[25],
-            "ramcount": row[26],
-            "brand": row[27],
-            "memory_type": row[28],
-            "memory_speed": row[29],
-            "memory_channels": row[30],
-            "pin_configuration": row[31],
+            "id": row[26],
+            "ramcount": row[27],
+            "brand": row[28],
+            "memory_type": row[29],
+            "memory_speed": row[30],
+            "memory_channels": row[31],
+            "pin_configuration": row[32],
         },
         "mobo": {
-            "id": row[32],
-            "brand": row[33],
-            "socket_type": row[34],
-            "max_memory": row[35],
-            "max_memory_per_slot": row[36],
-            "pcie_slots": row[37],
-            "memory_slots": row[38],
+            "id": row[33],
+            "brand": row[34],
+            "socket_type": row[35],
+            "max_memory": row[36],
+            "max_memory_per_slot": row[37],
+            "pcie_slots": row[38],
+            "memory_slots": row[39],
         },
         "cpu": {
-            "id": row[39],
-            "processor": row[40],
-            "cores": row[41],
-            "threads": row[42],
-            "speed": row[43],
-            "socket_type": row[44],
+            "id": row[40],
+            "processor": row[41],
+            "cores": row[42],
+            "threads": row[43],
+            "speed": row[44],
+            "socket_type": row[45],
         },
         "psu": {
-            "id": row[45],
-            "brand": row[46],
-            "wattage": row[47],
-            "atx_connector": row[48],
-            "atx_12v_connector": row[49],
-            "graphics_connector": row[50],
-            "molex_connector": row[51],
-            "sata_connector": row[52]
+            "id": row[46],
+            "brand": row[47],
+            "wattage": row[48],
+            "atx_connector": row[49],
+            "atx_12v_connector": row[50],
+            "graphics_connector": row[51],
+            "molex_connector": row[52],
+            "sata_connector": row[53]
         }
     }
     return build
@@ -138,10 +141,10 @@ def build_list(query=Depends(BuildsQueries)):
 
 # Example of how to get the current user for an endpoint
 @router.get("/api/builds/mine", response_model=Build)
-def gpu_list(query=Depends(BuildsQueries), current_user: User = Depends(get_current_active_user)):
-    rows = query.get_user_builds(current_user)
+def my_build_list(query=Depends(BuildsQueries), current_user: User = Depends(get_current_active_user)):
+    rows = query.get_build_by_user(current_user["id"])
     return {
-        "gpus": [row_to_build(row) for row in rows],
+        "builds": [row_to_build(row) for row in rows],
     }
 
 @router.post(
@@ -154,9 +157,10 @@ def gpu_list(query=Depends(BuildsQueries), current_user: User = Depends(get_curr
 def create_build(
     build: InsertBuild,
     query = Depends(BuildsQueries),
+    current_user: User = Depends(get_current_active_user)
 ):
 
-    row = query.create_build(build.Name, build.moboid, build.cpuid, build.psuid, build.gpuid, build.cardcount, build.hddid, build.hddcount, build.ramid, build.ramcount, build.color, build.size, build.picture)
+    row = query.create_build(build.Name, build.moboid, build.cpuid, build.psuid, current_user["id"], build.gpuid, build.cardcount, build.hddid, build.hddcount, build.ramid, build.ramcount, build.color, build.size, build.picture)
     return row_to_create_build(row)
 
 @router.get(
