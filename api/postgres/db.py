@@ -245,6 +245,7 @@ class BuildsQueries:
                     SELECT
                         build.id,
                         build."Name",
+                        build."Private",
                         color.name,
                         "size".name,
                         caseimage.picture,
