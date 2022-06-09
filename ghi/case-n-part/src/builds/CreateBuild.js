@@ -37,10 +37,8 @@ function CreateBuild() {
     manufacturer: "",
     chipset: "",
   });
-  const [state, setState] = useState({
-    color: "",
-    size: "",
-  });
+  const [colorState, setColorState] = useState("");
+  const [sizeState, setSizeState] = useState("");
 
   const handleGpuClick = e => {
     const selected = e;
@@ -86,17 +84,19 @@ function CreateBuild() {
     getSizeData();
   }, []);
 
-  const handleChange = event => {
+  const handleColorChange = event => {
     const value = event.target.value;
-    setState({
-      ...state,
-      [event.target.name]: value,
-    });
+    setColorState(value);
     if (value === "") {
       setCaseColor(caseColors["black"]);
     } else {
       setCaseColor(caseColors[colors[value - 1].name]);
     }
+  };
+
+  const handleSizeChange = event => {
+    const value = event.target.value;
+    setSizeState(value);
   };
 
   return (
@@ -449,8 +449,8 @@ function CreateBuild() {
 
         <div className='col-md-3 offset-md-3 '>
           <select
-            onChange={handleChange}
-            value={state.color}
+            onChange={handleColorChange}
+            value={colorState}
             name='color'
             id='color'
             className='form-select w-75'
@@ -466,8 +466,8 @@ function CreateBuild() {
             })}
           </select>
           <select
-            onChange={handleChange}
-            value={state.sizes}
+            onChange={handleSizeChange}
+            value={sizeState}
             name='size'
             id='size'
             className='form-select w-75'
