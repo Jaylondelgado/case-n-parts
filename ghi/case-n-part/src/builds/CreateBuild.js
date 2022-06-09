@@ -88,7 +88,7 @@ function CreateBuild() {
           >
             <div className="modal-dialog">
               <div className="modal-content">
-                <div className="modal-header">
+                <div className="modal-header bg-secondary">
                   <h5 className="modal-title" id="exampleModalLabel">
                     PSU
                   </h5>
@@ -99,7 +99,7 @@ function CreateBuild() {
                     aria-label="Close"
                   ></button>
                 </div>
-                <div className="modal-body">
+                <div className="modal-body bg-secondary">
                   <PsuTable />
                 </div>
                 <div className="modal-footer">
@@ -109,9 +109,6 @@ function CreateBuild() {
                     data-bs-dismiss="modal"
                   >
                     Close
-                  </button>
-                  <button type="button" className="btn btn-primary">
-                    Save changes
                   </button>
                 </div>
               </div>
@@ -136,7 +133,7 @@ function CreateBuild() {
           >
             <div className="modal-dialog">
               <div className="modal-content">
-                <div className="modal-header">
+                <div className="modal-header bg-secondary">
                   <h5 className="modal-title" id="exampleModalLabel">
                     GPU
                   </h5>
@@ -147,7 +144,7 @@ function CreateBuild() {
                     aria-label="Close"
                   ></button>
                 </div>
-                <div className="modal-body">
+                <div className="modal-body bg-secondary">
                   <GpuTable />
                 </div>
                 <div className="modal-footer">
@@ -157,9 +154,6 @@ function CreateBuild() {
                     data-bs-dismiss="modal"
                   >
                     Close
-                  </button>
-                  <button type="button" className="btn btn-primary">
-                    Save changes
                   </button>
                 </div>
               </div>
@@ -184,7 +178,7 @@ function CreateBuild() {
           >
             <div className="modal-dialog">
               <div className="modal-content">
-                <div className="modal-header">
+                <div className="modal-header bg-secondary">
                   <h5 className="modal-title" id="exampleModalLabel">
                     CPU
                   </h5>
@@ -195,7 +189,7 @@ function CreateBuild() {
                     aria-label="Close"
                   ></button>
                 </div>
-                <div className="modal-body">
+                <div className="modal-body bg-secondary">
                   <CpuTable />
                 </div>
                 <div className="modal-footer">
@@ -205,9 +199,6 @@ function CreateBuild() {
                     data-bs-dismiss="modal"
                   >
                     Close
-                  </button>
-                  <button type="button" className="btn btn-primary">
-                    Save changes
                   </button>
                 </div>
               </div>
@@ -232,7 +223,7 @@ function CreateBuild() {
           >
             <div className="modal-dialog">
               <div className="modal-content">
-                <div className="modal-header">
+                <div className="modal-header bg-secondary">
                   <h5 className="modal-title" id="exampleModalLabel">
                     HDD
                   </h5>
@@ -243,7 +234,7 @@ function CreateBuild() {
                     aria-label="Close"
                   ></button>
                 </div>
-                <div className="modal-body">
+                <div className="modal-body bg-secondary">
                   <HddTable />
                 </div>
                 <div className="modal-footer">
@@ -253,9 +244,6 @@ function CreateBuild() {
                     data-bs-dismiss="modal"
                   >
                     Close
-                  </button>
-                  <button type="button" className="btn btn-primary">
-                    Save changes
                   </button>
                 </div>
               </div>
@@ -280,7 +268,7 @@ function CreateBuild() {
           >
             <div className="modal-dialog">
               <div className="modal-content">
-                <div className="modal-header">
+                <div className="modal-header bg-secondary">
                   <h5 className="modal-title" id="exampleModalLabel">
                     RAM
                   </h5>
@@ -291,7 +279,7 @@ function CreateBuild() {
                     aria-label="Close"
                   ></button>
                 </div>
-                <div className="modal-body">
+                <div className="modal-body bg-secondary">
                   <RamTable />
                 </div>
                 <div className="modal-footer">
@@ -301,9 +289,6 @@ function CreateBuild() {
                     data-bs-dismiss="modal"
                   >
                     Close
-                  </button>
-                  <button type="button" className="btn btn-primary">
-                    Save changes
                   </button>
                 </div>
               </div>

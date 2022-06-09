@@ -6,7 +6,7 @@ function HddTable() {
   const hdds = HddList();
 
   return (
-    <table className="table">
+    <table className="table table-hover table-dark">
       <thead>
         <tr>
           <th>Brand</th>
