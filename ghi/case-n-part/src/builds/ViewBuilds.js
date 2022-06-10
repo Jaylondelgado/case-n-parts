@@ -16,15 +16,18 @@ function ViewBuildsList() {
 
   return (
     <>
-      <div className="row">
-        <div className="col">col</div>
-        <div className="col">col</div>
-        <div className="col">col</div>
-        <div className="col">col</div>
-      </div>
-      <div className="row">
-        <div className="col-8">col-8</div>
-        <div className="col-4">col-4</div>
+      <div className='container-fluid'>
+        <div className='row justify-content-md-center'>
+         <div className="row">
+            <div className="col-fluid">col</div>
+          </div>
+          <div className="container d-flex justify-content-center">
+          <div className="row">
+            {/* <div className="col-8">col-8</div>
+            <div className="col-4">col-4</div> */}
+          </div>
+          </div>
+        </div>
       </div>
     </>
   );

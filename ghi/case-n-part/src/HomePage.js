@@ -2,6 +2,10 @@ import React from "react";
 import "./index.css";
 import "./HomePage.css";
 
+import blackCase from "./images/outer-case/black.png";
+import pinkCase from "./images/outer-case/pink.png";
+import greenCase from "./images/outer-case/green.png";
+
 function HomePage() {
   return (
     <>
@@ -26,7 +30,7 @@ function HomePage() {
         </div>
       </div>
       <div className="our-cases">
-        <h1>Our Cases</h1>
+        <h1>Our Case Colors</h1>
         <div
           id="case-carousel"
           className="carousel slide pb-5"
@@ -57,25 +61,13 @@ function HomePage() {
           </div>
           <div className="carousel-inner">
             <div className="carousel-item active">
-              <img
-                src="https://i.ibb.co/pKn8MJ7/black.png"
-                alt="an case"
-                className="img-fluid"
-              />
+              <img src={blackCase} alt="an case" className="img-fluid" />
             </div>
             <div className="carousel-item">
-              <img
-                src="https://c1.neweggimages.com/ProductImage/AFSTS2112102mvyB.jpg"
-                alt="an case2"
-                className="img-fluid"
-              />
+              <img src={pinkCase} alt="an case2" className="img-fluid" />
             </div>
             <div className="carousel-item">
-              <img
-                src="https://c1.neweggimages.com/ProductImage/11-173-041-V01.jpg"
-                alt="an case3"
-                className="img-fluid"
-              />
+              <img src={greenCase} alt="an case3" className="img-fluid" />
             </div>
           </div>
           <button

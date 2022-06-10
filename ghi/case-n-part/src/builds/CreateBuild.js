@@ -1,102 +1,81 @@
 import React, { useEffect, useState } from "react";
 
-import GpuList from "../parts/GpuFetch";
-import CpuList from "../parts/CpuFetch";
-import PsuList from "../parts/PsuFetch";
-import RamList from "../parts/RamFetch";
+import useApiData from "../parts/ApiFetch";
 
 import pcCaseBlack from "../images/inner-case/pc-case-with-mobo-black.png";
 import pcCasePink from "../images/inner-case/pc-case-with-mobo-pink.png";
 import pcCaseGreen from "../images/inner-case/pc-case-with-mobo-green.png";
-import HddList from "../parts/HddsFetch";
+
+const basePath = "http://localhost:8000";
 
 function CreateBuild() {
-  const gpus = GpuList();
-  const cpus = CpuList();
-  const psus = PsuList();
-  const rams = RamList();
-  const hdds = HddList();
-
-  const caseColors = {
-    empty: "",
-    black: pcCaseBlack,
-    red: pcCasePink,
-    green: pcCaseGreen,
-  };
-
   const [gpuChoice, setGpuChoice] = useState([]);
   const [cpuChoice, setCpuChoice] = useState([]);
   const [psuChoice, setPsuChoice] = useState([]);
   const [ramChoice, setRamChoice] = useState([]);
   const [hddChoice, setHddChoice] = useState([]);
-  const [colors, setColors] = useState([]);
-  const [sizes, setSizes] = useState([]);
   const [caseColor, setCaseColor] = useState(pcCaseBlack);
 
   const [gpuState, setGpuState] = useState({
     manufacturer: "",
     chipset: "",
   });
-  const [state, setState] = useState({
-    color: "",
-    size: "",
-  });
 
-  const handleGpuClick = e => {
-    const selected = e;
+  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
+
+  const gpus = useApiData(`${basePath}/api/gpus/`, "gpus");
+  const cpus = useApiData(`${basePath}/api/cpus/`, "cpus");
+  const psus = useApiData(`${basePath}/api/psus/`, "psus");
+  const rams = useApiData(`${basePath}/api/rams/`, "rams");
+  const hdds = useApiData(`${basePath}/api/hdds`, "hdds");
+  const colors = useApiData(`${basePath}/api/color/`, "colors");
+  const sizes = useApiData(`${basePath}/api/size/`, "sizes");
+
+  const caseColors = {
+    black: pcCaseBlack,
+    red: pcCasePink,
+    green: pcCaseGreen,
+  };
+
+  const handleGpuClick = gpu => {
+    const selected = gpu;
     setGpuChoice(selected);
   };
 
-  const handleCpuClick = e => {
-    const selected = e;
+  const handleCpuClick = cpu => {
+    const selected = cpu;
     setCpuChoice(selected);
   };
 
-  const handlePsuClick = e => {
-    const selected = e;
+  const handlePsuClick = psu => {
+    const selected = psu;
     setPsuChoice(selected);
   };
 
-  const handleRamClick = e => {
-    const selected = e;
+  const handleRamClick = ram => {
+    const selected = ram;
     setRamChoice(selected);
   };
 
-  const handleHddClick = e => {
-    const selected = e;
-    console.log(selected);
+  const handleHddClick = hdd => {
+    const selected = hdd;
     setHddChoice(selected);
   };
 
-  useEffect(() => {
-    const getColorData = async () => {
-      const colorRes = await fetch("http://localhost:8000/api/color/");
-      const colorData = await colorRes.json();
-      setColors(colorData.colors);
-    };
-    getColorData();
-  }, []);
-  useEffect(() => {
-    const getSizeData = async () => {
-      const sizeRes = await fetch("http://localhost:8000/api/size/");
-      const sizeData = await sizeRes.json();
-      setSizes(sizeData.sizes);
-    };
-
-    getSizeData();
-  }, []);
-
-  const handleChange = event => {
+  const handleColorChange = event => {
     const value = event.target.value;
-    setState({
-      ...state,
-      [event.target.name]: value,
-    });
+    setSelectedColor(value);
     if (value === "") {
       setCaseColor(caseColors["black"]);
     } else {
       setCaseColor(caseColors[colors[value - 1].name]);
     }
+  };
+
+  const handleSizeChange = event => {
+    const value = event.target.value;
+    setSelectedSize(value);
   };
 
   return (
@@ -444,13 +423,13 @@ function CreateBuild() {
       </div>
       <div className='row justify-content-md-center'>
         <div className='col-md-2 offset-md-3'>
-          <img src={caseColor} alt='empty case' width='500' />
+          <img src={caseColor} alt='pc case image' width='500' />
         </div>
 
         <div className='col-md-3 offset-md-3 '>
           <select
-            onChange={handleChange}
-            value={state.color}
+            onChange={handleColorChange}
+            value={selectedColor}
             name='color'
             id='color'
             className='form-select w-75'
@@ -466,8 +445,8 @@ function CreateBuild() {
             })}
           </select>
           <select
-            onChange={handleChange}
-            value={state.sizes}
+            onChange={handleSizeChange}
+            value={selectedSize}
             name='size'
             id='size'
             className='form-select w-75'
@@ -482,6 +461,9 @@ function CreateBuild() {
               );
             })}
           </select>
+          <div className='col-md-3 offset-md-3'>
+            <button className='btn btn-outline-primary mt-4'>Create</button>
+          </div>
         </div>
       </div>
     </div>
