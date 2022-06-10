@@ -20,7 +20,6 @@ function BuildList() {
       <div class="row">
         {builds.map((build) => {
           return (
-            // <div class="col-lg-6 mb-4 justify-content-md-center">
             <div className="col-sm m-3">
               <div
                 className="card h-100 border-light bg-transparent"
