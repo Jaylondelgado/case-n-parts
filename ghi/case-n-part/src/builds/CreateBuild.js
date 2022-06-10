@@ -38,31 +38,6 @@ function CreateBuild() {
     green: pcCaseGreen,
   };
 
-<<<<<<< HEAD
-  const handleGpuClick = (e) => {
-    const selected = e;
-    setGpuChoice(selected);
-  };
-
-  const handleCpuClick = (e) => {
-    const selected = e;
-    setCpuChoice(selected);
-  };
-
-  const handlePsuClick = (e) => {
-    const selected = e;
-    setPsuChoice(selected);
-  };
-
-  const handleRamClick = (e) => {
-    const selected = e;
-    setRamChoice(selected);
-  };
-
-  const handleHddClick = (e) => {
-    const selected = e;
-    console.log(selected);
-=======
   const handleGpuClick = gpu => {
     const selected = gpu;
     setGpuChoice(selected);
@@ -85,7 +60,6 @@ function CreateBuild() {
 
   const handleHddClick = hdd => {
     const selected = hdd;
->>>>>>> 75d57b6c5f0a0bace0accc822b576ed72ba9dff4
     setHddChoice(selected);
   };
 
