@@ -80,7 +80,7 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
         expire = datetime.utcnow() + expires_delta
     else:
         expire = datetime.utcnow() + timedelta(minutes=15)
-    to_encode.update({"exp": expire})
+    # to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
@@ -97,16 +97,13 @@ async def get_current_user(
     )
     token = bearer_token
     if not token and cookie_token:
-        print(cookie_token)
         token = cookie_token
-        print(token)
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username = payload.get("sub")
         if username is None:
             raise credentials_exception
     except (JWTError, AttributeError):
-        print("cookieEEEEEEEEEEEEE")
         raise credentials_exception
     user = repo.get_user(username)
     if user is None:
@@ -148,7 +145,6 @@ async def login_for_access_token(response: Response, request: Request, form_data
         samesite=samesite,
         secure=secure,
     )
-    print(token)
     return token
     
 

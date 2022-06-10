@@ -20,7 +20,6 @@ class UsersQueries:
                         [username]
                 )
                 rows = cursor.fetchone()
-                print(rows)
                 return rows
 
     def create_user(self, username: str, hashed_password: str, email: str = None):
@@ -507,7 +506,6 @@ class BuildsQueries:
                     [build_id]
                 )
                 rows = cursor.fetchone()
-                print("build id:", build_id)
                 return list(rows)
 
 
@@ -522,7 +520,6 @@ class CaseQueries:
                     """
                 )
                 rows = cursor.fetchall()
-                print(rows)
                 return list(rows)
 
     def list_size(self):
@@ -535,7 +532,6 @@ class CaseQueries:
                     """
                 )
                 rows = cursor.fetchall()
-                print(rows)
                 return list(rows)
 
     def list_caseimage(self):
@@ -548,5 +544,4 @@ class CaseQueries:
                     """
                 )
                 rows = cursor.fetchall()
-                print(rows)
                 return list(rows)
