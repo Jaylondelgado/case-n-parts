@@ -145,7 +145,6 @@ def build_list(query=Depends(BuildsQueries)):
 def my_build_list(query=Depends(BuildsQueries), current_user: User = Depends(get_current_active_user)):
 
     rows = query.get_build_by_user(current_user["id"])
-    print("rows", rows)
     dict = {
         "builds": [row_to_build(row) for row in rows],
     }
