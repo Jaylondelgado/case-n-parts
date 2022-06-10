@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-import GpuList from "../parts/GpuFetch";
-import CpuList from "../parts/CpuFetch";
-import PsuList from "../parts/PsuFetch";
-import RamList from "../parts/RamFetch";
+import useApiData from "../parts/ApiFetch";
 
 import pcCaseBlack from "../images/inner-case/pc-case-with-mobo-black.png";
 import pcCasePink from "../images/inner-case/pc-case-with-mobo-pink.png";
 import pcCaseGreen from "../images/inner-case/pc-case-with-mobo-green.png";
-import HddList from "../parts/HddsFetch";
+
+const basePath = "http://localhost:8000";
 
 function CreateBuild() {
   const [gpuChoice, setGpuChoice] = useState([]);
@@ -16,8 +14,6 @@ function CreateBuild() {
   const [psuChoice, setPsuChoice] = useState([]);
   const [ramChoice, setRamChoice] = useState([]);
   const [hddChoice, setHddChoice] = useState([]);
-  const [colors, setColors] = useState([]);
-  const [sizes, setSizes] = useState([]);
   const [caseColor, setCaseColor] = useState(pcCaseBlack);
 
   const [gpuState, setGpuState] = useState({
@@ -28,59 +24,42 @@ function CreateBuild() {
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
 
-  const gpus = GpuList();
-  const cpus = CpuList();
-  const psus = PsuList();
-  const rams = RamList();
-  const hdds = HddList();
+  const gpus = useApiData(`${basePath}/api/gpus/`, "gpus");
+  const cpus = useApiData(`${basePath}/api/cpus/`, "cpus");
+  const psus = useApiData(`${basePath}/api/psus/`, "psus");
+  const rams = useApiData(`${basePath}/api/rams/`, "rams");
+  const hdds = useApiData(`${basePath}/api/hdds`, "hdds");
+  const colors = useApiData(`${basePath}/api/color/`, "colors");
+  const sizes = useApiData(`${basePath}/api/size/`, "sizes");
 
-  useEffect(() => {
-    const getColorData = async () => {
-      const colorRes = await fetch("http://localhost:8000/api/color/");
-      const colorData = await colorRes.json();
-      setColors(colorData.colors);
-    };
-    getColorData();
-  }, []);
-  useEffect(() => {
-    const getSizeData = async () => {
-      const sizeRes = await fetch("http://localhost:8000/api/size/");
-      const sizeData = await sizeRes.json();
-      setSizes(sizeData.sizes);
-    };
-
-    getSizeData();
-  }, []);
   const caseColors = {
-    empty: "",
     black: pcCaseBlack,
     red: pcCasePink,
     green: pcCaseGreen,
   };
 
-  const handleGpuClick = e => {
-    const selected = e;
+  const handleGpuClick = gpu => {
+    const selected = gpu;
     setGpuChoice(selected);
   };
 
-  const handleCpuClick = e => {
-    const selected = e;
+  const handleCpuClick = cpu => {
+    const selected = cpu;
     setCpuChoice(selected);
   };
 
-  const handlePsuClick = e => {
-    const selected = e;
+  const handlePsuClick = psu => {
+    const selected = psu;
     setPsuChoice(selected);
   };
 
-  const handleRamClick = e => {
-    const selected = e;
+  const handleRamClick = ram => {
+    const selected = ram;
     setRamChoice(selected);
   };
 
-  const handleHddClick = e => {
-    const selected = e;
-    console.log(selected);
+  const handleHddClick = hdd => {
+    const selected = hdd;
     setHddChoice(selected);
   };
 
@@ -482,8 +461,8 @@ function CreateBuild() {
               );
             })}
           </select>
-          <div className="col-md-3 offset-md-3">
-            <button className="btn btn-outline-primary mt-4">Create</button>
+          <div className='col-md-3 offset-md-3'>
+            <button className='btn btn-outline-primary mt-4'>Create</button>
           </div>
         </div>
       </div>
