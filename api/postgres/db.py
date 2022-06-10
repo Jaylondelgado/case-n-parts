@@ -247,6 +247,7 @@ class BuildsQueries:
                     """
                     SELECT
                         build.id,
+                        build.userid,
                         build."Name",
                         build."Private",
                         color.name,

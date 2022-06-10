@@ -1,137 +1,130 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { GpuImage } from "../static/cnpStyle";
-function BuildColumn(props) {
+import React, { useState, useEffect, useContext, cloneElement } from "react";
+// import { UserContext } from "../authApi";
+
+import { Navigate, Link } from "react-router-dom";
+
+function MyBuilds() {
+  const [builds, setBuild] = useState([]);
+
+  useEffect(() => {
+    const getBuildData = async () => {
+      const buildResponse = await fetch(`${process.env.REACT_APP_ACCOUNTS_HOST}/api/builds/mine`, {
+        credentials: 'include',
+      });
+      const buildData = await buildResponse.json();
+      console.log(buildData)
+      setBuild(buildData.builds);
+    };
+
+    getBuildData();
+  }, []);
+  console.log(builds);
+
   return (
-    <div className="col">
-      {props.list.map((data) => {
-        const build = data.build;
+    <div class="container">
+    <div class="row">
+      {builds.map((build) => {
         return (
-          <div key={build.href} className="card mb-3 shadow">
-            <img
-              src={build.location.picture_url}
-              className="card-img-top"
-              alt="my build"
-            />
-            <div className="card-body">
-              <h5 className="card-title">{build.name}</h5>
-              <h6 className="card-subtitle mb-2 text-muted">
-                {build.location.name}
-              </h6>
-              <p className="card-text">{build.description}</p>
-            </div>
-            <div className="card-footer">
-              {new Date(build.starts).toLocaleDateString()}-
-              {new Date(build.ends).toLocaleDateString()}
-            </div>
+          <div class="col-lg-6 mb-4">
+            <div className="card" style={{width: "18rem"}} key={build.id}>
+              <img src={build.picture} className="card-img-top" alt="..." height={"100rem"}/>
+              <div className="card-body">
+                <h5 className="card-title">{build.Name}</h5>
+                <p className="card-text">{build.gpu.chipset}</p>
+                <a href="#" className="btn btn-primary">Build Detail</a>
+              </div>
+            </div> 
           </div>
         );
       })}
     </div>
+    </div>
   );
 }
-
-class MyBuilds extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      BuildColumns: [[], [], []],
-    };
-  }
-
-  async componentDidMount() {
-    const url = "http://localhost:8000/api/builds/";
-
-    try {
-      const response = await fetch(url);
-      if (response.ok) {
-        // Get the list of builds
-        const data = await response.json();
-
-        // Create a list of for all the requests and
-        // add all of the requests to it
-        const requests = [];
-        for (let build of data.builds) {
-          const detailUrl = `http://localhost:3000${build.href}`;
-          requests.push(fetch(detailUrl));
-        }
-
-        // Wait for all of the requests to finish
-        // simultaneously
-        const responses = await Promise.all(requests);
-
-        // Set up the "columns" to put the build
-        // information into
-        const BuildColumns = [[], [], []];
-
-        // Loop over the build detail responses and add
-        // each to to the proper "column" if the response is
-        // ok
-        let i = 0;
-        for (const buildResponse of responses) {
-          if (buildResponse.ok) {
-            const details = await buildResponse.json();
-            BuildColumns[i].push(details);
-            i = i + 1;
-            if (i > 2) {
-              i = 0;
-            }
-          } else {
-            console.error(buildResponse);
-          }
-        }
-
-        // Set the state to the new list of three lists of
-        // builds
-        this.setState({ BuildColumns: BuildColumns });
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  render() {
-    return (
-      <>
-        <div className="px-4 py-5 my-5 mt-0 text-center">
-          <img
-            className="bg-white rounded shadow d-block mx-auto mb-4"
-            src="/logo.svg"
-            alt="my builds2"
-            width="600"
-          />
-          <h1 className="display-5 fw-bold">My Builds</h1>
-          <div className="row">
-            <div className="column">
-              <GpuImage />
-            </div>
-            <div className="column">
-              <GpuImage />
-            </div>
-            <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-              <Link to="/create" className="btn btn-outline-secondary m-2">
-                Create a Build
-              </Link>
-            </div>
-          </div>
-        </div>
-        <div className="container">
-          <h1>Favorite Builds</h1>
-          <div className="row">
-            <GpuImage />
-            <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-              <Link to="/viewbuilds" className="btn btn-outline-secondary m-2">
-                View Builds
-              </Link>
-            </div>
-            {this.state.BuildColumns.map((buildList, index) => {
-              return <BuildColumn key={index} list={buildList} />;
-            })}
-          </div>
-        </div>
-      </>
-    );
-  }
-}
-
 export default MyBuilds;
+
+
+// class MyBuilds extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       builds: [],
+//       redirect: false,
+//   };
+//   }
+//   async getMyBuilds() {
+//     const url = `${process.env.REACT_APP_API_HOST}/api/builds/mine`;
+//     const response = await fetch(url, {
+//       credentials:'include',
+//     });
+//     if (response.ok) {
+//       this.setState({
+//         builds: await response.json(),
+//       });
+//       console.log(this.state.builds)
+//     }else if (response.status === 401) {
+//       this.setState({redirect: true})
+//     }
+//   }
+
+//   componentDidMount() {
+//     this.getMyBuilds();
+//   }
+//     render() {
+//       console.log(this.state)
+//       if(this.state.redirect === true) {
+//         return <Navigate to ='/login' />;
+//       }
+//       return (
+//         <>
+//   <div class="container">
+//     <div class="row">     
+//           <div class="col-lg-6 mb-4">
+//             <div className="card" style={{width: "18rem"}} >
+//               <img src={this.state.builds.picture} className="card-img-top" alt="..." height={"100rem"}/>
+//               <div className="card-body">
+//                 <h5 className="card-title">{this.state.builds.Name}</h5>
+//                 <p className="card-text">{this.state.builds.gpu}</p>
+//                 <a href="#" className="btn btn-primary">Build Detail</a>
+//               </div>
+//             </div> 
+//           </div>
+//     </div>
+//     </div>
+//         </>
+//       );
+//     }
+// }
+// export default MyBuilds;
+
+// class MyBuilds extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       user: null,
+//     };
+//   }
+
+//   async getMyDetails() {
+//     const url = `${process.env.REACT_APP_API_HOST}/users/me`;
+//     const response = await fetch(url, {
+//       credentials: 'include',
+//     });
+//     if (response.ok) {
+//       this.setState({
+//         user: await response.json(),
+//       });
+//     }
+//   }
+
+//   componentDidMount() {
+//     this.getMyDetails();
+//   }
+
+//   render() {
+//     return (
+//       <div>{this.state.user.username}</div>
+//     );
+//   }
+// }
+// export default MyBuilds;

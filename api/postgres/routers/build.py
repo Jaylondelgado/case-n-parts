@@ -7,6 +7,7 @@ from ..db import BuildsQueries
 from ..models.common import ErrorMessage
 from .accounts import User, get_current_active_user
 
+
 router = APIRouter()
 def row_to_create_build(row):
     build ={
@@ -142,10 +143,13 @@ def build_list(query=Depends(BuildsQueries)):
 # Example of how to get the current user for an endpoint
 @router.get("/api/builds/mine", response_model=Build)
 def my_build_list(query=Depends(BuildsQueries), current_user: User = Depends(get_current_active_user)):
+
     rows = query.get_build_by_user(current_user["id"])
-    return {
+    dict = {
         "builds": [row_to_build(row) for row in rows],
     }
+    return dict
+
 
 @router.post(
     "/api/build/create",
