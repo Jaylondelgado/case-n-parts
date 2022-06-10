@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./FetchBuilds.css"
 
 function BuildList() {
   const [builds, setBuild] = useState([]);
@@ -15,17 +16,18 @@ function BuildList() {
   console.log(builds);
 
   return (
-    <div class="container">
+    <div class="container justify-content-center pt-5 my-5">
     <div class="row">
       {builds.map((build) => {
         return (
-          <div class="col-lg-6 mb-4">
-            <div className="card" style={{width: "18rem"}} key={build.id}>
-              <img src={build.picture} className="card-img-top" alt="..." height={"100rem"}/>
+          // <div class="col-lg-6 mb-4 justify-content-md-center">
+          <div className="col-sm m-3">
+            <div className="card h-100 border-light bg-transparent" key={build.id}>
+              <img src={build.picture} className="card-img-top p-3" alt="..."/>
               <div className="card-body">
-                <h5 className="card-title">{build.Name}</h5>
-                <p className="card-text">{build.gpu.chipset}</p>
-                <a href="#" className="btn btn-primary">Build Detail</a>
+                <h5 className="card-title text-primary">{build.Name}</h5>
+                <p className="card-text text-primary">{build.gpu.chipset}</p>
+                <a href="#" className="btn btn-outline-primary">Build Detail</a>
               </div>
             </div> 
           </div>
