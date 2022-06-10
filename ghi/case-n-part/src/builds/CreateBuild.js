@@ -38,31 +38,6 @@ function CreateBuild() {
     green: pcCaseGreen,
   };
 
-<<<<<<< HEAD
-  const handleGpuClick = (e) => {
-    const selected = e;
-    setGpuChoice(selected);
-  };
-
-  const handleCpuClick = (e) => {
-    const selected = e;
-    setCpuChoice(selected);
-  };
-
-  const handlePsuClick = (e) => {
-    const selected = e;
-    setPsuChoice(selected);
-  };
-
-  const handleRamClick = (e) => {
-    const selected = e;
-    setRamChoice(selected);
-  };
-
-  const handleHddClick = (e) => {
-    const selected = e;
-    console.log(selected);
-=======
   const handleGpuClick = gpu => {
     const selected = gpu;
     setGpuChoice(selected);
@@ -85,11 +60,10 @@ function CreateBuild() {
 
   const handleHddClick = hdd => {
     const selected = hdd;
->>>>>>> 75d57b6c5f0a0bace0accc822b576ed72ba9dff4
     setHddChoice(selected);
   };
 
-  const handleColorChange = (event) => {
+  const handleColorChange = event => {
     const value = event.target.value;
     setSelectedColor(value);
     if (value === "") {
@@ -99,45 +73,45 @@ function CreateBuild() {
     }
   };
 
-  const handleSizeChange = (event) => {
+  const handleSizeChange = event => {
     const value = event.target.value;
     setSelectedSize(value);
   };
 
   return (
-    <div className="container-fluid my-5">
-      <div className="row justify-content-md-center py-4 g-4 mt-4">
-        <div className="col-sm-1">
+    <div className='container-fluid my-5'>
+      <div className='row justify-content-md-center py-4 g-4 mt-4'>
+        <div className='col-sm-1'>
           <button
-            type="button"
-            className="btn btn-outline-secondary"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
+            type='button'
+            className='btn btn-outline-secondary'
+            data-bs-toggle='modal'
+            data-bs-target='#exampleModal'
           >
             PSU
           </button>
           <div
-            className="modal fade"
-            id="exampleModal"
-            tabIndex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
+            className='modal fade'
+            id='exampleModal'
+            tabIndex='-1'
+            aria-labelledby='exampleModalLabel'
+            aria-hidden='true'
           >
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header bg-secondary">
-                  <h5 className="modal-title" id="exampleModalLabel">
+            <div className='modal-dialog'>
+              <div className='modal-content'>
+                <div className='modal-header bg-secondary'>
+                  <h5 className='modal-title' id='exampleModalLabel'>
                     PSU
                   </h5>
                   <button
-                    type="button"
-                    className="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
+                    type='button'
+                    className='btn-close'
+                    data-bs-dismiss='modal'
+                    aria-label='Close'
                   ></button>
                 </div>
-                <div className="modal-body bg-secondary">
-                  <table className="table table-hover table-dark">
+                <div className='modal-body bg-secondary'>
+                  <table className='table table-hover table-dark'>
                     <thead>
                       <tr>
                         <th>Brand</th>
@@ -145,7 +119,7 @@ function CreateBuild() {
                       </tr>
                     </thead>
                     <tbody>
-                      {psus.map((psu) => {
+                      {psus.map(psu => {
                         return (
                           <>
                             <tr
@@ -161,11 +135,11 @@ function CreateBuild() {
                     </tbody>
                   </table>
                 </div>
-                <div className="modal-footer">
+                <div className='modal-footer'>
                   <button
-                    type="button"
-                    className="btn btn-secondary"
-                    data-bs-dismiss="modal"
+                    type='button'
+                    className='btn btn-secondary'
+                    data-bs-dismiss='modal'
                   >
                     Close
                   </button>
@@ -174,37 +148,37 @@ function CreateBuild() {
             </div>
           </div>
         </div>
-        <div className="col-sm-1">
+        <div className='col-sm-1'>
           <button
-            type="button"
-            className="btn btn-outline-secondary"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModals"
+            type='button'
+            className='btn btn-outline-secondary'
+            data-bs-toggle='modal'
+            data-bs-target='#exampleModals'
           >
             GPU
           </button>
           <div
-            className="modal fade"
-            id="exampleModals"
-            tabIndex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
+            className='modal fade'
+            id='exampleModals'
+            tabIndex='-1'
+            aria-labelledby='exampleModalLabel'
+            aria-hidden='true'
           >
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header bg-secondary">
-                  <h5 className="modal-title" id="exampleModalLabel">
+            <div className='modal-dialog'>
+              <div className='modal-content'>
+                <div className='modal-header bg-secondary'>
+                  <h5 className='modal-title' id='exampleModalLabel'>
                     GPU
                   </h5>
                   <button
-                    type="button"
-                    className="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
+                    type='button'
+                    className='btn-close'
+                    data-bs-dismiss='modal'
+                    aria-label='Close'
                   ></button>
                 </div>
-                <div className="modal-body bg-secondary">
-                  <table className="table table-hover table-dark">
+                <div className='modal-body bg-secondary'>
+                  <table className='table table-hover table-dark'>
                     <thead>
                       <tr>
                         <th>Manufacturer</th>
@@ -212,7 +186,7 @@ function CreateBuild() {
                       </tr>
                     </thead>
                     <tbody>
-                      {gpus.map((gpu) => {
+                      {gpus.map(gpu => {
                         return (
                           <>
                             <tr
@@ -228,11 +202,11 @@ function CreateBuild() {
                     </tbody>
                   </table>
                 </div>
-                <div className="modal-footer">
+                <div className='modal-footer'>
                   <button
-                    type="button"
-                    className="btn btn-secondary"
-                    data-bs-dismiss="modal"
+                    type='button'
+                    className='btn btn-secondary'
+                    data-bs-dismiss='modal'
                   >
                     Close
                   </button>
@@ -241,37 +215,37 @@ function CreateBuild() {
             </div>
           </div>
         </div>
-        <div className="col-sm-1">
+        <div className='col-sm-1'>
           <button
-            type="button"
-            className="btn btn-outline-secondary"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModaler"
+            type='button'
+            className='btn btn-outline-secondary'
+            data-bs-toggle='modal'
+            data-bs-target='#exampleModaler'
           >
             CPU
           </button>
           <div
-            className="modal fade"
-            id="exampleModaler"
-            tabIndex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
+            className='modal fade'
+            id='exampleModaler'
+            tabIndex='-1'
+            aria-labelledby='exampleModalLabel'
+            aria-hidden='true'
           >
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header bg-secondary">
-                  <h5 className="modal-title" id="exampleModalLabel">
+            <div className='modal-dialog'>
+              <div className='modal-content'>
+                <div className='modal-header bg-secondary'>
+                  <h5 className='modal-title' id='exampleModalLabel'>
                     CPU
                   </h5>
                   <button
-                    type="button"
-                    className="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
+                    type='button'
+                    className='btn-close'
+                    data-bs-dismiss='modal'
+                    aria-label='Close'
                   ></button>
                 </div>
-                <div className="modal-body bg-secondary">
-                  <table className="table table-hover table-dark">
+                <div className='modal-body bg-secondary'>
+                  <table className='table table-hover table-dark'>
                     <thead>
                       <tr>
                         <th>Processor</th>
@@ -281,7 +255,7 @@ function CreateBuild() {
                       </tr>
                     </thead>
                     <tbody>
-                      {cpus.map((cpu) => {
+                      {cpus.map(cpu => {
                         return (
                           <>
                             <tr
@@ -299,11 +273,11 @@ function CreateBuild() {
                     </tbody>
                   </table>
                 </div>
-                <div className="modal-footer">
+                <div className='modal-footer'>
                   <button
-                    type="button"
-                    className="btn btn-outline-secondary"
-                    data-bs-dismiss="modal"
+                    type='button'
+                    className='btn btn-outline-secondary'
+                    data-bs-dismiss='modal'
                   >
                     Close
                   </button>
@@ -312,37 +286,37 @@ function CreateBuild() {
             </div>
           </div>
         </div>
-        <div className="col-sm-1">
+        <div className='col-sm-1'>
           <button
-            type="button"
-            className="btn btn-outline-secondary"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModale"
+            type='button'
+            className='btn btn-outline-secondary'
+            data-bs-toggle='modal'
+            data-bs-target='#exampleModale'
           >
             HDD
           </button>
           <div
-            className="modal fade"
-            id="exampleModale"
-            tabIndex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
+            className='modal fade'
+            id='exampleModale'
+            tabIndex='-1'
+            aria-labelledby='exampleModalLabel'
+            aria-hidden='true'
           >
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header bg-secondary">
-                  <h5 className="modal-title" id="exampleModalLabel">
+            <div className='modal-dialog'>
+              <div className='modal-content'>
+                <div className='modal-header bg-secondary'>
+                  <h5 className='modal-title' id='exampleModalLabel'>
                     HDD
                   </h5>
                   <button
-                    type="button"
-                    className="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
+                    type='button'
+                    className='btn-close'
+                    data-bs-dismiss='modal'
+                    aria-label='Close'
                   ></button>
                 </div>
-                <div className="modal-body bg-secondary">
-                  <table className="table table-hover table-dark">
+                <div className='modal-body bg-secondary'>
+                  <table className='table table-hover table-dark'>
                     <thead>
                       <tr>
                         <th>Brand</th>
@@ -350,7 +324,7 @@ function CreateBuild() {
                       </tr>
                     </thead>
                     <tbody>
-                      {hdds.map((hdd) => {
+                      {hdds.map(hdd => {
                         return (
                           <>
                             <tr
@@ -366,11 +340,11 @@ function CreateBuild() {
                     </tbody>
                   </table>
                 </div>
-                <div className="modal-footer">
+                <div className='modal-footer'>
                   <button
-                    type="button"
-                    className="btn btn-secondary"
-                    data-bs-dismiss="modal"
+                    type='button'
+                    className='btn btn-secondary'
+                    data-bs-dismiss='modal'
                   >
                     Close
                   </button>
@@ -379,37 +353,37 @@ function CreateBuild() {
             </div>
           </div>
         </div>
-        <div className="col-sm-1">
+        <div className='col-sm-1'>
           <button
-            type="button"
-            className="btn btn-outline-secondary"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModalj"
+            type='button'
+            className='btn btn-outline-secondary'
+            data-bs-toggle='modal'
+            data-bs-target='#exampleModalj'
           >
             RAM
           </button>
           <div
-            className="modal fade"
-            id="exampleModalj"
-            tabIndex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
+            className='modal fade'
+            id='exampleModalj'
+            tabIndex='-1'
+            aria-labelledby='exampleModalLabel'
+            aria-hidden='true'
           >
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header bg-secondary">
-                  <h5 className="modal-title" id="exampleModalLabel">
+            <div className='modal-dialog'>
+              <div className='modal-content'>
+                <div className='modal-header bg-secondary'>
+                  <h5 className='modal-title' id='exampleModalLabel'>
                     RAM
                   </h5>
                   <button
-                    type="button"
-                    className="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
+                    type='button'
+                    className='btn-close'
+                    data-bs-dismiss='modal'
+                    aria-label='Close'
                   ></button>
                 </div>
-                <div className="modal-body bg-secondary">
-                  <table className="table table-hover table-dark">
+                <div className='modal-body bg-secondary'>
+                  <table className='table table-hover table-dark'>
                     <thead>
                       <tr>
                         <th>Brand</th>
@@ -417,7 +391,7 @@ function CreateBuild() {
                       </tr>
                     </thead>
                     <tbody>
-                      {rams.map((ram) => {
+                      {rams.map(ram => {
                         return (
                           <>
                             <tr
@@ -433,11 +407,11 @@ function CreateBuild() {
                     </tbody>
                   </table>
                 </div>
-                <div className="modal-footer">
+                <div className='modal-footer'>
                   <button
-                    type="button"
-                    className="btn btn-secondary"
-                    data-bs-dismiss="modal"
+                    type='button'
+                    className='btn btn-secondary'
+                    data-bs-dismiss='modal'
                   >
                     Close
                   </button>
@@ -447,22 +421,22 @@ function CreateBuild() {
           </div>
         </div>
       </div>
-      <div className="row justify-content-md-center">
-        <div className="col-md-2 offset-md-3">
-          <img src={caseColor} alt="pc case image" width="500" />
+      <div className='row justify-content-md-center'>
+        <div className='col-md-2 offset-md-3'>
+          <img src={caseColor} alt='pc case image' width='500' />
         </div>
 
-        <div className="col-md-3 offset-md-3 ">
+        <div className='col-md-3 offset-md-3 '>
           <select
             onChange={handleColorChange}
             value={selectedColor}
-            name="color"
-            id="color"
-            className="form-select w-75"
+            name='color'
+            id='color'
+            className='form-select w-75'
             required
           >
-            <option value="">Choose a color</option>
-            {colors.map((color) => {
+            <option value=''>Choose a color</option>
+            {colors.map(color => {
               return (
                 <option key={color.id} value={color.id}>
                   {color.name}
@@ -473,13 +447,13 @@ function CreateBuild() {
           <select
             onChange={handleSizeChange}
             value={selectedSize}
-            name="size"
-            id="size"
-            className="form-select w-75"
+            name='size'
+            id='size'
+            className='form-select w-75'
             required
           >
-            <option value="">Choose a size</option>
-            {sizes.map((size) => {
+            <option value=''>Choose a size</option>
+            {sizes.map(size => {
               return (
                 <option key={size.id} value={size.id}>
                   {size.name}
