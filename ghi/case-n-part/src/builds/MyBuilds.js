@@ -1,48 +1,57 @@
 import React, { useState, useEffect, useContext, cloneElement } from "react";
 // import { UserContext } from "../authApi";
 
-import { Navigate, Link } from "react-router-dom";
-
 function MyBuilds() {
   const [builds, setBuild] = useState([]);
 
   useEffect(() => {
     const getBuildData = async () => {
-      const buildResponse = await fetch(`${process.env.REACT_APP_ACCOUNTS_HOST}/api/builds/mine`, {
-        credentials: 'include',
-      });
+      const buildResponse = await fetch(
+        `${process.env.REACT_APP_ACCOUNTS_HOST}/api/builds/mine`,
+        {
+          credentials: "include",
+        }
+      );
       const buildData = await buildResponse.json();
-      console.log(buildData)
+      console.log(buildData);
       setBuild(buildData.builds);
     };
 
     getBuildData();
   }, []);
-  console.log(builds);
 
   return (
-    <div class="container">
-    <div class="row">
-      {builds.map((build) => {
-        return (
-          <div class="col-lg-6 mb-4">
-            <div className="card" style={{width: "18rem"}} key={build.id}>
-              <img src={build.picture} className="card-img-top" alt="..." height={"100rem"}/>
-              <div className="card-body">
-                <h5 className="card-title">{build.Name}</h5>
-                <p className="card-text">{build.gpu.chipset}</p>
-                <a href="#" className="btn btn-primary">Build Detail</a>
+    <div class='container justify-content-center pt-5 my-5'>
+      {builds.length > 0 && (
+        <div class='row'>
+          {builds.map(build => {
+            return (
+              <div class='col-lg-6 mb-4'>
+                <div className='card' style={{ width: "18rem" }} key={build.id}>
+                  <img
+                    src={build.picture}
+                    className='card-img-top'
+                    alt='...'
+                    height={"100rem"}
+                  />
+                  <div className='card-body'>
+                    <h5 className='card-title'>{build.Name}</h5>
+                    <p className='card-text'>{build.gpu.chipset}</p>
+                    <a href='#' className='btn btn-primary'>
+                      Build Detail
+                    </a>
+                  </div>
+                </div>
               </div>
-            </div> 
-          </div>
-        );
-      })}
-    </div>
+            );
+          })}
+        </div>
+      )}
+      {builds.length === 0 && <h2>No builds available</h2>}
     </div>
   );
 }
 export default MyBuilds;
-
 
 // class MyBuilds extends React.Component {
 //   constructor(props) {
@@ -78,7 +87,7 @@ export default MyBuilds;
 //       return (
 //         <>
 //   <div class="container">
-//     <div class="row">     
+//     <div class="row">
 //           <div class="col-lg-6 mb-4">
 //             <div className="card" style={{width: "18rem"}} >
 //               <img src={this.state.builds.picture} className="card-img-top" alt="..." height={"100rem"}/>
@@ -87,7 +96,7 @@ export default MyBuilds;
 //                 <p className="card-text">{this.state.builds.gpu}</p>
 //                 <a href="#" className="btn btn-primary">Build Detail</a>
 //               </div>
-//             </div> 
+//             </div>
 //           </div>
 //     </div>
 //     </div>
