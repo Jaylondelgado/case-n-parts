@@ -28,7 +28,7 @@ function App() {
       <div className="container-fluid p-0">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="mybuilds" element={<MyBuilds />} />
+          <Route path="mybuilds" element={<MyBuilds token={token} />} />
           <Route path="create" element={<CreateBuild />} />
           <Route path="login" element={<Login token={token} login={login} />} />
           <Route path="logout" element={<Logout logout={logout} />} />

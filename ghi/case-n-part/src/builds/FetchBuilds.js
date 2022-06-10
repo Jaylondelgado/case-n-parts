@@ -20,7 +20,7 @@ function BuildList() {
       {builds.map((build) => {
         return (
           <div class="col-lg-6 mb-4">
-            <div className="card" style={{width: "18rem"}} key={build.id}>
+            <div className="card" style={{width: "10rem"}} key={build.id}>
               <img src={build.picture} className="card-img-top" alt="..." height={"100rem"}/>
               <div className="card-body">
                 <h5 className="card-title">{build.Name}</h5>
