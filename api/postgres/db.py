@@ -505,7 +505,6 @@ class BuildsQueries:
                     [build_id]
                 )
                 rows = cursor.fetchone()
-                print("build id:", build_id)
                 return list(rows)
 
 
@@ -520,7 +519,6 @@ class CaseQueries:
                     """
                 )
                 rows = cursor.fetchall()
-                print(rows)
                 return list(rows)
 
     def list_size(self):
@@ -533,7 +531,6 @@ class CaseQueries:
                     """
                 )
                 rows = cursor.fetchall()
-                print(rows)
                 return list(rows)
 
     def list_caseimage(self):
@@ -546,5 +543,4 @@ class CaseQueries:
                     """
                 )
                 rows = cursor.fetchall()
-                print(rows)
                 return list(rows)

@@ -5,7 +5,7 @@ import "./Nav.css";
 export const myLinks = [
   { name: "My Builds", path: "/mybuilds" },
   { name: "Create Builds", path: "/create" },
-  { name: "View Builds", path: "/toprated" },
+  { name: "View Builds", path: "/viewbuilds" },
   { name: "Logout", path: "/logout" },
 ];
 

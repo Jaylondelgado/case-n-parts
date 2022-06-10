@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+// import blackCase from "./images/outer-case/black.png";
+// import redCase from "./images/outer-case/red.png";
+// import greenCase from "./images/outer-case/green.png";
 
 function ViewBuildsList() {
   const [showBuilds, SetViewBuilds] = useState([]);
