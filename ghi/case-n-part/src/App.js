@@ -8,7 +8,6 @@ import SignUp from "./login/SignUp";
 import HomePage from "./HomePage";
 import MyBuilds from "./builds/MyBuilds";
 import CreateBuild from "./builds/CreateBuild";
-// import MoboList from "./parts/MoboFetch";
 import BuildList from "./builds/FetchBuilds";
 import { useToken } from "./authApi";
 import ViewBuilds from "./builds/ViewBuilds";
