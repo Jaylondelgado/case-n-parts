@@ -20,6 +20,7 @@ class UsersQueries:
                         [username]
                 )
                 rows = cursor.fetchone()
+                print(rows)
                 return rows
 
     def create_user(self, username: str, hashed_password: str, email: str = None):
@@ -247,6 +248,7 @@ class BuildsQueries:
                     """
                     SELECT
                         build.id,
+                        build.userid,
                         build."Name",
                         build."Private",
                         color.name,

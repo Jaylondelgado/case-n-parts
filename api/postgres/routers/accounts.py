@@ -34,10 +34,9 @@ class AccessToken(BaseModel):
 
 class User(BaseModel):
     id: int
-    username: str
-    email: str | None = None
-    full_name: str | None = None
-    disabled: bool | None = None
+    user: str
+    password:str
+    email:str
 
 
 class UserSignUp(BaseModel):
@@ -54,7 +53,8 @@ def row_to_user(row):
     user = {
         "id": row[0],
         "user": row[1],
-        "email": row[2],
+        "password": row[2],
+        "email": row[3],
 
     }
     return user
@@ -97,14 +97,15 @@ async def get_current_user(
     )
     token = bearer_token
     if not token and cookie_token:
-        token = json.loads(cookie_token)
+        print(cookie_token)
+        token = cookie_token
         print(token)
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username = payload.get("sub")
         if username is None:
             raise credentials_exception
-    except (JWTError, AttributeError)as e:
+    except (JWTError, AttributeError):
         print("cookieEEEEEEEEEEEEE")
         raise credentials_exception
     user = repo.get_user(username)
@@ -147,7 +148,9 @@ async def login_for_access_token(response: Response, request: Request, form_data
         samesite=samesite,
         secure=secure,
     )
+    print(token)
     return token
+    
 
 
 @router.get("/token", response_model=AccessToken)

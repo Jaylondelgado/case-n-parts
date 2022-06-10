@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext } from "react";
+
+export const UserContext = createContext();
 let internalToken = null;
 
 export function getToken() {
