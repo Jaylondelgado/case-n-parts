@@ -55,3 +55,7 @@ After some discussion with the team, we decided we needed another table for sole
 \* Working on create builds page
 
 Got the grid more or less in the position we want the parts to be displayed and the central image. Tinkering with bootstrap was tricky but so far the layout is close to what I've envisioned. The drop downs for the color and size of the case have some alignment issues but are populating the data so thats a plus. I hit a wall this week working on the project, but my team picked me up and we were able to get some things moving today.
+
+## 6/9/2022
+
+\*

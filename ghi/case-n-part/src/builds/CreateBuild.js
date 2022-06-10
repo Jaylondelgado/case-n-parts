@@ -38,54 +38,28 @@ function CreateBuild() {
     green: pcCaseGreen,
   };
 
-<<<<<<< HEAD
-  const handleGpuClick = (e) => {
-    const selected = e;
-    setGpuChoice(selected);
-  };
-
-  const handleCpuClick = (e) => {
-    const selected = e;
-    setCpuChoice(selected);
-  };
-
-  const handlePsuClick = (e) => {
-    const selected = e;
-    setPsuChoice(selected);
-  };
-
-  const handleRamClick = (e) => {
-    const selected = e;
-    setRamChoice(selected);
-  };
-
-  const handleHddClick = (e) => {
-    const selected = e;
-    console.log(selected);
-=======
-  const handleGpuClick = gpu => {
+  const handleGpuClick = (gpu) => {
     const selected = gpu;
     setGpuChoice(selected);
   };
 
-  const handleCpuClick = cpu => {
+  const handleCpuClick = (cpu) => {
     const selected = cpu;
     setCpuChoice(selected);
   };
 
-  const handlePsuClick = psu => {
+  const handlePsuClick = (psu) => {
     const selected = psu;
     setPsuChoice(selected);
   };
 
-  const handleRamClick = ram => {
+  const handleRamClick = (ram) => {
     const selected = ram;
     setRamChoice(selected);
   };
 
-  const handleHddClick = hdd => {
+  const handleHddClick = (hdd) => {
     const selected = hdd;
->>>>>>> 75d57b6c5f0a0bace0accc822b576ed72ba9dff4
     setHddChoice(selected);
   };
 
@@ -487,8 +461,8 @@ function CreateBuild() {
               );
             })}
           </select>
-          <div className='col-md-3 offset-md-3'>
-            <button className='btn btn-outline-primary mt-4'>Create</button>
+          <div className="col-md-3 offset-md-3">
+            <button className="btn btn-outline-primary mt-4">Create</button>
           </div>
         </div>
       </div>
