@@ -1,9 +1,5 @@
-import React, { useState, useEffect, useContext, cloneElement } from "react";
+import React, { useState, useEffect } from "react";
 
-<<<<<<< HEAD
-=======
-
->>>>>>> bd6e664204c907128bc08706c50ac8dde59a548b
 function MyBuilds() {
   const [builds, setBuild] = useState([]);
 
