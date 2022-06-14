@@ -58,3 +58,25 @@ Me and Jaylon have switched roles a little bit now. He wanted to work a bit on t
 I laid out the homepage to display a top 3 builds and a carousel of our cases. Still haven't added the data to the page yet, but the layout is there.
 
 Learned a bit more about bootstrap today. Implementing their carousel took a bit more time than I thought it would. Though looking at old documentation didn't help. Once I changed to the right version, I was able to implement it easly.
+
+## June 8th, 2022
+
+I spent most of the day helping my team members debug. Helped on the back-end with errors where we weren't getting the right data. Turns out, it was just a minor change to the select statement.
+
+I also helped on the front-end. Jason had some problems with grid, and looking through the documentation for bootstrap and working together, we were able to get the layout working somewhat. Still not how we want it, but still, it's working.
+
+I also did a bit of image editing work, to get a few different images for the case that we could switch between when a user selected a color. I was very happy with the progress on that. Using state in functional components to help with that was a learning experience. While I have knowledge with React Hooks, I'm still learning, and that helped solidify that knowledge even more.
+
+## June 9th, 2022
+
+Today was a major learning point for bootstrap. Figuring out how everything works together. Figuring out how to lay everyhing out was a struggle. But we got a basic layout working with cards for our list views, along with some basic buttons and tables to list our data for create builds.
+
+Getting the onClick to work for a table so that we could return the right data and not just the data in the td tag was a bit of a struggle, but we learned that in the onClick, if you just pass in the current table row that you're looping over, you can get all of that data back on an onClick event. That was very handy to learn.
+
+## June 10th, 2022
+
+We were having issues where the cookies of the site were staying even when you closed down the browser. With help, we were able to solve that issue and have the cookie for the user not expire and only go away when you closed the brower. That helped solve the issue of a cookie expiring if you went away from your keyboard for a time and would get automatically logged out. That was the major issue that was solved today.
+
+We also got the layout of the view builds and my build pages working. It's not quite mobile friendly yet, but on a desktop, it displays fine.
+
+We're learning a bit more about how to use bootstrap to do mobile friendly designs. Learning that they have different break points for different sizes of screens.
