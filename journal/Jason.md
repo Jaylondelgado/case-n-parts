@@ -58,4 +58,12 @@ Got the grid more or less in the position we want the parts to be displayed and 
 
 ## 6/9/2022
 
-\*
+\* Create Build troubleshoot
+
+The front end has been a tricky trying to understand padding, margins, and where to place them when using bootstrap. We worked as a team trying to get things onto the page within a card, reading further into documentation and learning how to override bootstrap locally. After several hours of experimenting we landed on something good. Afterwards we tackled an onClick of a modal row to send back data to the state as well as another onClick from the menu to change colors when the user wants to clicks another option.
+
+## 6/10/2022
+
+\* Buggy logged in issue and more front end grid mishaps
+
+It turns out MacOS does fully close the application until you force quit out of it. This was causing cookie issues where you stayed logged in even if there was not a user in the system. Working with Curtis, we commented out a single line of code and checked the JWT to confirm the login issue. Once that was sorted, that automatically fixed another login issue we were having. It's all tied to the JWT! After that we continued messing with the front end, working on footer placement and tidying up some loose ends in the Nav bar.

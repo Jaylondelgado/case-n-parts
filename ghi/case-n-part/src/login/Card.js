@@ -8,6 +8,7 @@ export const CardWrapper = styled.div`
   font-family: Quicksand, arial, sans-serif;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.05), 0 0px 40px rgba(0, 0, 0, 0.08);
   border-radius: 5px;
+  background-color: steelblue;
 `;
 
 export const CardHeader = styled.header`
@@ -127,8 +128,8 @@ export const CardButton = styled.button`
   font-family: inherit;
   font-size: 14px;
   font-weight: 700;
-  color: #fff;
-  background-color: #77a07b;
+  color: #778899;
+  background-color: #afeeee;
   border: 0;
   border-radius: 35px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.08);
