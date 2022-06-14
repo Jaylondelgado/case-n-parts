@@ -75,12 +75,6 @@ function CreateBuild() {
   };
 
   const handlePsuClick = psu => {
-    // <button
-    //   type='button'
-    //   className='btn-close'
-    //   data-bs-dismiss='modal'
-    //   aria-label='Close'
-    // ></button>;
     const selected = psu;
     setPsuChoice(selected);
   };
