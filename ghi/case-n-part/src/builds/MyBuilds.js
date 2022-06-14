@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-function MyBuilds() {
+function MyBuilds(props) {
   const [builds, setBuild] = useState([]);
+
 
   useEffect(() => {
     const getBuildData = async () => {
