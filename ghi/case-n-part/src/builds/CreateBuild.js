@@ -15,14 +15,40 @@ function CreateBuild() {
   const [ramChoice, setRamChoice] = useState([]);
   const [hddChoice, setHddChoice] = useState([]);
   const [caseColor, setCaseColor] = useState(pcCaseBlack);
-
-  const [gpuState, setGpuState] = useState({
-    manufacturer: "",
-    chipset: "",
-  });
-
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
+
+  const [build, setBuild] = useState({
+    psu: "",
+    gpu: "",
+    cpu: "",
+    ram: "",
+    hdd: "",
+    mobo: 1,
+    color: "",
+    size: "",
+  });
+
+  useEffect(() => {
+    setBuild({
+      ...build,
+      psu: psuChoice.id,
+      gpu: gpuChoice.id,
+      cpu: cpuChoice.id,
+      ram: ramChoice.id,
+      hdd: hddChoice.id,
+      color: Number(selectedColor),
+      size: Number(selectedSize),
+    });
+  }, [
+    psuChoice,
+    gpuChoice,
+    cpuChoice,
+    ramChoice,
+    hddChoice,
+    selectedColor,
+    selectedSize,
+  ]);
 
   const gpus = useApiData(`${basePath}/api/gpus/`, "gpus");
   const cpus = useApiData(`${basePath}/api/cpus/`, "cpus");
@@ -65,6 +91,7 @@ function CreateBuild() {
 
   const handleColorChange = event => {
     const value = event.target.value;
+    console.log(value);
     setSelectedColor(value);
     if (value === "") {
       setCaseColor(caseColors["black"]);
@@ -80,6 +107,7 @@ function CreateBuild() {
 
   return (
     <div className='container-fluid my-5'>
+      {console.log(build)}
       <div className='row justify-content-md-center py-4 g-4 mt-4'>
         <div className='col-sm-1'>
           <button
