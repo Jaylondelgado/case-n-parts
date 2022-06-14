@@ -75,6 +75,12 @@ function CreateBuild() {
   };
 
   const handlePsuClick = psu => {
+    // <button
+    //   type='button'
+    //   className='btn-close'
+    //   data-bs-dismiss='modal'
+    //   aria-label='Close'
+    // ></button>;
     const selected = psu;
     setPsuChoice(selected);
   };
@@ -153,6 +159,7 @@ function CreateBuild() {
                             <tr
                               key={psu["id"]}
                               onClick={() => handlePsuClick(psu)}
+                              data-bs-dismiss='modal'
                             >
                               <td>{psu["brand"]}</td>
                               <td>{psu["wattage"]}</td>
@@ -162,15 +169,6 @@ function CreateBuild() {
                       })}
                     </tbody>
                   </table>
-                </div>
-                <div className='modal-footer'>
-                  <button
-                    type='button'
-                    className='btn btn-secondary'
-                    data-bs-dismiss='modal'
-                  >
-                    Close
-                  </button>
                 </div>
               </div>
             </div>
@@ -220,6 +218,7 @@ function CreateBuild() {
                             <tr
                               key={gpu["id"]}
                               onClick={() => handleGpuClick(gpu)}
+                              data-bs-dismiss='modal'
                             >
                               <td>{gpu["manufacturer"]}</td>
                               <td>{gpu["chipset"]}</td>
@@ -229,15 +228,6 @@ function CreateBuild() {
                       })}
                     </tbody>
                   </table>
-                </div>
-                <div className='modal-footer'>
-                  <button
-                    type='button'
-                    className='btn btn-secondary'
-                    data-bs-dismiss='modal'
-                  >
-                    Close
-                  </button>
                 </div>
               </div>
             </div>
@@ -289,6 +279,7 @@ function CreateBuild() {
                             <tr
                               key={cpu["id"]}
                               onClick={() => handleCpuClick(cpu)}
+                              data-bs-dismiss='modal'
                             >
                               <td>{cpu["processor"]}</td>
                               <td>{cpu["cores"]}</td>
@@ -300,15 +291,6 @@ function CreateBuild() {
                       })}
                     </tbody>
                   </table>
-                </div>
-                <div className='modal-footer'>
-                  <button
-                    type='button'
-                    className='btn btn-outline-secondary'
-                    data-bs-dismiss='modal'
-                  >
-                    Close
-                  </button>
                 </div>
               </div>
             </div>
@@ -358,6 +340,7 @@ function CreateBuild() {
                             <tr
                               key={hdd["id"]}
                               onClick={() => handleHddClick(hdd)}
+                              data-bs-dismiss='modal'
                             >
                               <td>{hdd["brand"]}</td>
                               <td>{hdd["capacity"]}</td>
@@ -367,15 +350,6 @@ function CreateBuild() {
                       })}
                     </tbody>
                   </table>
-                </div>
-                <div className='modal-footer'>
-                  <button
-                    type='button'
-                    className='btn btn-secondary'
-                    data-bs-dismiss='modal'
-                  >
-                    Close
-                  </button>
                 </div>
               </div>
             </div>
@@ -425,6 +399,7 @@ function CreateBuild() {
                             <tr
                               key={ram["id"]}
                               onClick={() => handleRamClick(ram)}
+                              data-bs-dismiss='modal'
                             >
                               <td>{ram["brand"]}</td>
                               <td>{ram["memory_speed"]}</td>
@@ -434,15 +409,6 @@ function CreateBuild() {
                       })}
                     </tbody>
                   </table>
-                </div>
-                <div className='modal-footer'>
-                  <button
-                    type='button'
-                    className='btn btn-secondary'
-                    data-bs-dismiss='modal'
-                  >
-                    Close
-                  </button>
                 </div>
               </div>
             </div>
