@@ -118,14 +118,15 @@ function CreateBuild() {
     }
 
     let caseColorUrls = caseImages.map(image => {
-      return Object.values(image)[1];
+      return Object.values(image);
     });
 
     let caseColorUrl = caseColorUrls.map(colorUrl => {
-      if (colorUrl.includes(colors[value - 1].name)) {
-        return colorUrl;
+      if (colorUrl[1].includes(colors[value - 1].name)) {
+        return colorUrl[0];
       }
     });
+    console.log(caseColorUrl);
 
     const caseFilteredUrls = caseColorUrl.filter(url => url !== undefined);
     setCasePicture(caseFilteredUrls[0]);
@@ -172,6 +173,7 @@ function CreateBuild() {
 
   return (
     <form onSubmit={handleSubmit} id='create-appointment-form'>
+      {console.log(build)}
       <div className='container-fluid my-5'>
         <div className='row justify-content-md-center py-4 g-4 mt-4'>
           <div className='col-sm-1'>
