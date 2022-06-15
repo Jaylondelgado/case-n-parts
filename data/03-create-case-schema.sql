@@ -1,7 +1,3 @@
-
-ALTER TABLE IF EXISTS public.build
-    OWNER to "great-value";
-
 CREATE TABLE IF NOT EXISTS public.case
 (
     Id SERIAL NOT NULL PRIMARY KEY,
@@ -11,9 +7,6 @@ CREATE TABLE IF NOT EXISTS public.case
     Picture INT NOT NULL REFERENCES caseimage,
     UNIQUE(BuildId)
 );
-
-
-
 
 ALTER TABLE IF EXISTS public.case
     OWNER to "great-value";
