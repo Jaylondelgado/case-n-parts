@@ -19,6 +19,14 @@ function CreateBuild() {
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
   const [successfulSubmit, setSuccessfulSubmit] = useState(false);
+  // const [partsData, setPartsData] = useState({
+  //   psus: [],
+  //   gpus: [],
+  //   cpus: [],
+  //   rams: [],
+  //   colors: [],
+  //   sizes: [],
+  // });
 
   const [build, setBuild] = useState({
     Name: "",
@@ -33,7 +41,7 @@ function CreateBuild() {
     moboid: 1,
     color: "",
     size: "",
-    picture: 3,
+    picture: "",
   });
 
   useEffect(() => {
@@ -66,11 +74,6 @@ function CreateBuild() {
   const hdds = useApiData(`${basePath}/api/hdds`, "hdds");
   const colors = useApiData(`${basePath}/api/color/`, "colors");
   const sizes = useApiData(`${basePath}/api/size/`, "sizes");
-
-  useEffect(() => {
-    const currentColorImage = colors.includes(selectedColor);
-    console.log(currentColorImage);
-  }, [selectedColor, colors]);
 
   const caseColors = {
     black: pcCaseBlack,
@@ -181,9 +184,10 @@ function CreateBuild() {
                       className="btn-close"
                       data-bs-dismiss="modal"
                       aria-label="Close"
-                    ></button>
+                    ></button>{" "}
                   </div>
                   <div className="modal-body bg-secondary">
+                    {" "}
                     <table className="table table-hover table-dark">
                       <thead>
                         <tr>
@@ -195,6 +199,7 @@ function CreateBuild() {
                         {psus.map((psu) => {
                           return (
                             <tr
+                              key={psu.id}
                               onClick={() => handlePsuClick(psu)}
                               data-bs-dismiss="modal"
                             >
@@ -251,7 +256,7 @@ function CreateBuild() {
                         {gpus.map((gpu) => {
                           return (
                             <tr
-                              key={gpu["id"]}
+                              key={gpu.id}
                               onClick={() => handleGpuClick(gpu)}
                               data-bs-dismiss="modal"
                             >
@@ -369,7 +374,7 @@ function CreateBuild() {
                         {hdds.map((hdd) => {
                           return (
                             <tr
-                              key={hdd["id"]}
+                              key={hdd.id}
                               onClick={() => handleHddClick(hdd)}
                               data-bs-dismiss="modal"
                             >
@@ -426,7 +431,7 @@ function CreateBuild() {
                         {rams.map((ram) => {
                           return (
                             <tr
-                              key={ram["id"]}
+                              key={ram.id}
                               onClick={() => handleRamClick(ram)}
                               data-bs-dismiss="modal"
                             >
@@ -452,7 +457,7 @@ function CreateBuild() {
             <input
               onChange={name}
               value={nameChoice}
-              placeholder="PC Build Name"
+              placeholder="name"
               required
               name="name"
               id="name"
