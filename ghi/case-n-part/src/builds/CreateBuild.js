@@ -9,6 +9,7 @@ import pcCaseGreen from "../images/inner-case/pc-case-with-mobo-green.png";
 const basePath = "http://localhost:8000";
 
 function CreateBuild() {
+  const [nameChoice, setNameChoice] = useState("");
   const [gpuChoice, setGpuChoice] = useState([]);
   const [cpuChoice, setCpuChoice] = useState([]);
   const [psuChoice, setPsuChoice] = useState([]);
@@ -20,7 +21,7 @@ function CreateBuild() {
   const [successfulSubmit, setSuccessfulSubmit] = useState(false);
 
   const [build, setBuild] = useState({
-    Name: "test build",
+    Name: "",
     psuid: "",
     gpuid: "",
     cardcount: 1,
@@ -38,6 +39,7 @@ function CreateBuild() {
   useEffect(() => {
     setBuild({
       ...build,
+      Name: nameChoice,
       psuid: psuChoice.id,
       gpuid: gpuChoice.id,
       cpuid: cpuChoice.id,
@@ -47,6 +49,8 @@ function CreateBuild() {
       size: Number(selectedSize),
     });
   }, [
+    build,
+    nameChoice,
     psuChoice,
     gpuChoice,
     cpuChoice,
@@ -63,6 +67,11 @@ function CreateBuild() {
   const hdds = useApiData(`${basePath}/api/hdds`, "hdds");
   const colors = useApiData(`${basePath}/api/color/`, "colors");
   const sizes = useApiData(`${basePath}/api/size/`, "sizes");
+
+  useEffect(() => {
+    const currentColorImage = colors.includes(selectedColor);
+    console.log(currentColorImage);
+  }, [selectedColor, colors]);
 
   const caseColors = {
     black: pcCaseBlack,
@@ -103,6 +112,10 @@ function CreateBuild() {
     } else {
       setCaseColor(caseColors[colors[value - 1].name]);
     }
+  };
+
+  const name = (event) => {
+    setNameChoice(event.target.value);
   };
 
   const handleSizeChange = (event) => {
@@ -447,6 +460,18 @@ function CreateBuild() {
         <div className="row justify-content-md-center">
           <div className="col-md-2 offset-md-3">
             <img src={caseColor} alt="pc case" width="500" />
+          </div>
+          <div className="col-md-3 offset-md-3">
+            <input
+              onChange={name}
+              value={nameChoice}
+              placeholder="name"
+              required
+              name="name"
+              id="name"
+              className="form-control"
+            />
+            <label htmlFor="name">Name</label>
           </div>
 
           <div className="col-md-3 offset-md-3 ">

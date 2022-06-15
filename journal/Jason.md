@@ -67,3 +67,10 @@ The front end has been a tricky trying to understand padding, margins, and where
 \* Buggy logged in issue and more front end grid mishaps
 
 It turns out MacOS does fully close the application until you force quit out of it. This was causing cookie issues where you stayed logged in even if there was not a user in the system. Working with Curtis, we commented out a single line of code and checked the JWT to confirm the login issue. Once that was sorted, that automatically fixed another login issue we were having. It's all tied to the JWT! After that we continued messing with the front end, working on footer placement and tidying up some loose ends in the Nav bar.
+
+## 6/13/2022
+
+\* Posting our first pc build to the front
+
+After class we got together to work out finally getting our pc build to post. We referenced some old projects to get an idea of how to implement our post using hooks through creating states and useEffects. After modeling our empty dictionary through the fastAPI output, and lots of console logs, we push our first pc build to the database. Bootstrap was tweaked with to have an onClick where it closes when you click a row item.
+We also decided that we would forgo the ratings system and use a likes system instead since getting average ratings would be a tedious task where we would manually create multiple builds and ratings to see a result.
