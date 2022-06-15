@@ -47,7 +47,7 @@ const FlipCard = (props) => {
   const { FrontCard, BackCard, height, width } = props;
   return (
     // <Root width={width} height={height}>
-    <div class="flip-card">
+    <div className="flip-card">
       <div className="flip-card-inner">
         <div className="flip-card-front">
           <FrontCard />

@@ -16,27 +16,27 @@ function BuildList() {
   console.log(builds);
 
   return (
-    <div class='container justify-content-center pt-5 my-5'>
+    <div className="container justify-content-center pt-5 my-5">
       {builds.length > 0 && (
-        <div class='row'>
-          {builds.map(build => {
+        <div className="row">
+          {builds.map((build) => {
             return (
-              <div className='col-sm m-3'>
+              <div className="col-sm m-3">
                 <div
-                  className='card h-100 border-light bg-transparent'
+                  className="card h-100 border-light bg-transparent"
                   key={build.id}
                 >
                   <img
                     src={build.picture}
-                    className='card-img-top p-3'
-                    alt='...'
+                    className="card-img-top p-3"
+                    alt="..."
                   />
-                  <div className='card-body'>
-                    <h5 className='card-title text-primary'>{build.Name}</h5>
-                    <p className='card-text text-primary'>
+                  <div className="card-body">
+                    <h5 className="card-title text-primary">{build.Name}</h5>
+                    <p className="card-text text-primary">
                       {build.gpu.chipset}
                     </p>
-                    <a href='#' className='btn btn-outline-primary'>
+                    <a href="#" className="btn btn-outline-primary">
                       Build Detail
                     </a>
                   </div>
