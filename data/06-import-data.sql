@@ -185,7 +185,7 @@ INSERT INTO color
 (Name)
 VALUES 
 ('black'),
-('red'),
+('pink'),
 ('green');
 
 INSERT INTO size

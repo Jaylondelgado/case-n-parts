@@ -90,3 +90,9 @@ I was able to get some practice with the spread operator in javascript to help s
 On a post request, we also got it tied to the user, which was very cool. With Jarett's help, he told us what to change on the link of the fetch request to get it tied to the user. We had to retrive the token that was currently being used for the user that was logged in, and then set it to use those creditentials. Everytime we have authentication questions or back-end questions, Jarett is always able to help us find a solution. Really great teammate and I've been learning a lot from him.
 
 We also decided we wanted to change the ratings to be a like system instead of just a star rating system. So one user gets one like per build.
+
+## June 14th, 2022
+
+Worked to add in a dynamic picture url for the object you will submit as JSON when you change case colors on the front end. Was harder than originally thought. We were just going to add in a `useEffect` that ran once a user selected a color, but we kept getting `undefined` and couldn't figure out why. I realized we could instead move the code that we had into the `handleColorChange` function that we had. Once we did that, we just did some mapping and filtering over the picture urls we had stored in the database, and since each picture url had the name of the color somewhere in it's link, I just used the built in JavaScript `.includes` function to see if it had the name of the color that was selected. Once it did, I did a filter over it to remove the `undefined` values, then set the `casePicture` state to that value.
+
+Also debugged a `useEffect` for our `setBuild`. It was running constantly, which is not what we want. Turns out we put `build` in the dependencies of the `useEffect`, and that was causing it to run over and over. Once we removed that, everything worked fine.

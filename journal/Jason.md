@@ -74,3 +74,9 @@ It turns out MacOS does fully close the application until you force quit out of 
 
 After class we got together to work out finally getting our pc build to post. We referenced some old projects to get an idea of how to implement our post using hooks through creating states and useEffects. After modeling our empty dictionary through the fastAPI output, and lots of console logs, we push our first pc build to the database. Bootstrap was tweaked with to have an onClick where it closes when you click a row item.
 We also decided that we would forgo the ratings system and use a likes system instead since getting average ratings would be a tedious task where we would manually create multiple builds and ratings to see a result.
+
+## 6/14/2022
+
+\* Removing hard code from CreateBuild JSON post
+
+Some items were, and still are, missing dynamically from the JSON builds post method which included the name of the build, the total counts for specific pc parts, the case image and size. I created a hook to put the name form into the grid and got that working. Afterwards I pair coded with chad to get the picture url to post into the JSON body. It was a lot more difficult than we anticipated, with Chad running console logs everywhere and hacking a method that finally pulled a string comparison into the JSON body. We also ran into a bug where our fetches were infinitely fetching data and sorted that out. Turns it it was recursively calling itself in the useEffect.
