@@ -80,3 +80,13 @@ We were having issues where the cookies of the site were staying even when you c
 We also got the layout of the view builds and my build pages working. It's not quite mobile friendly yet, but on a desktop, it displays fine.
 
 We're learning a bit more about how to use bootstrap to do mobile friendly designs. Learning that they have different break points for different sizes of screens.
+
+## June 13th, 2022
+
+Worked on getting post requests working from the front-end. I made state for holding the values that would make up the post request. I used a `useEffect` to trigger updating that state once the user made a choice on a part.
+
+I was able to get some practice with the spread operator in javascript to help set the values on the build state. Took a little bit of help from my teammates to get it working.
+
+On a post request, we also got it tied to the user, which was very cool. With Jarett's help, he told us what to change on the link of the fetch request to get it tied to the user. We had to retrive the token that was currently being used for the user that was logged in, and then set it to use those creditentials. Everytime we have authentication questions or back-end questions, Jarett is always able to help us find a solution. Really great teammate and I've been learning a lot from him.
+
+We also decided we wanted to change the ratings to be a like system instead of just a star rating system. So one user gets one like per build.

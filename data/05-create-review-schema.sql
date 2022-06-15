@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS public.rating
 (
     Id SERIAL  PRIMARY KEY,
-    Rating INT,
+    Liked BOOLEAN DEFAULT false,
     BuildId INTEGER REFERENCES build,
     UserId INTEGER REFERENCES "user"
 );
