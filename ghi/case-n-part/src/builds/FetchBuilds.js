@@ -32,7 +32,7 @@ function BuildList() {
                     alt="..."
                   />
                   <div className="card-body">
-                    <h5 className="card-title text-primary">{build.Name}</h5>
+                    <h5 className="card-title text-info">{build.Name}</h5>
                     <p className="card-text text-primary">
                       {build.gpu.chipset}
                     </p>

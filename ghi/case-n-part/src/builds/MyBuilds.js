@@ -12,7 +12,6 @@ function MyBuilds(props) {
         }
       );
       const buildData = await buildResponse.json();
-      console.log(buildData);
       setBuild(buildData.builds);
     };
 
@@ -25,18 +24,15 @@ function MyBuilds(props) {
         <div className="row">
           {builds.map((build) => {
             return (
-              <div className="col-sm m-3">
-                <div
-                  className="card h-100 border-light bg-transparent"
-                  key={build.id}
-                >
+              <div key={build.id} className="col-sm m-3">
+                <div className="card h-100 border-light bg-transparent">
                   <img
                     src={build.picture}
                     className="card-img-top p-3"
                     alt="..."
                   />
                   <div className="card-body">
-                    <h5 className="card-title text-primary">{build.Name}</h5>
+                    <h5 className="card-title text-info">{build.name}</h5>
                     <p className="card-text text-primary">
                       {build.gpu.chipset}
                     </p>

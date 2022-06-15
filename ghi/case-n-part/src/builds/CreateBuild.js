@@ -19,14 +19,6 @@ function CreateBuild() {
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
   const [successfulSubmit, setSuccessfulSubmit] = useState(false);
-  // const [partsData, setPartsData] = useState({
-  //   psus: [],
-  //   gpus: [],
-  //   cpus: [],
-  //   rams: [],
-  //   colors: [],
-  //   sizes: [],
-  // });
 
   const [build, setBuild] = useState({
     Name: "",
@@ -41,7 +33,7 @@ function CreateBuild() {
     moboid: 1,
     color: "",
     size: "",
-    picture: "",
+    picture: 3,
   });
 
   useEffect(() => {
@@ -74,6 +66,11 @@ function CreateBuild() {
   const hdds = useApiData(`${basePath}/api/hdds`, "hdds");
   const colors = useApiData(`${basePath}/api/color/`, "colors");
   const sizes = useApiData(`${basePath}/api/size/`, "sizes");
+
+  useEffect(() => {
+    const currentColorImage = colors.includes(selectedColor);
+    console.log(currentColorImage);
+  }, [selectedColor, colors]);
 
   const caseColors = {
     black: pcCaseBlack,
@@ -138,6 +135,7 @@ function CreateBuild() {
       credentials: "include",
     };
     const response = await fetch(appointmentUrl, fetchConfig);
+    console.log("resszz", response);
     if (response.ok) {
       setBuild({
         psu: "",
@@ -198,14 +196,16 @@ function CreateBuild() {
                       <tbody>
                         {psus.map((psu) => {
                           return (
-                            <tr
-                              key={psu.id}
-                              onClick={() => handlePsuClick(psu)}
-                              data-bs-dismiss="modal"
-                            >
-                              <td>{psu["brand"]}</td>
-                              <td>{psu["wattage"]}</td>
-                            </tr>
+                            <>
+                              <tr
+                                key={psu["id"]}
+                                onClick={() => handlePsuClick(psu)}
+                                data-bs-dismiss="modal"
+                              >
+                                <td>{psu["brand"]}</td>
+                                <td>{psu["wattage"]}</td>
+                              </tr>
+                            </>
                           );
                         })}
                       </tbody>
@@ -255,14 +255,16 @@ function CreateBuild() {
                       <tbody>
                         {gpus.map((gpu) => {
                           return (
-                            <tr
-                              key={gpu.id}
-                              onClick={() => handleGpuClick(gpu)}
-                              data-bs-dismiss="modal"
-                            >
-                              <td>{gpu["manufacturer"]}</td>
-                              <td>{gpu["chipset"]}</td>
-                            </tr>
+                            <>
+                              <tr
+                                key={gpu["id"]}
+                                onClick={() => handleGpuClick(gpu)}
+                                data-bs-dismiss="modal"
+                              >
+                                <td>{gpu["manufacturer"]}</td>
+                                <td>{gpu["chipset"]}</td>
+                              </tr>
+                            </>
                           );
                         })}
                       </tbody>
@@ -314,16 +316,18 @@ function CreateBuild() {
                       <tbody>
                         {cpus.map((cpu) => {
                           return (
-                            <tr
-                              key={cpu.id}
-                              onClick={() => handleCpuClick(cpu)}
-                              data-bs-dismiss="modal"
-                            >
-                              <td>{cpu["processor"]}</td>
-                              <td>{cpu["cores"]}</td>
-                              <td>{cpu["threads"]}</td>
-                              <td>{cpu["speed"]}</td>
-                            </tr>
+                            <>
+                              <tr
+                                key={cpu["id"]}
+                                onClick={() => handleCpuClick(cpu)}
+                                data-bs-dismiss="modal"
+                              >
+                                <td>{cpu["processor"]}</td>
+                                <td>{cpu["cores"]}</td>
+                                <td>{cpu["threads"]}</td>
+                                <td>{cpu["speed"]}</td>
+                              </tr>
+                            </>
                           );
                         })}
                       </tbody>
@@ -373,14 +377,16 @@ function CreateBuild() {
                       <tbody>
                         {hdds.map((hdd) => {
                           return (
-                            <tr
-                              key={hdd.id}
-                              onClick={() => handleHddClick(hdd)}
-                              data-bs-dismiss="modal"
-                            >
-                              <td>{hdd["brand"]}</td>
-                              <td>{hdd["capacity"]}</td>
-                            </tr>
+                            <>
+                              <tr
+                                key={hdd["id"]}
+                                onClick={() => handleHddClick(hdd)}
+                                data-bs-dismiss="modal"
+                              >
+                                <td>{hdd["brand"]}</td>
+                                <td>{hdd["capacity"]}</td>
+                              </tr>
+                            </>
                           );
                         })}
                       </tbody>
@@ -430,14 +436,16 @@ function CreateBuild() {
                       <tbody>
                         {rams.map((ram) => {
                           return (
-                            <tr
-                              key={ram.id}
-                              onClick={() => handleRamClick(ram)}
-                              data-bs-dismiss="modal"
-                            >
-                              <td>{ram["brand"]}</td>
-                              <td>{ram["memory_speed"]}</td>
-                            </tr>
+                            <>
+                              <tr
+                                key={ram["id"]}
+                                onClick={() => handleRamClick(ram)}
+                                data-bs-dismiss="modal"
+                              >
+                                <td>{ram["brand"]}</td>
+                                <td>{ram["memory_speed"]}</td>
+                              </tr>
+                            </>
                           );
                         })}
                       </tbody>
