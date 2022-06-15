@@ -545,3 +545,4 @@ class CaseQueries:
                 )
                 rows = cursor.fetchall()
                 return list(rows)
+# class ReviewQueries:
