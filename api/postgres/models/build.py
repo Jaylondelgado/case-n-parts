@@ -6,7 +6,7 @@ from .parts import BuildCpu, BuildHdd, BuildMobo, BuildPsu, BuildRam, Cpu, CpuOu
 class BuildOut(BaseModel):
     id: int
     userid: int
-    name: str
+    Name: str
     Private: bool
     color: str
     size: str
@@ -20,6 +20,7 @@ class BuildOut(BaseModel):
 
 class Build(BaseModel):
     builds: list[BuildOut]
+
 
 
 
@@ -69,6 +70,7 @@ class OutBuild(BaseModel):
 class BuildOutList(BaseModel):
     id: int
     userid: int
+    username: str
     Name: str
     color: str
     size: str
@@ -79,6 +81,7 @@ class BuildOutList(BaseModel):
     mobo: BuildMobo
     cpu: BuildCpu
     psu: BuildPsu
+
 
 class BuildA(BaseModel):
     builds: list[BuildOutList]
