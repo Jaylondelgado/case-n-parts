@@ -25,12 +25,12 @@ function App() {
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='builds/'>
+            <Route path='create' element={<CreateBuild />} />
             <Route path='mybuilds' element={<MyBuilds />} />
             <Route path='listbuilds' element={<BuildList />} />
             <Route path='viewbuilds' element={<ViewBuilds />} />
             <Route path='detailbuild/:id' element={<DetailBuild />} />
           </Route>
-          <Route path='create' element={<CreateBuild />} />
           <Route path='login' element={<Login token={token} login={login} />} />
           <Route path='logout' element={<Logout logout={logout} />} />
           <Route

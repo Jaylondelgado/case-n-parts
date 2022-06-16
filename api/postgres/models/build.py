@@ -6,6 +6,7 @@ from .parts import BuildCpu, BuildHdd, BuildMobo, BuildPsu, BuildRam, Cpu, CpuOu
 class BuildOut(BaseModel):
     id: int
     userid: int
+    username: str
     Name: str
     Private: bool
     color: str

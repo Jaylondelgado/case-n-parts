@@ -462,6 +462,7 @@ class BuildsQueries:
                 """,
                     [id],
                 )
+                print('yesenia is awesome', cursor.fetchone())
                 return cursor.fetchone()
 
     def update_build(self,id, Name, moboid, cpuid, psuid,Private, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size, picture):

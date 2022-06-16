@@ -171,11 +171,13 @@ def create_build(
 
 @router.get(
     "/api/build/{build_id}",
-    response_model=BuildOutList,
+    response_model=BuildOut,
 )
 def get_build(build_id: int, query=Depends(BuildsQueries)):
     row = query.get_build(build_id)
+    print('row', row)
     return row_to_build(row)
+    
 
 @router.put(
     "/api/build/{build_id}",

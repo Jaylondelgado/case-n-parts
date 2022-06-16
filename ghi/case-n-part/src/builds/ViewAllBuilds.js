@@ -30,7 +30,7 @@ function BuildList() {
                   />
                   <div className='card-body'>
                     <h5 className='card-title text-info'>{build.Name}</h5>
-                    <p className='card-text text-primary'>{build.userid}</p>
+                    <p className='card-text text-primary'>{build.username}</p>
                     <Link
                       to={`/builds/detailbuild/${build.id}`}
                       className='btn btn-outline-primary'
