@@ -143,7 +143,7 @@ def build_list(query=Depends(BuildsQueries)):
     }
 
 # Example of how to get the current user for an endpoint
-@router.get("/api/builds/mine", response_model=BuildA)
+@router.get("/api/builds/mine", response_model=Build)
 def my_build_list(query=Depends(BuildsQueries), current_user: User = Depends(get_current_active_user)):
 
     rows = query.get_build_by_user(current_user["id"])
@@ -171,7 +171,7 @@ def create_build(
 
 @router.get(
     "/api/build/{build_id}",
-    response_model=BuildOutList,
+    response_model=BuildOut,
 )
 def get_build(build_id: int, query=Depends(BuildsQueries)):
     row = query.get_build(build_id)
