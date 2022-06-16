@@ -19,24 +19,24 @@ function MyBuilds(props) {
   }, []);
 
   return (
-    <div className="container justify-content-center pt-5 my-5">
+    <div className='container justify-content-center pt-5 my-5'>
       {builds.length > 0 && (
-        <div className="row">
-          {builds.map((build) => {
+        <div className='row'>
+          {builds.map(build => {
             return (
-              <div key={build.id} className="col-sm m-3">
-                <div className="card h-100 border-light bg-transparent">
+              <div key={build.id} className='col-sm m-3'>
+                <div className='card h-100 border-light bg-transparent'>
                   <img
                     src={build.picture}
-                    className="card-img-top p-3"
-                    alt="..."
+                    className='card-img-top p-3'
+                    alt='...'
                   />
-                  <div className="card-body">
-                    <h5 className="card-title text-info">{build.name}</h5>
-                    <p className="card-text text-primary">
+                  <div className='card-body'>
+                    <h5 className='card-title text-info'>{build.name}</h5>
+                    <p className='card-text text-primary'>
                       {build.gpu.chipset}
                     </p>
-                    <a href="#" className="btn btn-outline-primary">
+                    <a href='#' className='btn btn-outline-primary'>
                       Build Detail
                     </a>
                   </div>

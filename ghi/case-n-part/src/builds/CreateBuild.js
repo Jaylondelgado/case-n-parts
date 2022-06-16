@@ -126,7 +126,6 @@ function CreateBuild() {
         return colorUrl[0];
       }
     });
-    console.log(caseColorUrl);
 
     const caseFilteredUrls = caseColorUrl.filter(url => url !== undefined);
     setCasePicture(caseFilteredUrls[0]);
