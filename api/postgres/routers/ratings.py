@@ -1,4 +1,4 @@
-from ..models.ratings import RatingIn, RatingOut
+from ..models.ratings import RatingIn, RatingOut, UpdateRating
 from .accounts import User, get_current_active_user
 from fastapi import APIRouter, Response, status, Depends
 from ..db import RatingQueries
@@ -38,9 +38,10 @@ def create_build(
     },
 )
 def update_rating(
+    liked: UpdateRating,
     build_id: int,
     query=Depends(RatingQueries),
     current_user: User = Depends(get_current_active_user)
 ):
-    row = query.unlike_rating(build_id, current_user["id"])
+    row = query.unlike_rating(liked.liked, build_id, current_user["id"])
     return row_to_rating(row)

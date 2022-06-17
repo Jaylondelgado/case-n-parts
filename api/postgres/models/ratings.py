@@ -8,3 +8,7 @@ class RatingOut(BaseModel):
 
 class RatingIn(BaseModel):
     buildid: int
+
+
+class UpdateRating(BaseModel):
+    liked: bool
