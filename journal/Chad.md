@@ -96,3 +96,9 @@ We also decided we wanted to change the ratings to be a like system instead of j
 Worked to add in a dynamic picture url for the object you will submit as JSON when you change case colors on the front end. Was harder than originally thought. We were just going to add in a `useEffect` that ran once a user selected a color, but we kept getting `undefined` and couldn't figure out why. I realized we could instead move the code that we had into the `handleColorChange` function that we had. Once we did that, we just did some mapping and filtering over the picture urls we had stored in the database, and since each picture url had the name of the color somewhere in it's link, I just used the built in JavaScript `.includes` function to see if it had the name of the color that was selected. Once it did, I did a filter over it to remove the `undefined` values, then set the `casePicture` state to that value.
 
 Also debugged a `useEffect` for our `setBuild`. It was running constantly, which is not what we want. Turns out we put `build` in the dependencies of the `useEffect`, and that was causing it to run over and over. Once we removed that, everything worked fine.
+
+## June 15th, 2022
+
+Started working on the detail build page. Had a bit of a struggle on how to dynamically get the build id into the url path. But after reading some React Router documentation, I learned that I could just add `:id` to the `Route` path and that would work.
+
+After that, I had another issue, where I needed the id that I was using in the url so that I could make a fetch request to the back-end for that build. I went back to the React Router Dom documentation, and learned about the `useParams` hook, that returns an object of key/value pairs of the dynamic params from the current URL that were matched by the `<Route path>`.

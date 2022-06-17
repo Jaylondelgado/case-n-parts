@@ -176,11 +176,11 @@ function CreateBuild() {
         <div className="row justify-content-md-center py-5 g-4 mt-4">
           <div className="col-sm-1 my-25"></div>
           <div className="row justify-content-md-center">
-            <div className="col-md-2 offset-md-3">
-              <img src={caseColor} alt="pc case" width="500" />
+            <div className="col-md-auto">
+              <img class="rounded" src={caseColor} alt="pc case" width="500" />
             </div>
 
-            <div className="col-md-3 offset-md-3 w-25">
+            <div className="col-md-auto justify-content-md-center">
               <input
                 onChange={name}
                 value={nameChoice}

@@ -8,7 +8,6 @@ function DetailBuild() {
   const [build, setBuild] = useState();
   const basePath = "http://localhost:8000";
 
-  //   const build = useApiData(`${basePath}/api/build/${id}`, "build");
   useEffect(() => {
     const getBuildData = async () => {
       const buildResponse = await fetch(`${basePath}/api/build/${id}`);
