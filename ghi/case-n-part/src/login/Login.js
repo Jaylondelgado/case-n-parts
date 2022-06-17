@@ -15,16 +15,16 @@ import {
 } from "./Card";
 
 function Login(props) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const { login, token } = props;
 
   if (token) {
-    return <Navigate to="/mybuilds" />;
+    return <Navigate to='builds/mybuilds' />;
   }
 
   return (
-    <div className="App">
+    <div className='App'>
       <CardWrapper>
         <CardHeader>
           <CardHeading>Sign in</CardHeading>
@@ -32,12 +32,24 @@ function Login(props) {
 
         <CardBody>
           <CardFieldset>
-            <CardInput onChange={e => setUsername(e.target.value)} value={username} placeholder="Username" type="text" required />
+            <CardInput
+              onChange={e => setUsername(e.target.value)}
+              value={username}
+              placeholder='Username'
+              type='text'
+              required
+            />
           </CardFieldset>
 
           <CardFieldset>
-            <CardInput onChange={e => setPassword(e.target.value)} value={password} placeholder="Password" type="password" required />
-            <CardIcon className="fa fa-eye" eye small />
+            <CardInput
+              onChange={e => setPassword(e.target.value)}
+              value={password}
+              placeholder='Password'
+              type='password'
+              required
+            />
+            <CardIcon className='fa fa-eye' eye small />
           </CardFieldset>
           {/*
         <CardFieldset>
@@ -59,7 +71,9 @@ function Login(props) {
         </CardFieldset> */}
 
           <CardFieldset>
-            <CardButton onClick={() => login(username, password)} type="button">Sign In</CardButton>
+            <CardButton onClick={() => login(username, password)} type='button'>
+              Sign In
+            </CardButton>
           </CardFieldset>
         </CardBody>
       </CardWrapper>

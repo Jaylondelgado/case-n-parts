@@ -191,3 +191,5 @@ def update_build(
 ):
     row = query.update_build(build_id,build.Name, build.moboid, build.cpuid, build.psuid,build.Private, build.gpuid, build.cardcount, build.hddid, build.hddcount, build.ramid, build.ramcount, build.color, build.size, build.picture)
     return row_to_create_build(row)
+
+

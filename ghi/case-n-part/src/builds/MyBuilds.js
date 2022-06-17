@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function MyBuilds(props) {
   const [builds, setBuild] = useState([]);
@@ -32,13 +33,17 @@ function MyBuilds(props) {
                     alt='...'
                   />
                   <div className='card-body'>
-                    <h5 className='card-title text-info'>{build.name}</h5>
+                    {console.log(build.name)}
+                    <h5 className='card-title text-info'>{build.Name}</h5>
                     <p className='card-text text-primary'>
                       {build.gpu.chipset}
                     </p>
-                    <a href='#' className='btn btn-outline-primary'>
+                    <Link
+                      to={`/builds/detailbuild/${build.id}`}
+                      className='btn btn-outline-primary'
+                    >
                       Build Detail
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
