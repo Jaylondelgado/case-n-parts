@@ -1,6 +1,18 @@
 from pydantic import BaseModel
 
-
+class GpuOutDetail(BaseModel):
+    id: int
+    cardcount: int
+    manufacturer: str
+    chipset: str
+    core_clock_speed: str
+    video_memory: str
+    memory_type: str
+    height: str
+    length: str
+    width: str
+    hdmi: str
+    display_port: str
 
 
 class GpuOut(BaseModel):
@@ -51,7 +63,14 @@ class BuildCpu(BaseModel):
 
 class CpuA(BaseModel):
     cpus: list[BuildCpu]
-
+class RamOutDetail(BaseModel):
+    id: int
+    ramcount: int
+    brand: str
+    memory_type: str
+    memory_speed: str
+    memory_channels: str
+    pin_configuration: str
 
 
 
@@ -74,7 +93,14 @@ class BuildRam(BaseModel):
 class RamA(BaseModel):
     rams: list[BuildRam]
 
-
+class HddOutDetail(BaseModel):
+    id: int
+    hddcount: int
+    brand: str
+    capacity: str
+    interface: str
+    cache: str
+    rpm: str
 
 class HddOut(BaseModel):
     id: int

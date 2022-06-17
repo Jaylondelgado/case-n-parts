@@ -145,8 +145,14 @@ class BuildsQueries:
                         cpu.cores,
                         cpu.socket_type,
                         psu.id,
-                        psu.brand
+                        psu.brand,
+                        COUNT(rating.id) as likes
                     FROM public.build
+
+                    INNER JOIN public.rating
+                        ON rating.buildid=build.id
+                    
+                    
 
                     INNER JOIN public.user
                         ON "user".id=build.userid
@@ -183,6 +189,16 @@ class BuildsQueries:
                     
                     INNER JOIN public.psu
                         ON psu.id = build.psuid
+
+                    WHERE rating.liked is TRUE
+                    
+                    GROUP BY build.id, "user".id, "color".name,
+                     "size".name, caseimage.picture, buildgpus.id,
+                     gpu.manufacturer, gpu.chipset, buildhdds.hddid,
+                     hdd.brand, hdd.capacity, buildram.ramid, ram.brand,
+                     mobos.id, mobos.brand, mobos.socket_type, mobos.max_memory,
+                     cpu.id, cpu.processor, cpu.cores, cpu.socket_type, psu.id,
+                     psu.brand
                     
                     """
                 )
@@ -231,6 +247,13 @@ class BuildsQueries:
                         VALUES(%s, %s, %s, %s)
                     """,
                         [new_build_id, color, size, picture]
+                    )
+                    cursor.execute(
+                        """
+                        INSERT INTO "rating"(buildid, userid, liked)
+                        VALUES(%s, %s, TRUE)
+                    """,
+                        [new_build_id, userid]
                     )
                 cursor.execute(
                     """
@@ -462,7 +485,9 @@ class BuildsQueries:
                 """,
                     [id],
                 )
-                return cursor.fetchone()
+                rows = (cursor.fetchone())
+                print(rows)
+                return list(rows)
 
     def update_build(self,id, Name, moboid, cpuid, psuid,Private, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size, picture):
         with pool.connection() as connection:
@@ -560,14 +585,43 @@ class CaseQueries:
                 )
                 rows = cursor.fetchall()
                 return list(rows)
-class ReviewQueries:
-    def list_review(self):
+class RatingQueries:
+    # def list_review(self, buildid):
+    #     with pool.connection() as connection:
+    #         with connection.cursor() as cursor:
+    #             cursor.execute(
+    #                 """
+    #                 SELECT COUNT(*) as num_likes
+    #                 FROM RATING
+    #                 WHERE buildid = %s
+    #                 """
+    #             )
+    #             row = cursor.fetchone()
+    #             return row
+    def create_rating(self,buildid,userid:int):
         with pool.connection() as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """
-                    SELECT liked, build
-                    """
+                    INSERT INTO rating(liked, buildid, userid)
+                    VALUES(TRUE, %s, %s)
+                    RETURNING id, liked, buildid, userid
+                    """,
+                        [buildid, userid]
                 )
-                rows = cursor.fetchall()
-                return list(rows)
+                rows = cursor.fetchone()
+                return rows
+    def unlike_rating(self, liked, buildid, userid:int):
+        with pool.connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    UPDATE rating
+                    SET liked=%s
+                    WHERE buildid=%s AND userid=%s
+                    RETURNING id, liked, buildid, userid
+                    """,
+                        [liked, buildid, userid]
+                )
+                rows = cursor.fetchone()
+                return rows
