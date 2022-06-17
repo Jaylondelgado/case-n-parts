@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import { Link } from "react-router-dom";
 import useApiData from "../parts/ApiFetch";
 
 import black from "../images/inner-case/pc-case-with-mobo-black.png";
@@ -153,34 +153,50 @@ function CreateBuild() {
       credentials: "include",
     };
     const response = await fetch(appointmentUrl, fetchConfig);
-    console.log("resszz", response);
     if (response.ok) {
       setBuild({
-        psu: "",
-        gpu: "",
-        cpu: "",
-        ram: "",
-        hdd: "",
+        name: setNameChoice(""),
+        psu: setPsuChoice(""),
+        gpu: setGpuChoice(""),
+        cpu: setCpuChoice(""),
+        ram: setRamChoice(""),
+        hdd: setHddChoice(""),
         mobo: 1,
-        color: "",
-        size: "",
-        picture: "",
+        color: setSelectedColor(black),
+        size: setSelectedSize(""),
+        picture: setCasePicture(""),
       });
+      console.log("    chad work", build);
       setSuccessfulSubmit(true);
     }
   };
 
+  let createButton = "btn btn-outline-primary w-100 mt-4";
+  let alertClasses = "alert alert-success d-none mb-0";
+  let alertContainerClasses = "d-none";
+
+  if (successfulSubmit) {
+    createButton = "d-none";
+    alertClasses = "alert alert-success mb-3";
+    alertContainerClasses = "";
+  }
+
   return (
-    <form onSubmit={handleSubmit} id="create-appointment-form">
-      <div className="container-fluid my-5">
-        <div className="row justify-content-md-center py-5 g-4 mt-4">
+    <div className="container my-5">
+      <div className="row py-5 g-4 mt-4">
+        <form onSubmit={handleSubmit} id="create-appointment-form">
           <div className="col-sm-1 my-25"></div>
           <div className="row justify-content-md-center">
             <div className="col-md-auto">
-              <img class="rounded" src={caseColor} alt="pc case" width="500" />
+              <img
+                className="rounded"
+                src={caseColor}
+                alt="pc case"
+                width="500"
+              />
             </div>
 
-            <div className="col-md-auto justify-content-md-center">
+            <div className="col-md-auto">
               <input
                 onChange={name}
                 value={nameChoice}
@@ -344,7 +360,7 @@ function CreateBuild() {
                 </div>
               </div>
               <div className="col-md w-75 pt-2">
-                <div class="btn-group dropup w-100">
+                <div className="btn-group dropup w-100">
                   <button
                     type="button"
                     className="btn btn-outline-secondary w-75"
@@ -355,14 +371,14 @@ function CreateBuild() {
                   </button>
                   <button
                     type="button"
-                    class="btn btn-secondary dropdown-toggle dropdown-toggle-split w-25"
+                    className="btn btn-secondary dropdown-toggle dropdown-toggle-split w-25"
                     data-bs-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                    <span class="sr-only">Toggle Dropdown</span>
+                    <span className="sr-only">Toggle Dropdown</span>
                   </button>
-                  <div class="dropdown-menu">x</div>
+                  <div className="dropdown-menu">x</div>
                 </div>
                 <div
                   className="modal fade"
@@ -414,7 +430,7 @@ function CreateBuild() {
               </div>
 
               <div className="col-sm-1 w-75 pt-2">
-                <div class="btn-group dropup w-100">
+                <div className="btn-group dropup w-100">
                   <button
                     type="button"
                     className="btn btn-outline-secondary w-75"
@@ -425,14 +441,14 @@ function CreateBuild() {
                   </button>
                   <button
                     type="button"
-                    class="btn btn-secondary dropdown-toggle dropdown-toggle-split w-25"
+                    className="btn btn-secondary dropdown-toggle dropdown-toggle-split w-25"
                     data-bs-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                    <span class="sr-only">Toggle Dropdown</span>
+                    <span className="sr-only">Toggle Dropdown</span>
                   </button>
-                  <div class="dropdown-menu">x</div>
+                  <div className="dropdown-menu">x</div>
                 </div>
                 <div
                   className="modal fade"
@@ -483,7 +499,7 @@ function CreateBuild() {
                 </div>
               </div>
               <div className="col-sm-1 w-75 pt-2">
-                <div class="btn-group dropup w-100">
+                <div className="btn-group dropup w-100">
                   <button
                     type="button"
                     className="btn btn-outline-secondary w-75"
@@ -494,14 +510,14 @@ function CreateBuild() {
                   </button>
                   <button
                     type="button"
-                    class="btn btn-secondary dropdown-toggle dropdown-toggle-split w-25"
+                    className="btn btn-secondary dropdown-toggle dropdown-toggle-split w-25"
                     data-bs-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                    <span class="sr-only">Toggle Dropdown</span>
+                    <span className="sr-only">Toggle Dropdown</span>
                   </button>
-                  <div class="dropdown-menu">
+                  <div className="dropdown-menu">
                     <p>something</p>
                   </div>
                 </div>
@@ -554,20 +570,42 @@ function CreateBuild() {
                 </div>
               </div>
             </div>
+            <div className="row justify-content-md-center">
+              <div className="col-sm-1 pt-2 w-50">
+                <button
+                  onSubmit={handleSubmit}
+                  id="create-pc-build"
+                  className={createButton}
+                >
+                  Create
+                </button>
 
-            <div className="col-sm-1 w-50 pt-2">
-              <button
-                onSubmit={handleSubmit}
-                id="create-pc-build"
-                className="btn btn-outline-primary w-100 mt-4"
-              >
-                Create
-              </button>
+                <div className={alertContainerClasses}>
+                  <div className={alertClasses} id="success-message">
+                    Build created successfully
+                  </div>
+                  <div className="d-flex justify-content-between">
+                    <Link to="/builds/create">
+                      <button
+                        onClick={() => setSuccessfulSubmit(false)}
+                        className="btn btn-outline-primary"
+                      >
+                        Make new build
+                      </button>
+                    </Link>
+                    <Link to="/builds/mybuilds">
+                      <button className="btn btn-outline-primary float-right">
+                        View my builds
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
-    </form>
+    </div>
   );
 }
 
