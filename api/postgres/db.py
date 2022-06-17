@@ -604,3 +604,17 @@ class RatingQueries:
                 )
                 rows = cursor.fetchone()
                 return rows
+    def unlike_rating(self, buildid, userid:int):
+        with pool.connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    UPDATE rating
+                    SET liked = FALSE
+                    WHERE buildid=%s AND userid=%s
+                    RETURNING id, liked, buildid, userid
+                    """,
+                        [buildid, userid]
+                )
+                rows = cursor.fetchone()
+                return rows

@@ -28,3 +28,19 @@ def create_build(
 
     row = query.create_rating(rating.buildid, current_user["id"],)
     return row_to_rating(row)
+
+
+@router.put(
+    "/api/rating/{build_id}",
+    response_model = RatingOut,
+    responses = {
+        200: {"model": RatingOut}
+    },
+)
+def update_rating(
+    build_id: int,
+    query=Depends(RatingQueries),
+    current_user: User = Depends(get_current_active_user)
+):
+    row = query.unlike_rating(build_id, current_user["id"])
+    return row_to_rating(row)
