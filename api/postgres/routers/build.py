@@ -60,6 +60,7 @@ def row_to_list_build(row):
             "id": row[23],
             "brand": row[24],
         },
+        "likes": row[25]
     }
     return build
 
@@ -75,7 +76,7 @@ def row_to_build(row):
         "picture": row[7],
         "gpu": {
             "id": row[8],
-            "card_count": row[9],
+            "cardcount": row[9],
             "manufacturer": row[10],
             "chipset": row[11],
             "core_clock_speed": row[12],
