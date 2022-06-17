@@ -249,6 +249,13 @@ class BuildsQueries:
                     """,
                         [new_build_id, color, size, picture]
                     )
+                    cursor.execute(
+                        """
+                        INSERT INTO "rating"(buildid, userid, liked)
+                        VALUES(%s, %s, TRUE)
+                    """,
+                        [new_build_id, userid]
+                    )
                 cursor.execute(
                     """
                     SELECT build.id, build."Name", build.moboid, build.cpuid, build.psuid, build."Private", build.userid
