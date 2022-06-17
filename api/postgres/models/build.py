@@ -1,7 +1,7 @@
 from re import S
-from .review import RatingOut
+from .ratings import RatingOut
 from pydantic import BaseModel
-from .parts import BuildCpu, BuildHdd, BuildMobo, BuildPsu, BuildRam, Cpu, CpuOut, Gpu, GpuOut, Hdd, HddOut, Mobo, MoboOut, Psu, PsuOut, Ram, RamOut, BuildGpu
+from .parts import BuildCpu, BuildHdd, BuildMobo, BuildPsu, BuildRam, Cpu, CpuOut, Gpu, GpuOut, GpuOutDetail, Hdd, HddOut, HddOutDetail, Mobo, MoboOut, Psu, PsuOut, Ram, RamOut, BuildGpu, RamOutDetail
 
 class BuildOut(BaseModel):
     id: int
@@ -12,9 +12,9 @@ class BuildOut(BaseModel):
     color: str
     size: str
     picture: str
-    gpu: GpuOut
-    hdd: HddOut
-    ram: RamOut
+    gpu: GpuOutDetail
+    hdd: HddOutDetail
+    ram: RamOutDetail
     mobo: MoboOut
     cpu: CpuOut
     psu: PsuOut
@@ -82,6 +82,7 @@ class BuildOutList(BaseModel):
     mobo: BuildMobo
     cpu: BuildCpu
     psu: BuildPsu
+    likes: int
 
 
 class BuildA(BaseModel):

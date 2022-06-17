@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 
 
-from postgres.routers import parts, build, accounts, case
+from postgres.routers import parts, build, accounts, case, ratings
 
 app = FastAPI()
 
@@ -25,3 +25,4 @@ app.include_router(parts.router)
 app.include_router(build.router)
 app.include_router(accounts.router)
 app.include_router(case.router)
+app.include_router(ratings.router)
