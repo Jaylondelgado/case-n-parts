@@ -1,7 +1,7 @@
 from ctypes import Union
 from turtle import title
 from urllib import response
-from ..models.build import Build, BuildA, BuildOut, BuildOutList, InBuild, InsertBuild, OutBuild
+from ..models.build import Build, BuildA, BuildDeleteOpertion, BuildOut, BuildOutList, InBuild, InsertBuild, OutBuild
 from fastapi import APIRouter, Response, status, Depends
 from ..db import BuildsQueries
 from ..models.common import ErrorMessage
@@ -192,5 +192,22 @@ def update_build(
 ):
     row = query.update_build(build_id,build.Name, build.moboid, build.cpuid, build.psuid,build.Private, build.gpuid, build.cardcount, build.hddid, build.hddcount, build.ramid, build.ramcount, build.color, build.size, build.picture)
     return row_to_create_build(row)
+
+@router.delete(
+    "/api/build/{build_id}",
+    response_model=BuildDeleteOpertion,
+)
+def delete_build(
+    build_id: int,
+    query=Depends(BuildsQueries),
+    current_user: User = Depends(get_current_active_user),
+):
+    try: 
+        query.delete_build(build_id, current_user["id"])
+        return {"result": True}
+    except:
+        return {"result": False}
+
+
 
 
