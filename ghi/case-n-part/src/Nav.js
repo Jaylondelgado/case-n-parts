@@ -3,9 +3,9 @@ import { NavLink } from "react-router-dom";
 import "./Nav.css";
 
 export const myLinks = [
-  { name: "My Builds", path: "/mybuilds" },
-  { name: "Create Builds", path: "/create" },
-  { name: "View Builds", path: "/builds" },
+  { name: "My Builds", path: "/builds/mybuilds" },
+  { name: "Create Builds", path: "create" },
+  { name: "View Builds", path: "/builds/listbuilds" },
   { name: "Logout", path: "/logout" },
 ];
 

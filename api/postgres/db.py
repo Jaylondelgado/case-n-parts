@@ -159,7 +159,8 @@ class BuildsQueries:
                     """
                     SELECT
                         build.id,
-                        build.userid,
+                        "user".id,
+                        "user".username,
                         build."Name",
                         color.name,
                         "size".name,
@@ -183,6 +184,9 @@ class BuildsQueries:
                         psu.id,
                         psu.brand
                     FROM public.build
+
+                    INNER JOIN public.user
+                        ON "user".id=build.userid
 
                     INNER JOIN public.case
                         ON "case".buildid = build.id
@@ -220,6 +224,7 @@ class BuildsQueries:
                     """
                 )
                 rows = cursor.fetchall()
+                print("rows:", rows)
                 return list(rows)
     
     def create_build(self, Name, moboid, cpuid, psuid,userid:int, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size, picture):
@@ -284,7 +289,8 @@ class BuildsQueries:
                     """
                     SELECT
                         build.id,
-                        build.userid,
+                        "user".id,
+                        "user".username,
                         build."Name",
                         build."Private",
                         color.name,
@@ -338,6 +344,10 @@ class BuildsQueries:
                         psu.molex_connector,
                         psu.sata_connector
                     FROM public.build
+
+                    INNER JOIN public.user
+                        ON "user".id=build.userid
+
                     
 
                     -- Join case information
@@ -389,7 +399,8 @@ class BuildsQueries:
                     """
                     SELECT
                         build.id,
-                        build.userid,
+                        "user".id,
+                        "user".username,
                         build."Name",
                         build."Private",
                         color.name,
@@ -443,6 +454,10 @@ class BuildsQueries:
                         psu.molex_connector,
                         psu.sata_connector
                     FROM public.build
+
+                    INNER JOIN public.user
+                        ON "user".id=build.userid
+
                     
 
                     -- Join case information
@@ -582,4 +597,14 @@ class CaseQueries:
                 )
                 rows = cursor.fetchall()
                 return list(rows)
-# class ReviewQueries:
+class ReviewQueries:
+    def list_review(self):
+        with pool.connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    SELECT liked, build
+                    """
+                )
+                rows = cursor.fetchall()
+                return list(rows)
