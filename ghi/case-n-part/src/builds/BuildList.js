@@ -4,7 +4,7 @@ import "./FetchBuilds.css";
 
 function BuildList() {
   const [builds, setBuild] = useState([]);
-
+  
   useEffect(() => {
     const getBuildData = async () => {
       const buildResponse = await fetch("http://localhost:8000/api/builds/");
@@ -38,6 +38,10 @@ function BuildList() {
                     >
                       Build Detail
                     </Link>
+                    <div className="btn btn-primary">
+                    <i class="bi bi-hand-thumbs-up"></i>
+                    {build.likes}
+                    </div>
                   </div>
                 </div>
               </div>
