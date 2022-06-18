@@ -4,7 +4,7 @@ import "./FetchBuilds.css";
 
 function BuildList() {
   const [builds, setBuild] = useState([]);
-
+  
   useEffect(() => {
     const getBuildData = async () => {
       const buildResponse = await fetch("http://localhost:8000/api/builds/");
