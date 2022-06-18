@@ -23,20 +23,6 @@ function DetailBuild() {
       {build !== undefined && (
         <>
           <div className='row justify-content-center'>
-            <div className='col-auto'>
-              <img
-                className='img-fluid'
-                src={build.picture}
-                alt='pc case'
-                width='200'
-              />
-            </div>
-            <div className='col-auto'>
-              <h2>{build.Name}</h2>
-              <h3>{build.username}</h3>
-            </div>
-          </div>
-          <div className='row justify-content-center'>
             <div className='col-sm-4'>
               <div className='card bg-dark border border-primary w-5'>
                 <h5 className='card-title text-white p-3'>Motherboard</h5>
@@ -88,7 +74,55 @@ function DetailBuild() {
             </div>
             <div className='col-sm-4'></div>
             <div className='col-sm-4'>
-              <div className='col'>
+              <div className='card bg-dark border border-primary w-5'>
+                <h5 className='card-title text-white p-3'>CPU</h5>
+                <p className='d-flex flex-column card-text text-white text-left align-items-start px-4'>
+                  <span>
+                    <p className='fw-bold'>
+                      Processor -{" "}
+                      <span className='fw-normal'>{build.cpu.processor}</span>
+                    </p>
+                  </span>
+                  <span>
+                    <p className='fw-bold'>
+                      Cores -{" "}
+                      <span className='fw-normal'>{build.cpu.cores}</span>
+                    </p>
+                  </span>
+                  <span>
+                    <p className='fw-bold'>
+                      Threads -{" "}
+                      <span className='fw-normal'>{build.cpu.threads}</span>
+                    </p>
+                  </span>
+                  <span>
+                    <p className='fw-bold'>
+                      Speed -{" "}
+                      <span className='fw-normal'>{build.cpu.speed}</span>
+                    </p>
+                  </span>
+                  <span>
+                    <p className='fw-bold'>
+                      Socket Type -{" "}
+                      <span className='fw-normal'>{build.cpu.socket_type}</span>
+                    </p>
+                  </span>
+                  <span>
+                    <p className='fw-bold'>
+                      Memory Slots -{" "}
+                      <span className='fw-normal'>
+                        {build.mobo.memory_slots}
+                      </span>
+                    </p>
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className='row justify-content-center'>
+            <div className='col-sm-4'></div>
+            <div className='col-sm-4'>
+              <div className='col my-4'>
                 <div className='card bg-dark border border-primary w-5'>
                   <h5 className='card-title text-white p-3'>{build.Name}</h5>
                   <p className='d-flex flex-column card-text text-white px-4'>
@@ -124,6 +158,169 @@ function DetailBuild() {
                     </div>
                   </p>
                 </div>
+              </div>
+            </div>
+            <div className='col-sm-4'></div>
+          </div>
+          <div className='row justify-content-center'>
+            <div className='col-sm-4'>
+              <div className='card bg-dark border border-primary w-5'>
+                <h5 className='card-title text-white p-3'>RAM</h5>
+                <p className='d-flex flex-column card-text text-white text-left align-items-start px-4'>
+                  <span>
+                    <p className='fw-bold'>
+                      Brand -{" "}
+                      <span className='fw-normal'>{build.ram.brand}</span>
+                    </p>
+                  </span>
+                  <span>
+                    <p className='fw-bold'>
+                      Memory Type -{" "}
+                      <span className='fw-normal'>{build.cpu.memory_type}</span>
+                    </p>
+                  </span>
+                  <span>
+                    <p className='fw-bold'>
+                      Memory Speed -{" "}
+                      <span className='fw-normal'>
+                        {build.cpu.memory_speed}
+                      </span>
+                    </p>
+                  </span>
+                  <span>
+                    <p className='fw-bold'>
+                      Memory Channels -{" "}
+                      <span className='fw-normal'>
+                        {build.cpu.memory_channels}
+                      </span>
+                    </p>
+                  </span>
+                </p>
+              </div>
+            </div>
+            <div className='col-sm-4'>
+              <div className='card bg-dark border border-primary w-5'>
+                <h5 className='card-title text-white p-3'>GPU</h5>
+                <p className='d-flex flex-column card-text text-white text-left align-items-start px-4'>
+                  <span>
+                    <p className='fw-bold'>
+                      Manufacturer -{" "}
+                      <span className='fw-normal'>
+                        {build.gpu.manufacturer}
+                      </span>
+                    </p>
+                  </span>
+                  <span>
+                    <p className='fw-bold'>
+                      Chipset -{" "}
+                      <span className='fw-normal'>{build.gpu.chipset}</span>
+                    </p>
+                  </span>
+                  <span>
+                    <p className='fw-bold'>
+                      Core Clock Speed -{" "}
+                      <span className='fw-normal'>
+                        {build.gpu.core_clock_speed}
+                      </span>
+                    </p>
+                  </span>
+                  <span>
+                    <p className='fw-bold'>
+                      Video Memory -{" "}
+                      <span className='fw-normal'>
+                        {build.gpu.video_memory}
+                      </span>
+                    </p>
+                  </span>
+                  <span>
+                    <p className='fw-bold'>
+                      Memory Type -{" "}
+                      <span className='fw-normal'>{build.gpu.memory_type}</span>
+                    </p>
+                  </span>
+                  <span>
+                    <p className='fw-bold'>
+                      Height -{" "}
+                      <span className='fw-normal'>{build.gpu.height}</span>
+                    </p>
+                  </span>
+                  <span>
+                    <p className='fw-bold'>
+                      Length -{" "}
+                      <span className='fw-normal'>{build.gpu.length}</span>
+                    </p>
+                  </span>
+                  <span>
+                    <p className='fw-bold'>
+                      Width -{" "}
+                      <span className='fw-normal'>{build.gpu.width}</span>
+                    </p>
+                  </span>
+                  <span>
+                    <p className='fw-bold'>
+                      Hdmi - <span className='fw-normal'>{build.gpu.hdmi}</span>
+                    </p>
+                  </span>
+                  <span>
+                    <p className='fw-bold'>
+                      Display Port -{" "}
+                      <span className='fw-normal'>
+                        {build.gpu.display_port}
+                      </span>
+                    </p>
+                  </span>
+                </p>
+              </div>
+            </div>
+            <div className='col-sm-4'>
+              <div className='card bg-dark border border-primary w-5'>
+                <h5 className='card-title text-white p-3'>PSU</h5>
+                <p className='d-flex flex-column card-text text-white text-left align-items-start px-4'>
+                  <span>
+                    <p className='fw-bold'>
+                      Brand -{" "}
+                      <span className='fw-normal'>{build.psu.brand}</span>
+                    </p>
+                  </span>
+                  <span>
+                    <p className='fw-bold'>
+                      Wattage -{" "}
+                      <span className='fw-normal'>{build.psu.wattage}</span>
+                    </p>
+                  </span>
+                  <span>
+                    <p className='fw-bold'>
+                      Atx Connector -{" "}
+                      <span className='fw-normal'>
+                        {build.cpu.atx_12v_connector}
+                      </span>
+                    </p>
+                  </span>
+                  <span>
+                    <p className='fw-bold'>
+                      Graphics Connector -{" "}
+                      <span className='fw-normal'>
+                        {build.cpu.graphics_connector}
+                      </span>
+                    </p>
+                  </span>
+                  <span>
+                    <p className='fw-bold'>
+                      Molex Connector -{" "}
+                      <span className='fw-normal'>
+                        {build.cpu.molex_connector}
+                      </span>
+                    </p>
+                  </span>
+                  <span>
+                    <p className='fw-bold'>
+                      Sata Connector -{" "}
+                      <span className='fw-normal'>
+                        {build.mobo.sata_connector}
+                      </span>
+                    </p>
+                  </span>
+                </p>
               </div>
             </div>
           </div>
