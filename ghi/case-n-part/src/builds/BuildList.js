@@ -38,6 +38,10 @@ function BuildList() {
                     >
                       Build Detail
                     </Link>
+                    <div className="btn btn-primary">
+                    <i class="bi bi-hand-thumbs-up"></i>
+                    {build.likes}
+                    </div>
                   </div>
                 </div>
               </div>
