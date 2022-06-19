@@ -23,7 +23,7 @@ function DetailBuild() {
       {build !== undefined && (
         <>
           <div className='row justify-content-center'>
-            <div className='col-sm-4'>
+            <div className='col-sm-3'>
               <div className='card bg-dark border border-primary w-5'>
                 <h5 className='card-title text-white p-3'>Motherboard</h5>
                 <p className='d-flex flex-column card-text text-white text-left align-items-start px-4'>
@@ -72,8 +72,44 @@ function DetailBuild() {
                 </p>
               </div>
             </div>
-            <div className='col-sm-4'></div>
             <div className='col-sm-4'>
+              <div className='card bg-dark border border-primary w-5'>
+                <h5 className='card-title text-white p-3'>{build.Name}</h5>
+                <p className='d-flex flex-column card-text text-white px-4'>
+                  <div className='row justify-content-center'>
+                    <div className='col-auto'>
+                      <img
+                        className='img-fluid'
+                        src={build.picture}
+                        alt='pc case'
+                        width='200'
+                      />
+                    </div>
+                    <div className='d-flex flex-column align-items-start col-auto'>
+                      <span>
+                        <p className='fw-bold'>
+                          By user -{" "}
+                          <span className='fw-normal'>{build.username}</span>
+                        </p>
+                      </span>
+                      <span className='text-left'>
+                        <p className='fw-bold'>
+                          Color -{" "}
+                          <span className='fw-normal'>{build.color}</span>
+                        </p>
+                      </span>
+                      <span>
+                        <p className='fw-bold'>
+                          Size - <span className='fw-normal'>{build.size}</span>
+                        </p>
+                      </span>
+                    </div>
+                  </div>
+                </p>
+              </div>
+            </div>
+
+            <div className='col-sm-3'>
               <div className='card bg-dark border border-primary w-5'>
                 <h5 className='card-title text-white p-3'>CPU</h5>
                 <p className='d-flex flex-column card-text text-white text-left align-items-start px-4'>
@@ -107,63 +143,12 @@ function DetailBuild() {
                       <span className='fw-normal'>{build.cpu.socket_type}</span>
                     </p>
                   </span>
-                  <span>
-                    <p className='fw-bold'>
-                      Memory Slots -{" "}
-                      <span className='fw-normal'>
-                        {build.mobo.memory_slots}
-                      </span>
-                    </p>
-                  </span>
                 </p>
               </div>
             </div>
           </div>
           <div className='row justify-content-center'>
-            <div className='col-sm-4'></div>
-            <div className='col-sm-4'>
-              <div className='col my-4'>
-                <div className='card bg-dark border border-primary w-5'>
-                  <h5 className='card-title text-white p-3'>{build.Name}</h5>
-                  <p className='d-flex flex-column card-text text-white px-4'>
-                    <div className='row justify-content-center'>
-                      <div className='col-auto'>
-                        <img
-                          className='img-fluid'
-                          src={build.picture}
-                          alt='pc case'
-                          width='200'
-                        />
-                      </div>
-                      <div className='d-flex flex-column align-items-start col-auto'>
-                        <span>
-                          <p className='fw-bold'>
-                            By user -{" "}
-                            <span className='fw-normal'>{build.username}</span>
-                          </p>
-                        </span>
-                        <span className='text-left'>
-                          <p className='fw-bold'>
-                            Color -{" "}
-                            <span className='fw-normal'>{build.color}</span>
-                          </p>
-                        </span>
-                        <span>
-                          <p className='fw-bold'>
-                            Size -{" "}
-                            <span className='fw-normal'>{build.size}</span>
-                          </p>
-                        </span>
-                      </div>
-                    </div>
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className='col-sm-4'></div>
-          </div>
-          <div className='row justify-content-center'>
-            <div className='col-sm-4'>
+            <div className='col-sm-3'>
               <div className='card bg-dark border border-primary w-5'>
                 <h5 className='card-title text-white p-3'>RAM</h5>
                 <p className='d-flex flex-column card-text text-white text-left align-items-start px-4'>
@@ -176,14 +161,14 @@ function DetailBuild() {
                   <span>
                     <p className='fw-bold'>
                       Memory Type -{" "}
-                      <span className='fw-normal'>{build.cpu.memory_type}</span>
+                      <span className='fw-normal'>{build.ram.memory_type}</span>
                     </p>
                   </span>
                   <span>
                     <p className='fw-bold'>
                       Memory Speed -{" "}
                       <span className='fw-normal'>
-                        {build.cpu.memory_speed}
+                        {build.ram.memory_speed}
                       </span>
                     </p>
                   </span>
@@ -191,14 +176,14 @@ function DetailBuild() {
                     <p className='fw-bold'>
                       Memory Channels -{" "}
                       <span className='fw-normal'>
-                        {build.cpu.memory_channels}
+                        {build.ram.memory_channels}
                       </span>
                     </p>
                   </span>
                 </p>
               </div>
             </div>
-            <div className='col-sm-4'>
+            <div className='col-sm-3'>
               <div className='card bg-dark border border-primary w-5'>
                 <h5 className='card-title text-white p-3'>GPU</h5>
                 <p className='d-flex flex-column card-text text-white text-left align-items-start px-4'>
@@ -272,7 +257,8 @@ function DetailBuild() {
                 </p>
               </div>
             </div>
-            <div className='col-sm-4'>
+
+            <div className='col-sm-3'>
               <div className='card bg-dark border border-primary w-5'>
                 <h5 className='card-title text-white p-3'>PSU</h5>
                 <p className='d-flex flex-column card-text text-white text-left align-items-start px-4'>
@@ -292,7 +278,7 @@ function DetailBuild() {
                     <p className='fw-bold'>
                       Atx Connector -{" "}
                       <span className='fw-normal'>
-                        {build.cpu.atx_12v_connector}
+                        {build.psu.atx_12v_connector}
                       </span>
                     </p>
                   </span>
@@ -300,7 +286,7 @@ function DetailBuild() {
                     <p className='fw-bold'>
                       Graphics Connector -{" "}
                       <span className='fw-normal'>
-                        {build.cpu.graphics_connector}
+                        {build.psu.graphics_connector}
                       </span>
                     </p>
                   </span>
@@ -308,7 +294,7 @@ function DetailBuild() {
                     <p className='fw-bold'>
                       Molex Connector -{" "}
                       <span className='fw-normal'>
-                        {build.cpu.molex_connector}
+                        {build.psu.molex_connector}
                       </span>
                     </p>
                   </span>
@@ -316,7 +302,7 @@ function DetailBuild() {
                     <p className='fw-bold'>
                       Sata Connector -{" "}
                       <span className='fw-normal'>
-                        {build.mobo.sata_connector}
+                        {build.psu.sata_connector}
                       </span>
                     </p>
                   </span>
