@@ -29,7 +29,7 @@ function DetailBuild({ token }) {
             <div className='col-sm-4 order-sm-1 order-2'>
               <div className='card bg-dark border border-primary w-5'>
                 <h4 className='card-title text-white p-3'>Motherboard</h4>
-                <p className='d-flex flex-column card-text text-white px-4'>
+                <div className='d-flex flex-column card-text text-white px-4'>
                   <div className='row'>
                     <div className='col-sm-6'>
                       <div className='d-flex flex-column align-items-center w-100 mb-3'>
@@ -72,13 +72,13 @@ function DetailBuild({ token }) {
                       </div>
                     </div>
                   </div>
-                </p>
+                </div>
               </div>
             </div>
             <div className='col-sm-4 order-sm-2 order-1'>
               <div className='card bg-dark border border-primary w-5'>
                 <h5 className='card-title text-white p-3'>{build.Name}</h5>
-                <p className='d-flex flex-column card-text text-white px-4'>
+                <div className='d-flex flex-column card-text text-white px-4'>
                   <div className='row'>
                     <div className='col-sm-6'>
                       <div className='d-flex flex-column align-items-center w-100 mb-3'>
@@ -122,14 +122,14 @@ function DetailBuild({ token }) {
                       </div>
                     </div>
                   </div>
-                </p>
+                </div>
               </div>
             </div>
 
             <div className='col-sm-4 order-sm-2 order-2'>
               <div className='card bg-dark border border-primary w-5'>
                 <h5 className='card-title text-white p-3'>CPU</h5>
-                <p className='d-flex flex-column card-text text-white px-4'>
+                <div className='d-flex flex-column card-text text-white px-4'>
                   <div className='row'>
                     <div className='col-sm-6'>
                       <div className='d-flex flex-column align-items-center w-100 mb-3'>
@@ -163,7 +163,7 @@ function DetailBuild({ token }) {
                       </div>
                     </div>
                   </div>
-                </p>
+                </div>
               </div>
             </div>
           </div>
@@ -171,7 +171,7 @@ function DetailBuild({ token }) {
             <div className='col-sm-4'>
               <div className='card bg-dark border border-primary w-5'>
                 <h5 className='card-title text-white p-3'>RAM</h5>
-                <p className='d-flex flex-column card-text text-white px-4'>
+                <div className='d-flex flex-column card-text text-white px-4'>
                   <div className='row'>
                     <div className='col-sm-6'>
                       <div className='d-flex flex-column align-items-center w-100 mb-3'>
@@ -202,14 +202,14 @@ function DetailBuild({ token }) {
                       </div>
                     </div>
                   </div>
-                </p>
+                </div>
               </div>
             </div>
             <div className='col-sm-4'>
               <div className='card bg-dark border border-primary w-5'>
                 <h5 className='card-title text-white p-3'>GPU</h5>
-                <p className='d-flex flex-column card-text text-white px-4'>
-                  <p className='d-flex flex-column card-text text-white px-4'>
+                <div className='d-flex flex-column card-text text-white px-4'>
+                  <div className='d-flex flex-column card-text text-white px-4'>
                     <div className='row'>
                       <div className='col-sm-6'>
                         <div className='d-flex flex-column align-items-center w-100 mb-3'>
@@ -282,15 +282,15 @@ function DetailBuild({ token }) {
                         </div>
                       </div>
                     </div>
-                  </p>
-                </p>
+                  </div>
+                </div>
               </div>
             </div>
 
             <div className='col-sm-4'>
               <div className='card bg-dark border border-primary w-5'>
                 <h5 className='card-title text-white p-3'>PSU</h5>
-                <p className='d-flex flex-column card-text text-white px-4'>
+                <div className='d-flex flex-column card-text text-white px-4'>
                   <div className='row'>
                     <div className='col-sm-6'>
                       <div className='d-flex flex-column align-items-center w-100 mb-3'>
@@ -341,7 +341,7 @@ function DetailBuild({ token }) {
                       </div>
                     </div>
                   </div>
-                </p>
+                </div>
               </div>
             </div>
           </div>
