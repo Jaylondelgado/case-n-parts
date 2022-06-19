@@ -20,24 +20,27 @@ function App() {
   return (
     <BrowserRouter>
       <Nav token={token} />
-      <div className="container-fluid p-0">
+      <div className='container-fluid p-0'>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="builds/">
-            <Route path="create" element={<CreateBuild />} />
-            <Route path="mybuilds" element={<MyBuilds />} />
-            <Route path="viewbuilds" element={<BuildList />} />
-            <Route path="detailbuild/:id" element={<DetailBuild />} />
+          <Route path='/' element={<HomePage />} />
+          <Route path='builds/'>
+            <Route path='create' element={<CreateBuild />} />
+            <Route path='mybuilds' element={<MyBuilds />} />
+            <Route path='viewbuilds' element={<BuildList />} />
+            <Route
+              path='detailbuild/:id'
+              element={<DetailBuild token={token} />}
+            />
           </Route>
-          <Route path="login" element={<Login token={token} login={login} />} />
-          <Route path="logout" element={<Logout logout={logout} />} />
+          <Route path='login' element={<Login token={token} login={login} />} />
+          <Route path='logout' element={<Logout logout={logout} />} />
           <Route
-            path="signup"
+            path='signup'
             element={<SignUp token={token} signup={signup} />}
           />
         </Routes>
       </div>
-      <div className="footer-container">
+      <div className='footer-container'>
         <Footer />
       </div>
     </BrowserRouter>
