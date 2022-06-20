@@ -9,12 +9,6 @@ import green from "../images/inner-case/pc-case-with-mobo-green.png";
 const basePath = "http://localhost:8000";
 
 function CreateBuild() {
-  const [nameChoice, setNameChoice] = useState("");
-  const [gpuChoice, setGpuChoice] = useState([]);
-  const [cpuChoice, setCpuChoice] = useState([]);
-  const [psuChoice, setPsuChoice] = useState([]);
-  const [ramChoice, setRamChoice] = useState([]);
-  const [hddChoice, setHddChoice] = useState([]);
   const [caseColor, setCaseColor] = useState(black);
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
@@ -41,27 +35,11 @@ function CreateBuild() {
   useEffect(() => {
     setBuild({
       ...build,
-      Name: nameChoice,
-      psuid: psuChoice.id,
-      gpuid: gpuChoice.id,
-      cpuid: cpuChoice.id,
-      ramid: ramChoice.id,
-      hddid: hddChoice.id,
       color: Number(selectedColor),
       size: Number(selectedSize),
       picture: casePicture,
     });
-  }, [
-    nameChoice,
-    psuChoice,
-    gpuChoice,
-    cpuChoice,
-    ramChoice,
-    hddChoice,
-    selectedColor,
-    selectedSize,
-    casePicture,
-  ]);
+  }, [selectedColor, selectedSize, casePicture]);
 
   const gpus = useApiData(`${basePath}/api/gpus/`, "gpus");
   const cpus = useApiData(`${basePath}/api/cpus/`, "cpus");
@@ -84,28 +62,38 @@ function CreateBuild() {
   };
 
   const handleGpuClick = (gpu) => {
-    const selected = gpu;
-    setGpuChoice(selected);
+    setBuild((build) => ({
+      ...build,
+      gpuid: gpu.id,
+    }));
   };
 
   const handleCpuClick = (cpu) => {
-    const selected = cpu;
-    setCpuChoice(selected);
+    setBuild((build) => ({
+      ...build,
+      cpuid: cpu.id,
+    }));
   };
 
   const handlePsuClick = (psu) => {
-    const selected = psu;
-    setPsuChoice(selected);
+    setBuild((build) => ({
+      ...build,
+      psuid: psu.id,
+    }));
   };
 
   const handleRamClick = (ram) => {
-    const selected = ram;
-    setRamChoice(selected);
+    setBuild((build) => ({
+      ...build,
+      ramid: ram.id,
+    }));
   };
 
   const handleHddClick = (hdd) => {
-    const selected = hdd;
-    setHddChoice(selected);
+    setBuild((build) => ({
+      ...build,
+      hddid: hdd.id,
+    }));
   };
 
   const handleColorChange = (event) => {
@@ -131,8 +119,11 @@ function CreateBuild() {
     setCasePicture(caseFilteredUrls[0]);
   };
 
-  const name = (event) => {
-    setNameChoice(event.target.value);
+  const handleNameChange = (event) => {
+    setBuild((build) => ({
+      ...build,
+      Name: event.target.value,
+    }));
   };
 
   const handleSizeChange = (event) => {
@@ -155,12 +146,12 @@ function CreateBuild() {
     const response = await fetch(appointmentUrl, fetchConfig);
     if (response.ok) {
       setBuild({
-        name: setNameChoice(""),
-        psu: setPsuChoice(""),
-        gpu: setGpuChoice(""),
-        cpu: setCpuChoice(""),
-        ram: setRamChoice(""),
-        hdd: setHddChoice(""),
+        Name: "",
+        psu: "",
+        gpu: "",
+        cpu: "",
+        ram: "",
+        hdd: "",
         mobo: 1,
         caseColor: black,
         color: setSelectedColor(black),
@@ -198,8 +189,8 @@ function CreateBuild() {
 
             <div className="col-md-auto">
               <input
-                onChange={name}
-                value={nameChoice}
+                onChange={handleNameChange}
+                value={build.Name}
                 placeholder="PC Name"
                 required
                 name="name"
@@ -364,7 +355,6 @@ function CreateBuild() {
                   <button
                     type="button"
                     className="btn btn-outline-secondary w-75"
-                    onClick="btn btn-outline-success w-75"
                     data-bs-toggle="modal"
                     data-bs-target="#gpuModal"
                   >

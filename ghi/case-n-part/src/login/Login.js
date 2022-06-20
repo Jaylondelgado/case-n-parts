@@ -15,47 +15,53 @@ function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { login, token } = props;
+  console.log("props", props);
 
   if (token) {
-    return <Navigate to="builds/mybuilds" />;
+    return <Navigate to="/builds/mybuilds" />;
   }
 
   return (
-    <div className="App">
-      <CardWrapper>
-        <CardHeader>
-          <CardHeading>Sign in</CardHeading>
-        </CardHeader>
+    <div className="container mt-5 py-5">
+      <div className="App">
+        <CardWrapper>
+          <CardHeader>
+            <CardHeading>Sign in</CardHeading>
+          </CardHeader>
 
-        <CardBody>
-          <CardFieldset>
-            <CardInput
-              onChange={(e) => setUsername(e.target.value)}
-              value={username}
-              placeholder="Username"
-              type="text"
-              required
-            />
-          </CardFieldset>
+          <CardBody>
+            <CardFieldset>
+              <CardInput
+                onChange={(e) => setUsername(e.target.value)}
+                value={username}
+                placeholder="Username"
+                type="text"
+                required
+              />
+            </CardFieldset>
 
-          <CardFieldset>
-            <CardInput
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              placeholder="Password"
-              type="password"
-              required
-            />
-            <CardIcon className="fa fa-eye" eye small />
-          </CardFieldset>
+            <CardFieldset>
+              <CardInput
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                placeholder="Password"
+                type="password"
+                required
+              />
+              <CardIcon className="fa fa-eye" eye small />
+            </CardFieldset>
 
-          <CardFieldset>
-            <CardButton onClick={() => login(username, password)} type="button">
-              Sign In
-            </CardButton>
-          </CardFieldset>
-        </CardBody>
-      </CardWrapper>
+            <CardFieldset>
+              <CardButton
+                onClick={() => login(username, password)}
+                type="button"
+              >
+                Sign In
+              </CardButton>
+            </CardFieldset>
+          </CardBody>
+        </CardWrapper>
+      </div>
     </div>
   );
 }

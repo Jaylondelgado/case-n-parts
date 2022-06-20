@@ -11,6 +11,7 @@ import CreateBuild from "./builds/CreateBuild";
 import BuildList from "./builds/BuildList";
 import { useToken } from "./authApi";
 import DetailBuild from "./builds/DetailBuild";
+import UpdateBuild from "./builds/UpdateBuild";
 
 import "./App.css";
 
@@ -31,6 +32,7 @@ function App() {
               path='detailbuild/:id'
               element={<DetailBuild token={token} />}
             />
+            <Route path='updatebuild/:id' element={<UpdateBuild />} />
           </Route>
           <Route path='login' element={<Login token={token} login={login} />} />
           <Route path='logout' element={<Logout logout={logout} />} />
