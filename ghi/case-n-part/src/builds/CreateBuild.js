@@ -20,6 +20,7 @@ function CreateBuild() {
   const [selectedSize, setSelectedSize] = useState("");
   const [casePicture, setCasePicture] = useState("");
   const [successfulSubmit, setSuccessfulSubmit] = useState(false);
+  const [partChosen, setPartChosen] = useState("success");
 
   const [build, setBuild] = useState({
     Name: "",
@@ -74,7 +75,6 @@ function CreateBuild() {
 
   useEffect(() => {
     const currentColorImage = colors.includes(selectedColor);
-    console.log(currentColorImage);
   }, [selectedColor, colors]);
 
   const caseColors = {
@@ -162,11 +162,11 @@ function CreateBuild() {
         ram: setRamChoice(""),
         hdd: setHddChoice(""),
         mobo: 1,
+        caseColor: black,
         color: setSelectedColor(black),
         size: setSelectedSize(""),
         picture: setCasePicture(""),
       });
-      console.log("    chad work", build);
       setSuccessfulSubmit(true);
     }
   };
@@ -184,7 +184,7 @@ function CreateBuild() {
   return (
     <div className="container my-5">
       <div className="row py-5 g-4 mt-4">
-        <form onSubmit={handleSubmit} id="create-appointment-form">
+        <form onSubmit={handleSubmit} id="create-build-form">
           <div className="col-sm-1 my-25"></div>
           <div className="row justify-content-md-center">
             <div className="col-md-auto">
@@ -364,6 +364,7 @@ function CreateBuild() {
                   <button
                     type="button"
                     className="btn btn-outline-secondary w-75"
+                    onClick="btn btn-outline-success w-75"
                     data-bs-toggle="modal"
                     data-bs-target="#gpuModal"
                   >
@@ -572,6 +573,96 @@ function CreateBuild() {
             </div>
             <div className="row justify-content-md-center">
               <div className="col-sm-1 pt-2 w-50">
+                {/* <div>
+                  <h3>PSU</h3>
+                  <table className="table table-info">
+                    <thead>
+                      <tr>
+                        <th>Brand</th>
+                        <th>Wattage</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{psuChoice["brand"]}</td>
+                        <td>{psuChoice["wattage"]}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                ell
+                <div>
+                  <h3>CPU</h3>
+                  <table className="table table-info">
+                    <thead>
+                      <tr>
+                        <th>Processor</th>
+                        <th>Cores</th>
+                        <th>Threads</th>
+                        <th>Speed</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{cpuChoice["processor"]}</td>
+                        <td>{cpuChoice["cores"]}</td>
+                        <td>{cpuChoice["threads"]}</td>
+                        <td>{cpuChoice["speed"]}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div>
+                  <h3>GPU</h3>
+                  <table className="table table-info">
+                    <thead>
+                      <tr>
+                        <th>Manufacturer</th>
+                        <th>Chipset</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{gpuChoice["manufacturer"]}</td>
+                        <td>{gpuChoice["chipset"]}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div>
+                  <h3>HDD</h3>
+                  <table className="table table-info">
+                    <thead>
+                      <tr>
+                        <th>Brand</th>
+                        <th>Capacity</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{hddChoice["brand"]}</td>
+                        <td>{hddChoice["capacity"]}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div>
+                  <h3>RAM</h3>
+                  <table className="table table-info">
+                    <thead>
+                      <tr>
+                        <th>Brand</th>
+                        <th>Memory Speed</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{ramChoice["brand"]}</td>
+                        <td>{ramChoice["memory_speed"]}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div> */}
                 <button
                   onSubmit={handleSubmit}
                   id="create-pc-build"
@@ -579,7 +670,6 @@ function CreateBuild() {
                 >
                   Create
                 </button>
-
                 <div className={alertContainerClasses}>
                   <div className={alertClasses} id="success-message">
                     Build created successfully
