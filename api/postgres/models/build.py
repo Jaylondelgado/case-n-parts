@@ -88,3 +88,5 @@ class BuildOutList(BaseModel):
 class BuildA(BaseModel):
     builds: list[BuildOutList]
 
+class BuildDeleteOpertion(BaseModel):
+    result: bool

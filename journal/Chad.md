@@ -102,3 +102,9 @@ Also debugged a `useEffect` for our `setBuild`. It was running constantly, which
 Started working on the detail build page. Had a bit of a struggle on how to dynamically get the build id into the url path. But after reading some React Router documentation, I learned that I could just add `:id` to the `Route` path and that would work.
 
 After that, I had another issue, where I needed the id that I was using in the url so that I could make a fetch request to the back-end for that build. I went back to the React Router Dom documentation, and learned about the `useParams` hook, that returns an object of key/value pairs of the dynamic params from the current URL that were matched by the `<Route path>`.
+
+## June 17th, 2022
+
+Worked some more on the detail page. Went through a couple of layouts. Started out by outputting the data for the build into a table that would display on the page, but whenever we'd scale it down, the table would break because you can only scale a table down so far, and so the design was not responsive friendly. Finally settled on a design where we'd lay out the different parts as cards on the screen that would have the details of each part, then when we scaled down, we'd reorder them so that they looked good on a mobile screen.
+
+I had an aha moment today when I realzied the bootstrap grid system is set up to be a max of 12 columns. Once I realized that, all the `col-sm-4` stuff made sense. It's just dividing up the different portions of the grid. So a 4 means there's 8 columns left over. Made laying stuff out a lot easier.

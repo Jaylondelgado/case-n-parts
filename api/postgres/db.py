@@ -1,4 +1,5 @@
 from psycopg_pool import ConnectionPool
+from psycopg.errors import UniqueViolation
 
 pool = ConnectionPool()
 
@@ -486,6 +487,57 @@ class BuildsQueries:
                 )
                 rows = (cursor.fetchone())
                 return list(rows)
+    
+    def delete_build(self, id, userid:int):
+        with pool.connection() as connection:
+            with connection.cursor() as cursor:
+                with connection.transaction():
+                    try:
+                        cursor.execute(
+                            """
+                            DELETE FROM "case"
+                            WHERE buildid=%s
+                        """,
+                            [id]
+                        )
+                        cursor.execute(
+                            """
+                            DELETE FROM buildgpus
+                            WHERE buildid=%s
+                        """,
+                            [id]
+                        )
+                        cursor.execute(
+                            """
+                            DELETE FROM buildhdds
+                            WHERE buildid=%s
+                        """,
+                            [id]
+                        )
+                        cursor.execute(
+                            """
+                            DELETE FROM rating
+                            WHERE buildid=%s
+                        """,
+                            [id]
+                        )
+                        cursor.execute(
+                            """
+                            DELETE FROM buildram
+                            WHERE buildid=%s
+                        """,
+                            [id],
+                        )
+                        cursor.execute(
+                            """
+                            DELETE FROM build
+                            WHERE id=%s
+                            AND userid=%s
+                        """,
+                            [id,userid],
+                        )
+                    except UniqueViolation:
+                        raise DuplicateTitle()
 
     def update_build(self,id, Name, moboid, cpuid, psuid,Private, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size, picture):
         with pool.connection() as connection:
