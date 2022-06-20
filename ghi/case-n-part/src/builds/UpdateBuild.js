@@ -8,14 +8,13 @@ import green from "../images/inner-case/pc-case-with-mobo-green.png";
 
 const basePath = "http://localhost:8000";
 
-function CreateBuild() {
-  const { id } = useParams();
-  const [caseColor, setCaseColor] = useState(black);
-  const [selectedColor, setSelectedColor] = useState("");
-  const [selectedSize, setSelectedSize] = useState("");
-  const [casePicture, setCasePicture] = useState("");
-  const [successfulSubmit, setSuccessfulSubmit] = useState(false);
+const caseColors = {
+  black,
+  green,
+  pink,
+};
 
+function CreateBuild() {
   const [build, setBuild] = useState({
     Name: "",
     psuid: "",
@@ -32,14 +31,16 @@ function CreateBuild() {
     picture: 3,
   });
 
+  const { id } = useParams();
+  const [selectedSize, setSelectedSize] = useState("");
+  const [successfulSubmit, setSuccessfulSubmit] = useState(false);
+
   useEffect(() => {
     setBuild({
       ...build,
-      color: Number(selectedColor),
       size: Number(selectedSize),
-      picture: casePicture,
     });
-  }, [selectedColor, selectedSize, casePicture]);
+  }, [selectedSize]);
 
   useEffect(() => {
     const getBuildData = async () => {
@@ -51,6 +52,7 @@ function CreateBuild() {
       );
       const buildData = await buildResponse.json();
       setBuild(buildData);
+      console.log("buildData:", buildData);
     };
 
     getBuildData();
@@ -61,16 +63,10 @@ function CreateBuild() {
   const psus = useApiData(`${basePath}/api/psus/`, "psus");
   const rams = useApiData(`${basePath}/api/rams/`, "rams");
   const hdds = useApiData(`${basePath}/api/hdds`, "hdds");
-  const caseImages = useApiData(`${basePath}/api/caseimage`, "caseimages");
   const colors = useApiData(`${basePath}/api/color/`, "colors");
   const sizes = useApiData(`${basePath}/api/size/`, "sizes");
+  const caseImages = useApiData(`${basePath}/api/caseimage`, "caseimages");
   const mobos = useApiData(`${basePath}/api/mobos`, "mobos");
-
-  const caseColors = {
-    black: black,
-    green: green,
-    pink: pink,
-  };
 
   const handleGpuClick = gpu => {
     setBuild(build => ({
@@ -107,27 +103,29 @@ function CreateBuild() {
     }));
   };
 
-  const handleColorChange = event => {
-    const value = event.target.value;
-    setSelectedColor(value);
-    if (value === "") {
-      setCaseColor(caseColors["black"]);
-    } else {
-      setCaseColor(caseColors[colors[value - 1].name]);
-    }
+  const handleColorChange = ({ target: { value: selectedColor } }) => {
+    const { id: selectedId, name: selectedName } = colors.find(
+      color => color.name === selectedColor
+    );
 
-    let caseColorUrls = caseImages.map(image => {
-      return Object.values(image);
+    console.log({
+      selectedColor,
+      selectedId,
+      selectedName,
+      selectedCaseColor: caseColors[selectedName],
+      colors,
+      caseColors,
+      caseImages,
     });
 
-    let caseColorUrl = caseColorUrls.map(colorUrl => {
-      if (colorUrl[1].includes(colors[value - 1].name)) {
-        return colorUrl[0];
-      }
-    });
-
-    const caseFilteredUrls = caseColorUrl.filter(url => url !== undefined);
-    setCasePicture(caseFilteredUrls[0]);
+    const picture = caseImages.find(
+      caseImage => caseImage.id === selectedId
+    ).picture;
+    setBuild(build => ({
+      ...build,
+      color: selectedName,
+      picture,
+    }));
   };
 
   const handleNameChange = event => {
@@ -165,9 +163,9 @@ function CreateBuild() {
         ram: "",
         hdd: "",
         mobo: 1,
-        color: setSelectedColor(black),
+        color: "black",
         size: setSelectedSize(""),
-        picture: setCasePicture(""),
+        picture: "",
       });
       setSuccessfulSubmit(true);
     }
@@ -192,7 +190,7 @@ function CreateBuild() {
             <div className='col-md-auto'>
               <img
                 className='rounded'
-                src={caseColor}
+                src={build.color ? caseColors[build.color] : caseColors.black}
                 alt='pc case'
                 width='500'
               />
@@ -219,7 +217,7 @@ function CreateBuild() {
                 <option value=''>Case color</option>
                 {colors.map(color => {
                   return (
-                    <option key={color.id} value={color.id}>
+                    <option key={color.id} value={color.name}>
                       {color.name}
                     </option>
                   );
@@ -249,7 +247,7 @@ function CreateBuild() {
                   data-bs-toggle='modal'
                   data-bs-target='#psuModal'
                 >
-                  PSU
+                  {build.psu ? `PSU: ${build.psu.wattage}` : "PSU"}
                 </button>
                 <div
                   className='modal fade'
@@ -287,7 +285,7 @@ function CreateBuild() {
                                   key={psu.id}
                                   onClick={() => handlePsuClick(psu)}
                                   className={
-                                    build.psuid === psu.id
+                                    build.psu.id === psu.id
                                       ? "selected-list-item"
                                       : undefined
                                   }
@@ -312,7 +310,7 @@ function CreateBuild() {
                   data-bs-toggle='modal'
                   data-bs-target='#cpuModal'
                 >
-                  CPU
+                  {build.cpu ? `CPU: ${build.cpu.processor}` : "CPU"}
                 </button>
                 <div
                   className='modal fade'
