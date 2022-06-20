@@ -13,7 +13,13 @@ function DetailBuild({ token }) {
 
   useEffect(() => {
     const getBuildData = async () => {
-      const buildResponse = await fetch(`${basePath}/api/build/${id}`);
+      const buildResponse = await fetch(
+        `${process.env.REACT_APP_ACCOUNTS_HOST}/api/build/${id}`,
+        {
+          credentials: "include",
+        }
+      );
+      console.log(buildResponse);
       const buildData = await buildResponse.json();
       setBuild(buildData);
     };
@@ -92,7 +98,7 @@ function DetailBuild({ token }) {
                       <div className='d-flex flex-row justify-content-center w-100 '>
                         <span>
                           <Link
-                            to={`/builds/detailbuild/${build.id}`}
+                            to={`/builds/updatebuild/${build.id}`}
                             className='btn btn-outline-primary mb-2'
                           >
                             Update Build

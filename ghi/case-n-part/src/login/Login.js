@@ -18,9 +18,10 @@ function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { login, token } = props;
+  console.log("props", props);
 
   if (token) {
-    return <Navigate to='builds/mybuilds' />;
+    return <Navigate to='/builds/mybuilds' />;
   }
 
   return (

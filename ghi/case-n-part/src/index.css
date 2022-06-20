@@ -21,3 +21,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.selected-list-item > td {
+  filter: brightness(140%);
+}
