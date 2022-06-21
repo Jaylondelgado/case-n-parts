@@ -214,7 +214,6 @@ function CreateBuild() {
                   );
                 })}
               </select>
-              {console.log(build)}
               <div className='col-sm-1 w-75 pt-2'>
                 <button
                   type='button'
@@ -222,6 +221,8 @@ function CreateBuild() {
                 >
                   {`MOBO: ${mobos[0].brand}`}
                 </button>
+              </div>
+              <div className='col-sm-1 w-75 pt-2'>
                 <button
                   type='button'
                   className='btn btn-outline-secondary w-100'
@@ -360,7 +361,7 @@ function CreateBuild() {
                   >
                     {build.gpu ? `GPU: ${build.gpu.chipset}` : "GPU"}
                   </button>
-                  <button
+                  {/* <button
                     type='button'
                     className='btn btn-secondary dropdown-toggle dropdown-toggle-split w-25'
                     data-bs-toggle='dropdown'
@@ -369,7 +370,7 @@ function CreateBuild() {
                   >
                     <span className='sr-only'>Toggle Dropdown</span>
                   </button>
-                  <div className='dropdown-menu'>x</div>
+                  <div className='dropdown-menu'>x</div> */}
                 </div>
                 <div
                   className='modal fade'
