@@ -1,13 +1,11 @@
+
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useApiData from "../parts/ApiFetch";
-
 import black from "../images/inner-case/pc-case-with-mobo-black.png";
 import pink from "../images/inner-case/pc-case-with-mobo-pink.png";
 import green from "../images/inner-case/pc-case-with-mobo-green.png";
-
 const basePath = "http://localhost:8000";
-
 const caseColors = {
   black: black,
   green: green,
@@ -26,7 +24,6 @@ function CreateBuild() {
     picture: "",
   });
   const [successfulSubmit, setSuccessfulSubmit] = useState();
-
   const gpus = useApiData(`${basePath}/api/gpus/`, "gpus");
   const cpus = useApiData(`${basePath}/api/cpus/`, "cpus");
   const psus = useApiData(`${basePath}/api/psus/`, "psus");
@@ -36,47 +33,40 @@ function CreateBuild() {
   const colors = useApiData(`${basePath}/api/color/`, "colors");
   const sizes = useApiData(`${basePath}/api/size/`, "sizes");
   const mobos = useApiData(`${basePath}/api/mobos`, "mobos");
-
   const handleGpuClick = (gpu) => {
     setBuild((build) => ({
       ...build,
       gpu,
     }));
   };
-
   const handleCpuClick = (cpu) => {
     setBuild((build) => ({
       ...build,
       cpu,
     }));
   };
-
   const handlePsuClick = (psu) => {
     setBuild((build) => ({
       ...build,
       psu,
     }));
   };
-
   const handleRamClick = (ram) => {
     setBuild((build) => ({
       ...build,
       ram,
     }));
   };
-
   const handleHddClick = (hdd) => {
     setBuild((build) => ({
       ...build,
       hdd,
     }));
   };
-
   const handleColorChange = ({ target: { value: selectedColor } }) => {
     const { id: selectedId, name: selectedName } = colors.find(
       (color) => color.name === selectedColor
     );
-
     const picture = caseImages.find(
       (caseImage) => caseImage.id === selectedId
     ).id;
@@ -86,21 +76,18 @@ function CreateBuild() {
       picture,
     }));
   };
-
   const handleNameChange = (event) => {
     setBuild((build) => ({
       ...build,
       Name: event.target.value,
     }));
   };
-
   const handleSizeChange = ({ target: { value: selectedSize } }) => {
     setBuild((build) => ({
       ...build,
       size: selectedSize,
     }));
   };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     const buildPostData = {
@@ -120,7 +107,6 @@ function CreateBuild() {
         .id,
       Private: true,
     };
-
     const buildUrl = `${process.env.REACT_APP_ACCOUNTS_HOST}/api/build/create`;
     const fetchConfig = {
       method: "POST",
@@ -147,17 +133,14 @@ function CreateBuild() {
       setSuccessfulSubmit(true);
     }
   };
-
   let createButton = "btn btn-outline-primary w-100 mt-4";
   let alertClasses = "alert alert-success d-none mb-0";
   let alertContainerClasses = "d-none";
-
   if (successfulSubmit) {
     createButton = "d-none";
     alertClasses = "alert alert-success mb-3";
     alertContainerClasses = "";
   }
-
   return (
     <div className="container my-5">
       <div className="row py-5 g-4 mt-4">
@@ -177,16 +160,16 @@ function CreateBuild() {
                 value={build.Name}
                 placeholder="PC Name"
                 required
-                name="name"
-                id="name"
-                className="form-control w-75 mb-2"
+                name='name'
+                id='name'
+                className='form-control w-75 mb-2 bg-dark text-white border-secondary'
               />
               <select
                 onChange={handleColorChange}
                 value={build.color}
-                name="color"
-                id="color"
-                className="form-select w-75 mb-2"
+                name='color'
+                id='color'
+                className='form-select w-75 mb-2 bg-dark text-white border-secondary'
                 required
               >
                 <option value="">Case color</option>
@@ -201,9 +184,9 @@ function CreateBuild() {
               <select
                 onChange={handleSizeChange}
                 value={build.size}
-                name="size"
-                id="size"
-                className="form-select w-75"
+                name='size'
+                id='size'
+                className='form-select w-75 bg-dark text-white border-secondary'
                 required
               >
                 <option value="">Case size</option>
@@ -215,12 +198,20 @@ function CreateBuild() {
                   );
                 })}
               </select>
-              <div className="col-sm-1 w-75 pt-2">
+              <div className='col-sm-1 w-75 pt-2'>
                 <button
-                  type="button"
-                  className="btn btn-outline-secondary w-100"
-                  data-bs-toggle="modal"
-                  data-bs-target="#psuModal"
+                  type='button'
+                  className='btn btn-outline-secondary w-100'
+                >
+                  {"MOBOS"}
+                </button>
+              </div>
+              <div className='col-sm-1 w-75 pt-2'>
+                <button
+                  type='button'
+                  className='btn btn-outline-secondary w-100'
+                  data-bs-toggle='modal'
+                  data-bs-target='#psuModal'
                 >
                   {build.psu ? `PSU: ${build.psu.wattage}` : "PSU"}
                 </button>
@@ -344,8 +335,8 @@ function CreateBuild() {
                   </div>
                 </div>
               </div>
-              <div className="col-md w-75 pt-2">
-                <div className="btn-group dropup w-100">
+              <div className='col-md w-75 pt-2'>
+                <div className='btn-group dropend w-100'>
                   <button
                     type="button"
                     className="btn btn-outline-secondary w-75"
@@ -355,15 +346,15 @@ function CreateBuild() {
                     {build.gpu ? `GPU: ${build.gpu.chipset}` : "GPU"}
                   </button>
                   <button
-                    type="button"
-                    className="btn btn-secondary dropdown-toggle dropdown-toggle-split w-25"
-                    data-bs-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
+                    type='button'
+                    className='btn btn-outline-secondary dropdown-toggle dropdown-toggle-split w-25'
+                    data-bs-toggle='dropdown'
+                    aria-haspopup='true'
+                    aria-expanded='false'
                   >
                     <span className="sr-only">Toggle Dropdown</span>
                   </button>
-                  <div className="dropdown-menu">x</div>
+                  <div className='dropdown-menu bg-dark ms-2'>x</div>
                 </div>
                 <div
                   className="modal fade"
@@ -418,8 +409,8 @@ function CreateBuild() {
                   </div>
                 </div>
               </div>
-              <div className="col-sm-1 w-75 pt-2">
-                <div className="btn-group dropup w-100">
+              <div className='col-sm-1 w-75 pt-2'>
+                <div className='btn-group dropend w-100'>
                   <button
                     type="button"
                     className="btn btn-outline-secondary w-75"
@@ -429,15 +420,15 @@ function CreateBuild() {
                     {build.hdd ? `HDD: ${build.hdd.capacity}` : "HDD"}
                   </button>
                   <button
-                    type="button"
-                    className="btn btn-secondary dropdown-toggle dropdown-toggle-split w-25"
-                    data-bs-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
+                    type='button'
+                    className='btn btn-outline-secondary dropdown-toggle dropdown-toggle-split w-25'
+                    data-bs-toggle='dropdown'
+                    aria-haspopup='true'
+                    aria-expanded='false'
                   >
                     <span className="sr-only">Toggle Dropdown</span>
                   </button>
-                  <div className="dropdown-menu">x</div>
+                  <div className='dropdown-menu bg-dark ms-2'>x</div>
                 </div>
                 <div
                   className="modal fade"
@@ -492,8 +483,8 @@ function CreateBuild() {
                   </div>
                 </div>
               </div>
-              <div className="col-sm-1 w-75 pt-2">
-                <div className="btn-group dropup w-100">
+              <div className='col-sm-1 w-75 pt-2'>
+                <div className='btn-group dropend w-100'>
                   <button
                     type="button"
                     className="btn btn-outline-secondary w-75"
@@ -503,15 +494,15 @@ function CreateBuild() {
                     {build.ram ? `RAM: ${build.ram.memory_type}` : "RAM"}
                   </button>
                   <button
-                    type="button"
-                    className="btn btn-secondary dropdown-toggle dropdown-toggle-split w-25"
-                    data-bs-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
+                    type='button'
+                    className='btn btn-outline-secondary dropdown-toggle dropdown-toggle-split w-25'
+                    data-bs-toggle='dropdown'
+                    aria-haspopup='true'
+                    aria-expanded='false'
                   >
                     <span className="sr-only">Toggle Dropdown</span>
                   </button>
-                  <div className="dropdown-menu">
+                  <div className='dropdown-menu bg-dark ms-2'>
                     <p>something</p>
                   </div>
                 </div>
@@ -606,5 +597,4 @@ function CreateBuild() {
     </div>
   );
 }
-
 export default CreateBuild;

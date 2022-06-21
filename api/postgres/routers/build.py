@@ -131,8 +131,9 @@ def row_to_build(row):
             "atx_12v_connector": row[51],
             "graphics_connector": row[52],
             "molex_connector": row[53],
-            "sata_connector": row[54]
-        }
+            "sata_connector": row[54],
+        },
+        "likes": row[55]
     }
     return build
 
