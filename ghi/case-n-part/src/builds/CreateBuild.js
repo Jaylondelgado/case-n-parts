@@ -198,12 +198,20 @@ function CreateBuild() {
                   );
                 })}
               </select>
-              <div className="col-sm-1 w-75 pt-2">
+              <div className='col-sm-1 w-75 pt-2'>
                 <button
-                  type="button"
-                  className="btn btn-outline-secondary w-100"
-                  data-bs-toggle="modal"
-                  data-bs-target="#psuModal"
+                  type='button'
+                  className='btn btn-outline-secondary w-100'
+                >
+                  {`MOBO: ${mobos[0].brand}`}
+                </button>
+              </div>
+              <div className='col-sm-1 w-75 pt-2'>
+                <button
+                  type='button'
+                  className='btn btn-outline-secondary w-100'
+                  data-bs-toggle='modal'
+                  data-bs-target='#psuModal'
                 >
                   {build.psu ? `PSU: ${build.psu.wattage}` : "PSU"}
                 </button>
@@ -337,16 +345,16 @@ function CreateBuild() {
                   >
                     {build.gpu ? `GPU: ${build.gpu.chipset}` : "GPU"}
                   </button>
-                  <button
-                    type="button"
-                    className="btn btn-secondary dropdown-toggle dropdown-toggle-split w-25"
-                    data-bs-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
+                  {/* <button
+                    type='button'
+                    className='btn btn-secondary dropdown-toggle dropdown-toggle-split w-25'
+                    data-bs-toggle='dropdown'
+                    aria-haspopup='true'
+                    aria-expanded='false'
                   >
                     <span className="sr-only">Toggle Dropdown</span>
                   </button>
-                  <div className="dropdown-menu">x</div>
+                  <div className='dropdown-menu'>x</div> */}
                 </div>
                 <div
                   className="modal fade"
