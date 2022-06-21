@@ -160,16 +160,16 @@ function CreateBuild() {
                 value={build.Name}
                 placeholder="PC Name"
                 required
-                name="name"
-                id="name"
-                className="form-control w-75 mb-2"
+                name='name'
+                id='name'
+                className='form-control w-75 mb-2 bg-dark text-white border-secondary'
               />
               <select
                 onChange={handleColorChange}
                 value={build.color}
-                name="color"
-                id="color"
-                className="form-select w-75 mb-2"
+                name='color'
+                id='color'
+                className='form-select w-75 mb-2 bg-dark text-white border-secondary'
                 required
               >
                 <option value="">Case color</option>
@@ -184,9 +184,9 @@ function CreateBuild() {
               <select
                 onChange={handleSizeChange}
                 value={build.size}
-                name="size"
-                id="size"
-                className="form-select w-75"
+                name='size'
+                id='size'
+                className='form-select w-75 bg-dark text-white border-secondary'
                 required
               >
                 <option value="">Case size</option>
@@ -203,7 +203,7 @@ function CreateBuild() {
                   type='button'
                   className='btn btn-outline-secondary w-100'
                 >
-                  {`MOBO: ${mobos[0].brand}`}
+                  {"MOBOS"}
                 </button>
               </div>
               <div className='col-sm-1 w-75 pt-2'>
@@ -335,8 +335,8 @@ function CreateBuild() {
                   </div>
                 </div>
               </div>
-              <div className="col-md w-75 pt-2">
-                <div className="btn-group dropup w-100">
+              <div className='col-md w-75 pt-2'>
+                <div className='btn-group dropend w-100'>
                   <button
                     type="button"
                     className="btn btn-outline-secondary w-75"
@@ -345,16 +345,16 @@ function CreateBuild() {
                   >
                     {build.gpu ? `GPU: ${build.gpu.chipset}` : "GPU"}
                   </button>
-                  {/* <button
+                  <button
                     type='button'
-                    className='btn btn-secondary dropdown-toggle dropdown-toggle-split w-25'
+                    className='btn btn-outline-secondary dropdown-toggle dropdown-toggle-split w-25'
                     data-bs-toggle='dropdown'
                     aria-haspopup='true'
                     aria-expanded='false'
                   >
                     <span className="sr-only">Toggle Dropdown</span>
                   </button>
-                  <div className='dropdown-menu'>x</div> */}
+                  <div className='dropdown-menu bg-dark ms-2'>x</div>
                 </div>
                 <div
                   className="modal fade"
@@ -409,8 +409,8 @@ function CreateBuild() {
                   </div>
                 </div>
               </div>
-              <div className="col-sm-1 w-75 pt-2">
-                <div className="btn-group dropup w-100">
+              <div className='col-sm-1 w-75 pt-2'>
+                <div className='btn-group dropend w-100'>
                   <button
                     type="button"
                     className="btn btn-outline-secondary w-75"
@@ -420,15 +420,15 @@ function CreateBuild() {
                     {build.hdd ? `HDD: ${build.hdd.capacity}` : "HDD"}
                   </button>
                   <button
-                    type="button"
-                    className="btn btn-secondary dropdown-toggle dropdown-toggle-split w-25"
-                    data-bs-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
+                    type='button'
+                    className='btn btn-outline-secondary dropdown-toggle dropdown-toggle-split w-25'
+                    data-bs-toggle='dropdown'
+                    aria-haspopup='true'
+                    aria-expanded='false'
                   >
                     <span className="sr-only">Toggle Dropdown</span>
                   </button>
-                  <div className="dropdown-menu">x</div>
+                  <div className='dropdown-menu bg-dark ms-2'>x</div>
                 </div>
                 <div
                   className="modal fade"
@@ -483,8 +483,8 @@ function CreateBuild() {
                   </div>
                 </div>
               </div>
-              <div className="col-sm-1 w-75 pt-2">
-                <div className="btn-group dropup w-100">
+              <div className='col-sm-1 w-75 pt-2'>
+                <div className='btn-group dropend w-100'>
                   <button
                     type="button"
                     className="btn btn-outline-secondary w-75"
@@ -494,15 +494,15 @@ function CreateBuild() {
                     {build.ram ? `RAM: ${build.ram.memory_type}` : "RAM"}
                   </button>
                   <button
-                    type="button"
-                    className="btn btn-secondary dropdown-toggle dropdown-toggle-split w-25"
-                    data-bs-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
+                    type='button'
+                    className='btn btn-outline-secondary dropdown-toggle dropdown-toggle-split w-25'
+                    data-bs-toggle='dropdown'
+                    aria-haspopup='true'
+                    aria-expanded='false'
                   >
                     <span className="sr-only">Toggle Dropdown</span>
                   </button>
-                  <div className="dropdown-menu">
+                  <div className='dropdown-menu bg-dark ms-2'>
                     <p>something</p>
                   </div>
                 </div>
