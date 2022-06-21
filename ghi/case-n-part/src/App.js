@@ -8,10 +8,10 @@ import SignUp from "./login/SignUp";
 import HomePage from "./HomePage";
 import MyBuilds from "./builds/MyBuilds";
 import CreateBuild from "./builds/CreateBuild";
-import BuildList from "./builds/ViewAllBuilds";
+import BuildList from "./builds/BuildList";
 import { useToken } from "./authApi";
-import ViewBuilds from "./builds/ViewBuilds";
 import DetailBuild from "./builds/DetailBuild";
+import UpdateBuild from "./builds/UpdateBuild";
 
 import "./App.css";
 
@@ -27,9 +27,12 @@ function App() {
           <Route path='builds/'>
             <Route path='create' element={<CreateBuild />} />
             <Route path='mybuilds' element={<MyBuilds />} />
-            <Route path='listbuilds' element={<BuildList />} />
-            <Route path='viewbuilds' element={<ViewBuilds />} />
-            <Route path='detailbuild/:id' element={<DetailBuild />} />
+            <Route path='viewbuilds' element={<BuildList />} />
+            <Route
+              path='detailbuild/:id'
+              element={<DetailBuild token={token} />}
+            />
+            <Route path='updatebuild/:id' element={<UpdateBuild />} />
           </Route>
           <Route path='login' element={<Login token={token} login={login} />} />
           <Route path='logout' element={<Logout logout={logout} />} />

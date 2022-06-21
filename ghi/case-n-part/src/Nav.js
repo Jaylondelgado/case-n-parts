@@ -4,8 +4,8 @@ import "./Nav.css";
 
 export const myLinks = [
   { name: "My Builds", path: "/builds/mybuilds" },
-  { name: "Create Builds", path: "create" },
-  { name: "View Builds", path: "/builds/listbuilds" },
+  { name: "Create Builds", path: "builds/create" },
+  { name: "View Builds", path: "/builds/viewbuilds" },
   { name: "Logout", path: "/logout" },
 ];
 

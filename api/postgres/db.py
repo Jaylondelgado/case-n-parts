@@ -1,4 +1,5 @@
 from psycopg_pool import ConnectionPool
+from psycopg.errors import UniqueViolation
 
 pool = ConnectionPool()
 
@@ -182,8 +183,14 @@ class BuildsQueries:
                         cpu.cores,
                         cpu.socket_type,
                         psu.id,
-                        psu.brand
+                        psu.brand,
+                        COUNT(rating.id) as likes
                     FROM public.build
+
+                    INNER JOIN public.rating
+                        ON rating.buildid=build.id
+                    
+                    
 
                     INNER JOIN public.user
                         ON "user".id=build.userid
@@ -220,11 +227,20 @@ class BuildsQueries:
                     
                     INNER JOIN public.psu
                         ON psu.id = build.psuid
+
+                    WHERE rating.liked is TRUE
+                    
+                    GROUP BY build.id, "user".id, "color".name,
+                     "size".name, caseimage.picture, buildgpus.id,
+                     gpu.manufacturer, gpu.chipset, buildhdds.hddid,
+                     hdd.brand, hdd.capacity, buildram.ramid, ram.brand,
+                     mobos.id, mobos.brand, mobos.socket_type, mobos.max_memory,
+                     cpu.id, cpu.processor, cpu.cores, cpu.socket_type, psu.id,
+                     psu.brand
                     
                     """
                 )
                 rows = cursor.fetchall()
-                print("rows:", rows)
                 return list(rows)
     
     def create_build(self, Name, moboid, cpuid, psuid,userid:int, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size, picture):
@@ -268,6 +284,13 @@ class BuildsQueries:
                         VALUES(%s, %s, %s, %s)
                     """,
                         [new_build_id, color, size, picture]
+                    )
+                    cursor.execute(
+                        """
+                        INSERT INTO "rating"(buildid, userid, liked)
+                        VALUES(%s, %s, TRUE)
+                    """,
+                        [new_build_id, userid]
                     )
                 cursor.execute(
                     """
@@ -499,7 +522,59 @@ class BuildsQueries:
                 """,
                     [id],
                 )
-                return cursor.fetchone()
+                rows = (cursor.fetchone())
+                return list(rows)
+    
+    def delete_build(self, id, userid:int):
+        with pool.connection() as connection:
+            with connection.cursor() as cursor:
+                with connection.transaction():
+                    try:
+                        cursor.execute(
+                            """
+                            DELETE FROM "case"
+                            WHERE buildid=%s
+                        """,
+                            [id]
+                        )
+                        cursor.execute(
+                            """
+                            DELETE FROM buildgpus
+                            WHERE buildid=%s
+                        """,
+                            [id]
+                        )
+                        cursor.execute(
+                            """
+                            DELETE FROM buildhdds
+                            WHERE buildid=%s
+                        """,
+                            [id]
+                        )
+                        cursor.execute(
+                            """
+                            DELETE FROM rating
+                            WHERE buildid=%s
+                        """,
+                            [id]
+                        )
+                        cursor.execute(
+                            """
+                            DELETE FROM buildram
+                            WHERE buildid=%s
+                        """,
+                            [id],
+                        )
+                        cursor.execute(
+                            """
+                            DELETE FROM build
+                            WHERE id=%s
+                            AND userid=%s
+                        """,
+                            [id,userid],
+                        )
+                    except UniqueViolation:
+                        raise DuplicateTitle()
 
     def update_build(self,id, Name, moboid, cpuid, psuid,Private, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size, picture):
         with pool.connection() as connection:
@@ -597,14 +672,43 @@ class CaseQueries:
                 )
                 rows = cursor.fetchall()
                 return list(rows)
-class ReviewQueries:
-    def list_review(self):
+class RatingQueries:
+    # def list_review(self, buildid):
+    #     with pool.connection() as connection:
+    #         with connection.cursor() as cursor:
+    #             cursor.execute(
+    #                 """
+    #                 SELECT COUNT(*) as num_likes
+    #                 FROM RATING
+    #                 WHERE buildid = %s
+    #                 """
+    #             )
+    #             row = cursor.fetchone()
+    #             return row
+    def create_rating(self,buildid,userid:int):
         with pool.connection() as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """
-                    SELECT liked, build
-                    """
+                    INSERT INTO rating(liked, buildid, userid)
+                    VALUES(TRUE, %s, %s)
+                    RETURNING id, liked, buildid, userid
+                    """,
+                        [buildid, userid]
                 )
-                rows = cursor.fetchall()
-                return list(rows)
+                rows = cursor.fetchone()
+                return rows
+    def unlike_rating(self, liked, buildid, userid:int):
+        with pool.connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    UPDATE rating
+                    SET liked=%s
+                    WHERE buildid=%s AND userid=%s
+                    RETURNING id, liked, buildid, userid
+                    """,
+                        [liked, buildid, userid]
+                )
+                rows = cursor.fetchone()
+                return rows

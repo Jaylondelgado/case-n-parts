@@ -1,7 +1,7 @@
-from ctypes import Union
+from typing import Union
 from turtle import title
 from urllib import response
-from ..models.build import Build, BuildA, BuildOut, BuildOutList, InBuild, InsertBuild, OutBuild
+from ..models.build import Build, BuildA, BuildDeleteOpertion, BuildOut, BuildOutList, InBuild, InsertBuild, OutBuild
 from fastapi import APIRouter, Response, status, Depends
 from ..db import BuildsQueries
 from ..models.common import ErrorMessage
@@ -60,6 +60,7 @@ def row_to_list_build(row):
             "id": row[23],
             "brand": row[24],
         },
+        "likes": row[25]
     }
     return build
 
@@ -75,7 +76,7 @@ def row_to_build(row):
         "picture": row[7],
         "gpu": {
             "id": row[8],
-            "card_count": row[9],
+            "cardcount": row[9],
             "manufacturer": row[10],
             "chipset": row[11],
             "core_clock_speed": row[12],
@@ -181,7 +182,8 @@ def get_build(build_id: int, query=Depends(BuildsQueries)):
     "/api/build/{build_id}",
     response_model = OutBuild,
     responses = {
-        200: {"model": OutBuild}
+        200: {"model": OutBuild},
+        422: {"model": ErrorMessage}
     },
 )
 def update_build(
@@ -191,5 +193,22 @@ def update_build(
 ):
     row = query.update_build(build_id,build.Name, build.moboid, build.cpuid, build.psuid,build.Private, build.gpuid, build.cardcount, build.hddid, build.hddcount, build.ramid, build.ramcount, build.color, build.size, build.picture)
     return row_to_create_build(row)
+
+@router.delete(
+    "/api/build/{build_id}",
+    response_model=BuildDeleteOpertion,
+)
+def delete_build(
+    build_id: int,
+    query=Depends(BuildsQueries),
+    current_user: User = Depends(get_current_active_user),
+):
+    try: 
+        query.delete_build(build_id, current_user["id"])
+        return {"result": True}
+    except:
+        return {"result": False}
+
+
 
 

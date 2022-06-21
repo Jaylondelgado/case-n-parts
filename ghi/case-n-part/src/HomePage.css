@@ -16,3 +16,10 @@ h1 {
   width: 14rem;
   height: 14rem;
 }
+
+.card-homepage {
+  transition-duration: 150ms;
+}
+.card-homepage:hover {
+  transform: scale(1.04);
+}

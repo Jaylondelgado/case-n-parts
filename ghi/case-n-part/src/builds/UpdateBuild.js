@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import useApiData from "../parts/ApiFetch";
 
 import black from "../images/inner-case/pc-case-with-mobo-black.png";
@@ -9,10 +9,11 @@ import green from "../images/inner-case/pc-case-with-mobo-green.png";
 const basePath = "http://localhost:8000";
 
 const caseColors = {
-  black: black,
-  green: green,
-  pink: pink,
+  black,
+  green,
+  pink,
 };
+
 function CreateBuild() {
   const [build, setBuild] = useState({
     Name: "",
@@ -25,22 +26,45 @@ function CreateBuild() {
     size: "",
     picture: "",
   });
-  const [successfulSubmit, setSuccessfulSubmit] = useState();
+
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const [successfulSubmit, setSuccessfulSubmit] = useState(false);
+
+  useEffect(() => {
+    const getBuildData = async () => {
+      const buildResponse = await fetch(
+        `${process.env.REACT_APP_ACCOUNTS_HOST}/api/build/${id}`,
+        {
+          credentials: "include",
+        }
+      );
+      const buildData = await buildResponse.json();
+      console.log("build data", buildData);
+      setBuild(buildData);
+    };
+
+    getBuildData();
+  }, []);
 
   const gpus = useApiData(`${basePath}/api/gpus/`, "gpus");
   const cpus = useApiData(`${basePath}/api/cpus/`, "cpus");
   const psus = useApiData(`${basePath}/api/psus/`, "psus");
   const rams = useApiData(`${basePath}/api/rams/`, "rams");
   const hdds = useApiData(`${basePath}/api/hdds`, "hdds");
-  const caseImages = useApiData(`${basePath}/api/caseimage`, "caseimages");
   const colors = useApiData(`${basePath}/api/color/`, "colors");
   const sizes = useApiData(`${basePath}/api/size/`, "sizes");
+  const caseImages = useApiData(`${basePath}/api/caseimage`, "caseimages");
   const mobos = useApiData(`${basePath}/api/mobos`, "mobos");
 
   const handleGpuClick = gpu => {
     setBuild(build => ({
       ...build,
       gpu,
+      // gpu: {
+      //   ...gpu,
+      //   cardcount: 1,
+      // },
     }));
   };
 
@@ -103,7 +127,7 @@ function CreateBuild() {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    const buildPostData = {
+    const buildPutData = {
       Name: build.Name,
       psuid: build.psu.id,
       gpuid: build.gpu.id,
@@ -120,10 +144,10 @@ function CreateBuild() {
       Private: true,
     };
 
-    const buildUrl = `${process.env.REACT_APP_ACCOUNTS_HOST}/api/build/create`;
+    const buildUrl = `${process.env.REACT_APP_ACCOUNTS_HOST}/api/build/${id}`;
     const fetchConfig = {
-      method: "POST",
-      body: JSON.stringify(buildPostData),
+      method: "PUT",
+      body: JSON.stringify(buildPutData),
       headers: {
         "Content-Type": "application/json",
       },
@@ -131,19 +155,7 @@ function CreateBuild() {
     };
     const response = await fetch(buildUrl, fetchConfig);
     if (response.ok) {
-      setBuild({
-        Name: "",
-        psu: "",
-        gpu: "",
-        cpu: "",
-        ram: "",
-        hdd: "",
-        mobo: 1,
-        color: 1,
-        size: 1,
-        picture: 1,
-      });
-      setSuccessfulSubmit(true);
+      navigate(`/builds/detailbuild/${id}`, { replace: true });
     }
   };
 
@@ -156,20 +168,21 @@ function CreateBuild() {
     alertClasses = "alert alert-success mb-3";
     alertContainerClasses = "";
   }
-
   return (
     <div className='container my-5'>
       <div className='row py-5 g-4 mt-4'>
-        <form onSubmit={handleSubmit} id='create-build-form'>
+        <form onSubmit={handleSubmit} id='create-appointment-form'>
           <div className='col-sm-1 my-25'></div>
           <div className='row justify-content-md-center'>
             <div className='col-md-auto'>
               <img
+                className='rounded'
                 src={build.color ? caseColors[build.color] : caseColors.black}
                 alt='pc case'
                 width='500'
               />
             </div>
+
             <div className='col-md-auto'>
               <input
                 onChange={handleNameChange}
@@ -258,12 +271,12 @@ function CreateBuild() {
                                 <tr
                                   key={psu.id}
                                   onClick={() => handlePsuClick(psu)}
+                                  className={
+                                    build.psu.id === psu.id
+                                      ? "selected-list-item"
+                                      : undefined
+                                  }
                                   data-bs-dismiss='modal'
-                                  // className={
-                                  //   build.psu.id === psu.id
-                                  //     ? "selected-list-item"
-                                  //     : undefined
-                                  // }
                                 >
                                   <td>{psu["brand"]}</td>
                                   <td>{psu["wattage"]}</td>
@@ -323,11 +336,11 @@ function CreateBuild() {
                                   key={cpu.id}
                                   onClick={() => handleCpuClick(cpu)}
                                   data-bs-dismiss='modal'
-                                  // className={
-                                  //   build.cpu.id === cpu.id
-                                  //     ? "selected-list-item"
-                                  //     : undefined
-                                  // }
+                                  className={
+                                    build.cpu.id === cpu.id
+                                      ? "selected-list-item"
+                                      : undefined
+                                  }
                                 >
                                   <td>{cpu["processor"]}</td>
                                   <td>{cpu["cores"]}</td>
@@ -399,11 +412,11 @@ function CreateBuild() {
                                   key={gpu.id}
                                   onClick={() => handleGpuClick(gpu)}
                                   data-bs-dismiss='modal'
-                                  // className={
-                                  //   build.gpu.id === gpu.id
-                                  //     ? "selected-list-item"
-                                  //     : undefined
-                                  // }
+                                  className={
+                                    build.gpu.id === gpu.id
+                                      ? "selected-list-item"
+                                      : undefined
+                                  }
                                 >
                                   <td>{gpu["manufacturer"]}</td>
                                   <td>{gpu["chipset"]}</td>
@@ -417,6 +430,7 @@ function CreateBuild() {
                   </div>
                 </div>
               </div>
+
               <div className='col-sm-1 w-75 pt-2'>
                 <div className='btn-group dropup w-100'>
                   <button
@@ -473,11 +487,11 @@ function CreateBuild() {
                                   key={hdd.id}
                                   onClick={() => handleHddClick(hdd)}
                                   data-bs-dismiss='modal'
-                                  // className={
-                                  //   build.hdd.id === hdd.id
-                                  //     ? "selected-list-item"
-                                  //     : undefined
-                                  // }
+                                  className={
+                                    build.hdd.id === hdd.id
+                                      ? "selected-list-item"
+                                      : undefined
+                                  }
                                 >
                                   <td>{hdd["brand"]}</td>
                                   <td>{hdd["capacity"]}</td>
@@ -549,11 +563,11 @@ function CreateBuild() {
                                   key={ram.id}
                                   onClick={() => handleRamClick(ram)}
                                   data-bs-dismiss='modal'
-                                  // className={
-                                  //   build.ram.id === ram.id
-                                  //     ? "selected-list-item"
-                                  //     : undefined
-                                  // }
+                                  className={
+                                    build.ram.id === ram.id
+                                      ? "selected-list-item"
+                                      : undefined
+                                  }
                                 >
                                   <td>{ram["brand"]}</td>
                                   <td>{ram["memory_speed"]}</td>
@@ -575,8 +589,9 @@ function CreateBuild() {
                   id='create-pc-build'
                   className={createButton}
                 >
-                  Create
+                  Update
                 </button>
+
                 <div className={alertContainerClasses}>
                   <div className={alertClasses} id='success-message'>
                     Build created successfully
