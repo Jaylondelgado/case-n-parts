@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../index.css";
 import ReactPaginate from "react-paginate";
 
-function BuildList() {
+function ListBuilds() {
   const [builds, setBuild] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
 
@@ -88,16 +88,4 @@ function BuildList() {
   );
 }
 
-export default BuildList;
-
-//  <ReactPaginate
-//         previousLabel={"Previous"}
-//         nextLabel={"Next"}
-//         pageCount={pageCount}
-//         onPageChange={changePage}
-//         containerClassName={"paginationBttns"}
-//         previousLinkClassName={"previousBttn"}
-//         nextLinkClassName={"nextBttn"}
-//         disabledClassName={"paginationDisabled"}
-//         activeClassName={"paginationActive"}
-//       />
+export default ListBuilds;

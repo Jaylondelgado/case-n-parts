@@ -1,4 +1,4 @@
-from ctypes import Union
+from typing import Union
 from turtle import title
 from urllib import response
 from ..models.build import Build, BuildA, BuildDeleteOpertion, BuildOut, BuildOutList, InBuild, InsertBuild, OutBuild
@@ -182,7 +182,8 @@ def get_build(build_id: int, query=Depends(BuildsQueries)):
     "/api/build/{build_id}",
     response_model = OutBuild,
     responses = {
-        200: {"model": OutBuild}
+        200: {"model": OutBuild},
+        422: {"model": ErrorMessage}
     },
 )
 def update_build(

@@ -19,6 +19,17 @@ function MyBuilds(props) {
     getBuildData();
   }, []);
 
+  const deleteBuild = async (id) => {
+    await fetch(`${process.env.REACT_APP_ACCOUNTS_HOST}/api/build/${id}/`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+    window.location.reload();
+  };
+
   return (
     <div className="container justify-content-center pt-5 my-5">
       {builds.length > 0 && (
@@ -45,7 +56,14 @@ function MyBuilds(props) {
                       Build Detail
                     </Link>
                     <div style={{ color: "lightblue" }} className="pt-3">
-                      <i class="fa fa-trash fa-xl" aria-hidden="true"></i>
+                      <i
+                        type="button"
+                        onClick={() => {
+                          deleteBuild(build.id);
+                        }}
+                        className="fa fa-trash fa-xl"
+                        aria-hidden="true"
+                      ></i>
                     </div>
                   </div>
                 </div>

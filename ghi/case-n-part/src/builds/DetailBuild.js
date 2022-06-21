@@ -9,6 +9,7 @@ function DetailBuild({ token }) {
   const classIfNotBuildOwner = "d-none";
 
   const [build, setBuild] = useState();
+  const [currentUser, setCurrentUser] = useState();
   const basePath = "http://localhost:8000";
 
   useEffect(() => {
@@ -19,7 +20,6 @@ function DetailBuild({ token }) {
           credentials: "include",
         }
       );
-      console.log(buildResponse);
       const buildData = await buildResponse.json();
       setBuild(buildData);
     };
@@ -28,7 +28,18 @@ function DetailBuild({ token }) {
   }, []);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const getCurrentUserData = async () => {
+      const userResponse = await fetch(
+        `${process.env.REACT_APP_ACCOUNTS_HOST}/users/me`,
+        {
+          credentials: "include",
+        }
+      );
+      const userData = await userResponse.json();
+      setCurrentUser(userData.id);
+    };
+
+    getCurrentUserData();
   }, []);
 
   return (
@@ -103,12 +114,12 @@ function DetailBuild({ token }) {
                         <span>
                           <Link
                             to={`/builds/updatebuild/${build.id}`}
-                            className="btn btn-outline-primary mb-2"
+                            className="btn btn-primary mb-2"
                           >
                             Update Build
                           </Link>
-                          {/* <button className='btn btn-outline-primary'>
-                            <i class='bi bi-hand-thumbs-up pe-1'></i>
+                          {/* <button className="btn btn-outline-primary">
+                            <i class="bi bi-hand-thumbs-up pe-1"></i>
                             Upvote
                           </button> */}
                         </span>
