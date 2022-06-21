@@ -365,8 +365,12 @@ class BuildsQueries:
                         psu.atx_12v_connector,
                         psu.graphics_connector,
                         psu.molex_connector,
-                        psu.sata_connector
+                        psu.sata_connector,
+                        COUNT(rating.id) as likes
                     FROM public.build
+
+                    INNER JOIN public.rating
+                        ON rating.buildid=build.id
 
                     INNER JOIN public.user
                         ON "user".id=build.userid
@@ -408,7 +412,64 @@ class BuildsQueries:
                     ON cpu.id = build.cpuid
                     INNER JOIN public.psu
                     ON psu.id = build.psuid
-                    WHERE userid = %s
+                    WHERE build.userid = %s 
+                    AND rating.liked is TRUE
+
+                    GROUP BY build.id,
+                        "user".id,
+                        "user".username,
+                        build."Name",
+                        build."Private",
+                        color.name,
+                        "size".name,
+                        caseimage.picture,
+                        buildgpus.gpuid,
+                        buildgpus.cardcount,
+                        gpu.manufacturer,
+                        gpu.chipset,
+                        gpu.core_clock_speed,
+                        gpu.video_memory,
+                        gpu.memory_type,
+                        gpu.height,
+                        gpu.length,
+                        gpu.width,
+                        gpu.hdmi,
+                        gpu.display_port,
+                        buildhdds.hddid,
+                        buildhdds.hddcount,
+                        hdd.brand,
+                        hdd.capacity,
+                        hdd.interface,
+                        hdd.cache,
+                        hdd.rpm,
+                        buildram.ramid,
+                        buildram.ramcount,
+                        ram.brand,
+                        ram.memory_type,
+                        ram.memory_speed,
+                        ram.memory_channels,
+                        ram.pin_configuration,
+                        mobos.id,
+                        mobos.brand,
+                        mobos.socket_type,
+                        mobos.max_memory,
+                        mobos.max_memory_per_slot,
+                        mobos.pcie_slots,
+                        mobos.memory_slots,
+                        cpu.id,
+                        cpu.processor,
+                        cpu.cores,
+                        cpu.threads,
+                        cpu.speed,
+                        cpu.socket_type,
+                        psu.id,
+                        psu.brand,
+                        psu.wattage,
+                        psu.atx_connector,
+                        psu.atx_12v_connector,
+                        psu.graphics_connector,
+                        psu.molex_connector,
+                        psu.sata_connector
                 """,
                     [userid]
                 )
@@ -475,8 +536,12 @@ class BuildsQueries:
                         psu.atx_12v_connector,
                         psu.graphics_connector,
                         psu.molex_connector,
-                        psu.sata_connector
+                        psu.sata_connector,
+                        COUNT(rating.id) as likes
                     FROM public.build
+
+                    INNER JOIN public.rating
+                        ON rating.buildid=build.id
 
                     INNER JOIN public.user
                         ON "user".id=build.userid
@@ -519,10 +584,68 @@ class BuildsQueries:
                     INNER JOIN public.psu
                     ON psu.id = build.psuid
                     WHERE build.id = %s
+                    AND rating.liked is TRUE
+
+                    GROUP BY build.id,
+                        "user".id,
+                        "user".username,
+                        build."Name",
+                        build."Private",
+                        color.name,
+                        "size".name,
+                        caseimage.picture,
+                        buildgpus.gpuid,
+                        buildgpus.cardcount,
+                        gpu.manufacturer,
+                        gpu.chipset,
+                        gpu.core_clock_speed,
+                        gpu.video_memory,
+                        gpu.memory_type,
+                        gpu.height,
+                        gpu.length,
+                        gpu.width,
+                        gpu.hdmi,
+                        gpu.display_port,
+                        buildhdds.hddid,
+                        buildhdds.hddcount,
+                        hdd.brand,
+                        hdd.capacity,
+                        hdd.interface,
+                        hdd.cache,
+                        hdd.rpm,
+                        buildram.ramid,
+                        buildram.ramcount,
+                        ram.brand,
+                        ram.memory_type,
+                        ram.memory_speed,
+                        ram.memory_channels,
+                        ram.pin_configuration,
+                        mobos.id,
+                        mobos.brand,
+                        mobos.socket_type,
+                        mobos.max_memory,
+                        mobos.max_memory_per_slot,
+                        mobos.pcie_slots,
+                        mobos.memory_slots,
+                        cpu.id,
+                        cpu.processor,
+                        cpu.cores,
+                        cpu.threads,
+                        cpu.speed,
+                        cpu.socket_type,
+                        psu.id,
+                        psu.brand,
+                        psu.wattage,
+                        psu.atx_connector,
+                        psu.atx_12v_connector,
+                        psu.graphics_connector,
+                        psu.molex_connector,
+                        psu.sata_connector
                 """,
                     [id],
                 )
                 rows = (cursor.fetchone())
+                print("rows:", rows)
                 return list(rows)
     
     def delete_build(self, id, userid:int):
