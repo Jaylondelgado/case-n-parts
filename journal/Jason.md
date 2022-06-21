@@ -111,4 +111,12 @@ Some items were, and still are, missing dynamically from the JSON builds post me
 
 \* **Reformatting create build page**
 
-The UI went through another round of remodeling where the parts buttons were shifted to be below the forms. We we able to adjust the buttons to be the same widths as the forms. A split button was added to the pc parts that have an adjustable amount based on the slots of the motherboard. The functionality has not been implemented yet but another design issue we are deciding on is if there will be a count option versus a single pc component. Troubleshooted with the team and found and found a react-router-dom `useParam` to pull the the `id` from the build to populate a detail page.
+The UI went through another round of remodeling where the parts buttons were shifted to be below the forms. We were able to adjust the buttons to be the same widths as the forms. A split button was added to the pc parts that have an adjustable amount based on the slots of the motherboard. The functionality has not been implemented yet but another design issue we are deciding on is if there will be a count option versus a single pc component. Troubleshooted with the team and found and found a react-router-dom `useParam` to pull the the `id` from the build to populate a detail page.
+
+##6/17/2022
+
+\* **Added trash can to my builds, handle changes for create page**
+
+A delete button was added to the user's my builds page where each build card now has a trash can that can clicked on to remove their build entirely. Jarett created the delete route and I plan to hook that up into the front soon. I forgot that I had installed the font-awesome package several weeks ago and was able to pull a cool icon from there. On the create page, I added a css `d-none` function for when a build is created, the create button will disappear and an alert take its place telling you it's successful and give you two new buttons with an option to create another build or view the my builds page. I was able to reset the state of each form but am still working on getting the actual image to reset as well. If you clicked on a different color and created a build, and wanted to make another build, the form wil reset but the picture will not.
+
+Learned a bit more of the fastAPI by debugging the rating system. After pulling down from the main, our builds were not populating. Troubleshooted the problem with the team, solving the issue fairly fast.

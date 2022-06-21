@@ -2,7 +2,7 @@ html,
 body,
 #root {
   min-height: 100vh;
-  min-width: 100vw;
+  min-width: auto;
   background-color: #070707;
 }
 
@@ -25,3 +25,35 @@ code {
 .selected-list-item > td {
   filter: brightness(140%);
 }
+
+.paginationBttns {
+  width: 80%;
+  height: 40px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.paginationBttns a {
+  padding: 10px;
+  margin: 8px;
+  border-radius: 5px;
+  border: 1px solid rgba(18, 199, 227, 0.79);
+  color: white;
+  cursor: pointer;
+}
+
+.paginationBttns a:hover {
+  color: white;
+  background-color: #01c7ee7a;
+}
+
+.paginationActive a {
+  color: white;
+  background-color: #a2bfec81;
+}
+
+/* .paginationDisabled a {
+  color: grey;
+  background-color: grey;
+} */

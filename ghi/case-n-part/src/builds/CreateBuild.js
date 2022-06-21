@@ -160,18 +160,16 @@ function CreateBuild() {
   return (
     <div className='container my-5'>
       <div className='row py-5 g-4 mt-4'>
-        <form onSubmit={handleSubmit} id='create-appointment-form'>
+        <form onSubmit={handleSubmit} id='create-build-form'>
           <div className='col-sm-1 my-25'></div>
           <div className='row justify-content-md-center'>
             <div className='col-md-auto'>
               <img
-                className='rounded'
                 src={build.color ? caseColors[build.color] : caseColors.black}
                 alt='pc case'
                 width='500'
               />
             </div>
-
             <div className='col-md-auto'>
               <input
                 onChange={handleNameChange}
@@ -419,7 +417,6 @@ function CreateBuild() {
                   </div>
                 </div>
               </div>
-
               <div className='col-sm-1 w-75 pt-2'>
                 <div className='btn-group dropup w-100'>
                   <button
@@ -580,7 +577,6 @@ function CreateBuild() {
                 >
                   Create
                 </button>
-
                 <div className={alertContainerClasses}>
                   <div className={alertClasses} id='success-message'>
                     Build created successfully
