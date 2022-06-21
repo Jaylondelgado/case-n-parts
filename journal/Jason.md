@@ -125,4 +125,8 @@ Learned a bit more of the fastAPI by debugging the rating system. After pulling 
 
 ## 6/18/2022
 
-\* Pagination, restructured columns in list builds
+\* Pagination, restructured columns in list builds, working trashcan!"
+
+After a lengthy search, I found a package that readily paginates for you in react. I saw other options to manually create that functionality but with a quick install and perusing the documentation, it was easily implemented. Currently it is only in the `ListBuilds` page, but that will be added to the `myBuilds` page soon. I was finally able to get the columns to line up correctly as well, only mapping three per row before starting a new one. I pair programmed with Chad earlier, dealing with the same bug `422 unprocessable entity` on the `UpdateBuild` page while I had that issue on the `CreateBuild` page. We spent an hour trying to find the issue and Jarett hopped on, with a fresh pair of eyes pinpointed the issue shortly after where a key was mistyped and some other keys needed to be added to the json body.
+
+Once that was sorted, I wanted to more or less have CRUD operational on our front end, attaching the `delete` method to our trash can icon in the `myBuilds` page. After some promise handling and authorization issues, the button works!
