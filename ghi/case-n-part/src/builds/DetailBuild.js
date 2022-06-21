@@ -27,6 +27,10 @@ function DetailBuild({ token }) {
     getBuildData();
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="d-grid gap-4 my-5 p-5">
       {build !== undefined && (

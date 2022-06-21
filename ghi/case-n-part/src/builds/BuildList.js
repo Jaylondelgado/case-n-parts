@@ -17,16 +17,16 @@ function BuildList() {
     getBuildData();
   }, []);
 
-  const buildsPerPage = 3;
+  const buildsPerPage = 6;
   const pagesVisited = pageNumber * buildsPerPage;
 
   const displayBuilds = builds
     .slice(pagesVisited, pagesVisited + buildsPerPage)
     .map((build) => {
-      return (
-        <div>
-          {builds.length > 0 && (
-            <div className="col-sm m-3" key={build.id}>
+      if (builds.length > 0) {
+        return (
+          <>
+            <div className="row py-3 justify-content-center" key={build.id}>
               <div className="card h-100 border-light bg-transparent">
                 <img
                   src={build.picture}
@@ -42,17 +42,22 @@ function BuildList() {
                   >
                     Build Detail
                   </Link>
-                  <div className="btn btn-primary mx-2">
-                    <i class="bi bi-hand-thumbs-up"></i>
+                  <div className="btn btn-primary  mx-1">
+                    <i className="bi bi-hand-thumbs-up"></i>
                     {build.likes}
                   </div>
                 </div>
               </div>
             </div>
-          )}
-          {builds.length === 0 && <h2>No builds available</h2>}
-        </div>
-      );
+          </>
+        );
+      } else {
+        return (
+          <div>
+            <h2>No builds available</h2>
+          </div>
+        );
+      }
     });
 
   const pageCount = Math.ceil(builds.length / buildsPerPage);
@@ -62,21 +67,37 @@ function BuildList() {
   };
 
   return (
-    <div className="container justify-content-center pt-5 my-5">
-      <div className="row">{displayBuilds}</div>
-      <ReactPaginate
-        previousLabel={"Previous"}
-        nextLabel={"Next"}
-        pageCount={pageCount}
-        onPageChange={changePage}
-        containerClassName={"paginationBttns"}
-        previousLinkClassName={"previousBttn"}
-        nextLinkClassName={"nextBttn"}
-        disabledClassName={"paginationDisabled"}
-        activeClassName={"paginationActive"}
-      />
-    </div>
+    <>
+      <div className="container pt-5 my-5">
+        <div className="row row-cols-3">{displayBuilds}</div>
+      </div>
+      <div className="centerPagination">
+        <ReactPaginate
+          previousLabel={"Previous"}
+          nextLabel={"Next"}
+          pageCount={pageCount}
+          onPageChange={changePage}
+          containerClassName={"paginationBttns"}
+          previousLinkClassName={"previousBttn"}
+          nextLinkClassName={"nextBttn"}
+          disabledClassName={"paginationDisabled"}
+          activeClassName={"paginationActive"}
+        />
+      </div>
+    </>
   );
 }
 
 export default BuildList;
+
+//  <ReactPaginate
+//         previousLabel={"Previous"}
+//         nextLabel={"Next"}
+//         pageCount={pageCount}
+//         onPageChange={changePage}
+//         containerClassName={"paginationBttns"}
+//         previousLinkClassName={"previousBttn"}
+//         nextLinkClassName={"nextBttn"}
+//         disabledClassName={"paginationDisabled"}
+//         activeClassName={"paginationActive"}
+//       />

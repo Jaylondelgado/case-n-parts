@@ -57,3 +57,8 @@ code {
   color: grey;
   background-color: grey;
 } */
+
+.centerPagination {
+  display: flex;
+  justify-content: center;
+}
