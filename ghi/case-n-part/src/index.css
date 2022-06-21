@@ -62,3 +62,12 @@ code {
   display: flex;
   justify-content: center;
 }
+
+.dropdown-menu {
+  min-width: auto;
+  padding: 5px;
+}
+
+.modal-min-width {
+  min-width: 50%;
+}
