@@ -8,37 +8,24 @@ import green from "../images/inner-case/pc-case-with-mobo-green.png";
 
 const basePath = "http://localhost:8000";
 
+const caseColors = {
+  black: black,
+  green: green,
+  pink: pink,
+};
 function CreateBuild() {
-  const [caseColor, setCaseColor] = useState(black);
-  const [selectedColor, setSelectedColor] = useState("");
-  const [selectedSize, setSelectedSize] = useState("");
-  const [casePicture, setCasePicture] = useState("");
-  const [successfulSubmit, setSuccessfulSubmit] = useState(false);
-
   const [build, setBuild] = useState({
     Name: "",
-    psuid: "",
-    gpuid: "",
-    cardcount: 1,
-    cpuid: "",
-    ramid: "",
-    ramcount: 1,
-    hddid: "",
-    hddcount: 1,
+    psu: "",
+    gpu: "",
+    cpu: "",
+    hdd: "",
     moboid: 1,
     color: "",
     size: "",
-    picture: 3,
+    picture: "",
   });
-
-  useEffect(() => {
-    setBuild({
-      ...build,
-      color: Number(selectedColor),
-      size: Number(selectedSize),
-      picture: casePicture,
-    });
-  }, [selectedColor, selectedSize, casePicture]);
+  const [successfulSubmit, setSuccessfulSubmit] = useState();
 
   const gpus = useApiData(`${basePath}/api/gpus/`, "gpus");
   const cpus = useApiData(`${basePath}/api/cpus/`, "cpus");
@@ -50,68 +37,54 @@ function CreateBuild() {
   const sizes = useApiData(`${basePath}/api/size/`, "sizes");
   const mobos = useApiData(`${basePath}/api/mobos`, "mobos");
 
-  const caseColors = {
-    black: black,
-    green: green,
-    pink: pink,
-  };
-
   const handleGpuClick = gpu => {
     setBuild(build => ({
       ...build,
-      gpuid: gpu.id,
+      gpu,
     }));
   };
 
   const handleCpuClick = cpu => {
     setBuild(build => ({
       ...build,
-      cpuid: cpu.id,
+      cpu,
     }));
   };
 
   const handlePsuClick = psu => {
     setBuild(build => ({
       ...build,
-      psuid: psu.id,
+      psu,
     }));
   };
 
   const handleRamClick = ram => {
     setBuild(build => ({
       ...build,
-      ramid: ram.id,
+      ram,
     }));
   };
 
   const handleHddClick = hdd => {
     setBuild(build => ({
       ...build,
-      hddid: hdd.id,
+      hdd,
     }));
   };
 
-  const handleColorChange = event => {
-    const value = event.target.value;
-    setSelectedColor(value);
-    if (value === "") {
-      setCaseColor(caseColors["black"]);
-    } else {
-      setCaseColor(caseColors[colors[value - 1].name]);
-    }
+  const handleColorChange = ({ target: { value: selectedColor } }) => {
+    const { id: selectedId, name: selectedName } = colors.find(
+      color => color.name === selectedColor
+    );
 
-    let caseColorUrls = caseImages.map(image => {
-      return Object.values(image);
-    });
-
-    let caseColorUrl = caseColorUrls.map(colorUrl => {
-      if (colorUrl[1].includes(colors[value - 1].name)) {
-        return colorUrl[0];
-      }
-    });
-
-    const caseFilteredUrls = caseColorUrl.filter(url => url !== undefined);
-    setCasePicture(caseFilteredUrls[0]);
+    const picture = caseImages.find(
+      caseImage => caseImage.id === selectedId
+    ).id;
+    setBuild(build => ({
+      ...build,
+      color: selectedName,
+      picture,
+    }));
   };
 
   const handleNameChange = event => {
@@ -121,24 +94,42 @@ function CreateBuild() {
     }));
   };
 
-  const handleSizeChange = event => {
-    const value = event.target.value;
-    setSelectedSize(value);
+  const handleSizeChange = ({ target: { value: selectedSize } }) => {
+    setBuild(build => ({
+      ...build,
+      size: selectedSize,
+    }));
   };
 
   const handleSubmit = async event => {
     event.preventDefault();
+    const buildPostData = {
+      Name: build.Name,
+      psuid: build.psu.id,
+      gpuid: build.gpu.id,
+      cardcount: 1,
+      cpuid: build.cpu.id,
+      ramid: build.ram.id,
+      ramcount: 1,
+      hddid: build.hdd.id,
+      hddcount: 1,
+      moboid: 1,
+      size: sizes.find(size => size.name === build.size).id,
+      color: colors.find(color => color.name === build.color).id,
+      picture: caseImages.find(image => image.picture.includes(build.color)).id,
+      Private: true,
+    };
 
-    const appointmentUrl = `${process.env.REACT_APP_ACCOUNTS_HOST}/api/build/create`;
+    const buildUrl = `${process.env.REACT_APP_ACCOUNTS_HOST}/api/build/create`;
     const fetchConfig = {
       method: "POST",
-      body: JSON.stringify(build),
+      body: JSON.stringify(buildPostData),
       headers: {
         "Content-Type": "application/json",
       },
       credentials: "include",
     };
-    const response = await fetch(appointmentUrl, fetchConfig);
+    const response = await fetch(buildUrl, fetchConfig);
     if (response.ok) {
       setBuild({
         Name: "",
@@ -148,9 +139,9 @@ function CreateBuild() {
         ram: "",
         hdd: "",
         mobo: 1,
-        color: setSelectedColor(black),
-        size: setSelectedSize(""),
-        picture: setCasePicture(""),
+        color: 1,
+        size: 1,
+        picture: 1,
       });
       setSuccessfulSubmit(true);
     }
@@ -175,7 +166,7 @@ function CreateBuild() {
             <div className='col-md-auto'>
               <img
                 className='rounded'
-                src={caseColor}
+                src={build.color ? caseColors[build.color] : caseColors.black}
                 alt='pc case'
                 width='500'
               />
@@ -193,7 +184,7 @@ function CreateBuild() {
               />
               <select
                 onChange={handleColorChange}
-                value={selectedColor}
+                value={build.color}
                 name='color'
                 id='color'
                 className='form-select w-75 mb-2'
@@ -202,7 +193,7 @@ function CreateBuild() {
                 <option value=''>Case color</option>
                 {colors.map(color => {
                   return (
-                    <option key={color.id} value={color.id}>
+                    <option key={color.id} value={color.name}>
                       {color.name}
                     </option>
                   );
@@ -210,7 +201,7 @@ function CreateBuild() {
               </select>
               <select
                 onChange={handleSizeChange}
-                value={selectedSize}
+                value={build.size}
                 name='size'
                 id='size'
                 className='form-select w-75'
@@ -219,7 +210,7 @@ function CreateBuild() {
                 <option value=''>Case size</option>
                 {sizes.map(size => {
                   return (
-                    <option key={size.id} value={size.id}>
+                    <option key={size.id} value={size.name}>
                       {size.name}
                     </option>
                   );
@@ -232,7 +223,7 @@ function CreateBuild() {
                   data-bs-toggle='modal'
                   data-bs-target='#psuModal'
                 >
-                  PSU
+                  {build.psu ? `PSU: ${build.psu.wattage}` : "PSU"}
                 </button>
                 <div
                   className='modal fade'
@@ -270,6 +261,11 @@ function CreateBuild() {
                                   key={psu.id}
                                   onClick={() => handlePsuClick(psu)}
                                   data-bs-dismiss='modal'
+                                  // className={
+                                  //   build.psu.id === psu.id
+                                  //     ? "selected-list-item"
+                                  //     : undefined
+                                  // }
                                 >
                                   <td>{psu["brand"]}</td>
                                   <td>{psu["wattage"]}</td>
@@ -290,7 +286,7 @@ function CreateBuild() {
                   data-bs-toggle='modal'
                   data-bs-target='#cpuModal'
                 >
-                  CPU
+                  {build.cpu ? `CPU: ${build.cpu.processor}` : "CPU"}
                 </button>
                 <div
                   className='modal fade'
@@ -329,6 +325,11 @@ function CreateBuild() {
                                   key={cpu.id}
                                   onClick={() => handleCpuClick(cpu)}
                                   data-bs-dismiss='modal'
+                                  // className={
+                                  //   build.cpu.id === cpu.id
+                                  //     ? "selected-list-item"
+                                  //     : undefined
+                                  // }
                                 >
                                   <td>{cpu["processor"]}</td>
                                   <td>{cpu["cores"]}</td>
@@ -352,7 +353,7 @@ function CreateBuild() {
                     data-bs-toggle='modal'
                     data-bs-target='#gpuModal'
                   >
-                    GPU
+                    {build.gpu ? `GPU: ${build.gpu.chipset}` : "GPU"}
                   </button>
                   <button
                     type='button'
@@ -400,6 +401,11 @@ function CreateBuild() {
                                   key={gpu.id}
                                   onClick={() => handleGpuClick(gpu)}
                                   data-bs-dismiss='modal'
+                                  // className={
+                                  //   build.gpu.id === gpu.id
+                                  //     ? "selected-list-item"
+                                  //     : undefined
+                                  // }
                                 >
                                   <td>{gpu["manufacturer"]}</td>
                                   <td>{gpu["chipset"]}</td>
@@ -422,7 +428,7 @@ function CreateBuild() {
                     data-bs-toggle='modal'
                     data-bs-target='#hddModal'
                   >
-                    HDD
+                    {build.hdd ? `HDD: ${build.hdd.capacity}` : "HDD"}
                   </button>
                   <button
                     type='button'
@@ -470,6 +476,11 @@ function CreateBuild() {
                                   key={hdd.id}
                                   onClick={() => handleHddClick(hdd)}
                                   data-bs-dismiss='modal'
+                                  // className={
+                                  //   build.hdd.id === hdd.id
+                                  //     ? "selected-list-item"
+                                  //     : undefined
+                                  // }
                                 >
                                   <td>{hdd["brand"]}</td>
                                   <td>{hdd["capacity"]}</td>
@@ -491,7 +502,7 @@ function CreateBuild() {
                     data-bs-toggle='modal'
                     data-bs-target='#ramModal'
                   >
-                    RAM
+                    {build.ram ? `RAM: ${build.ram.memory_type}` : "RAM"}
                   </button>
                   <button
                     type='button'
@@ -541,6 +552,11 @@ function CreateBuild() {
                                   key={ram.id}
                                   onClick={() => handleRamClick(ram)}
                                   data-bs-dismiss='modal'
+                                  // className={
+                                  //   build.ram.id === ram.id
+                                  //     ? "selected-list-item"
+                                  //     : undefined
+                                  // }
                                 >
                                   <td>{ram["brand"]}</td>
                                   <td>{ram["memory_speed"]}</td>

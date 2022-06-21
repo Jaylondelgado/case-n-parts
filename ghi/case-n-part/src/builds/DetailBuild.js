@@ -9,6 +9,7 @@ function DetailBuild({ token }) {
   const classIfNotBuildOwner = "d-none";
 
   const [build, setBuild] = useState();
+  const [currentUser, setCurrentUser] = useState();
   const basePath = "http://localhost:8000";
 
   useEffect(() => {
@@ -19,12 +20,26 @@ function DetailBuild({ token }) {
           credentials: "include",
         }
       );
-      console.log(buildResponse);
       const buildData = await buildResponse.json();
       setBuild(buildData);
     };
 
     getBuildData();
+  }, []);
+
+  useEffect(() => {
+    const getCurrentUserData = async () => {
+      const userResponse = await fetch(
+        `${process.env.REACT_APP_ACCOUNTS_HOST}/users/me`,
+        {
+          credentials: "include",
+        }
+      );
+      const userData = await userResponse.json();
+      setCurrentUser(userData.id);
+    };
+
+    getCurrentUserData();
   }, []);
 
   return (
