@@ -74,6 +74,7 @@ class BuildOutList(BaseModel):
     userid: int
     username: str
     Name: str
+    Private: bool
     color: str
     size: str
     picture: str
