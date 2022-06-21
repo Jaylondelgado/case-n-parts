@@ -169,6 +169,7 @@ def create_build(
     current_user: User = Depends(get_current_active_user)
 ):
 
+    print("build:", build, "query:", query, "current_user:", current_user)
     row = query.create_build(build.Name, build.moboid, build.cpuid, build.psuid, current_user["id"], build.gpuid, build.cardcount, build.hddid, build.hddcount, build.ramid, build.ramcount, build.color, build.size, build.picture)
     return row_to_create_build(row)
 
