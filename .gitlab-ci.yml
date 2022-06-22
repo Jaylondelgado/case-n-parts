@@ -1,38 +1,38 @@
-# stages:
-#   - test # Run tests first
-#   - build # Run build after tests
+stages:
+  - test # Run tests first
+  - build # Run build after tests
 
-# services:
-#   - postgres:14-bullseye
+services:
+  - postgres:14-bullseye
 
-# variables:
-#   POSTGRES_DB: test_db
-#   POSTGRES_USER: test_user
-#   POSTGRES_PASSWORD: test_password
-#   POSTGRES_HOST_AUTH_METHOD: trust
+variables:
+  POSTGRES_DB: test_db
+  POSTGRES_USER: test_user
+  POSTGRES_PASSWORD: test_password
+  POSTGRES_HOST_AUTH_METHOD: trust
 
-# api-unit-test-job:
-#   image: python:3-bullseye
-#   stage: test
-#   script:
-#     - cd great-value
-#     - pip install -r requirements.txt
-#     - python -m pytest # Run unit tests
+api-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - cd great-value
+    - pip install -r requirements.txt
+    - python -m pytest # Run unit tests
 
-# lint-test-job:
-#   image: python:3-bullseye
-#   stage: test
-#   script:
-#     - pip install flake8
-#     - flake8 great-value # Run flake8 on Python project to check
-#       # for code quality
+lint-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - pip install flake8
+    - flake8 great-value # Run flake8 on Python project to check
+      # for code quality
 
-# build-job:
-#   stage: build
-#   image: node:lts-bullseye
-#   needs:
-#     - api-unit-test-job # These two jobs must succeed for
-#     - lint-test-job # this build-job to run
+build-job:
+  stage: build
+  image: node:lts-bullseye
+  needs:
+    - api-unit-test-job # These two jobs must succeed for
+    - lint-test-job # this build-job to run
 
 #   script:
 #     - cd ghi
