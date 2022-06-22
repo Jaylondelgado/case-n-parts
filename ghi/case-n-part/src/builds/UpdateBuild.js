@@ -19,7 +19,7 @@ const gpuSlots = {
   "Triple Slot": 3,
 };
 
-function CreateBuild() {
+function UpdateBuild() {
   const [build, setBuild] = useState({
     Name: "",
     psu: null,
@@ -31,9 +31,9 @@ function CreateBuild() {
     color: "",
     size: "",
     picture: "",
-    Private: ""
+    Private: "",
   });
-  console.log("build:", build)
+  console.log("build:", build);
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -60,6 +60,7 @@ function CreateBuild() {
   const sizes = useApiData(`${basePath}/api/size/`, "sizes");
   const caseImages = useApiData(`${basePath}/api/caseimage`, "caseimages");
   const mobos = useApiData(`${basePath}/api/mobos`, "mobos");
+  console.log(gpus);
 
   const handleGpuClick = gpu => {
     setBuild(build => ({
@@ -129,11 +130,10 @@ function CreateBuild() {
     }));
   };
 
-  const handlePrivateChange = ({ target: { value: selectedPrivate} }) => {
+  const handlePrivateChange = ({ target: { value: selectedPrivate } }) => {
     setBuild(build => ({
       ...build,
-      Private: selectedPrivate
-
+      Private: selectedPrivate,
     }));
   };
 
@@ -425,6 +425,7 @@ function CreateBuild() {
                             ).map((_, i) => (
                               <button
                                 type='button'
+                                key={i}
                                 onClick={() => {
                                   setBuild(build => ({
                                     ...build,
@@ -615,6 +616,7 @@ function CreateBuild() {
                               (_, i) => (
                                 <button
                                   type='button'
+                                  key={i}
                                   onClick={() => {
                                     setBuild(build => ({
                                       ...build,
@@ -694,18 +696,44 @@ function CreateBuild() {
                       </div>
                     </div>
                   </div>
-                  <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onClick={() => {setBuild(build =>({ ...build, Private: true}))}}></input>
-                <label class="form-check-label" for="flexRadioDefault1">
-                  Private
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onClick={() => {setBuild(build =>({ ...build, Private: false}))}} checked></input>
-                <label class="form-check-label" for="flexRadioDefault2">
-                  Public
-                </label>
-              </div>
+                  <div className='form-check'>
+                    <input
+                      className='form-check-input'
+                      type='radio'
+                      name='flexRadioDefault'
+                      id='flexRadioDefault1'
+                      onClick={() => {
+                        setBuild(build => ({ ...build, Private: true }));
+                      }}
+                    ></input>
+                    <label
+                      className='form-check-label'
+                      htmlFor='flexRadioDefault1'
+                    >
+                      Private
+                    </label>
+                  </div>
+                  <div className='form-check'>
+                    <input
+                      className='form-check-input'
+                      type='radio'
+                      name='flexRadioDefault'
+                      id='flexRadioDefault2'
+                      onChange={() => {
+                        setBuild(build => ({
+                          ...build,
+                          Private: !build.Private,
+                        }));
+                      }}
+                      checked={build.Private}
+                    ></input>
+                    <label
+                      className='form-check-label'
+                      htmlFor='flexRadioDefault2'
+                    >
+                      Public
+                    </label>
+                  </div>
                 </div>
               </div>
               <div className='row justify-content-md-center'>
@@ -1196,4 +1224,4 @@ function CreateBuild() {
   );
 }
 
-export default CreateBuild;
+export default UpdateBuild;

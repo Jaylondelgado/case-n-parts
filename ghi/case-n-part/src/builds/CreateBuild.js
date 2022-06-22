@@ -408,6 +408,7 @@ function CreateBuild() {
                             ).map((_, i) => (
                               <button
                                 type='button'
+                                key={i}
                                 onClick={() => {
                                   setBuild(build => ({
                                     ...build,
@@ -594,6 +595,7 @@ function CreateBuild() {
                               (_, i) => (
                                 <button
                                   type='button'
+                                  key={i}
                                   onClick={() => {
                                     setBuild(build => ({
                                       ...build,

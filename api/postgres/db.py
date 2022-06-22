@@ -721,7 +721,7 @@ class BuildsQueries:
                         SET gpuid=%s, cardcount=%s
                         WHERE buildid=%s
                     """,
-                        [gpuid,psuid,build_id]
+                        [gpuid,cardcount,build_id]
                     )
                     cursor.execute(
                         """
