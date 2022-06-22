@@ -65,4 +65,11 @@ The day started off early with the team and I trying to troubleshoot why the mod
 Today started off with the team and I fixing the layout for our ViewBuilds webpage. They taught me a lot of CSS. I got to watch and help as Jason was working on the card and the effects that happen to it when you hover or click on things.
 
 ## June 17, 2022
+
 - Excused abscense from class
+
+## June 21, 2022
+
+- Began writing unit tests
+
+Today was spent going over the trivia game testable and trying to implement the tests into my own code. After some help with authentication and my team setting everyhting up, I was able to get a unit test to successfully run. After that I began working on testing for the list of all builds. There were some complications so I reached out for a Help Ticket. Unfortunately the problem was not resolved. I stayed on a while after messing with this, using print statements but unforunately I wasn't able to make much progress. I will gather the team tomorrw and knowing them, we will knock it out.
