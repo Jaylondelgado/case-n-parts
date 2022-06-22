@@ -131,11 +131,7 @@ function UpdateBuild() {
   };
 
   const handlePrivateChange = ({ target: { value: selectedPrivate } }) => {
-<<<<<<< HEAD
     setBuild((build) => ({
-=======
-    setBuild(build => ({
->>>>>>> 60f0558e370b67e5c1ea40573f19c47ed7a89832
       ...build,
       Private: selectedPrivate,
     }));
