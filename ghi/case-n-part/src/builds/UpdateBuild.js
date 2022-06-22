@@ -33,7 +33,6 @@ function UpdateBuild() {
     picture: "",
     Private: "",
   });
-  console.log("build:", build);
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -60,7 +59,6 @@ function UpdateBuild() {
   const sizes = useApiData(`${basePath}/api/size/`, "sizes");
   const caseImages = useApiData(`${basePath}/api/caseimage`, "caseimages");
   const mobos = useApiData(`${basePath}/api/mobos`, "mobos");
-  console.log(gpus);
 
   const handleGpuClick = (gpu) => {
     setBuild((build) => ({
@@ -131,7 +129,7 @@ function UpdateBuild() {
   };
 
   const handlePrivateChange = ({ target: { value: selectedPrivate } }) => {
-    setBuild(build => ({
+    setBuild((build) => ({
       ...build,
       Private: selectedPrivate,
     }));
@@ -425,6 +423,7 @@ function UpdateBuild() {
                               )
                             ).map((_, i) => (
                               <button
+                                key={i}
                                 type="button"
                                 onClick={() => {
                                   setBuild((build) => ({
@@ -615,6 +614,7 @@ function UpdateBuild() {
                             {Array.from(Array(build.mobo.memory_slots)).map(
                               (_, i) => (
                                 <button
+                                  key={i}
                                   type="button"
                                   onClick={() => {
                                     setBuild((build) => ({
@@ -695,9 +695,9 @@ function UpdateBuild() {
                       </div>
                     </div>
                   </div>
-                  <div class="form-check">
+                  <div className="form-check">
                     <input
-                      class="form-check-input"
+                      className="form-check-input"
                       type="radio"
                       name="flexRadioDefault"
                       id="flexRadioDefault1"
@@ -705,13 +705,16 @@ function UpdateBuild() {
                         setBuild((build) => ({ ...build, Private: true }));
                       }}
                     ></input>
-                    <label class="form-check-label" for="flexRadioDefault1">
+                    <label
+                      className="form-check-label"
+                      htmlFor="flexRadioDefault1"
+                    >
                       Private
                     </label>
                   </div>
-                  <div class="form-check">
+                  <div className="form-check">
                     <input
-                      class="form-check-input"
+                      className="form-check-input"
                       type="radio"
                       name="flexRadioDefault"
                       id="flexRadioDefault2"
@@ -719,7 +722,10 @@ function UpdateBuild() {
                         setBuild((build) => ({ ...build, Private: false }));
                       }}
                     ></input>
-                    <label class="form-check-label" for="flexRadioDefault2">
+                    <label
+                      className="form-check-label"
+                      htmlFor="flexRadioDefault2"
+                    >
                       Public
                     </label>
                   </div>
