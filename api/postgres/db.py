@@ -153,6 +153,21 @@ class PartsQueries:
                 return list(rows)
 
 class BuildsQueries:
+
+    # def get_top_builds(self):
+    #     with pool.connection() as connection:
+    #         with connection.cursor() as cursor:
+    #             cursor.execute(
+    #                 """
+    #                 SELECT
+    #                     build.id,
+    #                     "user".id,
+    #                     "user".username,
+    #                     build."Name",
+    #                     caseimage.picture,
+    #                     COUNT(rating.id) as likes
+    #             """
+    #             )
     def get_all_builds(self):
         with pool.connection() as connection:
             with connection.cursor() as cursor:
@@ -797,18 +812,22 @@ class CaseQueries:
                 rows = cursor.fetchall()
                 return list(rows)
 class RatingQueries:
-    # def list_review(self, buildid):
-    #     with pool.connection() as connection:
-    #         with connection.cursor() as cursor:
-    #             cursor.execute(
-    #                 """
-    #                 SELECT COUNT(*) as num_likes
-    #                 FROM RATING
-    #                 WHERE buildid = %s
-    #                 """
-    #             )
-    #             row = cursor.fetchone()
-    #             return row
+    def get_my_ratings(self, userid:int):
+        with pool.connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    SELECT rating.id, rating.liked, rating.buildid, rating.userid
+                    FROM rating
+                    WHERE userid = %s
+
+                """,
+                    [userid]
+                )
+                rows = cursor.fetchall()
+                print("rows", rows)
+                return list(rows)
+
     def create_rating(self,buildid,userid:int):
         with pool.connection() as connection:
             with connection.cursor() as cursor:
