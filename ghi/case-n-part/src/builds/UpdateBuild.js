@@ -19,7 +19,7 @@ const gpuSlots = {
   "Triple Slot": 3,
 };
 
-function CreateBuild() {
+function UpdateBuild() {
   const [build, setBuild] = useState({
     Name: "",
     psu: null,
@@ -60,6 +60,7 @@ function CreateBuild() {
   const sizes = useApiData(`${basePath}/api/size/`, "sizes");
   const caseImages = useApiData(`${basePath}/api/caseimage`, "caseimages");
   const mobos = useApiData(`${basePath}/api/mobos`, "mobos");
+  console.log(gpus);
 
   const handleGpuClick = (gpu) => {
     setBuild((build) => ({
@@ -130,7 +131,11 @@ function CreateBuild() {
   };
 
   const handlePrivateChange = ({ target: { value: selectedPrivate } }) => {
+<<<<<<< HEAD
     setBuild((build) => ({
+=======
+    setBuild(build => ({
+>>>>>>> 60f0558e370b67e5c1ea40573f19c47ed7a89832
       ...build,
       Private: selectedPrivate,
     }));
@@ -1212,4 +1217,4 @@ function CreateBuild() {
   );
 }
 
-export default CreateBuild;
+export default UpdateBuild;

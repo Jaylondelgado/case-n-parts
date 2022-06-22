@@ -323,6 +323,11 @@ function DetailBuild({ token }) {
                           <hr className='w-100 p-0 m-1'></hr>
                           <div className='card-text'>{build.gpu.hdmi}</div>
                         </div>
+                        <div className='d-flex flex-column align-items-center w-100 mb-3'>
+                          <p className='text-primary p-0 m-0'>Card Count</p>
+                          <hr className='w-100 p-0 m-1'></hr>
+                          <div className='card-text'>{build.gpu.cardcount}</div>
+                        </div>
                       </div>
                     </div>
                   </div>
