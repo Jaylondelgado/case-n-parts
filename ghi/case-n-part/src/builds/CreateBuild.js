@@ -34,16 +34,21 @@ function CreateBuild() {
     picture: "",
   });
   const [successfulSubmit, setSuccessfulSubmit] = useState();
-  const gpus = useApiData(`${basePath}/api/gpus/`, "gpus");
-  const cpus = useApiData(`${basePath}/api/cpus/`, "cpus");
-  const psus = useApiData(`${basePath}/api/psus/`, "psus");
-  const rams = useApiData(`${basePath}/api/rams/`, "rams");
-  const hdds = useApiData(`${basePath}/api/hdds`, "hdds");
-  const caseImages = useApiData(`${basePath}/api/caseimage`, "caseimages");
-  const colors = useApiData(`${basePath}/api/color/`, "colors");
-  const sizes = useApiData(`${basePath}/api/size/`, "sizes");
-  const mobos = useApiData(`${basePath}/api/mobos`, "mobos");
-  console.log("build:", build);
+  const [gpus] = useApiData({ url: `${basePath}/api/gpus/`, prop: "gpus" });
+  const [cpus] = useApiData({ url: `${basePath}/api/cpus/`, prop: "cpus" });
+  const [psus] = useApiData({ url: `${basePath}/api/psus/`, prop: "psus" });
+  const [rams] = useApiData({ url: `${basePath}/api/rams/`, prop: "rams" });
+  const [hdds] = useApiData({ url: `${basePath}/api/hdds`, prop: "hdds" });
+  const [caseImages] = useApiData({
+    url: `${basePath}/api/caseimage`,
+    prop: "caseimages",
+  });
+  const [colors] = useApiData({
+    url: `${basePath}/api/color/`,
+    prop: "colors",
+  });
+  const [sizes] = useApiData({ url: `${basePath}/api/size/`, prop: "sizes" });
+  const [mobos] = useApiData({ url: `${basePath}/api/mobos`, prop: "mobos" });
 
   useEffect(() => {
     if (mobos.length === 1) {
