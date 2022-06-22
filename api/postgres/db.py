@@ -163,6 +163,7 @@ class BuildsQueries:
                         "user".id,
                         "user".username,
                         build."Name",
+                        build."Private",
                         color.name,
                         "size".name,
                         caseimage.picture,

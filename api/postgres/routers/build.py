@@ -27,40 +27,41 @@ def row_to_list_build(row):
         "userid": row[1],
         "username": row[2],
         "Name": row[3],
-        "color": row[4],
-        "size": row[5],
-        "picture": row[6],
+        "Private": row [4],
+        "color": row[5],
+        "size": row[6],
+        "picture": row[7],
         "gpu": {
-            "id": row[7],
-            "manufacturer": row[8],
-            "chipset": row[9],
+            "id": row[8],
+            "manufacturer": row[9],
+            "chipset": row[10],
         },
         "hdd": {
-            "id": row[10],
-            "brand": row[11],
-            "capacity": row[12],
+            "id": row[11],
+            "brand": row[12],
+            "capacity": row[13],
         },
         "ram": {
-            "id": row[13],
-            "brand": row[14],
+            "id": row[14],
+            "brand": row[15],
         },
         "mobo": {
-            "id": row[15],
-            "brand": row[16],
-            "socket_type": row[17],
-            "max_memory": row[18],
+            "id": row[16],
+            "brand": row[17],
+            "socket_type": row[18],
+            "max_memory": row[19],
         },
         "cpu": {
-            "id": row[19],
-            "processor": row[20],
-            "cores": row[21],
-            "socket_type": row[22],
+            "id": row[20],
+            "processor": row[21],
+            "cores": row[22],
+            "socket_type": row[23],
         },
         "psu": {
-            "id": row[23],
-            "brand": row[24],
+            "id": row[24],
+            "brand": row[25],
         },
-        "likes": row[25]
+        "likes": row[26]
     }
     return build
 
@@ -168,6 +169,7 @@ def create_build(
     current_user: User = Depends(get_current_active_user)
 ):
 
+    print("build:", build, "query:", query, "current_user:", current_user)
     row = query.create_build(build.Name, build.moboid, build.cpuid, build.psuid, current_user["id"], build.gpuid, build.cardcount, build.hddid, build.hddcount, build.ramid, build.ramcount, build.color, build.size, build.picture)
     return row_to_create_build(row)
 
