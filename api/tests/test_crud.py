@@ -5,61 +5,8 @@ from fastapi.testclient import TestClient
 from main import app
 from postgres.db import BuildsQueries
 from unittest import TestCase
-import requests
 
 client = TestClient(app)
-
-    
-
-class NormalBuildQueries(TestCase):
-    def get_all_builds(self):
-        return [
-    {
-      "id": 0,
-      "userid": 0,
-      "username": "string",
-      "Name": "string",
-      "Private": True,
-      "color": "string",
-      "size": "string",
-      "picture": "string",
-      "gpu": {
-        "id": 0,
-        "manufacturer": "string",
-        "chipset": "string"
-      },
-      "hdd": {
-        "id": 0,
-        "brand": "string",
-        "capacity": "string"
-      },
-      "ram": {
-        "id": 0,
-        "brand": "string"
-      },
-      "mobo": {
-        "id": 0,
-        "brand": "string",
-        "socket_type": "string",
-        "max_memory": "string"
-      },
-      "cpu": {
-        "id": 0,
-        "processor": "string",
-        "cores": "string",
-        "socket_type": "string"
-      },
-      "psu": {
-        "id": 0,
-        "brand": "string"
-      },
-      "likes": 0
-    }
-  ]
-    
-    def create_build(self, Name, moboid, cpuid, psuid, userid, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size, picture):
-        return [1, "TEST BUILD", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-
 async def override_get_fake_user():
     return {"id": 1, "user": "jason", "password": "jason", "email": "jason@mail"}
 
@@ -68,7 +15,7 @@ async def override_build_list():
       "id": 1,
       "userid": 1,
       "username": "string",
-      "Name": "TEST BUILD",
+      "Name": "NEW BUILD",
       "color": "string",
       "size": "string",
       "picture": "string",
@@ -105,6 +52,30 @@ async def override_build_list():
       "likes": 1
     }
 
+app.dependency_overrides[get_current_active_user] = override_get_fake_user
+app.dependency_overrides[build_list] = override_build_list
+
+
+class EmptyBuildQueries:
+    def get_build(self, id):
+        return None   
+
+class NormalBuildQueries(TestCase):
+    def get_all_builds(self):
+        return ([0, 0] + ["s"] * 2 + [True] + ['s'] * 3 + [0] + ['s'] * 2 + [0] + ["s"] * 2 + [0] + ["s"] + 
+        [0] + ["s"] * 3 + [0] + ["s"] * 3 + [0] + ['s'] + [0])
+
+    def get_build(self, id:int):
+      r = ([1, 1] + ["s"] * 2 + [True] + ["s"] * 3 + [1, 1] + ["s"] * 10 + [1, 1] + ["s"] * 5 + [1, 1] + ["s"] * 5 + [1] + ["s"] * 4 + [1, 1, 1] +
+      ["s"] * 5 + [1] + ["s"] * 7 + [0])
+      return r
+        
+
+    # def update_build(self, id, Name, moboid, cpuid, psuid, Private, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size, picture):
+    #   return [id, "NEW BUILD", 1, 1, 1, True, 1, 1, 1, 1, 1, 1, 1, 1, 1 ]
+    
+    def create_build(self, Name, moboid, cpuid, psuid, userid, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size, picture):
+        return [1, "TEST BUILD", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
 
 def test_post_build_returns_200():
@@ -137,18 +108,146 @@ def test_post_build_returns_200():
     "userid": 1
 }
     app.dependency_overrides = {}
+  
 
-app.dependency_overrides[get_current_active_user] = override_get_fake_user
-app.dependency_overrides[build_list] = override_build_list
+# def test_get_build_returns_500():
+#     app.dependency_overrides[BuildsQueries.get_build] = EmptyBuildQueries
+#     response = requests.get(url="http://localhost:8000/api/build/10")
 
+#     assert response.status_code == 500
+
+#     app.dependency_overrides = {}
 
 def test_build_list_returns_200():
     app.dependency_overrides[BuildsQueries] = NormalBuildQueries
 
-    r = requests.get(url="http://localhost:8000/api/builds")
-    d = r.json()
+    r = client.get("/api/builds")
 
     assert r.status_code == 200
 
     app.dependency_overrides = {}
 
+def test_get_build_returns_200():
+  app.dependency_overrides[BuildsQueries] = NormalBuildQueries
+  r = client.get("/api/build/1")
+
+  assert r.status_code == 200
+  assert r.json() == {
+  "id": 1,
+  "userid": 1,
+  "username": "s",
+  "Name": "s",
+  "Private": True,
+  "color": "s",
+  "size": "s",
+  "picture": "s",
+  "gpu": {
+    "id": 1,
+    "cardcount": 1,
+    "manufacturer": "s",
+    "chipset": "s",
+    "core_clock_speed": "s",
+    "video_memory": "s",
+    "memory_type": "s",
+    "height": "s",
+    "length": "s",
+    "width": "s",
+    "hdmi": "s",
+    "display_port": "s"
+  },
+  "hdd": {
+    "id": 1,
+    "hddcount": 1,
+    "brand": "s",
+    "capacity": "s",
+    "interface": "s",
+    "cache": "s",
+    "rpm": "s"
+  },
+  "ram": {
+    "id": 1,
+    "ramcount": 1,
+    "brand": "s",
+    "memory_type": "s",
+    "memory_speed": "s",
+    "memory_channels": "s",
+    "pin_configuration": "s"
+  },
+  "mobo": {
+    "id": 1,
+    "brand": "s",
+    "socket_type": "s",
+    "max_memory": "s",
+    "max_memory_per_slot": "s",
+    "pcie_slots": 1,
+    "memory_slots": 1
+  },
+  "cpu": {
+    "id": 1,
+    "processor": "s",
+    "cores": "s",
+    "threads": "s",
+    "speed": "s",
+    "socket_type": "s"
+  },
+  "psu": {
+    "id": 1,
+    "brand": "s",
+    "wattage": "s",
+    "atx_connector": "s",
+    "atx_12v_connector": "s",
+    "graphics_connector": "s",
+    "molex_connector": "s",
+    "sata_connector": "s"
+  },
+  "likes": 0
+}
+
+  app.dependency_overrides = {}
+
+# def test_update_build_returns_422():
+#   app.dependency_overrides[BuildsQueries.update_build] = NormalBuildQueries
+
+#   r = client.put("http://localhost:8000/api/build/1")
+#   d = r.json()
+
+#   assert r.status_code == 422
+
+#   app.dependency_overrides = {}
+
+# def test_update_build_returns_200():
+#   app.dependency_overrides[BuildsQueries.update_build] = NormalBuildQueries
+#   r = client.put(
+#         "/api/build/1",
+#         json={
+#       "Name": "NEW BUILD",
+#       "moboid": 1,
+#       "cpuid": 1,
+#       "psuid": 1,
+#       "Private": False,
+#       "gpuid": 1,
+#       "cardcount": 1,
+#       "hddid": 1,
+#       "hddcount": 1,
+#       "ramid": 1,
+#       "ramcount": 1,
+#       "color": 1,
+#       "size": 1,
+#       "picture": 1
+# })
+
+#   assert r.status_code == 200
+#   assert r.json() == {
+#     "id": 1,
+#     "Name": "NEW BUILD",
+#     "moboid": 1,
+#     "cpuid": 1,
+#     "psuid": 1,
+#     "Private": False,
+#     "userid": 1
+# }
+
+#   app.dependency_overrides = {}
+
+# def test_delete_build():
+#   pass

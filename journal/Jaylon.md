@@ -54,7 +54,7 @@ I just started off and was able to finish the PUT request. The error I was getti
 
 ## June 9, 2022
 
-\*Create a build
+- Create a build
 
 The day started off early with the team and I trying to troubleshoot why the modals weren't displaying hte correct data. after about 2 hours of documentation, changing names, and more documentation, we were able to fix the id for each modal in order to display to correct data.
 
@@ -64,12 +64,20 @@ The day started off early with the team and I trying to troubleshoot why the mod
 
 Today started off with the team and I fixing the layout for our ViewBuilds webpage. They taught me a lot of CSS. I got to watch and help as Jason was working on the card and the effects that happen to it when you hover or click on things.
 
-## June 17, 2022
+## June 13, 2022 - June 17, 2022
 
-- Excused abscense from class
+- Excused abscense from class Friday June 17, 2022
+
+This week I wasn't able to work too much on the project as my focus was towards stufying for the practice exam and learning algorithms. Was able to help debug certain days after class and helped find a react-router-dom useParam to pull the id from the build and populate the detail page with that.
 
 ## June 21, 2022
 
 - Began writing unit tests
 
-Today was spent going over the trivia game testable and trying to implement the tests into my own code. After some help with authentication and my team setting everyhting up, I was able to get a unit test to successfully run. After that I began working on testing for the list of all builds. There were some complications so I reached out for a Help Ticket. Unfortunately the problem was not resolved. I stayed on a while after messing with this, using print statements but unforunately I wasn't able to make much progress. I will gather the team tomorrw and knowing them, we will knock it out.
+Today was spent going over the trivia game testable and trying to implement the tests into my own code. After some help with authentication and my team setting everyhting up, I was able to get a unit test to successfully run. After that I began working on testing for the list of all builds. There were some complications so I reached out for a Help Ticket. Unfortunately the problem was not resolved. I stayed on a while after messing with this, using print statements but unforunately I wasn't able to make much progress. I will gather the team tomorrw and knowing them, we will knock it out. I also read through the CI and CD from learn in order to stay up to date and help Jason if he required it. I still don't fully understand everything but with more practice I will get more fluent in it.
+
+## June 22, 2022
+
+- Working on Unit tests
+
+I started the day off working on getting the test for the list of our builds to pass. I learned that the return statement for my get_all_builds function inside of my fake database needed to replicate the same format and data that would show up in the real database. Once implementing that, we saw the green "Test Passed". I also got to work with the team on tryign to implement the likes on our builds and the logistics behind that like limiting one user to one like per build, and making sure our builds keep count of those likes. 
