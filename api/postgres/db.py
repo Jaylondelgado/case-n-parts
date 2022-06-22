@@ -154,20 +154,47 @@ class PartsQueries:
 
 class BuildsQueries:
 
-    # def get_top_builds(self):
-    #     with pool.connection() as connection:
-    #         with connection.cursor() as cursor:
-    #             cursor.execute(
-    #                 """
-    #                 SELECT
-    #                     build.id,
-    #                     "user".id,
-    #                     "user".username,
-    #                     build."Name",
-    #                     caseimage.picture,
-    #                     COUNT(rating.id) as likes
-    #             """
-    #             )
+    def get_top_builds(self):
+        with pool.connection() as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    SELECT
+                        build.id,
+                        "user".id,
+                        "user".username,
+                        build."Name",
+                        caseimage.picture,
+                        COUNT(rating.id) as likes
+
+                    FROM public.build
+
+                    INNER JOIN public.rating
+                        ON rating.buildid=build.id
+                    INNER JOIN public.user
+                        ON "user".id=build.userid
+
+
+                    INNER JOIN public.case
+                        ON "case".buildid = build.id
+                    INNER JOIN public.caseimage
+                        ON caseimage.id = "case".picture
+
+                    WHERE rating.liked is TRUE
+
+                    GROUP BY
+                        build.id,
+                        "user".id,
+                        "user".username,
+                        build."Name",
+                        caseimage.picture
+                    
+                    ORDER BY COUNT(rating.id) DESC LIMIT 3
+                """
+                )
+                rows = cursor.fetchall()
+                return list(rows)
+                
     def get_all_builds(self):
         with pool.connection() as connection:
             with connection.cursor() as cursor:

@@ -1,7 +1,7 @@
 from typing import Union
 from turtle import title
 from urllib import response
-from ..models.build import Build, BuildA, BuildDeleteOpertion, BuildOut, BuildOutList, InBuild, InsertBuild, OutBuild
+from ..models.build import Build, BuildA, BuildDeleteOpertion, BuildOut, BuildOutList, InBuild, InsertBuild, OutBuild, TopBuildsOut
 from fastapi import APIRouter, Response, status, Depends
 from ..db import BuildsQueries
 from ..models.common import ErrorMessage
@@ -9,6 +9,16 @@ from .accounts import User, get_current_active_user
 
 
 router = APIRouter()
+def row_to_top_builds(row):
+    build = {
+        "id": row[0],
+        "userid": row[1],
+        "username": row[2],
+        "Name": row[3],
+        "picture": row[4],
+        "likes": row[5]
+    }
+    return build
 def row_to_create_build(row):
     build ={
         "id": row[0],
@@ -137,6 +147,12 @@ def row_to_build(row):
         "likes": row[55]
     }
     return build
+@router.get("/api/topbuilds", response_model=TopBuildsOut)
+def top_build_list(query=Depends(BuildsQueries)):
+    rows = query.get_top_builds()
+    return {
+        "builds": [row_to_top_builds(row) for row in rows],
+    }
 
 @router.get("/api/builds", response_model=BuildA)
 def build_list(query=Depends(BuildsQueries)):
