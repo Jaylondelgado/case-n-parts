@@ -20,12 +20,12 @@ function CreateBuild() {
     Name: "",
     psu: null,
     gpu: null,
-    cardcount: 1,
+    gpuCardCount: 1,
     cpu: null,
     hdd: null,
-    hddcount: 1,
+    hddCount: 1,
     ram: null,
-    ramcount: 1,
+    ramCount: 1,
     mobo: null,
     color: "",
     size: "",
@@ -76,6 +76,10 @@ function CreateBuild() {
       ram,
     }));
   };
+
+  const handleRamCount = event => {
+    console.log(event.target.value);
+  };
   const handleHddClick = hdd => {
     setBuild(build => ({
       ...build,
@@ -113,12 +117,12 @@ function CreateBuild() {
       Name: build.Name,
       psuid: build.psu.id,
       gpuid: build.gpu.id,
-      cardcount: build.cardcount,
+      cardcount: build.gpuCardCount,
       cpuid: build.cpu.id,
       ramid: build.ram.id,
-      ramcount: build.ramcount,
+      ramcount: build.ramCount,
       hddid: build.hdd.id,
-      hddcount: build.hddcount,
+      hddcount: build.hddCount,
       moboid: 1,
       size: sizes.find(size => size.name === build.size).id,
       color: colors.find(color => color.name === build.color).id,
@@ -152,11 +156,6 @@ function CreateBuild() {
     }
   };
 
-  // const displayCount = slots => {
-  //   for (let i = 1; i <= slots; i++) {
-  //     return <button className='btn btn-secondary btn-sm mx-2'>{i}</button>;
-  //   }
-  // };
   let createButton = "btn btn-outline-primary w-100 mt-4";
   let alertClasses = "alert alert-success d-none mb-0";
   let alertContainerClasses = "d-none";
@@ -167,7 +166,6 @@ function CreateBuild() {
   }
   return (
     <div className='container my-5'>
-      {console.log(mobos)}
       {build !== undefined && (
         <div className='row py-5 g-4 mt-4'>
           <form onSubmit={handleSubmit} id='create-build-form'>
@@ -396,7 +394,7 @@ function CreateBuild() {
                           aria-haspopup='true'
                           aria-expanded='false'
                         >
-                          <span className='pe-2'>{build.cardcount}</span>
+                          <span className='pe-2'>{build.gpuCardCount}</span>
                           <span className='sr-only'>Toggle Dropdown</span>
                         </button>
                         <div className='dropdown-menu bg-dark ms-2 text-white'>
@@ -410,10 +408,11 @@ function CreateBuild() {
                               )
                             ).map((_, i) => (
                               <button
+                                type='button'
                                 onClick={() => {
                                   setBuild(build => ({
                                     ...build,
-                                    cardcount: i + 1,
+                                    gpuCardCount: i + 1,
                                   }));
                                 }}
                               >
@@ -506,17 +505,6 @@ function CreateBuild() {
                     >
                       {build.hdd ? `HDD: ${build.hdd.capacity}` : "HDD"}
                     </button>
-                    <button
-                      type='button'
-                      className='btn btn-outline-secondary dropdown-toggle dropdown-toggle-split w-25'
-                      data-bs-toggle='dropdown'
-                      aria-haspopup='true'
-                      aria-expanded='false'
-                    >
-                      <span className='pe-2'>{build.hddcount}</span>
-                      <span className='sr-only'>Toggle Dropdown</span>
-                    </button>
-                    <div className='dropdown-menu bg-dark ms-2'>x</div>
                   </div>
                   <div
                     className='modal fade'
@@ -589,19 +577,39 @@ function CreateBuild() {
                     >
                       {build.ram ? `RAM: ${build.ram.memory_type}` : "RAM"}
                     </button>
-                    <button
-                      type='button'
-                      className='btn btn-outline-secondary dropdown-toggle dropdown-toggle-split w-25'
-                      data-bs-toggle='dropdown'
-                      aria-haspopup='true'
-                      aria-expanded='false'
-                    >
-                      <span className='pe-2'>{build.ramcount}</span>
-                      <span className='sr-only'>Toggle Dropdown</span>
-                    </button>
-                    <div className='dropdown-menu bg-dark ms-2'>
-                      <p>something</p>
-                    </div>
+                    {build.mobo && build.ram && (
+                      <>
+                        <button
+                          type='button'
+                          className='btn btn-outline-secondary dropdown-toggle dropdown-toggle-split w-25'
+                          data-bs-toggle='dropdown'
+                          aria-haspopup='true'
+                          aria-expanded='false'
+                        >
+                          <span className='pe-2'>{build.ramCount}</span>
+                          <span className='sr-only'>Toggle Dropdown</span>
+                        </button>
+                        <div className='dropdown-menu bg-dark ms-2 text-white'>
+                          <span>
+                            {Array.from(Array(build.mobo.memory_slots)).map(
+                              (_, i) => (
+                                <button
+                                  type='button'
+                                  onClick={() => {
+                                    setBuild(build => ({
+                                      ...build,
+                                      ramCount: i + 1,
+                                    }));
+                                  }}
+                                >
+                                  {i + 1}
+                                </button>
+                              )
+                            )}
+                          </span>
+                        </div>
+                      </>
+                    )}
                   </div>
                   <div
                     className='modal fade'
@@ -667,11 +675,7 @@ function CreateBuild() {
               </div>
               <div className='row justify-content-md-center'>
                 <div className='col-sm-1 pt-2 w-50'>
-                  <button
-                    onSubmit={handleSubmit}
-                    id='create-pc-build'
-                    className={createButton}
-                  >
+                  <button type='submit' className={createButton}>
                     Create
                   </button>
                   <div className={alertContainerClasses}>
