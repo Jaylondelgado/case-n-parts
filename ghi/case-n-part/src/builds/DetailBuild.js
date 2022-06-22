@@ -163,7 +163,7 @@ function DetailBuild({ token }) {
                       />
                     </div>
                     <div className='d-flex flex-row justify-content-center w-100 '>
-                      {currentUser !== build.userid && (
+                      {currentUser.id !== build.userid && (
                         <span>
                           <div>{build.likes}</div>
 
@@ -176,7 +176,8 @@ function DetailBuild({ token }) {
                           </button>
                         </span>
                       )}
-                      {currentUser === build.userid && (
+                      {console.log("current user", currentUser)}
+                      {currentUser.id === build.userid && (
                         <span>
                           <Link
                             to={`/builds/updatebuild/${build.id}`}
