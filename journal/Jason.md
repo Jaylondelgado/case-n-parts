@@ -123,10 +123,20 @@ Learned a bit more of the fastAPI by debugging the rating system. After pulling 
 
 ---
 
-## 6/18/2022
+## 6/20/2022
 
 \* Pagination, restructured columns in list builds, working trashcan!"
 
 After a lengthy search, I found a package that readily paginates for you in react. I saw other options to manually create that functionality but with a quick install and perusing the documentation, it was easily implemented. Currently it is only in the `ListBuilds` page, but that will be added to the `myBuilds` page soon. I was finally able to get the columns to line up correctly as well, only mapping three per row before starting a new one. I pair programmed with Chad earlier, dealing with the same bug `422 unprocessable entity` on the `UpdateBuild` page while I had that issue on the `CreateBuild` page. We spent an hour trying to find the issue and Jarett hopped on, with a fresh pair of eyes pinpointed the issue shortly after where a key was mistyped and some other keys needed to be added to the json body.
 
 Once that was sorted, I wanted to more or less have CRUD operational on our front end, attaching the `delete` method to our trash can icon in the `myBuilds` page. After some promise handling and authorization issues, the button works!
+
+---
+
+## 6/21/2022
+
+\* Understanding CI/CD, troubleshooting everything
+
+We are in a good spot where every member has a task they are working on. I split up with Jaylon to work on getting our application working with continuous integration (CI) while he worked on a unit test. I went back to review CI on Learn from a few weeks and for the most part it makes sense but at the same time as I delve further into the integration it gets more confusing. I'm trying to understand the `$CI_COMMIT_TAG` and if I need to create a tag or initially or it will automatically take the first tag that gets committed and pushed to the repo. I will spend more time tomorrow sorting that out.
+
+The other portion of my day was spent troubleshooting everyone elses code. Once Jaylon got the unit test set up, as a team we were able to get it to pass, utilizing the convenience of FastAPIs docs and test JSON bodies. Also helped Chad and another classmate troubleshoot more bootstrap issues. Was able to debug Jarett's public/private button where the button did not change.
