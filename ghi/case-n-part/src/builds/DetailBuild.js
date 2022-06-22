@@ -2,16 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import useApiData from "../parts/ApiFetch";
 
+import { basePath } from "../basePath";
+
 function DetailBuild({ token }) {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const classesIfBuildOwner = "btn btn-outline-primary mb-2";
-  const classIfNotBuildOwner = "d-none";
-
   const [build, setBuild] = useState();
   const [currentUser, setCurrentUser] = useState();
-  const basePath = process.env.REACT_APP_ACCOUNTS_HOST;
 
   useEffect(() => {
     const getBuildData = async () => {
@@ -38,7 +36,7 @@ function DetailBuild({ token }) {
   }, []);
 
   const deleteBuild = async id => {
-    await fetch(`${process.env.REACT_APP_ACCOUNTS_HOST}/api/build/${id}/`, {
+    await fetch(`${basePath}/api/build/${id}/`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -120,7 +118,7 @@ function DetailBuild({ token }) {
                       <div className='d-flex flex-row justify-content-center w-100 '>
                         {currentUser !== build.userid && (
                           <button className='btn btn-outline-primary'>
-                            <i class='bi bi-hand-thumbs-up pe-1'></i>
+                            <i className='bi bi-hand-thumbs-up pe-1'></i>
                             Upvote
                           </button>
                         )}
@@ -324,6 +322,11 @@ function DetailBuild({ token }) {
                           <p className='text-primary p-0 m-0'>Hdmi Ports</p>
                           <hr className='w-100 p-0 m-1'></hr>
                           <div className='card-text'>{build.gpu.hdmi}</div>
+                        </div>
+                        <div className='d-flex flex-column align-items-center w-100 mb-3'>
+                          <p className='text-primary p-0 m-0'>Card Count</p>
+                          <hr className='w-100 p-0 m-1'></hr>
+                          <div className='card-text'>{build.gpu.cardcount}</div>
                         </div>
                       </div>
                     </div>

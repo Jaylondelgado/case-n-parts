@@ -108,3 +108,24 @@ After that, I had another issue, where I needed the id that I was using in the u
 Worked some more on the detail page. Went through a couple of layouts. Started out by outputting the data for the build into a table that would display on the page, but whenever we'd scale it down, the table would break because you can only scale a table down so far, and so the design was not responsive friendly. Finally settled on a design where we'd lay out the different parts as cards on the screen that would have the details of each part, then when we scaled down, we'd reorder them so that they looked good on a mobile screen.
 
 I had an aha moment today when I realzied the bootstrap grid system is set up to be a max of 12 columns. Once I realized that, all the `col-sm-4` stuff made sense. It's just dividing up the different portions of the grid. So a 4 means there's 8 columns left over. Made laying stuff out a lot easier.
+
+## June 21st, 2022
+
+It was a busy weekend, so I worked a bit here and there. Forgot to journal some days, so here's a summary.
+
+On Saturday, I went full on, on the detail page for a build. I went through about 4 different layouts, because I couldn't get the tables in bootstrap working in a good way when I scaled down, that looked decent. Kept sending screenshots to my team to make sure they liked the design. Eventually settled on a design with a bunch of different cards for each part.
+
+I learned a bit more about inner grids, how to make that work with bootstrap. You just have to put another row inside of the column, and then you can start building it.
+
+Sunday was all about starting the update build page. I had trouble getting the data to auto populate with what was being brought in by the build request. I ended up doing some reformatting, where I made an object that had all the build stuff it needed, and then in the `PUT` request, making another object that I could send that had the right keys matching up. This was because when I was fetching the data from the back-end, each part was coming back as an object. I needed the properties of those objects for use elsewhere in the JSX, so I decided to make two objects for each purpose. That was my entire Sunday, or at least the time I devoted to it.
+
+Monday was further implementation on the update build page. I had the objects working now. So I just made the update button redirect me to the detail of the build I was updating. I used the react router dom hook, `useNavigate` which returns a function that lets you navigate programmatically. This let me set up a redirect once the form was successfully submitted.
+
+Today, Tuesday June 21st, I worked on implementing the count for the gpu and ram on both the create and update build pages. I learned about `Array` and `Array.from` in JavaScript today. `Array` lets you create a new array, which I used to create an array that had the length of the amount of slots a motherboard had for that part.
+I also then divided those by the amount of slots the selected GPU would take. This gave me the maximum number of that part they could select.
+
+I then used `Array.from()` to create a new array from what I had just made with the `Array` function.
+
+After that, I mapped over the array I had, outputting buttons that I set to numbers that showed how many cards each button was adding.
+
+This took up a lot of my time today, due to having to figure out the math I needed to do and learning about those `Array` functions.

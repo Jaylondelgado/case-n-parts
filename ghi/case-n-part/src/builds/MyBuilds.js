@@ -3,18 +3,17 @@ import { Link } from "react-router-dom";
 import "../index.css";
 import ReactPaginate from "react-paginate";
 
-function MyBuilds(props) {
+import { basePath } from "../basePath";
+
+function MyBuilds() {
   const [builds, setBuild] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
 
   useEffect(() => {
     const getBuildData = async () => {
-      const buildResponse = await fetch(
-        `${process.env.REACT_APP_ACCOUNTS_HOST}/api/builds/mine`,
-        {
-          credentials: "include",
-        }
-      );
+      const buildResponse = await fetch(`${basePath}/api/builds/mine`, {
+        credentials: "include",
+      });
       const buildData = await buildResponse.json();
       setBuild(buildData.builds);
     };
@@ -22,8 +21,8 @@ function MyBuilds(props) {
     getBuildData();
   }, []);
 
-  const deleteBuild = async (id) => {
-    await fetch(`${process.env.REACT_APP_ACCOUNTS_HOST}/api/build/${id}/`, {
+  const deleteBuild = async id => {
+    await fetch(`${basePath}/api/build/${id}/`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -38,34 +37,34 @@ function MyBuilds(props) {
 
   const displayBuilds = builds
     .slice(pagesVisited, pagesVisited + buildsPerPage)
-    .map((build) => {
+    .map(build => {
       if (builds.length > 0) {
         return (
           <>
-            <div className="row py-3 justify-content-center" key={build.id}>
-              <div className="card h-100 border-light bg-transparent">
+            <div className='row py-3 justify-content-center' key={build.id}>
+              <div className='card h-100 border-light bg-transparent'>
                 <img
                   src={build.picture}
-                  className="card-img-top p-3"
-                  alt="..."
+                  className='card-img-top p-3'
+                  alt='...'
                 />
-                <div className="card-body">
-                  <h5 className="card-title text-info">{build.Name}</h5>
-                  <p className="card-text text-primary">{build.username}</p>
+                <div className='card-body'>
+                  <h5 className='card-title text-info'>{build.Name}</h5>
+                  <p className='card-text text-primary'>{build.username}</p>
                   <Link
                     to={`/builds/detailbuild/${build.id}`}
-                    className="btn btn-outline-primary"
+                    className='btn btn-outline-primary'
                   >
                     Build Detail
                   </Link>
-                  <div style={{ color: "lightblue" }} className="pt-3">
+                  <div style={{ color: "lightblue" }} className='pt-3'>
                     <i
-                      type="button"
+                      type='button'
                       onClick={() => {
                         deleteBuild(build.id);
                       }}
-                      className="fa fa-trash fa-xl"
-                      aria-hidden="true"
+                      className='fa fa-trash fa-xl'
+                      aria-hidden='true'
                     ></i>
                   </div>
                 </div>
@@ -90,10 +89,10 @@ function MyBuilds(props) {
 
   return (
     <>
-      <div className="container pt-5 my-5">
-        <div className="row row-cols-3">{displayBuilds}</div>
+      <div className='container pt-5 my-5'>
+        <div className='row row-cols-3'>{displayBuilds}</div>
       </div>
-      <div className="centerPagination">
+      <div className='centerPagination'>
         <ReactPaginate
           previousLabel={"Previous"}
           nextLabel={"Next"}
