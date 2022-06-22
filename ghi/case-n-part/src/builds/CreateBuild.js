@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useApiData from "../parts/ApiFetch";
 import black from "../images/inner-case/pc-case-with-mobo-black.png";
 import pink from "../images/inner-case/pc-case-with-mobo-pink.png";
@@ -33,7 +33,7 @@ function CreateBuild() {
     size: "",
     picture: "",
   });
-  const [successfulSubmit, setSuccessfulSubmit] = useState();
+
   const gpus = useApiData(`${basePath}/api/gpus/`, "gpus");
   const cpus = useApiData(`${basePath}/api/cpus/`, "cpus");
   const psus = useApiData(`${basePath}/api/psus/`, "psus");
@@ -47,70 +47,73 @@ function CreateBuild() {
 
   useEffect(() => {
     if (mobos.length === 1) {
-      setBuild(build => ({
+      setBuild((build) => ({
         ...build,
         mobo: mobos[0],
       }));
     }
   }, [mobos]);
 
-  const handleGpuClick = gpu => {
-    setBuild(build => ({
+  const handleGpuClick = (gpu) => {
+    setBuild((build) => ({
       ...build,
       gpu,
     }));
   };
-  const handleCpuClick = cpu => {
-    setBuild(build => ({
+  const handleCpuClick = (cpu) => {
+    setBuild((build) => ({
       ...build,
       cpu,
     }));
   };
-  const handlePsuClick = psu => {
-    setBuild(build => ({
+  const handlePsuClick = (psu) => {
+    setBuild((build) => ({
       ...build,
       psu,
     }));
   };
-  const handleRamClick = ram => {
-    setBuild(build => ({
+  const handleRamClick = (ram) => {
+    setBuild((build) => ({
       ...build,
       ram,
     }));
   };
 
-  const handleHddClick = hdd => {
-    setBuild(build => ({
+  const handleHddClick = (hdd) => {
+    setBuild((build) => ({
       ...build,
       hdd,
     }));
   };
   const handleColorChange = ({ target: { value: selectedColor } }) => {
     const { id: selectedId, name: selectedName } = colors.find(
-      color => color.name === selectedColor
+      (color) => color.name === selectedColor
     );
     const picture = caseImages.find(
-      caseImage => caseImage.id === selectedId
+      (caseImage) => caseImage.id === selectedId
     ).id;
-    setBuild(build => ({
+    setBuild((build) => ({
       ...build,
       color: selectedName,
       picture,
     }));
   };
-  const handleNameChange = event => {
-    setBuild(build => ({
+  const handleNameChange = (event) => {
+    setBuild((build) => ({
       ...build,
       Name: event.target.value,
     }));
   };
   const handleSizeChange = ({ target: { value: selectedSize } }) => {
-    setBuild(build => ({
+    setBuild((build) => ({
       ...build,
       size: selectedSize,
     }));
   };
-  const handleSubmit = async event => {
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const buildPostData = {
       Name: build.Name,
@@ -123,9 +126,10 @@ function CreateBuild() {
       hddid: build.hdd.id,
       hddcount: build.hddCount,
       moboid: 1,
-      size: sizes.find(size => size.name === build.size).id,
-      color: colors.find(color => color.name === build.color).id,
-      picture: caseImages.find(image => image.picture.includes(build.color)).id,
+      size: sizes.find((size) => size.name === build.size).id,
+      color: colors.find((color) => color.name === build.color).id,
+      picture: caseImages.find((image) => image.picture.includes(build.color))
+        .id,
       Private: true,
     };
     const buildUrl = `${basePath}/api/build/create`;
@@ -151,52 +155,44 @@ function CreateBuild() {
         size: 1,
         picture: 1,
       });
-      setSuccessfulSubmit(true);
+      navigate("/builds/mybuilds");
     }
   };
 
-  let createButton = "btn btn-outline-primary w-100 mt-4";
-  let alertClasses = "alert alert-success d-none mb-0";
-  let alertContainerClasses = "d-none";
-  if (successfulSubmit) {
-    createButton = "d-none";
-    alertClasses = "alert alert-success mb-3";
-    alertContainerClasses = "";
-  }
   return (
-    <div className='container my-5'>
+    <div className="container my-5">
       {build !== undefined && (
-        <div className='row py-5 g-4 mt-4'>
-          <form onSubmit={handleSubmit} id='create-build-form'>
-            <div className='col-sm-1 my-25'></div>
-            <div className='row justify-content-md-center'>
-              <div className='col-md-auto'>
+        <div className="row py-5 g-4 mt-4">
+          <form onSubmit={handleSubmit} id="create-build-form">
+            <div className="col-sm-1 my-25"></div>
+            <div className="row justify-content-md-center">
+              <div className="col-md-auto">
                 <img
                   src={build.color ? caseColors[build.color] : caseColors.black}
-                  alt='pc case'
-                  width='500'
+                  alt="pc case"
+                  width="500"
                 />
               </div>
-              <div className='col-md-auto'>
+              <div className="col-md-auto">
                 <input
                   onChange={handleNameChange}
                   value={build.Name}
-                  placeholder='PC Name'
+                  placeholder="PC Name"
                   required
-                  name='name'
-                  id='name'
-                  className='form-control w-75 mb-2 bg-dark text-white border-secondary'
+                  name="name"
+                  id="name"
+                  className="form-control w-75 mb-2 bg-dark text-white border-secondary"
                 />
                 <select
                   onChange={handleColorChange}
                   value={build.color}
-                  name='color'
-                  id='color'
-                  className='form-select w-75 mb-2 bg-dark text-white border-secondary'
+                  name="color"
+                  id="color"
+                  className="form-select w-75 mb-2 bg-dark text-white border-secondary"
                   required
                 >
-                  <option value=''>Case color</option>
-                  {colors.map(color => {
+                  <option value="">Case color</option>
+                  {colors.map((color) => {
                     return (
                       <option key={color.id} value={color.name}>
                         {color.name}
@@ -207,13 +203,13 @@ function CreateBuild() {
                 <select
                   onChange={handleSizeChange}
                   value={build.size}
-                  name='size'
-                  id='size'
-                  className='form-select w-75 bg-dark text-white border-secondary'
+                  name="size"
+                  id="size"
+                  className="form-select w-75 bg-dark text-white border-secondary"
                   required
                 >
-                  <option value=''>Case size</option>
-                  {sizes.map(size => {
+                  <option value="">Case size</option>
+                  {sizes.map((size) => {
                     return (
                       <option key={size.id} value={size.name}>
                         {size.name}
@@ -221,47 +217,47 @@ function CreateBuild() {
                     );
                   })}
                 </select>
-                <div className='col-sm-1 w-75 pt-2'>
+                <div className="col-sm-1 w-75 pt-2">
                   <button
-                    type='button'
-                    className='btn btn-outline-secondary w-100'
+                    type="button"
+                    className="btn btn-outline-secondary w-100"
                   >
                     {build.mobo ? `MOBOS: ${build.mobo.brand}` : "MOBOS"}
                   </button>
                 </div>
-                <div className='col-sm-1 w-75 pt-2'>
+                <div className="col-sm-1 w-75 pt-2">
                   <button
-                    type='button'
-                    className='btn btn-outline-secondary w-100'
-                    data-bs-toggle='modal'
-                    data-bs-target='#psuModal'
+                    type="button"
+                    className="btn btn-outline-secondary w-100"
+                    data-bs-toggle="modal"
+                    data-bs-target="#psuModal"
                   >
                     {build.psu ? `PSU: ${build.psu.wattage}` : "PSU"}
                   </button>
                   <div
-                    className='modal fade'
-                    id='psuModal'
-                    tabIndex='-1'
-                    aria-labelledby='exampleModalLabel'
-                    aria-hidden='true'
+                    className="modal fade"
+                    id="psuModal"
+                    tabIndex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
                   >
-                    <div className='modal-dialog modal-min-width'>
-                      <div className='modal-content'>
-                        <div className='modal-header bg-secondary'>
-                          <h5 className='modal-title' id='exampleModalLabel'>
+                    <div className="modal-dialog modal-min-width">
+                      <div className="modal-content">
+                        <div className="modal-header bg-secondary">
+                          <h5 className="modal-title" id="exampleModalLabel">
                             PSU
                           </h5>
                           <button
-                            type='button'
-                            className='btn-close'
-                            data-bs-dismiss='modal'
-                            aria-label='Close'
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
                           ></button>{" "}
                         </div>
-                        <div className='modal-body bg-secondary'>
+                        <div className="modal-body bg-secondary">
                           {" "}
-                          <div className='table-responsive'>
-                            <table className='table table-hover table-dark'>
+                          <div className="table-responsive">
+                            <table className="table table-hover table-dark">
                               <thead>
                                 <tr>
                                   <th>Brand</th>
@@ -274,12 +270,12 @@ function CreateBuild() {
                                 </tr>
                               </thead>
                               <tbody>
-                                {psus.map(psu => {
+                                {psus.map((psu) => {
                                   return (
                                     <tr
                                       key={psu.id}
                                       onClick={() => handlePsuClick(psu)}
-                                      data-bs-dismiss='modal'
+                                      data-bs-dismiss="modal"
                                       // className={
                                       //   build.psu.id === psu.id
                                       //     ? "selected-list-item"
@@ -304,38 +300,38 @@ function CreateBuild() {
                     </div>
                   </div>
                 </div>
-                <div className='col-sm-1 w-75 pt-2'>
+                <div className="col-sm-1 w-75 pt-2">
                   <button
-                    type='button'
-                    className='btn btn-outline-secondary w-100'
-                    data-bs-toggle='modal'
-                    data-bs-target='#cpuModal'
+                    type="button"
+                    className="btn btn-outline-secondary w-100"
+                    data-bs-toggle="modal"
+                    data-bs-target="#cpuModal"
                   >
                     {build.cpu ? `CPU: ${build.cpu.processor}` : "CPU"}
                   </button>
                   <div
-                    className='modal fade'
-                    id='cpuModal'
-                    tabIndex='-1'
-                    aria-labelledby='exampleModalLabel'
-                    aria-hidden='true'
+                    className="modal fade"
+                    id="cpuModal"
+                    tabIndex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
                   >
-                    <div className='modal-dialog modal-min-width'>
-                      <div className='modal-content'>
-                        <div className='modal-header bg-secondary'>
-                          <h5 className='modal-title' id='exampleModalLabel'>
+                    <div className="modal-dialog modal-min-width">
+                      <div className="modal-content">
+                        <div className="modal-header bg-secondary">
+                          <h5 className="modal-title" id="exampleModalLabel">
                             CPU
                           </h5>
                           <button
-                            type='button'
-                            className='btn-close'
-                            data-bs-dismiss='modal'
-                            aria-label='Close'
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
                           ></button>
                         </div>
-                        <div className='modal-body bg-secondary'>
-                          <div className='table-responsive'>
-                            <table className='table table-hover table-dark'>
+                        <div className="modal-body bg-secondary">
+                          <div className="table-responsive">
+                            <table className="table table-hover table-dark">
                               <thead>
                                 <tr>
                                   <th>Processor</th>
@@ -346,12 +342,12 @@ function CreateBuild() {
                                 </tr>
                               </thead>
                               <tbody>
-                                {cpus.map(cpu => {
+                                {cpus.map((cpu) => {
                                   return (
                                     <tr
                                       key={cpu.id}
                                       onClick={() => handleCpuClick(cpu)}
-                                      data-bs-dismiss='modal'
+                                      data-bs-dismiss="modal"
                                       // className={
                                       //   build.cpu.id === cpu.id
                                       //     ? "selected-list-item"
@@ -374,29 +370,29 @@ function CreateBuild() {
                     </div>
                   </div>
                 </div>
-                <div className='col-md w-75 pt-2'>
-                  <div className='btn-group dropend w-100'>
+                <div className="col-md w-75 pt-2">
+                  <div className="btn-group dropend w-100">
                     <button
-                      type='button'
-                      className='btn btn-outline-secondary w-75'
-                      data-bs-toggle='modal'
-                      data-bs-target='#gpuModal'
+                      type="button"
+                      className="btn btn-outline-secondary w-75"
+                      data-bs-toggle="modal"
+                      data-bs-target="#gpuModal"
                     >
                       {build.gpu ? `GPU: ${build.gpu.chipset}` : "GPU"}
                     </button>
                     {build.mobo && build.gpu && (
                       <>
                         <button
-                          type='button'
-                          className='btn btn-outline-secondary dropdown-toggle dropdown-toggle-split w-25'
-                          data-bs-toggle='dropdown'
-                          aria-haspopup='true'
-                          aria-expanded='false'
+                          type="button"
+                          className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split w-25"
+                          data-bs-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
                         >
-                          <span className='pe-2'>{build.gpuCardCount}</span>
-                          <span className='sr-only'>Toggle Dropdown</span>
+                          <span className="pe-2">{build.gpuCardCount}</span>
+                          <span className="sr-only">Toggle Dropdown</span>
                         </button>
-                        <div className='dropdown-menu bg-dark ms-2 text-white'>
+                        <div className="dropdown-menu bg-dark ms-2 text-white">
                           <span>
                             {Array.from(
                               Array(
@@ -407,10 +403,10 @@ function CreateBuild() {
                               )
                             ).map((_, i) => (
                               <button
-                                type='button'
+                                type="button"
                                 key={i}
                                 onClick={() => {
-                                  setBuild(build => ({
+                                  setBuild((build) => ({
                                     ...build,
                                     gpuCardCount: i + 1,
                                   }));
@@ -425,28 +421,28 @@ function CreateBuild() {
                     )}
                   </div>
                   <div
-                    className='modal fade'
-                    id='gpuModal'
-                    tabIndex='-1'
-                    aria-labelledby='exampleModalLabel'
-                    aria-hidden='true'
+                    className="modal fade"
+                    id="gpuModal"
+                    tabIndex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
                   >
-                    <div className='modal-dialog modal-min-width'>
-                      <div className='modal-content'>
-                        <div className='modal-header bg-secondary'>
-                          <h5 className='modal-title' id='exampleModalLabel'>
+                    <div className="modal-dialog modal-min-width">
+                      <div className="modal-content">
+                        <div className="modal-header bg-secondary">
+                          <h5 className="modal-title" id="exampleModalLabel">
                             GPU
                           </h5>
                           <button
-                            type='button'
-                            className='btn-close'
-                            data-bs-dismiss='modal'
-                            aria-label='Close'
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
                           ></button>
                         </div>
-                        <div className='modal-body bg-secondary container'>
-                          <div className='table-responsive'>
-                            <table className='table table-hover table-dark'>
+                        <div className="modal-body bg-secondary container">
+                          <div className="table-responsive">
+                            <table className="table table-hover table-dark">
                               <thead>
                                 <tr>
                                   <th>Manufacturer</th>
@@ -462,12 +458,12 @@ function CreateBuild() {
                                 </tr>
                               </thead>
                               <tbody>
-                                {gpus.map(gpu => {
+                                {gpus.map((gpu) => {
                                   return (
                                     <tr
                                       key={gpu.id}
                                       onClick={() => handleGpuClick(gpu)}
-                                      data-bs-dismiss='modal'
+                                      data-bs-dismiss="modal"
                                       // className={
                                       //   build.gpu.id === gpu.id
                                       //     ? "selected-list-item"
@@ -495,40 +491,40 @@ function CreateBuild() {
                     </div>
                   </div>
                 </div>
-                <div className='col-sm-1 w-75 pt-2'>
-                  <div className='btn-group dropend w-100'>
+                <div className="col-sm-1 w-75 pt-2">
+                  <div className="btn-group dropend w-100">
                     <button
-                      type='button'
-                      className='btn btn-outline-secondary w-75'
-                      data-bs-toggle='modal'
-                      data-bs-target='#hddModal'
+                      type="button"
+                      className="btn btn-outline-secondary w-75"
+                      data-bs-toggle="modal"
+                      data-bs-target="#hddModal"
                     >
                       {build.hdd ? `HDD: ${build.hdd.capacity}` : "HDD"}
                     </button>
                   </div>
                   <div
-                    className='modal fade'
-                    id='hddModal'
-                    tabIndex='-1'
-                    aria-labelledby='exampleModalLabel'
-                    aria-hidden='true'
+                    className="modal fade"
+                    id="hddModal"
+                    tabIndex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
                   >
-                    <div className='modal-dialog modal-min-width'>
-                      <div className='modal-content'>
-                        <div className='modal-header bg-secondary'>
-                          <h5 className='modal-title' id='exampleModalLabel'>
+                    <div className="modal-dialog modal-min-width">
+                      <div className="modal-content">
+                        <div className="modal-header bg-secondary">
+                          <h5 className="modal-title" id="exampleModalLabel">
                             HDD
                           </h5>
                           <button
-                            type='button'
-                            className='btn-close'
-                            data-bs-dismiss='modal'
-                            aria-label='Close'
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
                           ></button>
                         </div>
-                        <div className='modal-body bg-secondary'>
-                          <div className='table-responsive'>
-                            <table className='table table-hover table-dark'>
+                        <div className="modal-body bg-secondary">
+                          <div className="table-responsive">
+                            <table className="table table-hover table-dark">
                               <thead>
                                 <tr>
                                   <th>Brand</th>
@@ -539,12 +535,12 @@ function CreateBuild() {
                                 </tr>
                               </thead>
                               <tbody>
-                                {hdds.map(hdd => {
+                                {hdds.map((hdd) => {
                                   return (
                                     <tr
                                       key={hdd.id}
                                       onClick={() => handleHddClick(hdd)}
-                                      data-bs-dismiss='modal'
+                                      data-bs-dismiss="modal"
                                       // className={
                                       //   build.hdd.id === hdd.id
                                       //     ? "selected-list-item"
@@ -567,37 +563,37 @@ function CreateBuild() {
                     </div>
                   </div>
                 </div>
-                <div className='col-sm-1 w-75 pt-2'>
-                  <div className='btn-group dropend w-100'>
+                <div className="col-sm-1 w-75 pt-2">
+                  <div className="btn-group dropend w-100">
                     <button
-                      type='button'
-                      className='btn btn-outline-secondary w-75'
-                      data-bs-toggle='modal'
-                      data-bs-target='#ramModal'
+                      type="button"
+                      className="btn btn-outline-secondary w-75"
+                      data-bs-toggle="modal"
+                      data-bs-target="#ramModal"
                     >
                       {build.ram ? `RAM: ${build.ram.memory_type}` : "RAM"}
                     </button>
                     {build.mobo && build.ram && (
                       <>
                         <button
-                          type='button'
-                          className='btn btn-outline-secondary dropdown-toggle dropdown-toggle-split w-25'
-                          data-bs-toggle='dropdown'
-                          aria-haspopup='true'
-                          aria-expanded='false'
+                          type="button"
+                          className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split w-25"
+                          data-bs-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
                         >
-                          <span className='pe-2'>{build.ramCount}</span>
-                          <span className='sr-only'>Toggle Dropdown</span>
+                          <span className="pe-2">{build.ramCount}</span>
+                          <span className="sr-only">Toggle Dropdown</span>
                         </button>
-                        <div className='dropdown-menu bg-dark ms-2 text-white'>
+                        <div className="dropdown-menu bg-dark ms-2 text-white">
                           <span>
                             {Array.from(Array(build.mobo.memory_slots)).map(
                               (_, i) => (
                                 <button
-                                  type='button'
+                                  type="button"
                                   key={i}
                                   onClick={() => {
-                                    setBuild(build => ({
+                                    setBuild((build) => ({
                                       ...build,
                                       ramCount: i + 1,
                                     }));
@@ -613,28 +609,28 @@ function CreateBuild() {
                     )}
                   </div>
                   <div
-                    className='modal fade'
-                    id='ramModal'
-                    tabIndex='-1'
-                    aria-labelledby='exampleModalLabel'
-                    aria-hidden='true'
+                    className="modal fade"
+                    id="ramModal"
+                    tabIndex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
                   >
-                    <div className='modal-dialog modal-min-width'>
-                      <div className='modal-content'>
-                        <div className='modal-header bg-secondary'>
-                          <h5 className='modal-title' id='exampleModalLabel'>
+                    <div className="modal-dialog modal-min-width">
+                      <div className="modal-content">
+                        <div className="modal-header bg-secondary">
+                          <h5 className="modal-title" id="exampleModalLabel">
                             RAM
                           </h5>
                           <button
-                            type='button'
-                            className='btn-close'
-                            data-bs-dismiss='modal'
-                            aria-label='Close'
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
                           ></button>
                         </div>
-                        <div className='modal-body bg-secondary'>
-                          <div className='table-responsive'>
-                            <table className='table table-hover table-dark'>
+                        <div className="modal-body bg-secondary">
+                          <div className="table-responsive">
+                            <table className="table table-hover table-dark">
                               <thead>
                                 <tr>
                                   <th>Brand</th>
@@ -645,12 +641,12 @@ function CreateBuild() {
                                 </tr>
                               </thead>
                               <tbody>
-                                {rams.map(ram => {
+                                {rams.map((ram) => {
                                   return (
                                     <tr
                                       key={ram.id}
                                       onClick={() => handleRamClick(ram)}
-                                      data-bs-dismiss='modal'
+                                      data-bs-dismiss="modal"
                                       // className={
                                       //   build.ram.id === ram.id
                                       //     ? "selected-list-item"
@@ -674,31 +670,14 @@ function CreateBuild() {
                   </div>
                 </div>
               </div>
-              <div className='row justify-content-md-center'>
-                <div className='col-sm-1 pt-2 w-50'>
-                  <button type='submit' className={createButton}>
+              <div className="row justify-content-md-center">
+                <div className="col-sm-1 pt-2 w-50">
+                  <button
+                    type="submit"
+                    className="btn btn-outline-primary w-100 mt-4"
+                  >
                     Create
                   </button>
-                  <div className={alertContainerClasses}>
-                    <div className={alertClasses} id='success-message'>
-                      Build created successfully
-                    </div>
-                    <div className='d-flex justify-content-between'>
-                      <Link to='/builds/create'>
-                        <button
-                          onClick={() => setSuccessfulSubmit(false)}
-                          className='btn btn-outline-primary'
-                        >
-                          Make new build
-                        </button>
-                      </Link>
-                      <Link to='/builds/mybuilds'>
-                        <button className='btn btn-outline-primary float-right'>
-                          View my builds
-                        </button>
-                      </Link>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

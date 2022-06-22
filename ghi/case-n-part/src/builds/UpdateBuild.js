@@ -701,7 +701,7 @@ function UpdateBuild() {
                       type="radio"
                       name="flexRadioDefault"
                       id="flexRadioDefault1"
-                      onClick={() => {
+                      onChange={() => {
                         setBuild((build) => ({ ...build, Private: true }));
                       }}
                     ></input>
@@ -718,9 +718,10 @@ function UpdateBuild() {
                       type="radio"
                       name="flexRadioDefault"
                       id="flexRadioDefault2"
-                      onClick={() => {
+                      onChange={() => {
                         setBuild((build) => ({ ...build, Private: false }));
                       }}
+                      checked
                     ></input>
                     <label
                       className="form-check-label"
