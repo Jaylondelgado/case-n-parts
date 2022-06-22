@@ -62,4 +62,7 @@ The day started off early with the team and I trying to troubleshoot why the mod
 
 - Working on frontend pages
 
-Today started off with the team and I fixing the layout for our ViewBuilds webpage. They taught me a lot of CSS.
+Today started off with the team and I fixing the layout for our ViewBuilds webpage. They taught me a lot of CSS. I got to watch and help as Jason was working on the card and the effects that happen to it when you hover or click on things.
+
+## June 17, 2022
+- Excused abscense from class

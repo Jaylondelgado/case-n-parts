@@ -18,6 +18,7 @@ class BuildOut(BaseModel):
     mobo: MoboOut
     cpu: CpuOut
     psu: PsuOut
+    likes: int
 
 class Build(BaseModel):
     builds: list[BuildOut]
@@ -73,6 +74,7 @@ class BuildOutList(BaseModel):
     userid: int
     username: str
     Name: str
+    Private: bool
     color: str
     size: str
     picture: str
