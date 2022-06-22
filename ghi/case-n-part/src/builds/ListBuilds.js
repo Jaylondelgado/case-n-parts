@@ -13,9 +13,10 @@ function ListBuilds() {
       const buildData = await buildResponse.json();
       setBuild(buildData.builds);
     };
-
+    
     getBuildData();
   }, []);
+  console.log(builds)
 
   const buildsPerPage = 6;
   const pagesVisited = pageNumber * buildsPerPage;
@@ -23,7 +24,7 @@ function ListBuilds() {
   const displayBuilds = builds
     .slice(pagesVisited, pagesVisited + buildsPerPage)
     .map((build) => {
-      if (builds.length > 0) {
+      if (builds.length > 0 && build.Private === false) {
         return (
           <div className="row py-3 justify-content-center" key={build.id}>
             <div className="card h-100 border-light bg-transparent">

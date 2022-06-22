@@ -25,7 +25,9 @@ function CreateBuild() {
     color: "",
     size: "",
     picture: "",
+    Private: ""
   });
+  console.log("build:", build)
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -125,6 +127,14 @@ function CreateBuild() {
     }));
   };
 
+  const handlePrivateChange = ({ target: { value: selectedPrivate} }) => {
+    setBuild(build => ({
+      ...build,
+      Private: selectedPrivate
+
+    }));
+  };
+
   const handleSubmit = async event => {
     event.preventDefault();
     const buildPutData = {
@@ -141,7 +151,7 @@ function CreateBuild() {
       size: sizes.find(size => size.name === build.size).id,
       color: colors.find(color => color.name === build.color).id,
       picture: caseImages.find(image => image.picture.includes(build.color)).id,
-      Private: true,
+      Private: build.Private,
     };
 
     const buildUrl = `${process.env.REACT_APP_ACCOUNTS_HOST}/api/build/${id}`;
@@ -535,6 +545,7 @@ function CreateBuild() {
                   aria-labelledby='exampleModalLabel'
                   aria-hidden='true'
                 >
+                  
                   <div className='modal-dialog'>
                     <div className='modal-content'>
                       <div className='modal-header bg-secondary'>
@@ -576,10 +587,22 @@ function CreateBuild() {
                             })}
                           </tbody>
                         </table>
-                      </div>
+                      </div>  
                     </div>
                   </div>
                 </div>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onClick={() => {setBuild(build =>({ ...build, Private: true}))}}></input>
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Private
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onClick={() => {setBuild(build =>({ ...build, Private: false}))}} checked></input>
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Public
+                </label>
               </div>
             </div>
             <div className='row justify-content-md-center'>
