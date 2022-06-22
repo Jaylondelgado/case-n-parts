@@ -128,6 +128,7 @@ function CreateBuild() {
       picture: caseImages.find(image => image.picture.includes(build.color)).id,
       Private: true,
     };
+    console.log(buildPostData);
     const buildUrl = `${basePath}/api/build/create`;
     const fetchConfig = {
       method: "POST",
