@@ -4,7 +4,9 @@ import useApiData from "../parts/ApiFetch";
 import black from "../images/inner-case/pc-case-with-mobo-black.png";
 import pink from "../images/inner-case/pc-case-with-mobo-pink.png";
 import green from "../images/inner-case/pc-case-with-mobo-green.png";
-const basePath = "http://localhost:8000";
+
+import { basePath } from "../basePath";
+
 const caseColors = {
   black: black,
   green: green,
@@ -77,9 +79,6 @@ function CreateBuild() {
     }));
   };
 
-  const handleRamCount = event => {
-    console.log(event.target.value);
-  };
   const handleHddClick = hdd => {
     setBuild(build => ({
       ...build,
@@ -129,7 +128,7 @@ function CreateBuild() {
       picture: caseImages.find(image => image.picture.includes(build.color)).id,
       Private: true,
     };
-    const buildUrl = `${process.env.REACT_APP_ACCOUNTS_HOST}/api/build/create`;
+    const buildUrl = `${basePath}/api/build/create`;
     const fetchConfig = {
       method: "POST",
       body: JSON.stringify(buildPostData),

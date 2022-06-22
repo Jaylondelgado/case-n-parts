@@ -6,7 +6,7 @@ import black from "../images/inner-case/pc-case-with-mobo-black.png";
 import pink from "../images/inner-case/pc-case-with-mobo-pink.png";
 import green from "../images/inner-case/pc-case-with-mobo-green.png";
 
-const basePath = "http://localhost:8000";
+import { basePath } from "../basePath";
 
 const caseColors = {
   black,
@@ -39,14 +39,10 @@ function CreateBuild() {
 
   useEffect(() => {
     const getBuildData = async () => {
-      const buildResponse = await fetch(
-        `${process.env.REACT_APP_ACCOUNTS_HOST}/api/build/${id}`,
-        {
-          credentials: "include",
-        }
-      );
+      const buildResponse = await fetch(`${basePath}/api/build/${id}`, {
+        credentials: "include",
+      });
       const buildData = await buildResponse.json();
-      console.log("build data", buildData);
       setBuild(buildData);
     };
 
@@ -149,8 +145,6 @@ function CreateBuild() {
       picture: caseImages.find(image => image.picture.includes(build.color)).id,
       Private: true,
     };
-    console.log(build);
-    console.log("build put", buildPutData);
 
     const buildUrl = `${process.env.REACT_APP_ACCOUNTS_HOST}/api/build/${id}`;
     const fetchConfig = {
@@ -410,7 +404,6 @@ function CreateBuild() {
                           <span className='sr-only'>Toggle Dropdown</span>
                         </button>
                         <div className='dropdown-menu bg-dark ms-2 text-white'>
-                          {console.log(build.gpu)}
                           <span>
                             {Array.from(
                               Array(
@@ -425,8 +418,12 @@ function CreateBuild() {
                                 onClick={() => {
                                   setBuild(build => ({
                                     ...build,
-                                    cardcount: i + 1,
+                                    gpu: {
+                                      ...build.gpu,
+                                      cardcount: i + 1,
+                                    },
                                   }));
+                                  console.log(build);
                                 }}
                               >
                                 {i + 1}
@@ -599,20 +596,22 @@ function CreateBuild() {
                           aria-haspopup='true'
                           aria-expanded='false'
                         >
-                          <span className='pe-2'>{build.ramcount}</span>
+                          <span className='pe-2'>{build.ram.ramcount}</span>
                           <span className='sr-only'>Toggle Dropdown</span>
                         </button>
                         <div className='dropdown-menu bg-dark ms-2 text-white'>
                           <span>
-                            {console.log("ram slots", build.mobo.memory_slots)}
                             {Array.from(Array(build.mobo.memory_slots)).map(
                               (_, i) => (
                                 <button
-                                  type='submit'
+                                  type='button'
                                   onClick={() => {
                                     setBuild(build => ({
                                       ...build,
-                                      ramcount: i + 1,
+                                      ram: {
+                                        ...build.ram,
+                                        ramcount: i + 1,
+                                      },
                                     }));
                                   }}
                                 >
