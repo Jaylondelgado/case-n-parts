@@ -5,6 +5,8 @@ class RatingOut(BaseModel):
     liked: bool
     buildid: int
     userid: int
+class Rating(BaseModel):
+    ratings: list[RatingOut]
 
 class RatingIn(BaseModel):
     buildid: int
