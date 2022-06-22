@@ -39,6 +39,18 @@ build-job:
 #     - npm install
 #     - npm run build # Build the React application
 
+# build-job:
+#   stage: build
+#   image: node:lts-bullseye
+#   needs:
+#     - api-unit-test-job # These two jobs must succeed for
+#     - lint-test-job # this build-job to run
+
+#   script:
+#     - cd ghi
+#     - npm install
+#     - npm run build # Build the React application
+
 # # deploy-back-end-job-heroku:
 # #   rules:
 # #     # Only run if the commit is tagged with git tag
