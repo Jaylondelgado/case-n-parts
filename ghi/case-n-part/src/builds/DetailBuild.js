@@ -10,6 +10,7 @@ function DetailBuild({ token }) {
 
   const [build, setBuild] = useState();
   const [currentUser, setCurrentUser] = useState();
+  console.log(build);
 
   useEffect(() => {
     const getBuildData = async () => {
@@ -35,6 +36,13 @@ function DetailBuild({ token }) {
     getCurrentUserData();
   }, []);
 
+  const handleUpvoteClick = async event => {
+    setBuild(build => ({
+      ...build,
+      likes: parseInt(build.likes, 10) + 1,
+    }));
+  };
+
   const deleteBuild = async id => {
     await fetch(`${basePath}/api/build/${id}/`, {
       method: "DELETE",
@@ -47,12 +55,11 @@ function DetailBuild({ token }) {
   };
 
   return (
-    <div className='d-grid gap-4 my-5 p-5'>
-      {console.log(build)}
+    <div className='d-grid gap-xl-4 my-5 p-5'>
       {build !== undefined && (
         <>
           <div className='row justify-content-center'>
-            <div className='col-sm-4 order-sm-1 order-2'>
+            <div className='col-xl-4 order-xl-2 pb-4 pb-xxl-0pb-lg-4'>
               <div className='card bg-dark border border-primary w-5'>
                 <h4 className='card-title text-white p-3'>Motherboard</h4>
                 <div className='d-flex flex-column card-text text-white px-4'>
@@ -101,7 +108,7 @@ function DetailBuild({ token }) {
                 </div>
               </div>
             </div>
-            <div className='col-sm-4 order-sm-2 order-1'>
+            <div className='col-xl-4 order-first order-xl-2 pb-4 pb-xxl-0pb-lg-4'>
               <div className='card bg-dark border border-primary w-5'>
                 <h5 className='card-title text-white p-3'>{build.Name}</h5>
                 <div className='d-flex flex-column card-text text-white px-4'>
@@ -117,10 +124,17 @@ function DetailBuild({ token }) {
                       </div>
                       <div className='d-flex flex-row justify-content-center w-100 '>
                         {currentUser !== build.userid && (
-                          <button className='btn btn-outline-primary'>
-                            <i className='bi bi-hand-thumbs-up pe-1'></i>
-                            Upvote
-                          </button>
+                          <span>
+                            <div>{build.likes}</div>
+                            <button
+                              onClick={handleUpvoteClick}
+                              value={build.likes}
+                              className='btn btn-outline-primary'
+                            >
+                              <i className='bi bi-hand-thumbs-up pe-1'></i>
+                              Upvote
+                            </button>
+                          </span>
                         )}
                         {currentUser === build.userid && (
                           <span>
@@ -169,7 +183,7 @@ function DetailBuild({ token }) {
               </div>
             </div>
 
-            <div className='col-sm-4 order-sm-2 order-2'>
+            <div className='col-xl-4 order-sm-2 order-2 pb-4 pb-xxl-0'>
               <div className='card bg-dark border border-primary w-5'>
                 <h5 className='card-title text-white p-3'>CPU</h5>
                 <div className='d-flex flex-column card-text text-white px-4'>
@@ -211,7 +225,7 @@ function DetailBuild({ token }) {
             </div>
           </div>
           <div className='row justify-content-center'>
-            <div className='col-sm-4'>
+            <div className='col-xl-4 pb-4 pb-xxl-0'>
               <div className='card bg-dark border border-primary w-5'>
                 <h5 className='card-title text-white p-3'>RAM</h5>
                 <div className='d-flex flex-column card-text text-white px-4'>
@@ -248,7 +262,7 @@ function DetailBuild({ token }) {
                 </div>
               </div>
             </div>
-            <div className='col-sm-4'>
+            <div className='col-xl-4 pb-4 pb-xxl-0'>
               <div className='card bg-dark border border-primary w-5'>
                 <h5 className='card-title text-white p-3'>GPU</h5>
                 <div className='d-flex flex-column card-text text-white px-4'>
@@ -335,7 +349,7 @@ function DetailBuild({ token }) {
               </div>
             </div>
 
-            <div className='col-sm-4'>
+            <div className='col-xl-4 pb-4 p-xxl-0'>
               <div className='card bg-dark border border-primary w-5'>
                 <h5 className='card-title text-white p-3'>PSU</h5>
                 <div className='d-flex flex-column card-text text-white px-4'>
