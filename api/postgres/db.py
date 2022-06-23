@@ -1,8 +1,9 @@
+import os
 from psycopg_pool import ConnectionPool
 from psycopg.errors import UniqueViolation
 
-pool = ConnectionPool()
-
+conninfo = os.environ["DATABASE_URL"]
+pool = ConnectionPool(conninfo=conninfo)
 
 class DuplicateTitle(RuntimeError):
     pass
