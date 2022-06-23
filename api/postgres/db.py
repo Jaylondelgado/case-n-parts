@@ -704,8 +704,8 @@ class BuildsQueries:
                 """,
                     [id],
                 )
-                rows = (cursor.fetchone())
-                return list(rows)
+                rows = cursor.fetchone()
+                return rows
 
     def delete_build(self, id, userid: int):
         with pool.connection() as connection:

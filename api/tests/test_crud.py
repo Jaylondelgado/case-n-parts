@@ -287,15 +287,10 @@ def test_update_build_returns_200():
     app.dependency_overrides = {}
 
 
-
 def test_delete_build():
-  app.dependency_overrides[BuildsQueries] = NormalBuildQueries
-  app.dependency_overrides[get_current_active_user] = override_get_fake_user
-  r = client.delete(
-    "/api/build/1"
-  )
+    app.dependency_overrides[BuildsQueries] = NormalBuildQueries
+    app.dependency_overrides[get_current_active_user] = override_get_fake_user
+    r = client.delete("/api/build/1")
 
-  assert r.status_code == 200
-  assert r.json() == {
-    "result": False
-  }
+    assert r.status_code == 200
+    assert r.json() == {"result": False}
