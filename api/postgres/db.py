@@ -1,49 +1,52 @@
+import os
 from psycopg_pool import ConnectionPool
 from psycopg.errors import UniqueViolation
 
-pool = ConnectionPool()
+conninfo = os.environ["DATABASE_URL"]
+pool = ConnectionPool(conninfo=conninfo)
 
 
 class DuplicateTitle(RuntimeError):
     pass
 
 
-class RatingQueries:
-    def get_ratings(self):
-        with pool.connection() as connection:
-            with connection.cursor() as cursor:
-                cursor.execute(
-                    """
-                    SELECT rating.id, rating.liked, rating.buildid, rating.userid
-                    FROM public.rating
-                    """
-                )
-                rows = cursor.fetchall()
-                return list(rows)
+# class RatingQueries:
+#     def get_ratings(self):
+#         with pool.connection() as connection:
+#             with connection.cursor() as cursor:
+#                 cursor.execute(
+#                     """
+#                     SELECT rating.id, rating.liked,
+#                            rating.buildid, rating.userid
+#                     FROM public.rating
+#                     """
+#                 )
+#                 rows = cursor.fetchall()
+#                 return list(rows)
 
-    def create_ratings(self, liked, buildid: int, userid: int):
-        with pool.connection() as connection:
-            with connection.cursor as cursor:
-                with connection.transaction():
-                    cursor.execute(
-                        """
-                        INSERT INTO rating(liked, buildid, userid)
-                        VALUES(%s, %s, %s)
-                        returning id
-                        """,
-                        [liked, buildid, userid],
-                    )
-                    new_rating_id = cursor.fetchone()[0]
-                    cursor.execute(
-                        """
-                        SELECT build.id, build.userid
-                        FROM build
-                        WHERE rating.id = %s
-                        """,
-                        [new_rating_id],
-                    )
-                    rows = cursor.fetchone()
-                    return list(rows)
+#     def create_ratings(self, liked, buildid: int, userid: int):
+#         with pool.connection() as connection:
+#             with connection.cursor as cursor:
+#                 with connection.transaction():
+#                     cursor.execute(
+#                         """
+#                         INSERT INTO rating(liked, buildid, userid)
+#                         VALUES(%s, %s, %s)
+#                         returning id
+#                         """,
+#                         [liked, buildid, userid],
+#                     )
+#                     new_rating_id = cursor.fetchone()[0]
+#                     cursor.execute(
+#                         """
+#                         SELECT build.id, build.userid
+#                         FROM build
+#                         WHERE rating.id = %s
+#                         """,
+#                         [new_rating_id],
+#                     )
+#                     rows = cursor.fetchone()
+#                     return list(rows)
 
 
 class UsersQueries:
@@ -62,7 +65,9 @@ class UsersQueries:
                 rows = cursor.fetchone()
                 return rows
 
-    def create_user(self, username: str, hashed_password: str, email: str = None):
+    def create_user(
+        self, username: str, hashed_password: str, email: str = None
+    ):
         # TODO: Replace this with real SQL
         with pool.connection() as connection:
             with connection.cursor() as cursor:
@@ -84,8 +89,9 @@ class PartsQueries:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """
-                    SELECT id, manufacturer, chipset, core_clock_speed, video_memory,
-                    memory_type, height, length, width, hdmi, display_port
+                    SELECT id, manufacturer, chipset, core_clock_speed,
+                           video_memory, memory_type, height, length, width,
+                           hdmi, display_port
                     FROM gpu
                     """
                 )
@@ -109,7 +115,8 @@ class PartsQueries:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """
-                    SELECT id, brand, memory_type, memory_speed, memory_channels, pin_configuration
+                    SELECT id, brand, memory_type, memory_speed,
+                           memory_channels, pin_configuration
                     FROM ram
                     """
                 )
@@ -147,8 +154,8 @@ class PartsQueries:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """
-                    SELECT id, brand, socket_type, max_memory, max_memory_per_slot,
-                    pcie_slots, memory_slots
+                    SELECT id, brand, socket_type, max_memory,
+                    max_memory_per_slot, pcie_slots, memory_slots
                     FROM mobos
                     """
                 )
@@ -191,7 +198,7 @@ class BuildsQueries:
                         "user".username,
                         build."Name",
                         caseimage.picture
-                    
+
                     ORDER BY COUNT(rating.id) DESC LIMIT 3
                 """
                 )
@@ -235,8 +242,8 @@ class BuildsQueries:
 
                     INNER JOIN public.rating
                         ON rating.buildid=build.id
-                    
-                    
+
+
 
                     INNER JOIN public.user
                         ON "user".id=build.userid
@@ -267,23 +274,23 @@ class BuildsQueries:
 
                     INNER JOIN public.mobos
                         ON mobos.id = build.moboid
-                    
+
                     INNER JOIN public.cpu
                         ON cpu.id = build.cpuid
-                    
+
                     INNER JOIN public.psu
                         ON psu.id = build.psuid
 
                     WHERE rating.liked is TRUE
-                    
+
                     GROUP BY build.id, "user".id, "color".name,
                      "size".name, caseimage.picture, buildgpus.id,
                      gpu.manufacturer, gpu.chipset, buildhdds.hddid,
                      hdd.brand, hdd.capacity, buildram.ramid, ram.brand,
-                     mobos.id, mobos.brand, mobos.socket_type, mobos.max_memory,
-                     cpu.id, cpu.processor, cpu.cores, cpu.socket_type, psu.id,
-                     psu.brand
-                    
+                     mobos.id, mobos.brand, mobos.socket_type,
+                     mobos.max_memory, cpu.id, cpu.processor, cpu.cores,
+                     cpu.socket_type, psu.id, psu.brand
+
                     """
                 )
                 rows = cursor.fetchall()
@@ -313,7 +320,7 @@ class BuildsQueries:
                         """
                         INSERT INTO build("Name", moboid, cpuid, psuid, userid)
                         VALUES(%s, %s, %s, %s, %s)
-                        RETURNING id 
+                        RETURNING id
                     """,
                         [Name, moboid, cpuid, psuid, userid],
                     )
@@ -355,10 +362,10 @@ class BuildsQueries:
                     )
                 cursor.execute(
                     """
-                    SELECT build.id, build."Name", build.moboid, build.cpuid, build.psuid, build."Private", build.userid
+                    SELECT build.id, build."Name", build.moboid, build.cpuid,
+                           build.psuid, build."Private", build.userid
                     FROM build
                     WHERE build.id = %s
-                    
                 """,
                     [new_build_id],
                 )
@@ -435,7 +442,7 @@ class BuildsQueries:
                     INNER JOIN public.user
                         ON "user".id=build.userid
 
-                    
+
 
                     -- Join case information
                     INNER JOIN public.case
@@ -472,7 +479,7 @@ class BuildsQueries:
                     ON cpu.id = build.cpuid
                     INNER JOIN public.psu
                     ON psu.id = build.psuid
-                    WHERE build.userid = %s 
+                    WHERE build.userid = %s
                     AND rating.liked is TRUE
 
                     GROUP BY build.id,
@@ -606,7 +613,7 @@ class BuildsQueries:
                     INNER JOIN public.user
                         ON "user".id=build.userid
 
-                    
+
 
                     -- Join case information
                     INNER JOIN public.case
@@ -782,7 +789,11 @@ class BuildsQueries:
                     cursor.execute(
                         """
                         UPDATE build
-                        SET "Name"=%s, moboid=%s,cpuid=%s,psuid=%s, "Private"=%s
+                        SET "Name"=%s,
+                             moboid=%s,
+                             cpuid=%s,
+                             psuid=%s,
+                             "Private"=%s
                         WHERE id=%s
                         RETURNING id
                     """,
@@ -824,10 +835,11 @@ class BuildsQueries:
                     )
                 cursor.execute(
                     """
-                    SELECT build.id, build."Name", build.moboid, build.cpuid, build.psuid, build."Private", build.userid
+                    SELECT build.id, build."Name", build.moboid, build.cpuid,
+                           build.psuid, build."Private", build.userid
                     FROM build
                     WHERE build.id = %s
-                    
+
                 """,
                     [build_id],
                 )
@@ -879,7 +891,8 @@ class RatingQueries:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """
-                    SELECT rating.id, rating.liked, rating.buildid, rating.userid
+                    SELECT rating.id, rating.liked, rating.buildid,
+                           rating.userid
                     FROM rating
                     WHERE userid = %s
 

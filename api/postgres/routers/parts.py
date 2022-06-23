@@ -1,5 +1,4 @@
-from fastapi import APIRouter, Response, status, Depends
-from typing import Union
+from fastapi import APIRouter, Depends
 from ..models.parts import (
     Gpu,
     Cpu,
@@ -119,7 +118,7 @@ def psu_list(query=Depends(PartsQueries)):
 
 
 @router.get("/api/hdds", response_model=Hdd)
-def psu_list(query=Depends(PartsQueries)):
+def hdd_list(query=Depends(PartsQueries)):
     rows = query.get_all_hdds()
     return {
         "hdds": [row_to_hdd(row) for row in rows],

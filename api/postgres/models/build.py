@@ -1,5 +1,3 @@
-from re import S
-from .ratings import RatingOut
 from pydantic import BaseModel
 from .parts import (
     BuildCpu,
