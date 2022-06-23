@@ -17,8 +17,9 @@ app.dependency_overrides[get_current_active_user] = override_get_fake_user
 
 
 class EmptyBuildQueries:
-    def get_build(self, id):
-        return None
+    def get_build(self, build_id):
+        print(self)
+        return {}
 
 
 class NormalBuildQueries(TestCase):
@@ -141,8 +142,8 @@ def test_post_build_returns_200():
 
 
 # def test_get_build_returns_500():
-#     app.dependency_overrides[BuildsQueries.get_build] = EmptyBuildQueries
-#     response = client.get(url="http://localhost:8000/api/build/1")
+#     app.dependency_overrides[BuildsQueries] = EmptyBuildQueries
+#     response = client.get("/api/build/1")
 
 #     assert response.status_code == 500
 
@@ -272,7 +273,6 @@ def test_update_build_returns_200():
         },
     )
 
-    print(r.json())
     assert r.status_code == 200
     assert r.json() == {
         "id": 1,
@@ -288,13 +288,14 @@ def test_update_build_returns_200():
 
 
 
-# def test_delete_build():
-#   app.dependency_overrides[BuildsQueries.delete_build] = NormalBuildQueries
-#   r = client.delete(
-#     "/api/build/1"
-#   )
+def test_delete_build():
+  app.dependency_overrides[BuildsQueries] = NormalBuildQueries
+  app.dependency_overrides[get_current_active_user] = override_get_fake_user
+  r = client.delete(
+    "/api/build/1"
+  )
 
-#   assert r.status_code == 200
-#   assert r.json() == {
-#     "result"
-#   }
+  assert r.status_code == 200
+  assert r.json() == {
+    "result": False
+  }
