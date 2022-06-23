@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useApiData from "../parts/ApiFetch";
 import black from "../images/inner-case/pc-case-with-mobo-black.png";
 import pink from "../images/inner-case/pc-case-with-mobo-pink.png";
@@ -115,6 +115,9 @@ function CreateBuild() {
       size: selectedSize,
     }));
   };
+
+  const navigate = useNavigate();
+
   const handleSubmit = async event => {
     event.preventDefault();
     const buildPostData = {
@@ -157,18 +160,10 @@ function CreateBuild() {
         size: 1,
         picture: 1,
       });
-      setSuccessfulSubmit(true);
+      navigate("/builds/mybuilds");
     }
   };
 
-  let createButton = "btn btn-outline-primary w-100 mt-4";
-  let alertClasses = "alert alert-success d-none mb-0";
-  let alertContainerClasses = "d-none";
-  if (successfulSubmit) {
-    createButton = "d-none";
-    alertClasses = "alert alert-success mb-3";
-    alertContainerClasses = "";
-  }
   return (
     <div className='container my-5'>
       {build !== undefined && (
@@ -682,29 +677,12 @@ function CreateBuild() {
               </div>
               <div className='row justify-content-md-center'>
                 <div className='col-sm-1 pt-2 w-50'>
-                  <button type='submit' className={createButton}>
+                  <button
+                    type='submit'
+                    className='btn btn-outline-primary w-100 mt-4'
+                  >
                     Create
                   </button>
-                  <div className={alertContainerClasses}>
-                    <div className={alertClasses} id='success-message'>
-                      Build created successfully
-                    </div>
-                    <div className='d-flex justify-content-between'>
-                      <Link to='/builds/create'>
-                        <button
-                          onClick={() => setSuccessfulSubmit(false)}
-                          className='btn btn-outline-primary'
-                        >
-                          Make new build
-                        </button>
-                      </Link>
-                      <Link to='/builds/mybuilds'>
-                        <button className='btn btn-outline-primary float-right'>
-                          View my builds
-                        </button>
-                      </Link>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

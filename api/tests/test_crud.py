@@ -5,7 +5,7 @@ from fastapi.testclient import TestClient
 from main import app
 from postgres.db import BuildsQueries
 from unittest import TestCase
-import json
+import requests
 
 client = TestClient(app)
 
@@ -13,7 +13,49 @@ client = TestClient(app)
 
 class NormalBuildQueries(TestCase):
     def get_all_builds(self):
-        return ["builds"]
+        return [
+    {
+      "id": 0,
+      "userid": 0,
+      "username": "string",
+      "Name": "string",
+      "Private": True,
+      "color": "string",
+      "size": "string",
+      "picture": "string",
+      "gpu": {
+        "id": 0,
+        "manufacturer": "string",
+        "chipset": "string"
+      },
+      "hdd": {
+        "id": 0,
+        "brand": "string",
+        "capacity": "string"
+      },
+      "ram": {
+        "id": 0,
+        "brand": "string"
+      },
+      "mobo": {
+        "id": 0,
+        "brand": "string",
+        "socket_type": "string",
+        "max_memory": "string"
+      },
+      "cpu": {
+        "id": 0,
+        "processor": "string",
+        "cores": "string",
+        "socket_type": "string"
+      },
+      "psu": {
+        "id": 0,
+        "brand": "string"
+      },
+      "likes": 0
+    }
+  ]
     
     def create_build(self, Name, moboid, cpuid, psuid, userid, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size, picture):
         return [1, "TEST BUILD", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
@@ -63,8 +105,6 @@ async def override_build_list():
       "likes": 1
     }
 
-app.dependency_overrides[get_current_active_user] = override_get_fake_user
-app.dependency_overrides[build_list] = override_build_list
 
 
 def test_post_build_returns_200():
@@ -98,66 +138,17 @@ def test_post_build_returns_200():
 }
     app.dependency_overrides = {}
 
-
-# def test_get_all_builds_returns_200():
-#     app.dependency_overrides[BuildsQueries] = NormalBuildQueries
-
-#     response = client.get("/api/builds/")
-#     d = response.json()
-
-#     assert response.status_code == 200
+app.dependency_overrides[get_current_active_user] = override_get_fake_user
+app.dependency_overrides[build_list] = override_build_list
 
 
-#     app.dependency_overrides = {}
-
-def test_formatted_response():
+def test_build_list_returns_200():
     app.dependency_overrides[BuildsQueries] = NormalBuildQueries
 
-    response = client.get("/api/builds/")
+    r = requests.get(url="http://localhost:8000/api/builds")
+    d = r.json()
 
+    assert r.status_code == 200
 
-    assert "builds" in response.json()  
-# {
-#   "builds": [
-#     {
-#       "id": 1,
-#       "userid": 1,
-#       "username": "string",
-#       "Name": "TEST BUILD",
-#       "color": "string",
-#       "size": "string",
-#       "picture": "string",
-#       "gpu": {
-#         "id": 1,
-#         "manufacturer": "string",
-#         "chipset": "string"
-#       },
-#       "hdd": {
-#         "id": 1,
-#         "brand": "string",
-#         "capacity": "string"
-#       },
-#       "ram": {
-#         "id": 1,
-#         "brand": "string"
-#       },
-#       "mobo": {
-#         "id": 1,
-#         "brand": "string",
-#         "socket_type": "string",
-#         "max_memory": "string"
-#       },
-#       "cpu": {
-#         "id": 1,
-#         "processor": "string",
-#         "cores": "string",
-#         "socket_type": "string"
-#       },
-#       "psu": {
-#         "id": 1,
-#         "brand": "string"
-#       },
-#       "likes": 1
-#     }
-#   ]
-# }
+    app.dependency_overrides = {}
+

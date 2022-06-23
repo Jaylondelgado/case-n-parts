@@ -92,3 +92,14 @@ class BuildA(BaseModel):
 
 class BuildDeleteOpertion(BaseModel):
     result: bool
+
+class TopBuildsIn(BaseModel):
+    id: int
+    userid:int
+    username: str
+    Name: str
+    picture: str
+    likes: int
+
+class TopBuildsOut(BaseModel):
+    builds: list[TopBuildsIn]
