@@ -1,5 +1,3 @@
-from re import A
-from postgres.routers.build import build_list
 from postgres.routers.accounts import get_current_active_user
 from fastapi.testclient import TestClient
 from main import app
@@ -10,7 +8,12 @@ client = TestClient(app)
 
 
 async def override_get_fake_user():
-    return {"id": 1, "user": "jason", "password": "jason", "email": "jason@mail"}
+    return {
+        "id": 1,
+        "user": "jason",
+        "password": "jason",
+        "email": "jason@mail",
+    }
 
 
 app.dependency_overrides[get_current_active_user] = override_get_fake_user
@@ -104,7 +107,13 @@ class NormalBuildQueries(TestCase):
         size,
         picture,
     ):
-        r = [1] + ["TEST BUILD"] + [1, 5, 1] + [True] + [1, 1, 1, 1, 1, 1, 1, 1, 1]
+        r = (
+            [1]
+            + ["TEST BUILD"]
+            + [1, 5, 1]
+            + [True]
+            + [1, 1, 1, 1, 1, 1, 1, 1, 1]
+        )
         return r
 
 

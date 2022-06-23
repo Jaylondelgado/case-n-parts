@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 function useApiData({ url, prop, options, withCredentials, ...otherOptions }) {
   const [data, setData] = useState(
@@ -23,7 +23,7 @@ function useApiData({ url, prop, options, withCredentials, ...otherOptions }) {
     };
 
     getServerData();
-  }, []);
+  }, [options, prop, url, withCredentials]);
 
   return [data, setData];
 }
