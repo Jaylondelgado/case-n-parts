@@ -24,7 +24,7 @@ function HomePage() {
       <h1>Top 3 Builds of the Month</h1>
       <div className='container d-flex justify-content-center'>
         <div className='row'>
-          <div className='col-sm'>
+          {/* <div className='col-sm'>
             <div className='card card-homepage'>
               <h5 className='card-title'>Chad's Build</h5>
             </div>
@@ -38,7 +38,7 @@ function HomePage() {
             <div className='card card-homepage'>
               <h5 className='card-title'>Chad's Build</h5>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className='our-cases'>

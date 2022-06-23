@@ -86,7 +86,7 @@ heroku-release:
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   needs:
-    - heroku-transfer
+    - deploy-back-end-job-heroku
   before_script:
     - apk add curl bash
     - curl https://cli-assets.heroku.com/install.sh | sh
@@ -108,4 +108,5 @@ pages:
   script:
     - mv ghi/build public
   artifacts:
-    paths: public
+    paths:
+      - public

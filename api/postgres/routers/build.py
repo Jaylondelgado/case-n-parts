@@ -1,3 +1,4 @@
+from typing import Union
 from ..models.build import (
     Build,
     BuildA,
@@ -8,7 +9,7 @@ from ..models.build import (
     OutBuild,
     TopBuildsOut,
 )
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Response, status, Depends
 from ..db import BuildsQueries
 from ..models.common import ErrorMessage
 from .accounts import User, get_current_active_user
