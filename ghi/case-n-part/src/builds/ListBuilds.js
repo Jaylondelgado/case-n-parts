@@ -40,7 +40,7 @@ function ListBuilds() {
                 >
                   Build Detail
                 </Link>
-                <div className='btn btn-primary  mx-1'>
+                <div className=' btn-no-hover btn btn-primary active mx-1'>
                   <i className='bi bi-hand-thumbs-up'></i>
                   {build.likes}
                 </div>

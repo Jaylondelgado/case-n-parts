@@ -71,3 +71,7 @@ code {
 .modal-min-width {
   min-width: 50%;
 }
+
+.btn-no-hover {
+  cursor:default;
+}
