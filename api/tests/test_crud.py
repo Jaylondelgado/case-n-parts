@@ -225,7 +225,7 @@ def test_update_build_returns_200():
         json={
       "Name": "TEST BUILD",
       "moboid": 1,
-      "cpuid": 1,
+      "cpuid": 2,
       "psuid": 2,
       "Private": True,
       "gpuid": 1,
@@ -244,7 +244,7 @@ def test_update_build_returns_200():
     "id": 1,
     "Name": "TEST BUILD",
     "moboid": 1,
-    "cpuid": 1,
+    "cpuid": 2,
     "psuid": 2,
     "Private": True,
     "userid": 1
