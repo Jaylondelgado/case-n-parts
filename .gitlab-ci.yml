@@ -1,106 +1,91 @@
-# stages:
-#   - test # Run tests first
-#   - build # Run build after tests
+stages:
+  - test # Run tests first
+  - build # Run build after tests
 
-# services:
-#   - postgres:14-bullseye
+services:
+  - postgres:14-bullseye
 
-# variables:
-#   POSTGRES_DB: test_db
-#   POSTGRES_USER: test_user
-#   POSTGRES_PASSWORD: test_password
-#   POSTGRES_HOST_AUTH_METHOD: trust
+variables:
+  POSTGRES_DB: test_db
+  POSTGRES_USER: test_user
+  POSTGRES_PASSWORD: test_password
+  POSTGRES_HOST_AUTH_METHOD: trust
 
-# api-unit-test-job:
-#   image: python:3-bullseye
-#   stage: test
-#   script:
-#     - cd great-value
-#     - pip install -r requirements.txt
-#     - python -m pytest # Run unit tests
+api-unit-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - cd api
+    - pip install -r requirements.txt
+    - python -m pytest # Run unit tests
 
-# lint-test-job:
-#   image: python:3-bullseye
-#   stage: test
-#   script:
-#     - pip install flake8
-#     - flake8 great-value # Run flake8 on Python project to check
-#       # for code quality
+lint-test-job:
+  image: python:3-bullseye
+  stage: test
+  script:
+    - pip install flake8
+    - flake8 api # Run flake8 on Python project to check
+      # for code quality
 
-# build-job:
-#   stage: build
-#   image: node:lts-bullseye
+build-job:
+  rules:
+    # Only run if the commit is on the main branch
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  stage: build
+  image: node:lts-bullseye
+  needs:
+    - api-unit-test-job # These two jobs must succeed for
+    - lint-test-job # this build-job to run
+
+  script:
+    - cd ghi/case-n-part
+    - npm install
+    - npm run build # Build the React application
+
+deploy-back-end-job-heroku:
+  rules:
+    # Only run if the commit is on the main branch
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  stage: deploy
+  needs:
+    - build-back-end-job
+  image: docker:20.10.16
+  services:
+    - docker:20.10.16-dind
+  script:
+    - cd api
+    - docker build -t ${CI_REGISTRY_IMAGE}/api:latest .
+    - docker tag ${CI_REGISTRY_IMAGE}/app:latest ${CI_REGISTRY_IMAGE}/api:$CI_JOB_ID
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker push ${CI_REGISTRY_IMAGE}/api:$CI_JOB_ID
+    - docker push ${CI_REGISTRY_IMAGE}/api:latest
+
+# heroku-release:
+#   stage: deploy
+#   image: node:10.17-alpine
+#   rules:
+#     - if: $CI_COMMIT_TAG
 #   needs:
-#     - api-unit-test-job # These two jobs must succeed for
-#     - lint-test-job # this build-job to run
-
+#     - heroku-transfer
+#   before_script:
+#     - apk add curl bash
+#     - curl https://cli-assets.heroku.com/install.sh | sh
 #   script:
-#     - cd ghi
-#     - npm install
-#     - npm run build # Build the React application
+#     - heroku container:release web --app $HEROKU_STAGING_APP
 
-# build-job:
-#   stage: build
-#   image: node:lts-bullseye
+# # This is an easy way to deploy a React app using GitLab
+# # Pages. Then, you can access your application from
+# # gitlab.io.
+# pages:
+#   stage: deploy
+#   rules:
+#     # Only run if the commit is tagged with git tag
+#     - if: $CI_COMMIT_TAG
+#   dependencies:
+#     - build-front-end-job
 #   needs:
-#     - api-unit-test-job # These two jobs must succeed for
-#     - lint-test-job # this build-job to run
-
+#     - build-front-end-job
 #   script:
-#     - cd ghi
-#     - npm install
-#     - npm run build # Build the React application
-
-# # deploy-back-end-job-heroku:
-# #   rules:
-# #     # Only run if the commit is tagged with git tag
-# #     - if: $CI_COMMIT_TAG
-# #   stage: deploy
-# #   needs:
-# #     - build-back-end-job
-# #   image: docker:20.10.16
-# #   services:
-# #     - docker:20.10.16-dind
-# #   script:
-# #     # Logs in and pulls the image from the GitLab image registry
-# #     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-# #     - docker pull $CI_REGISTRY_IMAGE:latest
-
-# #     # Authenticates with the Heroku image registry
-# #     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
-
-# #     # Adds the name of your Heroku app to the image
-# #     - docker tag ${CI_REGISTRY_IMAGE}/api:latest registry.heroku.com/$HEROKU_STAGING_APP/web:latest
-
-# #     # Pushes the image to the Heroku image registry
-# #     - docker push registry.heroku.com/$HEROKU_STAGING_APP/web:latest
-
-# # heroku-release:
-# #   stage: deploy
-# #   image: node:10.17-alpine
-# #   rules:
-# #     - if: $CI_COMMIT_TAG
-# #   needs:
-# #     - heroku-transfer
-# #   before_script:
-# #     - apk add curl bash
-# #     - curl https://cli-assets.heroku.com/install.sh | sh
-# #   script:
-# #     - heroku container:release web --app $HEROKU_STAGING_APP
-
-# # # This is an easy way to deploy a React app using GitLab
-# # # Pages. Then, you can access your application from
-# # # gitlab.io.
-# # pages:
-# #   stage: deploy
-# #   rules:
-# #     # Only run if the commit is tagged with git tag
-# #     - if: $CI_COMMIT_TAG
-# #   dependencies:
-# #     - build-front-end-job
-# #   needs:
-# #     - build-front-end-job
-# #   script:
-# #     - mv ghi/build public
-# #   artifacts:
-# #     paths: public
+#     - mv ghi/build public
+#   artifacts:
+#     paths: public
