@@ -129,3 +129,9 @@ I then used `Array.from()` to create a new array from what I had just made with 
 After that, I mapped over the array I had, outputting buttons that I set to numbers that showed how many cards each button was adding.
 
 This took up a lot of my time today, due to having to figure out the math I needed to do and learning about those `Array` functions.
+
+## June 22nd, 2022
+
+Today I worked on gettin the ability to like a build working. I first went and had a talk with my back-end people about how we were getting the likes from the back-end. They had already set up the routes, and tied the likes to the build, so that helped out a ton. I then made my request to get the likes the current user had for the build they were on. I did a javascript `.find()` to filter to the right build they were on. Once I had that data, it was just a matter of updating state to when they clicked on a button to change the button, and also making different requests to the back-end to update the rating to be true or false if the user has rated it before.
+
+I'm getting a lot more practice with the `.find()` function. It's making it a lot easier to find the right data that I want when I get stuff from the database. First thoughts when I usually pull stuff from the database is to use `.filter()`, but that can return an array and at times I do not want to have an array returned.
