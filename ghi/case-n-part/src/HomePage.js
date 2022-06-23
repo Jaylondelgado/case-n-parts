@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./index.css";
 import "./HomePage.css";
 
 import blackCase from "./images/outer-case/black.png";
 import pinkCase from "./images/outer-case/pink.png";
 import greenCase from "./images/outer-case/green.png";
-
+import { basePath } from "./basePath";
 function HomePage() {
+  const[builds, setTopBuilds] = useState([]);
+
+  useEffect(() => {
+    const getTopBuildData = async () => {
+      const topBuildResponse = await fetch(`${basePath}/api/topbuilds/`);
+      const topBuildData = await topBuildResponse.json();
+      setTopBuilds(topBuildData.builds);
+      console.log("topbuilds:", topBuildData);
+    };
+    getTopBuildData();
+  }, []);
+  console.log(builds);
   return (
     <>
       <h1>Top 3 Builds of the Month</h1>
