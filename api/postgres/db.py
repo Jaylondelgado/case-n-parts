@@ -704,8 +704,7 @@ class BuildsQueries:
                 """,
                     [id],
                 )
-                rows = cursor.fetchone()
-                print("rows:", rows)
+                rows = (cursor.fetchone())
                 return list(rows)
 
     def delete_build(self, id, userid: int):
