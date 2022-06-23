@@ -48,7 +48,7 @@ function UpdateBuild() {
     };
 
     getBuildData();
-  }, []);
+  }, [id]);
 
   const [gpus] = useApiData({ url: `${basePath}/api/gpus/`, prop: "gpus" });
   const [cpus] = useApiData({ url: `${basePath}/api/cpus/`, prop: "cpus" });
@@ -64,7 +64,7 @@ function UpdateBuild() {
     url: `${basePath}/api/caseimage`,
     prop: "caseimages",
   });
-  const mobos = useApiData({ url: `${basePath}/api/mobos`, prop: "mobos" });
+  // const mobos = useApiData({ url: `${basePath}/api/mobos`, prop: "mobos" });
 
   const handleGpuClick = gpu => {
     setBuild(build => ({
@@ -134,12 +134,12 @@ function UpdateBuild() {
     }));
   };
 
-  const handlePrivateChange = ({ target: { value: selectedPrivate } }) => {
-    setBuild(build => ({
-      ...build,
-      Private: selectedPrivate,
-    }));
-  };
+  // const handlePrivateChange = ({ target: { value: selectedPrivate } }) => {
+  //   setBuild(build => ({
+  //     ...build,
+  //     Private: selectedPrivate,
+  //   }));
+  // };
 
   const handleSubmit = async event => {
     event.preventDefault();

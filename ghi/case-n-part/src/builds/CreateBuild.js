@@ -33,7 +33,7 @@ function CreateBuild() {
     size: "",
     picture: "",
   });
-  const [successfulSubmit, setSuccessfulSubmit] = useState();
+  // const [successfulSubmit, setSuccessfulSubmit] = useState();
   const [gpus] = useApiData({ url: `${basePath}/api/gpus/`, prop: "gpus" });
   const [cpus] = useApiData({ url: `${basePath}/api/cpus/`, prop: "cpus" });
   const [psus] = useApiData({ url: `${basePath}/api/psus/`, prop: "psus" });
