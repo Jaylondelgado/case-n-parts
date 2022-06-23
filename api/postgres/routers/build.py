@@ -1,3 +1,4 @@
+from typing import Union
 from ..models.build import (
     Build,
     BuildA,

@@ -87,8 +87,7 @@ def create_access_token(data: dict):
 
 async def get_current_user(
     bearer_token: Optional[str] = Depends(oauth2_scheme),
-    cookie_token: Optional[str]
-    | None = Cookie(default=None, alias=COOKIE_NAME),
+    cookie_token: Optional[str] | None = Cookie(default=None, alias=COOKIE_NAME),
     repo: UsersQueries = Depends(),
 ):
     credentials_exception = HTTPException(
@@ -141,10 +140,7 @@ async def login_for_access_token(
 
     samesite = "none"
     secure = True
-    if (
-        "origin" in request.headers
-        and "localhost" in request.headers["origin"]
-    ):
+    if "origin" in request.headers and "localhost" in request.headers["origin"]:
         samesite = "lax"
         secure = False
     response.set_cookie(
@@ -195,10 +191,7 @@ async def validate_token(access_token: AccessToken, response: Response):
 async def logout(request: Request, response: Response):
     samesite = "none"
     secure = True
-    if (
-        "origin" in request.headers
-        and "localhost" in request.headers["origin"]
-    ):
+    if "origin" in request.headers and "localhost" in request.headers["origin"]:
         samesite = "lax"
         secure = False
     response.delete_cookie(

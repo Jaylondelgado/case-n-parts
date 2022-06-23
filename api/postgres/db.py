@@ -10,45 +10,6 @@ class DuplicateTitle(RuntimeError):
     pass
 
 
-# class RatingQueries:
-#     def get_ratings(self):
-#         with pool.connection() as connection:
-#             with connection.cursor() as cursor:
-#                 cursor.execute(
-#                     """
-#                     SELECT rating.id, rating.liked,
-#                            rating.buildid, rating.userid
-#                     FROM public.rating
-#                     """
-#                 )
-#                 rows = cursor.fetchall()
-#                 return list(rows)
-
-#     def create_ratings(self, liked, buildid: int, userid: int):
-#         with pool.connection() as connection:
-#             with connection.cursor as cursor:
-#                 with connection.transaction():
-#                     cursor.execute(
-#                         """
-#                         INSERT INTO rating(liked, buildid, userid)
-#                         VALUES(%s, %s, %s)
-#                         returning id
-#                         """,
-#                         [liked, buildid, userid],
-#                     )
-#                     new_rating_id = cursor.fetchone()[0]
-#                     cursor.execute(
-#                         """
-#                         SELECT build.id, build.userid
-#                         FROM build
-#                         WHERE rating.id = %s
-#                         """,
-#                         [new_rating_id],
-#                     )
-#                     rows = cursor.fetchone()
-#                     return list(rows)
-
-
 class UsersQueries:
     def get_user(self, username: str):
         # TODO: Replace this with real SQL
@@ -65,9 +26,7 @@ class UsersQueries:
                 rows = cursor.fetchone()
                 return rows
 
-    def create_user(
-        self, username: str, hashed_password: str, email: str = None
-    ):
+    def create_user(self, username: str, hashed_password: str, email: str = None):
         # TODO: Replace this with real SQL
         with pool.connection() as connection:
             with connection.cursor() as cursor:
