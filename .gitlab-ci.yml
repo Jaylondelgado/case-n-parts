@@ -1,6 +1,7 @@
 stages:
   - test # Run tests first
   - build # Run build after tests
+  - deploy
 
 api-unit-test-job:
   image: python:3-bullseye
