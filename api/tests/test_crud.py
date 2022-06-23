@@ -62,8 +62,10 @@ class EmptyBuildQueries:
 
 class NormalBuildQueries(TestCase):
     def get_all_builds(self):
-        return ([0, 0] + ["s"] * 2 + [True] + ['s'] * 3 + [0] + ['s'] * 2 + [0] + ["s"] * 2 + [0] + ["s"] + 
-        [0] + ["s"] * 3 + [0] + ["s"] * 3 + [0] + ['s'] + [0])
+        r = ([ [1, 1] + ["s"] * 2 + [True] + ['s'] * 3 + [1] + ['s'] * 2 + [1] + ["s"] * 2 + [1] + ["s"] + 
+        [1] + ["s"] * 3 + [1] + ["s"] * 3 + [1] + ['s'] + [1]])
+        print(r)
+        return r
 
     def get_build(self, id:int):
       r = ([1, 1] + ["s"] * 2 + [True] + ["s"] * 3 + [1, 1] + ["s"] * 10 + [1, 1] + ["s"] * 5 + [1, 1] + ["s"] * 5 + [1] + ["s"] * 4 + [1, 1, 1] +
@@ -71,8 +73,9 @@ class NormalBuildQueries(TestCase):
       return r
         
 
-    # def update_build(self, id, Name, moboid, cpuid, psuid, Private, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size, picture):
-    #   return [id, "NEW BUILD", 1, 1, 1, True, 1, 1, 1, 1, 1, 1, 1, 1, 1 ]
+    def update_build(self, id, Name, moboid, cpuid, psuid, Private, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size, picture):
+      r = [1, "s", 1, 1, 1, True, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      return r
     
     def create_build(self, Name, moboid, cpuid, psuid, userid, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size, picture):
         return [1, "TEST BUILD", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
@@ -126,6 +129,7 @@ def test_build_list_returns_200():
     assert r.status_code == 200
 
     app.dependency_overrides = {}
+
 
 def test_get_build_returns_200():
   app.dependency_overrides[BuildsQueries] = NormalBuildQueries
@@ -205,49 +209,48 @@ def test_get_build_returns_200():
 
   app.dependency_overrides = {}
 
-# def test_update_build_returns_422():
-#   app.dependency_overrides[BuildsQueries.update_build] = NormalBuildQueries
+def test_update_build_returns_422():
+  app.dependency_overrides[BuildsQueries.update_build] = NormalBuildQueries
 
-#   r = client.put("http://localhost:8000/api/build/1")
-#   d = r.json()
+  r = client.put("http://localhost:8000/api/build/1")
 
-#   assert r.status_code == 422
+  assert r.status_code == 422
 
-#   app.dependency_overrides = {}
+  app.dependency_overrides = {}
 
-# def test_update_build_returns_200():
-#   app.dependency_overrides[BuildsQueries.update_build] = NormalBuildQueries
-#   r = client.put(
-#         "/api/build/1",
-#         json={
-#       "Name": "NEW BUILD",
-#       "moboid": 1,
-#       "cpuid": 1,
-#       "psuid": 1,
-#       "Private": False,
-#       "gpuid": 1,
-#       "cardcount": 1,
-#       "hddid": 1,
-#       "hddcount": 1,
-#       "ramid": 1,
-#       "ramcount": 1,
-#       "color": 1,
-#       "size": 1,
-#       "picture": 1
-# })
+def test_update_build_returns_200():
+  app.dependency_overrides[BuildsQueries.update_build] = NormalBuildQueries
+  r = client.put(
+        "/api/build/1",
+        json={
+      "Name": "s",
+      "moboid": 1,
+      "cpuid": 1,
+      "psuid": 1,
+      "Private": True,
+      "gpuid": 1,
+      "cardcount": 1,
+      "hddid": 1,
+      "hddcount": 1,
+      "ramid": 1,
+      "ramcount": 1,
+      "color": 1,
+      "size": 1,
+      "picture": 1
+})
 
-#   assert r.status_code == 200
-#   assert r.json() == {
-#     "id": 1,
-#     "Name": "NEW BUILD",
-#     "moboid": 1,
-#     "cpuid": 1,
-#     "psuid": 1,
-#     "Private": False,
-#     "userid": 1
-# }
+  assert r.status_code == 200
+  assert r.json() == {
+    "id": 1,
+    "Name": "s",
+    "moboid": 1,
+    "cpuid": 1,
+    "psuid": 1,
+    "Private": True,
+    "userid": 1
+}
 
-#   app.dependency_overrides = {}
+  app.dependency_overrides = {}
 
 # def test_delete_build():
 #   pass
