@@ -18,28 +18,28 @@ lint-test-job:
     - flake8 api # Run flake8 on Python project to check
       # for code quality
 
-build-job:
+build-front-end-job:
   rules:
     # Only run if the commit is on the main branch
     - if: ($CI_COMMIT_BRANCH == "deploy" || $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH)
   stage: build
   image: node:lts-bullseye
   needs:
-    - api-unit-test-job # These two jobs must succeed for
-    - lint-test-job # this build-job to run
-
+    - api-unit-test-job  # These two jobs must succeed for
+    - lint-test-job      # this build-job to run
   script:
-    - cd ghi/case-n-part
+    - cd ghi
     - npm install
-    - npm run build # Build the React application
+    - npm run build  # Build the React application
+  artifacts:
+    paths:
+      - ghi/build/  # Save all of the files in the build path
 
-deploy-back-end-job-heroku:
+build-back-end-job:
   rules:
     # Only run if the commit is on the main branch
     - if: ($CI_COMMIT_BRANCH == "deploy" || $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH)
-  stage: deploy
-  needs:
-    - build-back-end-job
+  stage: build
   image: docker:20.10.16
   services:
     - docker:20.10.16-dind
@@ -50,6 +50,34 @@ deploy-back-end-job-heroku:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker push ${CI_REGISTRY_IMAGE}/api:$CI_JOB_ID
     - docker push ${CI_REGISTRY_IMAGE}/api:latest
+
+# deploy-back-end-job-heroku:
+#   rules:
+#     # Only run if the commit is on the main branch
+#     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+#   stage: deploy
+#   needs:
+#     - build-back-end-job
+#   image: docker:20.10.16
+#   services:
+#     - docker:20.10.16-dind
+#   script:
+#     # You're going to need to do this for each of your services
+#     # Make sure you change the name from /web to the names of the
+#     # images created in the previous job
+
+#     # Logs in and pulls the image from the GitLab image registry
+#     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+#     - docker pull $CI_REGISTRY_IMAGE:latest
+
+#     # Authenticates with the Heroku image registry
+#     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+
+#     # Adds the name of your Heroku app to the image
+#     - docker tag ${CI_REGISTRY_IMAGE}/api:latest registry.heroku.com/$HEROKU_STAGING_APP/web:latest
+
+#     # Pushes the image to the Heroku image registry
+#     - docker push registry.heroku.com/$HEROKU_STAGING_APP/web:latest
 
 # heroku-release:
 #   stage: deploy
