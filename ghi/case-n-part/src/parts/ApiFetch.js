@@ -18,8 +18,10 @@ function useApiData({ url, prop, options, withCredentials, ...otherOptions }) {
       );
 
       const apiData = await apiResponse.json();
-      const stateData = prop ? apiData[prop] : apiData;
-      setData(stateData);
+      if (apiResponse.ok) {
+        const stateData = prop ? apiData[prop] : apiData;
+        setData(stateData);
+      }
     };
 
     getServerData();
