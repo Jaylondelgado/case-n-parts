@@ -134,10 +134,11 @@ function UpdateBuild() {
     }));
   };
 
-  const handlePrivateChange = ({ target: { value: selectedPrivate } }) => {
+  const handlePrivateChange = event => {
+    const value = event.target.checked;
     setBuild(build => ({
       ...build,
-      Private: selectedPrivate,
+      Private: value,
     }));
   };
 
@@ -184,6 +185,7 @@ function UpdateBuild() {
     alertClasses = "alert alert-success mb-3";
     alertContainerClasses = "";
   }
+  console.log("build", build);
   return (
     <div className='container my-5'>
       {build !== undefined && (
@@ -703,47 +705,23 @@ function UpdateBuild() {
                   <div className='form-check'>
                     <input
                       className='form-check-input'
-                      type='radio'
-                      name='flexRadioDefault'
-                      id='flexRadioDefault1'
-                      onChange={() => {
-                        setBuild(build => ({ ...build, Private: true }));
-                      }}
+                      type='checkbox'
+                      checked={build.Private}
+                      id='flexCheckDefault'
+                      onChange={handlePrivateChange}
                     ></input>
                     <label
                       className='form-check-label'
-                      htmlFor='flexRadioDefault1'
+                      htmlFor='flexCheckDefault'
                     >
                       Private
-                    </label>
-                  </div>
-                  <div className='form-check'>
-                    <input
-                      className='form-check-input'
-                      type='radio'
-                      name='flexRadioDefault'
-                      id='flexRadioDefault2'
-                      onChange={() => {
-                        setBuild(build => ({ ...build, Private: false }));
-                      }}
-                      checked
-                    ></input>
-                    <label
-                      className='form-check-label'
-                      htmlFor='flexRadioDefault2'
-                    >
-                      Public
                     </label>
                   </div>
                 </div>
               </div>
               <div className='row justify-content-md-center'>
                 <div className='col-sm-1 pt-2 w-50'>
-                  <button
-                    onSubmit={handleSubmit}
-                    id='create-pc-build'
-                    className={createButton}
-                  >
+                  <button onSubmit={handleSubmit} id='create-pc-build'>
                     Update
                   </button>
                   <div className={alertContainerClasses}>
