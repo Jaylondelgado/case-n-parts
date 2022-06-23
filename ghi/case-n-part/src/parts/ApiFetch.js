@@ -1,19 +1,31 @@
 import React, { useState, useEffect } from "react";
 
-function useApiData(url, prop) {
-  const [data, setData] = useState([]);
+function useApiData({ url, prop, options, withCredentials, ...otherOptions }) {
+  const [data, setData] = useState(
+    "defaultState" in otherOptions ? otherOptions.defaultState : []
+  );
 
   useEffect(() => {
     const getServerData = async () => {
-      const apiResponse = await fetch(url);
+      const apiResponse = await fetch(
+        url,
+        withCredentials
+          ? {
+              ...(options ?? {}),
+              credentials: "include",
+            }
+          : options
+      );
+
       const apiData = await apiResponse.json();
-      setData(apiData[prop]);
+      const stateData = prop ? apiData[prop] : apiData;
+      setData(stateData);
     };
 
     getServerData();
   }, []);
 
-  return data;
+  return [data, setData];
 }
 
 export default useApiData;
