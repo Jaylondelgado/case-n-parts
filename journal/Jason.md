@@ -140,3 +140,15 @@ Once that was sorted, I wanted to more or less have CRUD operational on our fron
 We are in a good spot where every member has a task they are working on. I split up with Jaylon to work on getting our application working with continuous integration (CI) while he worked on a unit test. I went back to review CI on Learn from a few weeks and for the most part it makes sense but at the same time as I delve further into the integration it gets more confusing. I'm trying to understand the `$CI_COMMIT_TAG` and if I need to create a tag or initially or it will automatically take the first tag that gets committed and pushed to the repo. I will spend more time tomorrow sorting that out.
 
 The other portion of my day was spent troubleshooting everyone elses code. Once Jaylon got the unit test set up, as a team we were able to get it to pass, utilizing the convenience of FastAPIs docs and test JSON bodies. Also helped Chad and another classmate troubleshoot more bootstrap issues. Was able to debug Jarett's public/private button where the button did not change.
+
+## 6/22/2022
+
+\* More unit testing and accidentally deleting data
+
+Continued troubleshooting with the team front end bugs followed by pair programming with Jaylon to get unit tests working for our build. After getting the inital post to work, things started breaking. We received some guidance and started using `import requests` which later turned out to be a really bad idea versus the documented `client.get/put/delete` option. `requests.get` make an http call directly to the database as opposed to a fake database, so it manipulates the actual raw data which is terrible. We kept making tests and they were passing until they weren't. We ended up deleting everything from the database with our pytest function when it ran, which lead to many things failing. Curtis came in and saw our error and had us remove `requests` and guided us through some formatting issues. We started back from ground zero and worked out way to 4 passing tests by 9pm with the help of Jarett.
+
+I black formatted the entire api file as well as made some minor refactoring of a few files.
+
+## 6/23/2022
+
+\* error handling, quick unit testing, CI/CD understanding

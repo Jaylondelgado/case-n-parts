@@ -12,7 +12,7 @@ import ListBuilds from "./builds/ListBuilds";
 import { useToken } from "./authApi";
 import DetailBuild from "./builds/DetailBuild";
 import UpdateBuild from "./builds/UpdateBuild";
-
+import NotFoundPage from "./404";
 import "./App.css";
 
 function App() {
@@ -40,6 +40,7 @@ function App() {
             path="signup"
             element={<SignUp token={token} signup={signup} />}
           />
+          <Route component={NotFoundPage} />
         </Routes>
       </div>
       <div className="footer-container">
