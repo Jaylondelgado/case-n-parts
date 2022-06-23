@@ -1,7 +1,21 @@
 from re import S
 from .ratings import RatingOut
 from pydantic import BaseModel
-from .parts import BuildCpu, BuildHdd, BuildMobo, BuildPsu, BuildRam, Cpu, CpuOut, Gpu, GpuOut, GpuOutDetail, Hdd, HddOut, HddOutDetail, Mobo, MoboOut, Psu, PsuOut, Ram, RamOut, BuildGpu, RamOutDetail
+from .parts import (
+    BuildCpu,
+    BuildHdd,
+    BuildMobo,
+    BuildPsu,
+    BuildRam,
+    CpuOut,
+    GpuOutDetail,
+    HddOutDetail,
+    MoboOut,
+    PsuOut,
+    BuildGpu,
+    RamOutDetail,
+)
+
 
 class BuildOut(BaseModel):
     id: int
@@ -20,11 +34,9 @@ class BuildOut(BaseModel):
     psu: PsuOut
     likes: int
 
+
 class Build(BaseModel):
     builds: list[BuildOut]
-
-
-
 
 
 class InsertBuild(BaseModel):
@@ -42,6 +54,7 @@ class InsertBuild(BaseModel):
     size: int
     picture: int
 
+
 class InBuild(BaseModel):
     Name: str
     moboid: int
@@ -58,6 +71,7 @@ class InBuild(BaseModel):
     size: int
     picture: int
 
+
 class OutBuild(BaseModel):
     id: int
     Name: str
@@ -66,7 +80,6 @@ class OutBuild(BaseModel):
     psuid: int
     Private: bool
     userid: int
-
 
 
 class BuildOutList(BaseModel):
@@ -90,16 +103,19 @@ class BuildOutList(BaseModel):
 class BuildA(BaseModel):
     builds: list[BuildOutList]
 
-class BuildDeleteOpertion(BaseModel):
+
+class BuildDeleteOperation(BaseModel):
     result: bool
+
 
 class TopBuildsIn(BaseModel):
     id: int
-    userid:int
+    userid: int
     username: str
     Name: str
     picture: str
     likes: int
+
 
 class TopBuildsOut(BaseModel):
     builds: list[TopBuildsIn]

@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 
+
 class GpuOutDetail(BaseModel):
     id: int
     cardcount: int
@@ -28,6 +29,7 @@ class GpuOut(BaseModel):
     hdmi: str
     display_port: str
 
+
 class Gpu(BaseModel):
     gpus: list[GpuOut]
 
@@ -37,11 +39,9 @@ class BuildGpu(BaseModel):
     manufacturer: str
     chipset: str
 
+
 class GpuA(BaseModel):
     gpus: list[BuildGpu]
-
-
-
 
 
 class CpuOut(BaseModel):
@@ -52,8 +52,10 @@ class CpuOut(BaseModel):
     speed: str
     socket_type: str
 
+
 class Cpu(BaseModel):
     cpus: list[CpuOut]
+
 
 class BuildCpu(BaseModel):
     id: int
@@ -61,8 +63,11 @@ class BuildCpu(BaseModel):
     cores: str
     socket_type: str
 
+
 class CpuA(BaseModel):
     cpus: list[BuildCpu]
+
+
 class RamOutDetail(BaseModel):
     id: int
     ramcount: int
@@ -73,7 +78,6 @@ class RamOutDetail(BaseModel):
     pin_configuration: str
 
 
-
 class RamOut(BaseModel):
     id: int
     brand: str
@@ -82,8 +86,10 @@ class RamOut(BaseModel):
     memory_channels: str
     pin_configuration: str
 
+
 class Ram(BaseModel):
     rams: list[RamOut]
+
 
 class BuildRam(BaseModel):
     id: int
@@ -92,6 +98,7 @@ class BuildRam(BaseModel):
 
 class RamA(BaseModel):
     rams: list[BuildRam]
+
 
 class HddOutDetail(BaseModel):
     id: int
@@ -102,6 +109,7 @@ class HddOutDetail(BaseModel):
     cache: str
     rpm: str
 
+
 class HddOut(BaseModel):
     id: int
     brand: str
@@ -110,39 +118,43 @@ class HddOut(BaseModel):
     cache: str
     rpm: str
 
+
 class Hdd(BaseModel):
     hdds: list[HddOut]
+
 
 class BuildHdd(BaseModel):
     id: int
     brand: str
     capacity: str
 
+
 class HddA(BaseModel):
     hdds: list[BuildHdd]
-
 
 
 class PsuOut(BaseModel):
     id: int
     brand: str
     wattage: str
-    atx_connector: str 
+    atx_connector: str
     atx_12v_connector: str
     graphics_connector: str
     molex_connector: str
     sata_connector: str
 
+
 class Psu(BaseModel):
     psus: list[PsuOut]
+
 
 class BuildPsu(BaseModel):
     id: int
     brand: str
 
+
 class PsuA(BaseModel):
     psus: list[BuildPsu]
-
 
 
 class MoboOut(BaseModel):
@@ -154,14 +166,17 @@ class MoboOut(BaseModel):
     pcie_slots: int
     memory_slots: int
 
+
 class Mobo(BaseModel):
     mobos: list[MoboOut]
+
 
 class BuildMobo(BaseModel):
     id: int
     brand: str
     socket_type: str
     max_memory: str
+
 
 class MoboA(BaseModel):
     mobos: list[BuildMobo]

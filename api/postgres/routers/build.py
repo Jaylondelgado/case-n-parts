@@ -1,14 +1,25 @@
 from typing import Union
-from turtle import title
-from urllib import response
-from ..models.build import Build, BuildA, BuildDeleteOpertion, BuildOut, BuildOutList, InBuild, InsertBuild, OutBuild, TopBuildsOut
-from fastapi import APIRouter, Response, status, Depends
+
+from ..models.build import (
+    Build,
+    BuildA,
+    BuildDeleteOperation,
+    BuildOut,
+    BuildOutList,
+    InBuild,
+    InsertBuild,
+    OutBuild,
+    TopBuildsOut,
+)
+from fastapi import APIRouter, Response, status, Depends, HTTPException
 from ..db import BuildsQueries
 from ..models.common import ErrorMessage
 from .accounts import User, get_current_active_user
 
 
 router = APIRouter()
+
+
 def row_to_top_builds(row):
     build = {
         "id": row[0],
@@ -16,11 +27,13 @@ def row_to_top_builds(row):
         "username": row[2],
         "Name": row[3],
         "picture": row[4],
-        "likes": row[5]
+        "likes": row[5],
     }
     return build
+
+
 def row_to_create_build(row):
-    build ={
+    build = {
         "id": row[0],
         "Name": row[1],
         "moboid": row[2],
@@ -31,13 +44,14 @@ def row_to_create_build(row):
     }
     return build
 
+
 def row_to_list_build(row):
-    build ={
+    build = {
         "id": row[0],
         "userid": row[1],
         "username": row[2],
         "Name": row[3],
-        "Private": row [4],
+        "Private": row[4],
         "color": row[5],
         "size": row[6],
         "picture": row[7],
@@ -71,9 +85,10 @@ def row_to_list_build(row):
             "id": row[24],
             "brand": row[25],
         },
-        "likes": row[26]
+        "likes": row[26],
     }
     return build
+
 
 def row_to_build(row):
     build = {
@@ -144,15 +159,18 @@ def row_to_build(row):
             "molex_connector": row[53],
             "sata_connector": row[54],
         },
-        "likes": row[55]
+        "likes": row[55],
     }
     return build
+
+
 @router.get("/api/topbuilds", response_model=TopBuildsOut)
 def top_build_list(query=Depends(BuildsQueries)):
     rows = query.get_top_builds()
     return {
         "builds": [row_to_top_builds(row) for row in rows],
     }
+
 
 @router.get("/api/builds", response_model=BuildA)
 def build_list(query=Depends(BuildsQueries)):
@@ -161,9 +179,12 @@ def build_list(query=Depends(BuildsQueries)):
         "builds": [row_to_list_build(row) for row in rows],
     }
 
+
 # Example of how to get the current user for an endpoint
 @router.get("/api/builds/mine", response_model=Build)
-def my_build_list(query=Depends(BuildsQueries), current_user: User = Depends(get_current_active_user)):
+def my_build_list(
+    query=Depends(BuildsQueries), current_user: User = Depends(get_current_active_user)
+):
 
     rows = query.get_build_by_user(current_user["id"])
     dict = {
@@ -174,59 +195,93 @@ def my_build_list(query=Depends(BuildsQueries), current_user: User = Depends(get
 
 @router.post(
     "/api/build/create",
-    response_model = OutBuild,
-    responses = {
+    response_model=OutBuild,
+    responses={
         200: {"model": OutBuild},
     },
 )
 def create_build(
     build: InsertBuild,
-    query = Depends(BuildsQueries),
-    current_user: User = Depends(get_current_active_user)
+    query=Depends(BuildsQueries),
+    current_user: User = Depends(get_current_active_user),
 ):
 
-    row = query.create_build(build.Name, build.moboid, build.cpuid, build.psuid, current_user["id"], build.gpuid, build.cardcount, build.hddid, build.hddcount, build.ramid, build.ramcount, build.color, build.size, build.picture)
+    row = query.create_build(
+        build.Name,
+        build.moboid,
+        build.cpuid,
+        build.psuid,
+        current_user["id"],
+        build.gpuid,
+        build.cardcount,
+        build.hddid,
+        build.hddcount,
+        build.ramid,
+        build.ramcount,
+        build.color,
+        build.size,
+        build.picture,
+    )
     return row_to_create_build(row)
+
 
 @router.get(
     "/api/build/{build_id}",
-    response_model=BuildOut,
+    response_model=Union[BuildOut, ErrorMessage],
+    responses={
+        200: {"model": BuildOut},
+        404: {"model": ErrorMessage},
+    },
 )
-def get_build(build_id: int, query=Depends(BuildsQueries)):
+def get_build(build_id: int, response: Response, query=Depends(BuildsQueries)):
     row = query.get_build(build_id)
+    if row is None:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {"message": "Custom build not found"}
     return row_to_build(row)
+
 
 @router.put(
     "/api/build/{build_id}",
-    response_model = OutBuild,
-    responses = {
-        200: {"model": OutBuild},
-        422: {"model": ErrorMessage}
-    },
+    response_model=OutBuild,
+    responses={200: {"model": OutBuild}, 422: {"model": ErrorMessage}},
 )
 def update_build(
     build_id: int,
     build: InBuild,
     query=Depends(BuildsQueries),
 ):
-    row = query.update_build(build_id,build.Name, build.moboid, build.cpuid, build.psuid,build.Private, build.gpuid, build.cardcount, build.hddid, build.hddcount, build.ramid, build.ramcount, build.color, build.size, build.picture)
+    row = query.update_build(
+        build_id,
+        build.Name,
+        build.moboid,
+        build.cpuid,
+        build.psuid,
+        build.Private,
+        build.gpuid,
+        build.cardcount,
+        build.hddid,
+        build.hddcount,
+        build.ramid,
+        build.ramcount,
+        build.color,
+        build.size,
+        build.picture,
+    )
     return row_to_create_build(row)
+
 
 @router.delete(
     "/api/build/{build_id}",
-    response_model=BuildDeleteOpertion,
+    response_model=BuildDeleteOperation,
 )
 def delete_build(
     build_id: int,
     query=Depends(BuildsQueries),
     current_user: User = Depends(get_current_active_user),
 ):
-    try: 
+    try:
         query.delete_build(build_id, current_user["id"])
         return {"result": True}
     except:
         return {"result": False}
-
-
-
-

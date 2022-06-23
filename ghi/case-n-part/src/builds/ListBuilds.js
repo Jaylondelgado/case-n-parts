@@ -13,7 +13,10 @@ function ListBuilds() {
     const getBuildData = async () => {
       const buildResponse = await fetch(`${basePath}/api/builds/`);
       const buildData = await buildResponse.json();
-      setBuild(buildData.builds);
+      const notPrivateBuilds = buildData.builds.filter(build => {
+        return build.Private === false;
+      });
+      setBuild(notPrivateBuilds);
     };
 
     getBuildData();
@@ -23,10 +26,14 @@ function ListBuilds() {
   const buildsPerPage = 6;
   const pagesVisited = pageNumber * buildsPerPage;
 
+  if (builds.length == 0) {
+    return <h1 className='pt-5 mt-5'>Jaylon has stolen all the builds!</h1>;
+  }
+
   const displayBuilds = builds
     .slice(pagesVisited, pagesVisited + buildsPerPage)
     .map(build => {
-      if (builds.length > 0 && build.Private == false) {
+      if (builds.length > 0 && build.Private === false) {
         return (
           <div className='row py-3 justify-content-center' key={build.id}>
             <div className='card h-100 border-light bg-transparent'>
@@ -40,18 +47,12 @@ function ListBuilds() {
                 >
                   Build Detail
                 </Link>
-                <div className='btn btn-primary  mx-1'>
+                <div className=' btn-no-hover btn btn-primary active mx-1'>
                   <i className='bi bi-hand-thumbs-up'></i>
                   {build.likes}
                 </div>
               </div>
             </div>
-          </div>
-        );
-      } else {
-        return (
-          <div>
-            <h2>No builds available</h2>
           </div>
         );
       }

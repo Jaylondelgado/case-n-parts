@@ -35,8 +35,8 @@ class AccessToken(BaseModel):
 class User(BaseModel):
     id: int
     user: str
-    password:str
-    email:str
+    password: str
+    email: str
 
 
 class UserSignUp(BaseModel):
@@ -49,16 +49,15 @@ class UserSignUp(BaseModel):
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
+
 def row_to_user(row):
     user = {
         "id": row[0],
         "user": row[1],
         "password": row[2],
         "email": row[3],
-
     }
     return user
-
 
 
 def verify_password(plain_password, hashed_password):
@@ -118,7 +117,12 @@ async def get_current_active_user(current_user: User = Depends(get_current_user)
 
 
 @router.post("/token")
-async def login_for_access_token(response: Response, request: Request, form_data: OAuth2PasswordRequestForm = Depends(), repo: UsersQueries = Depends()):
+async def login_for_access_token(
+    response: Response,
+    request: Request,
+    form_data: OAuth2PasswordRequestForm = Depends(),
+    repo: UsersQueries = Depends(),
+):
     user = authenticate_user(repo, form_data.username, form_data.password)
     if not user:
         raise HTTPException(
@@ -146,7 +150,6 @@ async def login_for_access_token(response: Response, request: Request, form_data
         secure=secure,
     )
     return token
-    
 
 
 @router.get("/token", response_model=AccessToken)
@@ -161,7 +164,15 @@ async def signup(user: UserSignUp, repo: UsersQueries = Depends()):
     repo.create_user(user.username, hashed_password, user.email)
 
 
-@router.get("/users/me", response_model=User, responses={200: {"model": User}, 400: {"model": HttpError}, 401: {"model": HttpError}})
+@router.get(
+    "/users/me",
+    response_model=User,
+    responses={
+        200: {"model": User},
+        400: {"model": HttpError},
+        401: {"model": HttpError},
+    },
+)
 async def read_users_me(current_user: User = Depends(get_current_active_user)):
     return current_user
 

@@ -13,6 +13,7 @@ from ..db import PartsQueries
 
 router = APIRouter()
 
+
 def row_to_gpu(row):
     gpu = {
         "id": row[0],
@@ -25,9 +26,10 @@ def row_to_gpu(row):
         "length": row[7],
         "width": row[8],
         "hdmi": row[9],
-        "display_port": row[10]
+        "display_port": row[10],
     }
     return gpu
+
 
 def row_to_cpu(row):
     cpu = {
@@ -40,16 +42,18 @@ def row_to_cpu(row):
     }
     return cpu
 
+
 def row_to_ram(row):
     ram = {
         "id": row[0],
         "brand": row[1],
         "memory_type": row[2],
-        'memory_speed': row[3],
-        'memory_channels': row[4],
-        'pin_configuration': row[5],
+        "memory_speed": row[3],
+        "memory_channels": row[4],
+        "pin_configuration": row[5],
     }
     return ram
+
 
 def row_to_hdd(row):
     hdd = {
@@ -58,12 +62,13 @@ def row_to_hdd(row):
         "capacity": row[2],
         "interface": row[3],
         "cache": row[4],
-        "rpm": row[5]
+        "rpm": row[5],
     }
     return hdd
 
+
 def row_to_psu(row):
-    psu= {
+    psu = {
         "id": row[0],
         "brand": row[1],
         "wattage": row[2],
@@ -74,8 +79,10 @@ def row_to_psu(row):
         "sata_connector": row[7],
     }
     return psu
+
+
 def row_to_mobo(row):
-    mobo= {
+    mobo = {
         "id": row[0],
         "brand": row[1],
         "socket_type": row[2],
@@ -86,6 +93,7 @@ def row_to_mobo(row):
     }
     return mobo
 
+
 @router.get("/api/gpus", response_model=Gpu)
 def gpu_list(query=Depends(PartsQueries)):
     rows = query.get_all_gpus()
@@ -93,19 +101,22 @@ def gpu_list(query=Depends(PartsQueries)):
         "gpus": [row_to_gpu(row) for row in rows],
     }
 
+
 @router.get("/api/cpus", response_model=Cpu)
 def cpu_list(query=Depends(PartsQueries)):
     rows = query.get_all_cpus()
     return {
         "cpus": [row_to_cpu(row) for row in rows],
     }
-    
+
+
 @router.get("/api/psus", response_model=Psu)
 def psu_list(query=Depends(PartsQueries)):
     rows = query.get_all_psus()
     return {
         "psus": [row_to_psu(row) for row in rows],
     }
+
 
 @router.get("/api/hdds", response_model=Hdd)
 def psu_list(query=Depends(PartsQueries)):
@@ -114,12 +125,14 @@ def psu_list(query=Depends(PartsQueries)):
         "hdds": [row_to_hdd(row) for row in rows],
     }
 
+
 @router.get("/api/mobos", response_model=Mobo)
 def mobo_list(query=Depends(PartsQueries)):
     rows = query.get_all_mobos()
     return {
         "mobos": [row_to_mobo(row) for row in rows],
     }
+
 
 @router.get("/api/rams", response_model=Ram)
 def ram_list(query=Depends(PartsQueries)):

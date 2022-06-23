@@ -13,42 +13,13 @@ async def override_get_fake_user():
     return {"id": 1, "user": "jason", "password": "jason", "email": "jason@mail"}
 
 
-# async def override_build_list():
-#     return {
-#         "id": 1,
-#         "userid": 1,
-#         "username": "string",
-#         "Name": "NEW BUILD",
-#         "color": "string",
-#         "size": "string",
-#         "picture": "string",
-#         "gpu": {"id": 1, "manufacturer": "string", "chipset": "string"},
-#         "hdd": {"id": 1, "brand": "string", "capacity": "string"},
-#         "ram": {"id": 1, "brand": "string"},
-#         "mobo": {
-#             "id": 1,
-#             "brand": "string",
-#             "socket_type": "string",
-#             "max_memory": "string",
-#         },
-#         "cpu": {
-#             "id": 1,
-#             "processor": "string",
-#             "cores": "string",
-#             "socket_type": "string",
-#         },
-#         "psu": {"id": 1, "brand": "string"},
-#         "likes": 1,
-#     }
-
-
 app.dependency_overrides[get_current_active_user] = override_get_fake_user
-# app.dependency_overrides[build_list] = override_build_list
 
 
 class EmptyBuildQueries:
-    def get_build(self, id):
-        return None
+    def get_build(self, build_id):
+        print(self)
+        return {}
 
 
 class NormalBuildQueries(TestCase):
@@ -133,7 +104,7 @@ class NormalBuildQueries(TestCase):
         size,
         picture,
     ):
-        r = ([1] + ["TEST BUILD"] + [1, 5, 1] + [True] + [1, 1, 1, 1, 1, 1, 1, 1, 1])
+        r = [1] + ["TEST BUILD"] + [1, 5, 1] + [True] + [1, 1, 1, 1, 1, 1, 1, 1, 1]
         return r
 
 
@@ -171,8 +142,8 @@ def test_post_build_returns_200():
 
 
 # def test_get_build_returns_500():
-#     app.dependency_overrides[BuildsQueries.get_build] = EmptyBuildQueries
-#     response = client.get(url="http://localhost:8000/api/build/1")
+#     app.dependency_overrides[BuildsQueries] = EmptyBuildQueries
+#     response = client.get("/api/build/1")
 
 #     assert response.status_code == 500
 
@@ -269,7 +240,9 @@ def test_get_build_returns_200():
 
 
 def test_update_build_returns_422():
-    app.dependency_overrides[BuildsQueries.update_build] = NormalBuildQueries.update_build
+    app.dependency_overrides[
+        BuildsQueries.update_build
+    ] = NormalBuildQueries.update_build
 
     r = client.put("http://localhost:8000/api/build/1")
 
@@ -279,49 +252,45 @@ def test_update_build_returns_422():
 
 
 def test_update_build_returns_200():
-  app.dependency_overrides[BuildsQueries] = NormalBuildQueries
-  r = client.put (
-    "/api/build/1",
-  json={
-          "Name": "s",
-          "moboid": 1,
-          "cpuid": 1,
-          "psuid": 4,
-          "Private": True,
-          "gpuid": 1,
-          "cardcount": 1,
-          "hddid": 1,
-          "hddcount": 1,
-          "ramid": 1,
-          "ramcount": 1,
-          "color": 1,
-          "size": 1,
-          "picture": 1
-      },
-  )
+    app.dependency_overrides[BuildsQueries] = NormalBuildQueries
+    r = client.put(
+        "/api/build/1",
+        json={
+            "Name": "s",
+            "moboid": 1,
+            "cpuid": 1,
+            "psuid": 4,
+            "Private": True,
+            "gpuid": 1,
+            "cardcount": 1,
+            "hddid": 1,
+            "hddcount": 1,
+            "ramid": 1,
+            "ramcount": 1,
+            "color": 1,
+            "size": 1,
+            "picture": 1,
+        },
+    )
 
-  print(r.json())
-  assert r.status_code == 200
-  assert r.json() == {
-      "id": 1,
-      "Name": "TEST BUILD",
-      "moboid": 1,
-      "cpuid": 5,
-      "psuid": 1,
-      "Private": True,
-      "userid": 1
-  }
+    assert r.status_code == 200
+    assert r.json() == {
+        "id": 1,
+        "Name": "TEST BUILD",
+        "moboid": 1,
+        "cpuid": 5,
+        "psuid": 1,
+        "Private": True,
+        "userid": 1,
+    }
 
-  app.dependency_overrides = {}
+    app.dependency_overrides = {}
 
 
-# def test_delete_build():
-#   app.dependency_overrides[BuildsQueries.delete_build] = NormalBuildQueries
-#   r = client.delete(
-#     "/api/build/1"
-#   )
+def test_delete_build():
+    app.dependency_overrides[BuildsQueries] = NormalBuildQueries
+    app.dependency_overrides[get_current_active_user] = override_get_fake_user
+    r = client.delete("/api/build/1")
 
-#   assert r.status_code == 200
-#   assert r.json() == {
-#     "result"
-#   }
+    assert r.status_code == 200
+    assert r.json() == {"result": False}

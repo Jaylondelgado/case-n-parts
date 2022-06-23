@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Redirect } from "react-router-dom";
 import Nav from "./Nav";
 import Footer from "./Footer";
 import Login from "./login/Login";
@@ -12,7 +12,7 @@ import ListBuilds from "./builds/ListBuilds";
 import { useToken } from "./authApi";
 import DetailBuild from "./builds/DetailBuild";
 import UpdateBuild from "./builds/UpdateBuild";
-
+import NotFound from "./NotFound";
 import "./App.css";
 
 function App() {
@@ -40,6 +40,7 @@ function App() {
             path="signup"
             element={<SignUp token={token} signup={signup} />}
           />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
       <div className="footer-container">
