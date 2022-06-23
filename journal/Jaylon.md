@@ -80,4 +80,11 @@ Today was spent going over the trivia game testable and trying to implement the 
 
 - Working on Unit tests
 
-I started the day off working on getting the test for the list of our builds to pass. I learned that the return statement for my get_all_builds function inside of my fake database needed to replicate the same format and data that would show up in the real database. Once implementing that, we saw the green "Test Passed". I also got to work with the team on tryign to implement the likes on our builds and the logistics behind that like limiting one user to one like per build, and making sure our builds keep count of those likes. 
+I started the day off working on getting the test for the list of our builds to pass. I learned that the return statement for my get_all_builds function inside of my fake database needed to replicate the same format and data that would show up in the real database. Once implementing that, we saw the green "Test Passed". I also got to work with the team on tryign to implement the likes on our builds and the logistics behind that like limiting one user to one like per build, and making sure our builds keep count of those likes. The whole day was spent on trying to complete the unit tests for our CRUD requests. I learned that requests.get is DEFINITELY not what we want to do when testing FastAPI, we want to do client.get, it's my understanding that the requests.get was making an actual request into the real database, so when I did my requests.delete, it actually deleted the build id 1. I ended up getting off at around 9 pm but wiht the help of Jasno and Jarett, we were able to get 5 passing unit tests again. We are saving the rest for tomorrow.
+
+
+## June 23, 2022
+
+- Continuation of Unit Tests
+
+I decided to get on early today and get to work on the unit tests. While working with Chad, we were able to get the delete request test funcioning properly. This one was pretty easy, all I had to do was change the json we were returning and make it the same as the json in the FastAPI docs.
