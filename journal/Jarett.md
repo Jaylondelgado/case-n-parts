@@ -52,3 +52,12 @@ Continued working on "likes" feature for out build. Worked on Update a rating qu
 ## June 16th, 2022
 
 I resumed working on getting a likes count on a list build endpoint. after playing around with query tool in PGAdmin, I was able to query a count of likes for each build. Query for Count of likes now works. Added skeleton for like feature on react front-end on list of builds for each build. Count was working, but attempted to add a like on the front-end but came up short.
+
+## June 21, 2022
+
+Resumed working on  like feature for builds. My tam and I had an issue of adding instances of likes to a build to increase its like count and dynamically change to a downvote if they have already voted. Likewise if they downvoted, an upvote button should appear to allot a user to update their rating instance to a boolean of true which would increase count of likes on a build.
+
+## June 22, 2022
+
+My teammate ran into a bug that required an endpoint for ratings tied to the current user. Today I was able to get a endpoint for a ratings tied to a user, so that the like button can dynamically change based off user input. I also jumped in to help my other teammate that was working on test driven devlopment to ensure our CRUD and api endpoints were working as should. We were able to check if create build, get builds, and update build were working as expected.
+
