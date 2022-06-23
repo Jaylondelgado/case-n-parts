@@ -107,7 +107,7 @@ class NormalBuildQueries(TestCase):
         size,
         picture,
     ):
-        r = [1] + ["TEST BUILD"] + [1, 5, 1] + [True] + [1, 1, 1, 1, 1, 1, 1, 1, 1]
+        r = [1, "TEST BUILD", 1, 5, 1, True, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         return r
 
 
