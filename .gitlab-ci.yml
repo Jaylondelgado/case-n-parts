@@ -108,4 +108,5 @@ pages:
   script:
     - mv ghi/build public
   artifacts:
-    paths: public
+    paths:
+      - public
