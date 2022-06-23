@@ -7,6 +7,7 @@ pool = ConnectionPool()
 class DuplicateTitle(RuntimeError):
     pass
 
+
 class RatingQueries:
     def get_ratings(self):
         with pool.connection() as connection:
@@ -30,7 +31,7 @@ class RatingQueries:
                         VALUES(%s, %s, %s)
                         returning id
                         """,
-                            [liked, buildid, userid]
+                        [liked, buildid, userid],
                     )
                     new_rating_id = cursor.fetchone()[0]
                     cursor.execute(
@@ -39,10 +40,11 @@ class RatingQueries:
                         FROM build
                         WHERE rating.id = %s
                         """,
-                        [new_rating_id]
+                        [new_rating_id],
                     )
                     rows = cursor.fetchone()
                     return list(rows)
+
 
 class UsersQueries:
     def get_user(self, username: str):
@@ -55,7 +57,7 @@ class UsersQueries:
                         FROM "user"
                         WHERE "user".username = %s
                     """,
-                        [username]
+                    [username],
                 )
                 rows = cursor.fetchone()
                 return rows
@@ -70,10 +72,11 @@ class UsersQueries:
                         VALUES (%s, %s, %s)
                         RETURNING id, Username, Password, Email
                     """,
-                    [username, hashed_password, email]
+                    [username, hashed_password, email],
                 )
                 rows = cursor.fetchone()
                 return list(rows)
+
 
 class PartsQueries:
     def get_all_gpus(self):
@@ -152,8 +155,8 @@ class PartsQueries:
                 rows = cursor.fetchall()
                 return list(rows)
 
-class BuildsQueries:
 
+class BuildsQueries:
     def get_top_builds(self):
         with pool.connection() as connection:
             with connection.cursor() as cursor:
@@ -194,7 +197,7 @@ class BuildsQueries:
                 )
                 rows = cursor.fetchall()
                 return list(rows)
-                
+
     def get_all_builds(self):
         with pool.connection() as connection:
             with connection.cursor() as cursor:
@@ -285,8 +288,24 @@ class BuildsQueries:
                 )
                 rows = cursor.fetchall()
                 return list(rows)
-    
-    def create_build(self, Name, moboid, cpuid, psuid,userid:int, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size, picture):
+
+    def create_build(
+        self,
+        Name,
+        moboid,
+        cpuid,
+        psuid,
+        userid: int,
+        gpuid,
+        cardcount,
+        hddid,
+        hddcount,
+        ramid,
+        ramcount,
+        color,
+        size,
+        picture,
+    ):
         with pool.connection() as connection:
             with connection.cursor() as cursor:
                 with connection.transaction():
@@ -296,7 +315,7 @@ class BuildsQueries:
                         VALUES(%s, %s, %s, %s, %s)
                         RETURNING id 
                     """,
-                        [Name, moboid, cpuid, psuid, userid]
+                        [Name, moboid, cpuid, psuid, userid],
                     )
                     new_build_id = cursor.fetchone()[0]
                     cursor.execute(
@@ -304,36 +323,35 @@ class BuildsQueries:
                         INSERT INTO buildgpus(buildid, gpuid, cardcount)
                         VALUES(%s, %s, %s)
                     """,
-                        [new_build_id, gpuid, cardcount]
-                    
+                        [new_build_id, gpuid, cardcount],
                     )
                     cursor.execute(
                         """
                         INSERT INTO buildhdds(buildid, hddid, hddcount)
                         VALUES(%s, %s, %s)
                     """,
-                        [new_build_id, hddid, hddcount]
+                        [new_build_id, hddid, hddcount],
                     )
                     cursor.execute(
                         """
                         INSERT INTO buildram(buildid, ramid, ramcount)
                         VALUES(%s, %s, %s)
                     """,
-                        [new_build_id, ramid, ramcount]
+                        [new_build_id, ramid, ramcount],
                     )
                     cursor.execute(
                         """
                         INSERT INTO "case"(buildid, color, size, picture)
                         VALUES(%s, %s, %s, %s)
                     """,
-                        [new_build_id, color, size, picture]
+                        [new_build_id, color, size, picture],
                     )
                     cursor.execute(
                         """
                         INSERT INTO "rating"(buildid, userid, liked)
                         VALUES(%s, %s, TRUE)
                     """,
-                        [new_build_id, userid]
+                        [new_build_id, userid],
                     )
                 cursor.execute(
                     """
@@ -342,13 +360,12 @@ class BuildsQueries:
                     WHERE build.id = %s
                     
                 """,
-                    [new_build_id]
-                    
+                    [new_build_id],
                 )
                 rows = cursor.fetchone()
                 return list(rows)
-    
-    def get_build_by_user(self, userid:int):
+
+    def get_build_by_user(self, userid: int):
         with pool.connection() as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
@@ -514,12 +531,12 @@ class BuildsQueries:
                         psu.molex_connector,
                         psu.sata_connector
                 """,
-                    [userid]
+                    [userid],
                 )
                 rows = cursor.fetchall()
                 return list(rows)
 
-    def get_build(self, id:int):
+    def get_build(self, id: int):
         with pool.connection() as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
@@ -688,10 +705,9 @@ class BuildsQueries:
                     [id],
                 )
                 rows = (cursor.fetchone())
-                print("rows:", rows)
                 return list(rows)
-    
-    def delete_build(self, id, userid:int):
+
+    def delete_build(self, id, userid: int):
         with pool.connection() as connection:
             with connection.cursor() as cursor:
                 with connection.transaction():
@@ -701,28 +717,28 @@ class BuildsQueries:
                             DELETE FROM "case"
                             WHERE buildid=%s
                         """,
-                            [id]
+                            [id],
                         )
                         cursor.execute(
                             """
                             DELETE FROM buildgpus
                             WHERE buildid=%s
                         """,
-                            [id]
+                            [id],
                         )
                         cursor.execute(
                             """
                             DELETE FROM buildhdds
                             WHERE buildid=%s
                         """,
-                            [id]
+                            [id],
                         )
                         cursor.execute(
                             """
                             DELETE FROM rating
                             WHERE buildid=%s
                         """,
-                            [id]
+                            [id],
                         )
                         cursor.execute(
                             """
@@ -737,12 +753,29 @@ class BuildsQueries:
                             WHERE id=%s
                             AND userid=%s
                         """,
-                            [id,userid],
+                            [id, userid],
                         )
                     except UniqueViolation:
                         raise DuplicateTitle()
 
-    def update_build(self,id, Name, moboid, cpuid, psuid,Private, gpuid, cardcount, hddid, hddcount, ramid, ramcount, color, size, picture):
+    def update_build(
+        self,
+        id,
+        Name,
+        moboid,
+        cpuid,
+        psuid,
+        Private,
+        gpuid,
+        cardcount,
+        hddid,
+        hddcount,
+        ramid,
+        ramcount,
+        color,
+        size,
+        picture,
+    ):
         with pool.connection() as connection:
             with connection.cursor() as cursor:
                 with connection.transaction():
@@ -753,17 +786,17 @@ class BuildsQueries:
                         WHERE id=%s
                         RETURNING id
                     """,
-                        [Name, moboid, cpuid, psuid, Private, id]
+                        [Name, moboid, cpuid, psuid, Private, id],
                     )
                     build_id = cursor.fetchone()[0]
-                    
+
                     cursor.execute(
                         """
                         UPDATE buildgpus
                         SET gpuid=%s, cardcount=%s
                         WHERE buildid=%s
                     """,
-                        [gpuid,cardcount,build_id]
+                        [gpuid, cardcount, build_id],
                     )
                     cursor.execute(
                         """
@@ -771,7 +804,7 @@ class BuildsQueries:
                         SET hddid=%s, hddcount=%s
                         WHERE buildid=%s
                     """,
-                        [hddid, hddcount, build_id]
+                        [hddid, hddcount, build_id],
                     )
                     cursor.execute(
                         """
@@ -779,7 +812,7 @@ class BuildsQueries:
                         SET ramid=%s, ramcount=%s
                         WHERE buildid=%s
                         """,
-                        [ramid, ramcount, build_id]
+                        [ramid, ramcount, build_id],
                     )
                     cursor.execute(
                         """
@@ -787,7 +820,7 @@ class BuildsQueries:
                         SET color=%s, size=%s, picture=%s
                         WHERE buildid=%s
                         """,
-                        [color, size, picture, build_id]
+                        [color, size, picture, build_id],
                     )
                 cursor.execute(
                     """
@@ -796,7 +829,7 @@ class BuildsQueries:
                     WHERE build.id = %s
                     
                 """,
-                    [build_id]
+                    [build_id],
                 )
                 rows = cursor.fetchone()
                 return list(rows)
@@ -838,8 +871,10 @@ class CaseQueries:
                 )
                 rows = cursor.fetchall()
                 return list(rows)
+
+
 class RatingQueries:
-    def get_my_ratings(self, userid:int):
+    def get_my_ratings(self, userid: int):
         with pool.connection() as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
@@ -849,13 +884,13 @@ class RatingQueries:
                     WHERE userid = %s
 
                 """,
-                    [userid]
+                    [userid],
                 )
                 rows = cursor.fetchall()
                 print("rows", rows)
                 return list(rows)
 
-    def create_rating(self,buildid,userid:int):
+    def create_rating(self, buildid, userid: int):
         with pool.connection() as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
@@ -864,11 +899,12 @@ class RatingQueries:
                     VALUES(TRUE, %s, %s)
                     RETURNING id, liked, buildid, userid
                     """,
-                        [buildid, userid]
+                    [buildid, userid],
                 )
                 rows = cursor.fetchone()
                 return rows
-    def unlike_rating(self, liked, buildid, userid:int):
+
+    def unlike_rating(self, liked, buildid, userid: int):
         with pool.connection() as connection:
             with connection.cursor() as cursor:
                 cursor.execute(
@@ -878,7 +914,7 @@ class RatingQueries:
                     WHERE buildid=%s AND userid=%s
                     RETURNING id, liked, buildid, userid
                     """,
-                        [liked, buildid, userid]
+                    [liked, buildid, userid],
                 )
                 rows = cursor.fetchone()
                 return rows
