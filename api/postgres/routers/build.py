@@ -1,18 +1,14 @@
-from typing import Union
-from turtle import title
-from urllib import response
 from ..models.build import (
     Build,
     BuildA,
     BuildDeleteOperation,
     BuildOut,
-    BuildOutList,
     InBuild,
     InsertBuild,
     OutBuild,
     TopBuildsOut,
 )
-from fastapi import APIRouter, Response, status, Depends
+from fastapi import APIRouter, Depends
 from ..db import BuildsQueries
 from ..models.common import ErrorMessage
 from .accounts import User, get_current_active_user
@@ -184,7 +180,8 @@ def build_list(query=Depends(BuildsQueries)):
 # Example of how to get the current user for an endpoint
 @router.get("/api/builds/mine", response_model=Build)
 def my_build_list(
-    query=Depends(BuildsQueries), current_user: User = Depends(get_current_active_user)
+    query=Depends(BuildsQueries),
+    current_user: User = Depends(get_current_active_user),
 ):
 
     rows = query.get_build_by_user(current_user["id"])
@@ -277,5 +274,5 @@ def delete_build(
     try:
         query.delete_build(build_id, current_user["id"])
         return {"result": True}
-    except:
+    except Exception:
         return {"result": False}
