@@ -1,6 +1,5 @@
 from typing import Union
-from turtle import title
-from urllib import response
+
 from ..models.build import (
     Build,
     BuildA,
@@ -12,7 +11,7 @@ from ..models.build import (
     OutBuild,
     TopBuildsOut,
 )
-from fastapi import APIRouter, Response, status, Depends
+from fastapi import APIRouter, Response, status, Depends, HTTPException
 from ..db import BuildsQueries
 from ..models.common import ErrorMessage
 from .accounts import User, get_current_active_user
@@ -228,10 +227,17 @@ def create_build(
 
 @router.get(
     "/api/build/{build_id}",
-    response_model=BuildOut,
+    response_model=Union[BuildOut, ErrorMessage],
+    responses={
+        200: {"model": BuildOut},
+        404: {"model": ErrorMessage},
+    },
 )
-def get_build(build_id: int, query=Depends(BuildsQueries)):
+def get_build(build_id: int, response: Response, query=Depends(BuildsQueries)):
     row = query.get_build(build_id)
+    if row is None:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return {"message": "Custom build not found"}
     return row_to_build(row)
 
 
