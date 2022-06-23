@@ -50,14 +50,17 @@ function UpdateBuild() {
     getBuildData();
   }, []);
 
-  const gpus = useApiData({ url: `${basePath}/api/gpus/`, prop: "gpus" });
-  const cpus = useApiData({ url: `${basePath}/api/cpus/`, prop: "cpus" });
-  const psus = useApiData({ url: `${basePath}/api/psus/`, prop: "psus" });
-  const rams = useApiData({ url: `${basePath}/api/rams/`, prop: "rams" });
-  const hdds = useApiData({ url: `${basePath}/api/hdds`, prop: "hdds" });
-  const colors = useApiData({ url: `${basePath}/api/color/`, prop: "colors" });
-  const sizes = useApiData({ url: `${basePath}/api/size/`, prop: "sizes" });
-  const caseImages = useApiData({
+  const [gpus] = useApiData({ url: `${basePath}/api/gpus/`, prop: "gpus" });
+  const [cpus] = useApiData({ url: `${basePath}/api/cpus/`, prop: "cpus" });
+  const [psus] = useApiData({ url: `${basePath}/api/psus/`, prop: "psus" });
+  const [rams] = useApiData({ url: `${basePath}/api/rams/`, prop: "rams" });
+  const [hdds] = useApiData({ url: `${basePath}/api/hdds`, prop: "hdds" });
+  const [colors] = useApiData({
+    url: `${basePath}/api/color/`,
+    prop: "colors",
+  });
+  const [sizes] = useApiData({ url: `${basePath}/api/size/`, prop: "sizes" });
+  const [caseImages] = useApiData({
     url: `${basePath}/api/caseimage`,
     prop: "caseimages",
   });
