@@ -223,10 +223,10 @@ def test_update_build_returns_200():
   r = client.put(
         "/api/build/1",
         json={
-      "Name": "s",
+      "Name": "TEST BUILD",
       "moboid": 1,
       "cpuid": 1,
-      "psuid": 1,
+      "psuid": 2,
       "Private": True,
       "gpuid": 1,
       "cardcount": 1,
@@ -242,10 +242,10 @@ def test_update_build_returns_200():
   assert r.status_code == 200
   assert r.json() == {
     "id": 1,
-    "Name": "s",
+    "Name": "TEST BUILD",
     "moboid": 1,
     "cpuid": 1,
-    "psuid": 1,
+    "psuid": 2,
     "Private": True,
     "userid": 1
 }
