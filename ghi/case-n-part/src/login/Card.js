@@ -49,7 +49,7 @@ export const CardFieldset = styled.fieldset`
 `;
 
 export const CardInput = styled.input`
-  padding: 7px 0;
+  padding: 7px;
   width: 100%;
   font-family: inherit;
   font-size: 14px;
@@ -79,14 +79,6 @@ export const CardIcon = styled.span`
     props.big &&
     css`
       font-size: 26px;
-    `}
-
-  ${props =>
-    props.eye &&
-    css`
-      position: absolute;
-      top: 8px;
-      right: 0;
     `}
 
   ${props =>
@@ -130,8 +122,8 @@ export const CardButton = styled.button`
   font-family: inherit;
   font-size: 14px;
   font-weight: 700;
-  color: #778899;
-  background-color: #afeeee;
+  color: #fff;
+  background-color: #0d6efd;
   border: 0;
   border-radius: 35px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.08);

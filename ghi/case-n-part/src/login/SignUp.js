@@ -56,7 +56,6 @@ function SignUp(props) {
               type='password'
               required
             />
-            <CardIcon className='fa fa-eye' eye small />
           </CardFieldset>
 
           <CardFieldset>

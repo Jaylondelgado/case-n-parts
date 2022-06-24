@@ -18,12 +18,12 @@ function Login(props) {
   console.log("props", props);
 
   if (token) {
-    return <Navigate to="/builds/mybuilds" />;
+    return <Navigate to='/builds/mybuilds' />;
   }
 
   return (
-    <div className="container mt-5 py-5">
-      <div className="App">
+    <div className='container mt-5 py-5'>
+      <div className='App'>
         <CardWrapper>
           <CardHeader>
             <CardHeading>Sign in</CardHeading>
@@ -32,29 +32,28 @@ function Login(props) {
           <CardBody>
             <CardFieldset>
               <CardInput
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={e => setUsername(e.target.value)}
                 value={username}
-                placeholder="Username"
-                type="text"
+                placeholder='Username'
+                type='text'
                 required
               />
             </CardFieldset>
 
             <CardFieldset>
               <CardInput
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={e => setPassword(e.target.value)}
                 value={password}
-                placeholder="Password"
-                type="password"
+                placeholder='Password'
+                type='password'
                 required
               />
-              <CardIcon className="fa fa-eye" eye small />
             </CardFieldset>
 
             <CardFieldset>
               <CardButton
                 onClick={() => login(username, password)}
-                type="button"
+                type='button'
               >
                 Sign In
               </CardButton>
