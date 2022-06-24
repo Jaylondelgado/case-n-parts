@@ -35,5 +35,5 @@ services:
     volumes:
       - ./api:/app
     environment:
-      DATABASE_URL: postgresql://great-value:great-value@postgres:5432/great-value
+      DATABASE_URL: postgresql://great-value:great-value@postgres/great-value
       SECRET_KEY: fe9f6e232112f6a1075578cdd151b3a7ff3aa32c25d1dab913dfa16a989358c3
