@@ -29,7 +29,7 @@ build-front-end-job:
     - api-unit-test-job # These two jobs must succeed for
     - lint-test-job # this build-job to run
   script:
-    - cd ghi/case-n-part
+    - cd ghi/case-n-part/
     - npm install
     - npm run build # Build the React application
   artifacts:
@@ -106,7 +106,7 @@ pages:
   needs:
     - build-front-end-job
   script:
-    - mv ghi/case-n-part public
+    - mv ghi/case-n-part/build/ public
   artifacts:
     paths:
       - public
