@@ -8,8 +8,9 @@ from postgres.routers import parts, build, accounts, case, ratings
 app = FastAPI()
 
 
+
 origins = [
-    "http://localhost:3000",
+    os.environ.get('REACT_APP_ACCOUNTS_HOST}'),
     os.environ.get("CORS_HOST", None),
 ]
 
