@@ -161,7 +161,7 @@ async def get_token(request: Request):
         return {"token": request.cookies[COOKIE_NAME]}
 
 
-@router.post("/api/users")
+@router.post("/api/users/")
 async def signup(user: UserSignUp, repo: UsersQueries = Depends()):
     hashed_password = pwd_context.hash(user.password)
     repo.create_user(user.username, hashed_password, user.email)
