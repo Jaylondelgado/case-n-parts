@@ -162,7 +162,7 @@ function UpdateBuild() {
       Private: build.Private,
     };
 
-    const buildUrl = `${process.env.REACT_APP_ACCOUNTS_HOST}/api/build/${id}`;
+    const buildUrl = `${basePath}/api/build/${id}`;
     const fetchConfig = {
       method: "PUT",
       body: JSON.stringify(buildPutData),

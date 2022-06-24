@@ -31,7 +31,6 @@ build-front-end-job:
   script:
     - cd ghi/case-n-part
     - npm install
-    - npm install serve
     - npm run build # Build the React application
   artifacts:
     paths:
@@ -107,7 +106,7 @@ pages:
   needs:
     - build-front-end-job
   script:
-    - mv ghi/case-n-part/build public
+    - mv ghi/case-n-part public
   artifacts:
     paths:
       - public

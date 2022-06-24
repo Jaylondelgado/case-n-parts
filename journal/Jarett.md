@@ -61,3 +61,6 @@ Resumed working on  like feature for builds. My tam and I had an issue of adding
 
 My teammate ran into a bug that required an endpoint for ratings tied to the current user. Today I was able to get a endpoint for a ratings tied to a user, so that the like button can dynamically change based off user input. I also jumped in to help my other teammate that was working on test driven devlopment to ensure our CRUD and api endpoints were working as should. We were able to check if create build, get builds, and update build were working as expected.
 
+## June 23, 2022
+
+Started the day off helping my teammates ensure that the tests were working properly in order to move on to CI/CD. Worked with my teammate to filter out the build list in order to only render builds that are publicized by its owner. We were getting a bug in which all builds were being mapped instead we filtered out the fetch requests to onl have public builds and then proceeded to map. Worked on the front-end of top three builds. Was able to map and get the top three builds on their respective cards to ensure easy usage.
