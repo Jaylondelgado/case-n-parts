@@ -26,7 +26,9 @@ class UsersQueries:
                 rows = cursor.fetchone()
                 return rows
 
-    def create_user(self, username: str, hashed_password: str, email: str = None):
+    def create_user(
+        self, username: str, hashed_password: str, email: str = None
+    ):
         # TODO: Replace this with real SQL
         with pool.connection() as connection:
             with connection.cursor() as cursor:

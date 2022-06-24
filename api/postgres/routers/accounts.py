@@ -87,7 +87,9 @@ def create_access_token(data: dict):
 
 async def get_current_user(
     bearer_token: Optional[str] = Depends(oauth2_scheme),
-    cookie_token: Optional[str] | None = (Cookie(default=None, alias=COOKIE_NAME)),
+    cookie_token: Optional[str] | None = (
+        Cookie(default=None, alias=COOKIE_NAME)
+        ),
     repo: UsersQueries = Depends(),
 ):
     credentials_exception = HTTPException(
