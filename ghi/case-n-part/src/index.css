@@ -71,3 +71,7 @@ code {
 .modal-min-width {
   min-width: 50%;
 }
+
+.nav-border {
+  border-bottom: 2px solid black;
+}

@@ -23,7 +23,7 @@ function Nav(props) {
 
   console.log(currentUser);
   return (
-    <nav className='navbar navbar-expand-md navbar-dark fixed-top bg-dark'>
+    <nav className='navbar navbar-expand-md navbar-dark fixed-top bg-dark nav-border'>
       <div className='container-fluid'>
         <NavLink className='text-decoration-none' to='/'>
           <h1 className='navbar-brand text-uppercase fs-2'>
