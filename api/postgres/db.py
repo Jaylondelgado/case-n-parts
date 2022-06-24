@@ -138,17 +138,17 @@ class BuildsQueries:
                         caseimage.picture,
                         COUNT(rating.id) as likes
 
-                    FROM public.build
+                    FROM build
 
-                    INNER JOIN public.rating
+                    INNER JOIN rating
                         ON rating.buildid=build.id
-                    INNER JOIN public.user
+                    INNER JOIN user
                         ON "user".id=build.userid
 
 
-                    INNER JOIN public.case
+                    INNER JOIN case
                         ON "case".buildid = build.id
-                    INNER JOIN public.caseimage
+                    INNER JOIN caseimage
                         ON caseimage.id = "case".picture
 
                     WHERE rating.liked is TRUE
@@ -199,47 +199,47 @@ class BuildsQueries:
                         psu.id,
                         psu.brand,
                         COUNT(rating.id) as likes
-                    FROM public.build
+                    FROM build
 
-                    INNER JOIN public.rating
+                    INNER JOIN rating
                         ON rating.buildid=build.id
 
 
 
-                    INNER JOIN public.user
+                    INNER JOIN user
                         ON "user".id=build.userid
 
-                    INNER JOIN public.case
+                    INNER JOIN case
                         ON "case".buildid = build.id
-                    INNER JOIN public.size
+                    INNER JOIN size
                         ON "size".id = "case".size
-                    INNER JOIN public.color
+                    INNER JOIN color
                         ON color.id = "case".color
-                    INNER JOIN public.caseimage
+                    INNER JOIN caseimage
                         ON caseimage.id = "case".picture
 
-                    INNER JOIN public.BuildGpus
-                    INNER JOIN public.gpu
+                    INNER JOIN BuildGpus
+                    INNER JOIN gpu
                         ON gpu.id = BuildGpus.gpuid
                     ON BuildGpus.BuildId = build.id
 
-                    INNER JOIN public.buildhdds
-                    INNER JOIN public.hdd
+                    INNER JOIN buildhdds
+                    INNER JOIN hdd
                         ON hdd.id = buildhdds.hddid
                     ON buildhdds.id = build.id
 
-                    INNER JOIN public.buildram
-                    INNER JOIN public.ram
+                    INNER JOIN buildram
+                    INNER JOIN ram
                         ON ram.id = buildram.ramid
                     ON build.id = buildram.id
 
-                    INNER JOIN public.mobos
+                    INNER JOIN mobos
                         ON mobos.id = build.moboid
 
-                    INNER JOIN public.cpu
+                    INNER JOIN cpu
                         ON cpu.id = build.cpuid
 
-                    INNER JOIN public.psu
+                    INNER JOIN psu
                         ON psu.id = build.psuid
 
                     WHERE rating.liked is TRUE
@@ -395,50 +395,50 @@ class BuildsQueries:
                         psu.molex_connector,
                         psu.sata_connector,
                         COUNT(rating.id) as likes
-                    FROM public.build
+                    FROM build
 
-                    INNER JOIN public.rating
+                    INNER JOIN rating
                         ON rating.buildid=build.id
 
-                    INNER JOIN public.user
+                    INNER JOIN user
                         ON "user".id=build.userid
 
 
 
                     -- Join case information
-                    INNER JOIN public.case
+                    INNER JOIN case
                     ON "case".buildid = build.id
-                    INNER JOIN public.size
+                    INNER JOIN size
                         ON "size".id = "case".size
-                    INNER JOIN public.color
+                    INNER JOIN color
                         ON color.id = "case".color
-                    INNER JOIN public.caseimage
+                    INNER JOIN caseimage
                         ON caseimage.id = "case".picture
 
                     -- Join GPU info
-                    INNER JOIN public.BuildGpus
-                    INNER JOIN public.gpu
+                    INNER JOIN BuildGpus
+                    INNER JOIN gpu
                         ON gpu.id = BuildGpus.gpuid
                     ON BuildGpus.BuildId = build.id
 
                     -- Join HDD information.
-                    INNER JOIN public.buildhdds
-                    INNER JOIN public.hdd
+                    INNER JOIN buildhdds
+                    INNER JOIN hdd
                         ON hdd.id = buildhdds.hddid
                     ON buildhdds.id = build.id
 
                     -- Join RAM information
-                    INNER JOIN public.buildram
-                    INNER JOIN public.ram
+                    INNER JOIN buildram
+                    INNER JOIN ram
                         ON ram.id = buildram.ramid
                     ON build.id = buildram.id
 
                     -- Join simple information.
-                    INNER JOIN public.mobos
+                    INNER JOIN mobos
                     ON mobos.id = build.moboid
-                    INNER JOIN public.cpu
+                    INNER JOIN cpu
                     ON cpu.id = build.cpuid
-                    INNER JOIN public.psu
+                    INNER JOIN psu
                     ON psu.id = build.psuid
                     WHERE build.userid = %s
                     AND rating.liked is TRUE
@@ -566,50 +566,50 @@ class BuildsQueries:
                         psu.molex_connector,
                         psu.sata_connector,
                         COUNT(rating.id) as likes
-                    FROM public.build
+                    FROM build
 
-                    INNER JOIN public.rating
+                    INNER JOIN rating
                         ON rating.buildid=build.id
 
-                    INNER JOIN public.user
+                    INNER JOIN user
                         ON "user".id=build.userid
 
 
 
                     -- Join case information
-                    INNER JOIN public.case
+                    INNER JOIN case
                     ON "case".buildid = build.id
-                    INNER JOIN public.size
+                    INNER JOIN size
                         ON "size".id = "case".size
-                    INNER JOIN public.color
+                    INNER JOIN color
                         ON color.id = "case".color
-                    INNER JOIN public.caseimage
+                    INNER JOIN caseimage
                         ON caseimage.id = "case".picture
 
                     -- Join GPU info
-                    INNER JOIN public.BuildGpus
-                    INNER JOIN public.gpu
+                    INNER JOIN BuildGpus
+                    INNER JOIN gpu
                         ON gpu.id = BuildGpus.gpuid
                     ON BuildGpus.BuildId = build.id
 
                     -- Join HDD information.
-                    INNER JOIN public.buildhdds
-                    INNER JOIN public.hdd
+                    INNER JOIN buildhdds
+                    INNER JOIN hdd
                         ON hdd.id = buildhdds.hddid
                     ON buildhdds.id = build.id
 
                     -- Join RAM information
-                    INNER JOIN public.buildram
-                    INNER JOIN public.ram
+                    INNER JOIN buildram
+                    INNER JOIN ram
                         ON ram.id = buildram.ramid
                     ON build.id = buildram.id
 
                     -- Join simple information.
-                    INNER JOIN public.mobos
+                    INNER JOIN mobos
                     ON mobos.id = build.moboid
-                    INNER JOIN public.cpu
+                    INNER JOIN cpu
                     ON cpu.id = build.cpuid
-                    INNER JOIN public.psu
+                    INNER JOIN psu
                     ON psu.id = build.psuid
                     WHERE build.id = %s
                     AND rating.liked is TRUE
