@@ -177,12 +177,10 @@ function UpdateBuild() {
     }
   };
 
-  let createButton = "btn btn-outline-primary w-100 mt-4";
   let alertClasses = "alert alert-success d-none mb-0";
   let alertContainerClasses = "d-none";
 
   if (successfulSubmit) {
-    createButton = "d-none";
     alertClasses = "alert alert-success mb-3";
     alertContainerClasses = "";
   }

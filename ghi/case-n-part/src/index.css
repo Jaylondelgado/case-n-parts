@@ -72,6 +72,9 @@ code {
   min-width: 50%;
 }
 
+.nav-border {
+  border-bottom: 2px solid black;
+}
 .btn-no-hover {
-  cursor:default;
+  cursor: default;
 }

@@ -31,6 +31,7 @@ build-front-end-job:
   script:
     - cd ghi/case-n-part
     - npm install
+    - npm install serve
     - npm run build # Build the React application
   artifacts:
     paths:
@@ -69,7 +70,7 @@ deploy-back-end-job-heroku:
 
     # Logs in and pulls the image from the GitLab image registry
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-    - docker pull $CI_REGISTRY_IMAGE:latest
+    - docker pull ${CI_REGISTRY_IMAGE}/api:latest
 
     # Authenticates with the Heroku image registry
     - docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
@@ -106,7 +107,7 @@ pages:
   needs:
     - build-front-end-job
   script:
-    - mv ghi/build public
+    - mv ghi/case-n-part/build public
   artifacts:
     paths:
       - public

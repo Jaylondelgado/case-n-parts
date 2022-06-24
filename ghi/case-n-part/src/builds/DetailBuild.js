@@ -89,11 +89,21 @@ function DetailBuild({ token }) {
     }
   };
 
+  // const msg = "Custom build not found";
+  // console.log("something", build);
+
+  // if (build && build.message === msg) {
+  //   return navigate("/NotFound", { replace: true });
+  // }
+
   if (!build) {
+    // setTimeout
     return (
-      <div className='d-flex align-items-center justify-content-center'>
-        <div className='spinner-border text-light p-8' role='status'>
-          <span className='visually-hidden'>Loading...</span>
+      <div className='container mt-5 py-5'>
+        <div className='d-flex align-items-center justify-content-center'>
+          <div className='spinner-border text-light p-8' role='status'>
+            <span className='visually-hidden'>Loading...</span>
+          </div>
         </div>
       </div>
     );
@@ -165,14 +175,26 @@ function DetailBuild({ token }) {
                     <div className='d-flex flex-row justify-content-center w-100 '>
                       {currentUser.id !== build.userid && (
                         <span>
-                          <div>{build.likes}</div>
+                          <p className='fs-6 p-0 m-0'>
+                            Total likes: {build.likes}
+                          </p>
 
                           <button
                             onClick={() => handleUpvoteChange()}
-                            className='btn btn-outline-primary'
+                            className={
+                              userRating
+                                ? "btn btn-outline-danger m-2"
+                                : "btn btn-outline-primary m-2"
+                            }
                           >
-                            <i className='bi bi-hand-thumbs-up pe-1'></i>
-                            {userRating ? "Unlike" : "Upvote"}
+                            <i
+                              className={
+                                userRating
+                                  ? "bi bi-hand-thumbs-down pe-1"
+                                  : "bi bi-hand-thumbs-up pe-1"
+                              }
+                            ></i>
+                            {userRating ? "" : ""}
                           </button>
                         </span>
                       )}
@@ -277,6 +299,11 @@ function DetailBuild({ token }) {
                       <hr className='w-100 p-0 m-1'></hr>
                       <div className='card-text'>{build.ram.memory_type}</div>
                     </div>
+                    <div className='d-flex flex-column align-items-center w-100 mb-3'>
+                      <p className='text-primary p-0 m-0'>Ram Count</p>
+                      <hr className='w-100 p-0 m-1'></hr>
+                      <div className='card-text'>{build.ram.ramcount}</div>
+                    </div>
                   </div>
                   <div className='col-sm-6'>
                     <div className='d-flex flex-column align-items-center w-100 mb-3'>
@@ -336,6 +363,11 @@ function DetailBuild({ token }) {
                           {build.gpu.display_port}
                         </div>
                       </div>
+                      <div className='d-flex flex-column align-items-center w-100 mb-3'>
+                        <p className='text-primary p-0 m-0'>Card Count</p>
+                        <hr className='w-100 p-0 m-1'></hr>
+                        <div className='card-text'>{build.gpu.cardcount}</div>
+                      </div>
                     </div>
                     <div className='col-sm-6'>
                       <div className='d-flex flex-column align-items-center w-100 mb-3'>
@@ -367,19 +399,14 @@ function DetailBuild({ token }) {
                         <hr className='w-100 p-0 m-1'></hr>
                         <div className='card-text'>{build.gpu.hdmi}</div>
                       </div>
-                      <div className='d-flex flex-column align-items-center w-100 mb-3'>
-                        <p className='text-primary p-0 m-0'>Card Count</p>
-                        <hr className='w-100 p-0 m-1'></hr>
-                        <div className='card-text'>{build.gpu.cardcount}</div>
-                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <div className='col-xl-4 pb-4 p-xxl-0'>
+          {/* col-xl-4 pb-4 pb-xxl-0 */}
+          <div className='col-xl-4 pb-4 pb-xxl-0'>
             <div className='card bg-dark border border-primary w-5'>
               <h5 className='card-title text-white p-3'>PSU</h5>
               <div className='d-flex flex-column card-text text-white px-4'>
@@ -443,241 +470,3 @@ function DetailBuild({ token }) {
 }
 
 export default DetailBuild;
-
-// {
-/* <div className="container justify-content-md-center my-5 pt-5">
-      {build !== undefined && (
-        <div className="row d-flex justify-content-center">
-          <div className="col-sm">
-            <img className="img-fluid" src={build.picture} alt="pc case" />
-          </div>
-          <div className="col">
-            <div className="d-flex flex-column col-8 col-sm-15 align-items-start">
-              <h2>{build.Name}</h2>
-              <h3>Built by: {build.username}</h3>
-              <p>
-                <button
-                  className="btn btn-secondary"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#motherboard-data"
-                  aria-expanded="false"
-                  aria-controls="motherboard-data"
-                >
-                  Motherboard
-                </button>
-              </p>
-              <div className="collapse" id="motherboard-data">
-                <table className="table table-hover table-dark border">
-                  <thead>
-                    <tr>
-                      <th>Brand</th>
-                      <th>Socket Type</th>
-                      <th>Max Memory</th>
-                      <th>Max Memory Per Slot</th>
-                      <th>Pci-e Slots</th>
-                      <th>Memory Slots</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>{build.mobo.brand}</td>
-                      <td>{build.mobo.socket_type}</td>
-                      <td>{build.mobo.max_memory}</td>
-                      <td>{build.mobo.max_memory_per_slot}</td>
-                      <td>{build.mobo.pcie_slots}</td>
-                      <td>{build.mobo.memory_slots}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <p>
-                <button
-                  className="btn btn-secondary"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#cpu-data"
-                  aria-expanded="false"
-                  aria-controls="cpu-data"
-                >
-                  CPU
-                </button>
-              </p>
-              <div className="collapse" id="cpu-data">
-                <table className="table table-hover table-dark border">
-                  <thead>
-                    <tr>
-                      <th>Processor</th>
-                      <th>Cores</th>
-                      <th>Threads</th>
-                      <th>Speed</th>
-                      <th>Socket Type</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>{build.cpu.processor}</td>
-                      <td>{build.cpu.cores}</td>
-                      <td>{build.cpu.threads}</td>
-                      <td>{build.cpu.speed}</td>
-                      <td>{build.cpu.socket_type}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <p>
-                <button
-                  className="btn btn-secondary"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#gpu-data"
-                  aria-expanded="false"
-                  aria-controls="gpu-data"
-                >
-                  GPU
-                </button>
-              </p>
-              <div className="collapse" id="gpu-data">
-                <table className="table table-hover table-dark border col-md-auto">
-                  <thead>
-                    <tr>
-                      <th>Manufacturer</th>
-                      <th>Chipset</th>
-                      <th>Core Clock Speed</th>
-                      <th>Video Memory</th>
-                      <th>Memory Type</th>
-                      <th>Height</th>
-                      <th>Length</th>
-                      <th>Width</th>
-                      <th>HDMI Ports</th>
-                      <th>Display Ports</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>{build.gpu.manufacturer}</td>
-                      <td>{build.gpu.chipset}</td>
-                      <td>{build.gpu.core_clock_speed}</td>
-                      <td>{build.gpu.video_memory}GB</td>
-                      <td>{build.gpu.memory_type}</td>
-                      <td>{build.gpu.height}</td>
-                      <td>{build.gpu.length}</td>
-                      <td>{build.gpu.width}</td>
-                      <td>{build.gpu.hdmi}</td>
-                      <td>{build.gpu.display_port}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <p>
-                <button
-                  className="btn btn-secondary"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#hdd-data"
-                  aria-expanded="false"
-                  aria-controls="hdd-data"
-                >
-                  HDD
-                </button>
-              </p>
-              <div className="collapse" id="hdd-data">
-                <table className="table table-hover table-dark border">
-                  <thead>
-                    <tr>
-                      <th>Brand</th>
-                      <th>Capacity</th>
-                      <th>Interface</th>
-                      <th>Cache</th>
-                      <th>RPM</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>{build.hdd.brand}</td>
-                      <td>{build.hdd.capacity}</td>
-                      <td>{build.hdd.interface}</td>
-                      <td>{build.hdd.cache}</td>
-                      <td>{build.hdd.rpm}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <p>
-                <button
-                  className="btn btn-secondary"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#ram-data"
-                  aria-expanded="false"
-                  aria-controls="ram-data"
-                >
-                  Ram
-                </button>
-              </p>
-              <div className="collapse" id="ram-data">
-                <table className="table table-hover table-dark border">
-                  <thead>
-                    <tr>
-                      <th>Brand</th>
-                      <th>Memory Type</th>
-                      <th>Memory Speed</th>
-                      <th>Memory Channels</th>
-                      <th>Pin Configuration</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>{build.ram.brand}</td>
-                      <td>{build.ram.memory_type}</td>
-                      <td>{build.ram.memory_speed}</td>
-                      <td>{build.ram.memory_channels}</td>
-                      <td>{build.ram.pin_configuration}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <p>
-                <button
-                  className="btn btn-secondary"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#psu-data"
-                  aria-expanded="false"
-                  aria-controls="psu-data"
-                >
-                  PSU
-                </button>
-              </p>
-              <div className="collapse" id="psu-data">
-                <table className="table table-hover table-dark border">
-                  <thead>
-                    <tr>
-                      <th>Brand</th>
-                      <th>Wattage</th>
-                      <th>Atx Connector</th>
-                      <th>Atx 12v Connector</th>
-                      <th>Graphics Connector</th>
-                      <th>Molex Connector</th>
-                      <th>Sata Connector</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>{build.psu.brand}</td>
-                      <td>{build.psu.wattage}</td>
-                      <td>{build.psu.atx_connector}</td>
-                      <td>{build.psu.atx_12v_connector}</td>
-                      <td>{build.psu.graphics_connector}</td>
-                      <td>{build.psu.molex_connector}</td>
-                      <td>{build.psu.sata_connector}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </div> */
-// }
