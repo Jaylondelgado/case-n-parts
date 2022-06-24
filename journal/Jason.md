@@ -152,3 +152,7 @@ I black formatted the entire api file as well as made some minor refactoring of 
 ## 6/23/2022
 
 \* error handling, quick unit testing, CI/CD understanding
+
+The application has little to no error handling so we wanted to get at least a 404 page when going to the wrong link. I set up a redirect with a function component that renders a simple "Build not found" line. I learned that routing a path with just an asterisk means any page that is not defined otherwise. I then added error handling in the back on for a `detailBuilds` where if the id does not exist, it will give a 404. Ran into some errors before asking the team for debugging help which was a quick fix. Only had to delete `list` from the return in our model.
+
+Curtis later came in to walk us through the CI yaml file with extensive guidance to implement the necessary variables and keys to get it integrated. We got all 4 check marks in the `Test` and `Build` stages but kept erroring in the deployment. We found some bugs where the `ghi/build` should have actually been `ghi/case-n-parts/build` and another item should have been nested between curly braces, followed by a missing api call. But alas, our deployment on heroku had hit a wall where the site currently returns an empty page with a sad `{"detail":"Not Found"}`. Tomorrow it will be fixed!
