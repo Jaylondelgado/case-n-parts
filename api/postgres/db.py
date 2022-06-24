@@ -142,11 +142,11 @@ class BuildsQueries:
 
                     INNER JOIN rating
                         ON rating.buildid=build.id
-                    INNER JOIN user
+                    INNER JOIN "user"
                         ON "user".id=build.userid
 
 
-                    INNER JOIN case
+                    INNER JOIN "case"
                         ON "case".buildid = build.id
                     INNER JOIN caseimage
                         ON caseimage.id = "case".picture
@@ -206,10 +206,10 @@ class BuildsQueries:
 
 
 
-                    INNER JOIN user
+                    INNER JOIN "user"
                         ON "user".id=build.userid
 
-                    INNER JOIN case
+                    INNER JOIN "case"
                         ON "case".buildid = build.id
                     INNER JOIN size
                         ON "size".id = "case".size
@@ -406,7 +406,7 @@ class BuildsQueries:
 
 
                     -- Join case information
-                    INNER JOIN case
+                    INNER JOIN "case"
                     ON "case".buildid = build.id
                     INNER JOIN size
                         ON "size".id = "case".size
@@ -571,13 +571,13 @@ class BuildsQueries:
                     INNER JOIN rating
                         ON rating.buildid=build.id
 
-                    INNER JOIN user
+                    INNER JOIN "user"
                         ON "user".id=build.userid
 
 
 
                     -- Join case information
-                    INNER JOIN case
+                    INNER JOIN "case"
                     ON "case".buildid = build.id
                     INNER JOIN size
                         ON "size".id = "case".size
