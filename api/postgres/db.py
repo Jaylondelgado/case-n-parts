@@ -199,7 +199,7 @@ class BuildsQueries:
                         psu.id,
                         psu.brand,
                         COUNT(rating.id) as likes
-                    FROM build
+                    FROM "build"
 
                     INNER JOIN rating
                         ON rating.buildid=build.id
