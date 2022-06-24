@@ -4,7 +4,7 @@ import useApiData from "../parts/ApiFetch";
 
 import { basePath } from "../basePath";
 
-function DetailBuild({ token }) {
+function DetailBuild() {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -198,7 +198,6 @@ function DetailBuild({ token }) {
                           </button>
                         </span>
                       )}
-                      {console.log("current user", currentUser)}
                       {currentUser.id === build.userid && (
                         <span>
                           <Link
@@ -405,7 +404,6 @@ function DetailBuild({ token }) {
               </div>
             </div>
           </div>
-          {/* col-xl-4 pb-4 pb-xxl-0 */}
           <div className='col-xl-4 pb-4 pb-xxl-0'>
             <div className='card bg-dark border border-primary w-5'>
               <h5 className='card-title text-white p-3'>PSU</h5>
