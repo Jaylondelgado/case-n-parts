@@ -31,7 +31,6 @@ build-front-end-job:
   script:
     - cd ghi/case-n-part
     - npm install
-    - npm install serve
     - npm run build # Build the React application
   artifacts:
     paths:
@@ -47,7 +46,7 @@ build-back-end-job:
     - docker:20.10.16-dind
   script:
     - cd api
-    - docker build -t ${CI_REGISTRY_IMAGE}/:latest .
+    - docker build -t ${CI_REGISTRY_IMAGE}/api:latest .
     - docker tag ${CI_REGISTRY_IMAGE}/api:latest ${CI_REGISTRY_IMAGE}/api:$CI_JOB_ID
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker push ${CI_REGISTRY_IMAGE}/api:$CI_JOB_ID
@@ -107,7 +106,7 @@ pages:
   needs:
     - build-front-end-job
   script:
-    - mv ghi/case-n-part/build public
+    - mv ghi/case-n-part public
   artifacts:
     paths:
       - public
