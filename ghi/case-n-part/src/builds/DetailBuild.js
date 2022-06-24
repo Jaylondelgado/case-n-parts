@@ -89,11 +89,21 @@ function DetailBuild({ token }) {
     }
   };
 
+  // const msg = "Custom build not found";
+  // console.log("something", build);
+
+  // if (build && build.message === msg) {
+  //   return navigate("/NotFound", { replace: true });
+  // }
+
   if (!build) {
+    // setTimeout
     return (
-      <div className='d-flex align-items-center justify-content-center'>
-        <div className='spinner-border text-light p-8' role='status'>
-          <span className='visually-hidden'>Loading...</span>
+      <div className='container mt-5 py-5'>
+        <div className='d-flex align-items-center justify-content-center'>
+          <div className='spinner-border text-light p-8' role='status'>
+            <span className='visually-hidden'>Loading...</span>
+          </div>
         </div>
       </div>
     );

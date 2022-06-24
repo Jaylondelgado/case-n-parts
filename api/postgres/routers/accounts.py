@@ -1,12 +1,18 @@
-from datetime import datetime, timedelta
 from postgres.db import UsersQueries
-from fastapi import Depends, HTTPException, status, Response, Cookie, APIRouter, Request
+from fastapi import (
+    Depends,
+    HTTPException,
+    status,
+    Response,
+    Cookie,
+    APIRouter,
+    Request,
+)
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt, jws, JWSError
 from passlib.context import CryptContext
 from pydantic import BaseModel
 from typing import Optional
-import json
 import os
 
 SECRET_KEY = os.environ["SECRET_KEY"]
@@ -73,20 +79,17 @@ def authenticate_user(repo: UsersQueries, username: str, password: str):
     return user
 
 
-def create_access_token(data: dict, expires_delta: timedelta | None = None):
+def create_access_token(data: dict):
     to_encode = data.copy()
-    if expires_delta:
-        expire = datetime.utcnow() + expires_delta
-    else:
-        expire = datetime.utcnow() + timedelta(minutes=15)
-    # to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
 
 async def get_current_user(
     bearer_token: Optional[str] = Depends(oauth2_scheme),
-    cookie_token: Optional[str] | None = Cookie(default=None, alias=COOKIE_NAME),
+    cookie_token: Optional[str] | None = (
+        Cookie(default=None, alias=COOKIE_NAME)
+        ),
     repo: UsersQueries = Depends(),
 ):
     credentials_exception = HTTPException(
@@ -110,7 +113,9 @@ async def get_current_user(
     return row_to_user(user)
 
 
-async def get_current_active_user(current_user: User = Depends(get_current_user)):
+async def get_current_active_user(
+    current_user: User = Depends(get_current_user),
+):
     # if current_user.disabled:
     #     raise HTTPException(status_code=400, detail="Inactive user")
     return current_user
@@ -130,16 +135,14 @@ async def login_for_access_token(
             detail="Invalid authentication credentials",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
         data={"sub": user[1]},
-        expires_delta=access_token_expires,
     )
     token = {"access_token": access_token, "token_type": "bearer"}
-
+    headers = request.headers
     samesite = "none"
     secure = True
-    if "origin" in request.headers and "localhost" in request.headers["origin"]:
+    if "origin" in headers and "localhost" in headers["origin"]:
         samesite = "lax"
         secure = False
     response.set_cookie(
@@ -189,8 +192,9 @@ async def validate_token(access_token: AccessToken, response: Response):
 @router.delete("/token")
 async def logout(request: Request, response: Response):
     samesite = "none"
+    headers = request.headers
     secure = True
-    if "origin" in request.headers and "localhost" in request.headers["origin"]:
+    if "origin" in headers and "localhost" in headers["origin"]:
         samesite = "lax"
         secure = False
     response.delete_cookie(

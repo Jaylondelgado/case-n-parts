@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 function useApiData({ url, prop, options, withCredentials, ...otherOptions }) {
   const [data, setData] = useState(
@@ -18,12 +18,14 @@ function useApiData({ url, prop, options, withCredentials, ...otherOptions }) {
       );
 
       const apiData = await apiResponse.json();
-      const stateData = prop ? apiData[prop] : apiData;
-      setData(stateData);
+      if (apiResponse.ok) {
+        const stateData = prop ? apiData[prop] : apiData;
+        setData(stateData);
+      }
     };
 
     getServerData();
-  }, []);
+  }, [options, prop, url, withCredentials]);
 
   return [data, setData];
 }
