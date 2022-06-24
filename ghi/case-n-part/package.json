@@ -20,13 +20,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "node ./windows-setup.js && react-scripts start",
+    "start": "node ./windows-setup.js && react-scripts start && serve -s build",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "dev": "react-scripts start",
-    "start": "serve -s build",
-    "build": "react-scripts build",
     "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {
