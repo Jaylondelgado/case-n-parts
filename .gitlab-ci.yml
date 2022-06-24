@@ -41,9 +41,9 @@ build-back-end-job:
     # Only run if the commit is on the main branch
     - if: ($CI_COMMIT_BRANCH == "deploy" || $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH)
   stage: build
-  image: docker:20.10.16
+  image: docker:latest
   services:
-    - docker:20.10.16-dind
+    - docker:latest
   script:
     - cd api
     - docker build -t ${CI_REGISTRY_IMAGE}/api:latest .
