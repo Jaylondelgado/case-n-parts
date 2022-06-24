@@ -59,9 +59,9 @@ deploy-back-end-job-heroku:
   stage: deploy
   needs:
     - build-back-end-job
-  image: docker:20.10.16
+  image: docker:latest
   services:
-    - docker:20.10.16-dind
+    - docker:latest
   script:
     # You're going to need to do this for each of your services
     # Make sure you change the name from /web to the names of the
