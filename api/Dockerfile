@@ -8,6 +8,7 @@ COPY main.py main.py
 
 # Copy all of the directories that contain your application
 # code
+COPY api api
 COPY postgres postgres
 
 RUN pip install -r requirements.txt
