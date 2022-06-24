@@ -1,3 +1,5 @@
+\connect great-value
+
 CREATE TABLE IF NOT EXISTS public.rating
 (
     Id SERIAL  PRIMARY KEY,
