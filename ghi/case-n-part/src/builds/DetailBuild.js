@@ -25,7 +25,6 @@ function DetailBuild({ token }) {
     withCredentials: true,
   });
 
-  console.log("builds: ", build);
   useEffect(() => {
     if (!build || !ratingData || userRating !== undefined) {
       return;
