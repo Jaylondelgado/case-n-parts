@@ -35,6 +35,8 @@ build-front-end-job:
   artifacts:
     paths:
       - ghi/case-n-part/build/ # Save all of the files in the build path
+  variables:
+    PUBLIC_URL: https://n-f-c.gitlab.io/great-value
 
 build-back-end-job:
   rules:
