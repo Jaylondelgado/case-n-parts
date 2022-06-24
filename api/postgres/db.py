@@ -34,7 +34,7 @@ class UsersQueries:
             with connection.cursor() as cursor:
                 cursor.execute(
                     """
-                        INSERT INTO public.user(Username, Password, Email)
+                        INSERT INTO public."user"(Username, Password, Email)
                         VALUES (%s, %s, %s)
                         RETURNING id, Username, Password, Email
                     """,
