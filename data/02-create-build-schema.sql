@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS public.build
     MoboId INTEGER REFERENCES mobos,
     CpuId INTEGER REFERENCES cpu,
     PsuId INTEGER REFERENCES psu ,
-    "Private" BOOLEAN DEFAULT true,
+    "Private" BOOLEAN DEFAULT false,
     UserId INTEGER REFERENCES "user"
 );
 
