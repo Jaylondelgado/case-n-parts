@@ -32,7 +32,7 @@ function CreateBuild() {
     color: "",
     size: "",
     picture: "",
-});
+  });
   // const [successfulSubmit, setSuccessfulSubmit] = useState();
   const [gpus] = useApiData({ url: `${basePath}/api/gpus/`, prop: "gpus" });
   const [cpus] = useApiData({ url: `${basePath}/api/cpus/`, prop: "cpus" });
@@ -410,6 +410,7 @@ function CreateBuild() {
                               <button
                                 type='button'
                                 key={i}
+                                className='btn btn-sm btn-secondary mx-2'
                                 onClick={() => {
                                   setBuild(build => ({
                                     ...build,
@@ -597,6 +598,7 @@ function CreateBuild() {
                                 <button
                                   type='button'
                                   key={i}
+                                  className='btn btn-sm btn-secondary mx-2'
                                   onClick={() => {
                                     setBuild(build => ({
                                       ...build,

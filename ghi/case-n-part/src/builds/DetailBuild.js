@@ -194,7 +194,6 @@ function DetailBuild() {
                                   : "bi bi-hand-thumbs-up pe-1"
                               }
                             ></i>
-                            {userRating ? "" : ""}
                           </button>
                         </span>
                       )}
