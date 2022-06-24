@@ -25,7 +25,7 @@ services:
       POSTGRES_USER: great-value
       POSTGRES_DB: great-value
     ports:
-      - 15432:5432
+      - "15432:5432"
   api:
     build:
       context: api
