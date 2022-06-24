@@ -7,8 +7,9 @@ export const CardWrapper = styled.div`
   width: 300px;
   font-family: Quicksand, arial, sans-serif;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.05), 0 0px 40px rgba(0, 0, 0, 0.08);
-  border-radius: 5px;
-  background-color: steelblue;
+  border-radius: 10px;
+  border: 3px solid #2c499f;
+  background-color: #232429;
 `;
 
 export const CardHeader = styled.header`
@@ -20,6 +21,7 @@ export const CardHeading = styled.h1`
   font-size: 24px;
   font-weight: bold;
   text-align: center;
+  color: white;
 `;
 
 export const CardBody = styled.div`
@@ -73,13 +75,13 @@ export const CardIcon = styled.span`
     opacity: 0.95;
   }
 
-  ${(props) =>
+  ${props =>
     props.big &&
     css`
       font-size: 26px;
     `}
 
-  ${(props) =>
+  ${props =>
     props.eye &&
     css`
       position: absolute;
@@ -87,7 +89,7 @@ export const CardIcon = styled.span`
       right: 0;
     `}
 
-  ${(props) =>
+  ${props =>
     props.small &&
     css`
       font-size: 14px;
