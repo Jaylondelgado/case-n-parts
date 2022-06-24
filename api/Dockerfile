@@ -8,8 +8,7 @@ COPY main.py main.py
 
 # Copy all of the directories that contain your application
 # code
-COPY api api
-COPY postgres postgres
+COPY api/postgres api/postgres
 
 RUN pip install -r requirements.txt
 CMD uvicorn main:app --reload --host 0.0.0.0 --port $PORT
