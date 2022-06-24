@@ -18,8 +18,8 @@ services:
   postgres:
     image: postgres:14-bullseye
     volumes:
-      - ./data/:/docker-entrypoint-initdb.d
       - cnp-data:/var/lib/postgresql/data
+      - ./data/:/docker-entrypoint-initdb.d
     environment:
       POSTGRES_PASSWORD: great-value
       POSTGRES_USER: great-value
