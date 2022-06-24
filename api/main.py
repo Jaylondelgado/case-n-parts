@@ -9,7 +9,7 @@ app = FastAPI()
 
 
 origins = [
-    os.environ.get("REACT_APP_ACCOUNTS_HOST}"),
+    os.environ.get("REACT_APP_ACCOUNTS_HOST"),
     os.environ.get("CORS_HOST", None),
 ]
 
