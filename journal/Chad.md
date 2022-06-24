@@ -135,3 +135,13 @@ This took up a lot of my time today, due to having to figure out the math I need
 Today I worked on gettin the ability to like a build working. I first went and had a talk with my back-end people about how we were getting the likes from the back-end. They had already set up the routes, and tied the likes to the build, so that helped out a ton. I then made my request to get the likes the current user had for the build they were on. I did a javascript `.find()` to filter to the right build they were on. Once I had that data, it was just a matter of updating state to when they clicked on a button to change the button, and also making different requests to the back-end to update the rating to be true or false if the user has rated it before.
 
 I'm getting a lot more practice with the `.find()` function. It's making it a lot easier to find the right data that I want when I get stuff from the database. First thoughts when I usually pull stuff from the database is to use `.filter()`, but that can return an array and at times I do not want to have an array returned.
+
+## June 23rd, 2022
+
+Today was mostly about finishing up some minor things and deploying. I fixed up the checkbox for the private option on a build. Wasn't too bad. Learned that there is a `checked` option on the checkbox event that you can interact with on react event handlers. Once I learned that, wasn't too hard to the checkbox to toggle between true and false.
+
+I also worked more on making more of the website mobile friendly. Worked on the navbar mostly today. When you get down to a smaller screen size, the buttons take up the full width, which looks nice on a smaller screen. I mainly just had to set the width for the buttons to be 100% on the smaller break point.
+
+I also changed the thumbs up button on the detail of the build page to toggle to a thumbs down once a user has liked the build. It was pretty simple to implement. Just a little conditional statement for the `className` of the button and the icon.
+
+With some help, we got our Gitlab CI/CD deployment working, but we're still having issues getting it working on Heroku. Going to be working on that more tomorrow.
