@@ -89,15 +89,7 @@ function DetailBuild() {
     }
   };
 
-  // const msg = "Custom build not found";
-  // console.log("something", build);
-
-  // if (build && build.message === msg) {
-  //   return navigate("/NotFound", { replace: true });
-  // }
-
   if (!build) {
-    // setTimeout
     return (
       <div className="container mt-5 py-5">
         <div className="d-flex align-items-center justify-content-center">

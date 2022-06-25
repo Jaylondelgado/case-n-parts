@@ -5,7 +5,6 @@ import {
   CardHeader,
   CardHeading,
   CardBody,
-  CardIcon,
   CardFieldset,
   CardInput,
   CardButton,
@@ -15,7 +14,6 @@ function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { login, token } = props;
-  console.log("props", props);
 
   if (token) {
     return <Navigate to="/builds/mybuilds" />;
@@ -48,7 +46,6 @@ function Login(props) {
                 type="password"
                 required
               />
-              <CardIcon className="fa fa-eye" eye small />
             </CardFieldset>
 
             <CardFieldset>

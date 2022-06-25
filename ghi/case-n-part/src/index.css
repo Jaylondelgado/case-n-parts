@@ -73,7 +73,7 @@ code {
 }
 
 .nav-border {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid rgb(27, 22, 22);
 }
 .btn-no-hover {
   cursor: default;

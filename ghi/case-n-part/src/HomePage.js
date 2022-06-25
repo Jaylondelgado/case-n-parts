@@ -14,11 +14,9 @@ function HomePage() {
       const topBuildResponse = await fetch(`${basePath}/api/topbuilds`);
       const topBuildData = await topBuildResponse.json();
       setTopBuilds(topBuildData.builds);
-      console.log("topbuilds:", topBuildData);
     };
     getTopBuildData();
   }, []);
-  console.log(builds);
   return (
     <>
       <h1>Top 3 Builds</h1>

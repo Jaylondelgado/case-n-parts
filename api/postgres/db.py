@@ -3,9 +3,7 @@ from psycopg_pool import ConnectionPool
 from psycopg.errors import UniqueViolation
 
 conninfo = os.environ["DATABASE_URL"]
-print("conninnnnfo: ", conninfo)
 pool = ConnectionPool(conninfo=conninfo)
-print('poolllll: ', pool)
 
 
 class DuplicateTitle(RuntimeError):
@@ -863,7 +861,6 @@ class RatingQueries:
                     [userid],
                 )
                 rows = cursor.fetchall()
-                print("rows", rows)
                 return list(rows)
 
     def create_rating(self, buildid, userid: int):
