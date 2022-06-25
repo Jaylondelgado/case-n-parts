@@ -1,3 +1,4 @@
+\connect great-value
 CREATE TABLE IF NOT EXISTS public.build
 (
     Id SERIAL NOT NULL PRIMARY KEY,

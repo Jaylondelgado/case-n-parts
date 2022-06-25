@@ -1,3 +1,5 @@
+\connect great-value
+
 INSERT INTO gpu
 (Manufacturer,Chipset,Core_Clock_Speed,Video_Memory,Memory_Type,Height,Length,Width,Hdmi,Display_Port)
 VALUES

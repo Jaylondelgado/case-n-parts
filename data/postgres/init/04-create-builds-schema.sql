@@ -1,3 +1,5 @@
+\connect great-value
+
 CREATE TABLE IF NOT EXISTS public.buildGpus
 (
     Id SERIAL NOT NULL PRIMARY KEY,

@@ -247,7 +247,7 @@ def test_update_build_returns_422():
         BuildsQueries.update_build
     ] = NormalBuildQueries.update_build
 
-    r = client.put("http://localhost:8000/api/build/1")
+    r = client.put("/api/build/1")
 
     assert r.status_code == 422
 

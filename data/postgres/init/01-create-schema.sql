@@ -1,3 +1,4 @@
+\connect great-value
 -- gpu_id INT NULL REFERENCES tabletnae (id)
 --
 -- PostgreSQL database dump

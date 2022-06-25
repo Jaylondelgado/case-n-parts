@@ -18,32 +18,35 @@ import "./App.css";
 function App() {
   const [token, login, logout, signup] = useToken();
 
+  const domain = /https:\/\/[^/]+/;
+  const basename = process.env.PUBLIC_URL.replace(domain, "");
+
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <Nav token={token} />
-      <div className='container-fluid p-0'>
+      <div className="container-fluid p-0">
         <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='builds/'>
-            <Route path='create' element={<CreateBuild />} />
-            <Route path='mybuilds' element={<MyBuilds />} />
-            <Route path='listbuilds' element={<ListBuilds />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="builds">
+            <Route path="create" element={<CreateBuild />} />
+            <Route path="mybuilds" element={<MyBuilds />} />
+            <Route path="listbuilds" element={<ListBuilds />} />
             <Route
-              path='detailbuild/:id'
+              path="detailbuild/:id"
               element={<DetailBuild token={token} />}
             />
-            <Route path='updatebuild/:id' element={<UpdateBuild />} />
+            <Route path="updatebuild/:id" element={<UpdateBuild />} />
           </Route>
-          <Route path='login' element={<Login token={token} login={login} />} />
-          <Route path='logout' element={<Logout logout={logout} />} />
+          <Route path="login" element={<Login token={token} login={login} />} />
+          <Route path="logout" element={<Logout logout={logout} />} />
           <Route
-            path='signup'
+            path="signup"
             element={<SignUp token={token} signup={signup} />}
           />
-          <Route path='*' element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
-      <div className='footer-container'>
+      <div className="footer-container">
         <Footer token={token} />
       </div>
     </BrowserRouter>

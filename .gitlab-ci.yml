@@ -29,12 +29,14 @@ build-front-end-job:
     - api-unit-test-job # These two jobs must succeed for
     - lint-test-job # this build-job to run
   script:
-    - cd ghi/case-n-part
+    - cd ghi/case-n-part/
     - npm install
     - npm run build # Build the React application
   artifacts:
     paths:
       - ghi/case-n-part/build/ # Save all of the files in the build path
+  variables:
+    PUBLIC_URL: https://n-f-c.gitlab.io/great-value
 
 build-back-end-job:
   rules:
@@ -106,7 +108,7 @@ pages:
   needs:
     - build-front-end-job
   script:
-    - mv ghi/case-n-part public
+    - mv ghi/case-n-part/build/ public
   artifacts:
     paths:
       - public

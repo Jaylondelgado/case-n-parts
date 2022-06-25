@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./index.css";
 import "./HomePage.css";
 
 import blackCase from "./images/outer-case/black.png";
@@ -12,7 +11,7 @@ function HomePage() {
 
   useEffect(() => {
     const getTopBuildData = async () => {
-      const topBuildResponse = await fetch(`${basePath}/api/topbuilds/`);
+      const topBuildResponse = await fetch(`${basePath}/api/topbuilds`);
       const topBuildData = await topBuildResponse.json();
       setTopBuilds(topBuildData.builds);
       console.log("topbuilds:", topBuildData);

@@ -18,14 +18,14 @@ services:
   postgres:
     image: postgres:14-bullseye
     volumes:
-      - ./data/:/docker-entrypoint-initdb.d
+      - ./data/postgres/init:/docker-entrypoint-initdb.d
       - cnp-data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: great-value
       POSTGRES_USER: great-value
       POSTGRES_DB: great-value
     ports:
-      - 15432:5432
+      - "15432:5432"
   api:
     build:
       context: api
