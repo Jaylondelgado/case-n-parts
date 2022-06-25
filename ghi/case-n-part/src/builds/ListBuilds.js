@@ -20,7 +20,6 @@ function ListBuilds() {
 
     getBuildData();
   }, []);
-  builds;
 
   const buildsPerPage = 6;
   const pagesVisited = pageNumber * buildsPerPage;

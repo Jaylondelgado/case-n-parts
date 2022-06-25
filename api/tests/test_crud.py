@@ -21,7 +21,6 @@ app.dependency_overrides[get_current_active_user] = override_get_fake_user
 
 class EmptyBuildQueries:
     def get_build(self, build_id):
-        print(self)
         return {}
 
 
