@@ -87,4 +87,10 @@ I started the day off working on getting the test for the list of our builds to 
 
 - Continuation of Unit Tests
 
-I decided to get on early today and get to work on the unit tests. While working with Chad, we were able to get the delete request test funcioning properly. This one was pretty easy, all I had to do was change the json we were returning and make it the same as the json in the FastAPI docs.
+I decided to get on early today and get to work on the unit tests. While working with Chad, we were able to get the delete request test funcioning properly. This one was pretty easy, all I had to do was change the json we were returning and make it the same as the json in the FastAPI docs. After that the team and I went into debugging mode trying to get the application to deploy. We were having issues in the CI yaml file which Curtis later came to help with. Fortunately, we were able to fix some errors with the help of Curtis' expertise however we continued to get different errors after he left. We decided to leave it for tomorrow after going down another deep rabbit hole.
+
+## June 24, 2022
+
+-Project submission/deployment
+
+Today was based 100% on getting the project deployed. We troubleshooted for about 4 hours, and even with the help of Mitch and JEff we unfortunately did not get dar. We did try to test small things here and there in the CI yaml file however we were forced to wait for more Curtis knowledge.
