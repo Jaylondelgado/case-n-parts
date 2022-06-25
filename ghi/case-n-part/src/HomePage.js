@@ -12,7 +12,7 @@ function HomePage() {
 
   useEffect(() => {
     const getTopBuildData = async () => {
-      const topBuildResponse = await fetch(`${basePath}/api/topbuilds/`);
+      const topBuildResponse = await fetch(`${basePath}/api/topbuilds`);
       const topBuildData = await topBuildResponse.json();
       setTopBuilds(topBuildData.builds);
       console.log("topbuilds:", topBuildData);

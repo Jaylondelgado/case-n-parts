@@ -11,7 +11,7 @@ function ListBuilds() {
 
   useEffect(() => {
     const getBuildData = async () => {
-      const buildResponse = await fetch(`${basePath}/api/builds/`);
+      const buildResponse = await fetch(`${basePath}/api/builds`);
       const buildData = await buildResponse.json();
       const notPrivateBuilds = buildData.builds.filter((build) => {
         return build.Private === false;

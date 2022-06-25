@@ -27,7 +27,7 @@ function App() {
       <div className="container-fluid p-0">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="builds/">
+          <Route path="builds">
             <Route path="create" element={<CreateBuild />} />
             <Route path="mybuilds" element={<MyBuilds />} />
             <Route path="listbuilds" element={<ListBuilds />} />
