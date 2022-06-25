@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./index.css";
 import "./HomePage.css";
 
 import blackCase from "./images/outer-case/black.png";
