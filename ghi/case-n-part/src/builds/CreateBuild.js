@@ -137,7 +137,6 @@ function CreateBuild() {
         .id,
       Private: true,
     };
-    console.log(buildPostData);
     const buildUrl = `${basePath}/api/build/create`;
     const fetchConfig = {
       method: "POST",

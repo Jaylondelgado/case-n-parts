@@ -5,7 +5,6 @@ import {
   CardHeader,
   CardHeading,
   CardBody,
-  CardIcon,
   CardFieldset,
   CardInput,
   CardButton,
@@ -19,10 +18,10 @@ function SignUp(props) {
   const [email, setEmail] = useState("");
 
   if (token) {
-    return <Navigate to='/' />;
+    return <Navigate to="/" />;
   }
   return (
-    <div className='container mt-5 py-5'>
+    <div className="container mt-5 py-5">
       <CardWrapper>
         <CardHeader>
           <CardHeading>Sign up</CardHeading>
@@ -30,30 +29,30 @@ function SignUp(props) {
         <CardBody>
           <CardFieldset>
             <CardInput
-              onChange={e => setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
               value={username}
-              placeholder='Username'
-              type='text'
+              placeholder="Username"
+              type="text"
               required
             />
           </CardFieldset>
 
           <CardFieldset>
             <CardInput
-              onChange={e => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               value={email}
-              placeholder='Email'
-              type='email'
+              placeholder="Email"
+              type="email"
               required
             />
           </CardFieldset>
 
           <CardFieldset>
             <CardInput
-              onChange={e => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               value={password}
-              placeholder='Password'
-              type='password'
+              placeholder="Password"
+              type="password"
               required
             />
           </CardFieldset>
@@ -61,13 +60,13 @@ function SignUp(props) {
           <CardFieldset>
             <CardButton
               onClick={() => signup(username, email, password)}
-              type='submit'
+              type="submit"
             >
               Create account
             </CardButton>
           </CardFieldset>
           <CardFieldset>
-            <NavLink to='/login'>
+            <NavLink to="/login">
               <CardLink>I already have an account</CardLink>
             </NavLink>
           </CardFieldset>

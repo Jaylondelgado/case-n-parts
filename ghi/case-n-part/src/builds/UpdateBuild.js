@@ -184,7 +184,6 @@ function UpdateBuild() {
     alertClasses = "alert alert-success mb-3";
     alertContainerClasses = "";
   }
-  console.log("build", build);
   return (
     <div className="container my-5">
       {build !== undefined && (
