@@ -145,3 +145,11 @@ I also worked more on making more of the website mobile friendly. Worked on the 
 I also changed the thumbs up button on the detail of the build page to toggle to a thumbs down once a user has liked the build. It was pretty simple to implement. Just a little conditional statement for the `className` of the button and the icon.
 
 With some help, we got our Gitlab CI/CD deployment working, but we're still having issues getting it working on Heroku. Going to be working on that more tomorrow.
+
+## June 24th, 2022
+
+Me and the team worked on polishing up some of the site today. Some color changes on the signup and login page. Added a border to it as well so it stood out a bit more, added some padding to the inside of the input boxes for login, email, and password.
+
+We also finally got it deployed fully. It's working on Heroku. We did have to add the tables to the database manually, but it works.
+
+Made it to the end. Extremely happy with the project and the team!
