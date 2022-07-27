@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCopyright } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCopyright } from '@fortawesome/free-solid-svg-icons'
 
 import {
   MyBuilds,
@@ -10,12 +10,12 @@ import {
   Signup,
   Login,
   Logout,
-} from "./links/NavLinks";
+} from './links/NavLinks'
 
 const Footer = ({ token }) => {
   return (
     <footer className='footer mt-auto py-3 bg-dark h-23'>
-      <div className='container align-content-center m-5'>
+      <div className='container align-content-center p-5'>
         <div className='row'>
           <div className='col-sm-8 text-start'>
             <span className='text-muted'>
@@ -63,6 +63,6 @@ const Footer = ({ token }) => {
         </div>
       </div>
     </footer>
-  );
-};
-export default Footer;
+  )
+}
+export default Footer
