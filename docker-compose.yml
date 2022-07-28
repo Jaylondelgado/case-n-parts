@@ -9,11 +9,11 @@ services:
     volumes:
       - ./ghi/case-n-part:/case-n-part
     ports:
-      - "3000:3000"
+      - '3000:3000'
     environment:
       HOST_OS: ${OS}
       NODE_ENV: development
-      HOST: "0.0.0.0"
+      HOST: '0.0.0.0'
       REACT_APP_ACCOUNTS_HOST: http://localhost:8000
   postgres:
     image: postgres:14-bullseye
@@ -25,15 +25,15 @@ services:
       POSTGRES_USER: great-value
       POSTGRES_DB: great-value
     ports:
-      - "15432:5432"
+      - '15432:5432'
   api:
     build:
       context: api
       dockerfile: Dockerfile.dev
     ports:
-      - "8000:8000"
+      - '8000:8000'
     volumes:
       - ./api:/app
     environment:
-      DATABASE_URL: postgresql://great-value:great-value@postgres/great-value
+      DATABASE_URL: postgresql://case-n-part:case-n-part@postgres/case-n-part
       SECRET_KEY: fe9f6e232112f6a1075578cdd151b3a7ff3aa32c25d1dab913dfa16a989358c3
