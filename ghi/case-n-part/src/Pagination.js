@@ -1,30 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useState } from 'react';
 import ReactPaginate from "react-paginate";
+import { Link } from "react-router-dom";
 
-import { basePath } from "../basePath";
-import  Pagination from "../Pagination";
-
-function ListBuilds() {
-  const [builds, setBuild] = useState([]);
-  const [pageNumber, setPageNumber] = useState(0);
-
-  useEffect(() => {
-    const getBuildData = async () => {
-      const buildResponse = await fetch(`${basePath}/api/builds`);
-      const buildData = await buildResponse.json();
-      const notPrivateBuilds = buildData.builds.filter((build) => {
-        return build.Private === false;
-      });
-      setBuild(notPrivateBuilds);
-    };
-
-    getBuildData();
-  }, []);
-  
-
-  const buildsPerPage = 6;
+function Pagination ({ numberPerPage, builds}) {
+  const buildsPerPage =  numberPerPage; //6;
   const pagesVisited = pageNumber * buildsPerPage;
+
+  const [pageNumber, setPageNumber] = useState(0);
 
   if (builds.length === 0) {
     return <h1 className="pt-5 mt-5">Jaylon has stolen all the builds!</h1>;
@@ -71,7 +53,6 @@ function ListBuilds() {
       <div className="container pt-5 my-5">
         <div className="row row-cols-3">{displayBuilds}</div>
       </div>
-      { builds.length > buildsPerPage &&
       <div className="centerPagination">
         <ReactPaginate
           previousLabel={"Previous"}
@@ -85,9 +66,8 @@ function ListBuilds() {
           activeClassName={"paginationActive"}
         />
       </div>
-      }
     </>
   );
 }
 
-export default ListBuilds;
+export default Pagination;
