@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 
 import { basePath } from "../basePath";
-import  Pagination from "../Pagination";
 
 function ListBuilds() {
   const [builds, setBuild] = useState([]);
