@@ -24,6 +24,17 @@ function ListBuilds() {
   const buildsPerPage = 6;
   const pagesVisited = pageNumber * buildsPerPage;
 
+  if (builds.length === 0) {
+    return (
+      <>
+      <h1>Loading builds</h1>
+      <div className="spinner-border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
+      </>
+    )
+  }
+
   const displayBuilds = builds
     .slice(pagesVisited, pagesVisited + buildsPerPage)
     .map((build) => {

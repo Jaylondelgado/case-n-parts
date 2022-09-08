@@ -49,21 +49,6 @@ function HomePage() {
               </div>
             );
           })}
-          {/* <div className='col-sm'>
-            <div className='card card-homepage'>
-              <h5 className='card-title'>Chad's Build</h5>
-            </div>
-          </div>
-          <div className='col-sm'>
-            <div className='card card-homepage'>
-              <h5 className='card-title'>Chad's Build</h5>
-            </div>
-          </div>
-          <div className='col-sm'>
-            <div className='card card-homepage'>
-              <h5 className='card-title'>Chad's Build</h5>
-            </div>
-          </div> */}
         </div>
       </div>
       <div className="our-cases">

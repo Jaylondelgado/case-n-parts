@@ -46,9 +46,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
-      <div className="footer-container">
-        <Footer token={token} />
-      </div>
+      <Footer token={token} />
     </BrowserRouter>
   );
 }
