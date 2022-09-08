@@ -24,10 +24,6 @@ function ListBuilds() {
   const buildsPerPage = 6;
   const pagesVisited = pageNumber * buildsPerPage;
 
-  if (builds.length === 0) {
-    return <h1 className="pt-5 mt-5">Jaylon has stolen all the builds!</h1>;
-  }
-
   const displayBuilds = builds
     .slice(pagesVisited, pagesVisited + buildsPerPage)
     .map((build) => {

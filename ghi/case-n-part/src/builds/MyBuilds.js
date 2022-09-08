@@ -34,6 +34,10 @@ function MyBuilds() {
   const buildsPerPage = 6;
   const pagesVisited = pageNumber * buildsPerPage;
 
+  if (builds.length === 0) {
+    return <h1 className="pt-5 mt-5">You currently do not have any created builds.</h1>
+  }
+
   const displayBuilds = builds
     .slice(pagesVisited, pagesVisited + buildsPerPage)
     .map((build) => {
